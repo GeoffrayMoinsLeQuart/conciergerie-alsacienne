@@ -7,7 +7,6 @@
     "**/.DS_Store": true,
     "node_modules": true,
     ".next": true,
-    ".firebase": true,
     "out": true,
   },
   "[javascript]": {
