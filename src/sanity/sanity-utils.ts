@@ -6,6 +6,7 @@ import {
   categoryQuery,
   postQueryBySlug,
   postQueryByTag,
+  propertyQuery,
 } from "./sanity-query";
 import { Blog } from "@/types/blog";
 import { integrations, messages } from "../../integrations.config";
@@ -28,6 +29,15 @@ export async function sanityFetch<QueryResponse>({
   } else {
     return {} as QueryResponse;
   }
+}
+
+// Function to fetch properties
+export async function fetchProperties() {
+  return await sanityFetch({
+    query: propertyQuery,
+    qParams: {},
+    tags: ["propertyType"],
+  });
 }
 
 export async function getPosts() {

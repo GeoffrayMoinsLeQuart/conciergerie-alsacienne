@@ -11,26 +11,45 @@ export default function About() {
         <div className="mx-[-16px] flex flex-wrap">
           <div className="mb-8 w-full px-4 lg:mb-0 lg:w-1/2 xl:w-7/12">
             <span className="mb-3 text-lg font-bold text-primary md:text-xl">
-              ABOUT US
+              NOTRE PROMESSE
             </span>
-            <h2 className="mb-5 max-w-[400px] text-3xl font-bold leading-tight text-black sm:text-4xl sm:leading-tight md:text-[45px] md:leading-tight">
-              Better design, better experience
+            <h2 className="mb-5 max-w-[570px] text-2xl font-semibold leading-tight text-black sm:text-4xl sm:leading-tight md:text-3xl md:leading-tight">
+              Une gestion sans souci pour des revenus maximisés
             </h2>
-            <p className="max-w-[570px] text-base font-medium text-body-color">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              dui ligula, malesuada vel convallis in, tincidunt ut mi Vestibulum
-              sit amet.
-            </p>
+            <ul>
+              <li>
+                <p className="max-w-[570px] text-base font-medium text-body-color">
+                  "Connaissance approfondie du marché local"
+                </p>
+              </li>
+              <li>
+                <p className="max-w-[570px] text-base font-medium text-body-color">
+                  "Service personnalisé avec interlocuteur unique"
+                </p>
+              </li>
+              <li>
+                <p className="max-w-[570px] text-base font-medium text-body-color">
+                  "Transparence totale et reporting détaillé"
+                </p>
+              </li>
+              <li>
+                <p className="max-w-[570px] text-base font-medium text-body-color">
+                  "Optimisation continue de vos revenus"
+                </p>
+              </li>
+            </ul>
           </div>
           <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
+          <span className="mb-3 text-lg font-bold text-primary md:text-xl invisible">
+              NOTRE PROMESSE
+            </span>
             <h3 className="mb-6 text-2xl font-semibold text-black md:text-3xl">
               Connect With Us
             </h3>
             <p className="mb-10 text-base font-medium text-body-color">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              dui ligula, malesuada vel convallis in, tincidunt ut mi.
-              Vestibulum sit amet urna placerat, tempor soloa demanium testi lor
-              Aliq lorem vitae semper tempor.
+              Notre équipe locale connaît parfaitement les spécificités du
+              marché et s'engage à vous offrir un service d'excellence pour une
+              rentabilité optimale de votre bien.
             </p>
 
             <SocialLinks />

@@ -10,15 +10,15 @@ export default function Hero() {
     >
       <div className="container">
         <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 lg:w-6/12 xl:w-5/12">
+          <div className="w-full px-4 lg:w-6/12 xl:w-6/12">
             <div className="hero-content">
               <h1 className="mb-3 text-4xl font-bold leading-snug text-dark sm:text-[42px] lg:text-[40px] xl:text-[42px]">
-                Next.js Site Template For
-                <br />
-                Agency and Portfolio <br />
+                Conciergerie & Gestion Locative à Mulhouse
               </h1>
               <p className="mb-8 max-w-[480px] text-base text-body-color">
-              Elevate your online presence and impress clients effortlessly! — featuring essential integrations, pre-built pages, and customizable components. Modern, responsive design with fast loading and SEO optimization. 
+                Service clé en main de gestion Airbnb et locations saisonnières.
+                Maximisez vos revenus et libérez-vous totalement des contraintes
+                de gestion grâce à notre expertise locale.
               </p>
               <ul className="flex flex-wrap items-center gap-8">
                 <li>
@@ -26,7 +26,7 @@ export default function Hero() {
                     href="/portfolio"
                     className="inline-flex items-center justify-center rounded-lg bg-primary px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
                   >
-                    Explore Portfolio
+                    Estimer mes revenus
                   </Link>
                 </li>
                 <li className="leading-none">
@@ -63,7 +63,7 @@ export default function Hero() {
                         />
                       </svg>
                     </span>
-                    Download Brochure
+                    Nos services
                   </Link>
                 </li>
               </ul>
@@ -71,7 +71,7 @@ export default function Hero() {
               <HeroClients />
             </div>
           </div>
-          <div className="hidden px-4 xl:block xl:w-1/12"></div>
+          <div className="hidden px-4 xl:block xl:hidden"></div>
           <div className="w-full px-4 lg:w-6/12">
             <div className="flex w-full max-lg:mt-10 lg:justify-end">
               <HeroImage />

@@ -1,14 +1,34 @@
 "use client";
 
 import { portfolioData } from "@/static-data/portfolio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import SectionTitle from "../Common/SectionTitle";
 import SinglePortfolio from "./SinglePortfolio";
+import { fetchProperties } from "@/sanity/sanity-utils";
+import ReactMarkdown from "react-markdown";
+import MarkdownRenderer, { markdownComponents } from "@/utils/markdownConfig";
 
 export default function Portfolio() {
   const [activeTag, setActiveTag] = useState("All");
   const [items, setItems] = useState(portfolioData);
+
+  const [properties, setProperties] = useState<Property[]>([]);
+
+  useEffect(() => {
+    console.log("properties");
+    async function loadProperties() {
+      const properties = await fetchProperties();
+      if (Array.isArray(properties)) {
+        setProperties(properties);
+      } else {
+        console.error("Unexpected data format:", properties);
+      }
+    }
+    loadProperties();
+  }, []);
+
+  console.log(properties);
 
   const allTag = Array.from(
     new Set(portfolioData.flatMap((item) => item.tags)),
@@ -58,6 +78,9 @@ export default function Portfolio() {
             </div>
           </div>
         </div>
+        {properties.map((property) => (
+          <MarkdownRenderer markdownContent={property.longDescription} />
+        ))}
 
         <div className="portfolio-container -mx-4 flex justify-center">
           <div className="w-full px-4 xl:w-10/12">

@@ -1,5 +1,16 @@
 import { groq } from "next-sanity";
 
+export const propertyQuery = `*[_type == "propertyType"]{
+  _id,
+  name,
+  shortDescription,
+  longDescription,
+  "slug": slug.current,
+  "image": image.asset->url,
+  imageButtons,
+  categories
+}`;
+
 export const postQuery = groq`*[_type == "post"] {
     title,
     metadata,

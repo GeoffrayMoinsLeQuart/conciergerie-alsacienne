@@ -57,27 +57,40 @@ const serviceDetails = (
 export const serviceData: Service[] = [
   {
     id: uuid(),
-    title: "Website Development",
-    description:
-      "Lorem ipsum is simply dummy text of the printing typesetting lorem ipsum been dummy text.",
+    title: "Gestion des Annonces",
+    description: "Création, optimisation, photos professionnelles",
     slug: "website-development",
     image: "/images/services/service-01.jpg",
     details: serviceDetails,
   },
   {
     id: uuid(),
-    title: "Graphic Design",
-    description:
-      "Lorem ipsum is simply dummy text of the printing typesetting lorem ipsum been dummy text.",
+    title: "Gestion des Réservations",
+    description: "Vérification des voyageurs, tarification dynamique",
     slug: "graphic-design",
     image: "/images/services/service-02.jpg",
     details: serviceDetails,
   },
   {
     id: uuid(),
-    title: "App Development",
-    description:
-      "Lorem ipsum is simply dummy text of the printing typesetting lorem ipsum been dummy text.",
+    title: "Conciergerie Premium",
+    description: "Accueil personnalisé, remise des clés, assistance",
+    slug: "app-development",
+    image: "/images/services/service-03.jpg",
+    details: serviceDetails,
+  },
+  {
+    id: uuid(),
+    title: "Entretien du Bien",
+    description: "Ménage professionnel, linge de qualité, maintenance",
+    slug: "app-development",
+    image: "/images/services/service-03.jpg",
+    details: serviceDetails,
+  },
+  {
+    id: uuid(),
+    title: "Conseils Personnalisés",
+    description: "Aménagements, investissements, réglementations",
     slug: "app-development",
     image: "/images/services/service-03.jpg",
     details: serviceDetails,

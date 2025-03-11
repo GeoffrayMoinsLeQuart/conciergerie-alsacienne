@@ -13,8 +13,8 @@ export default function Service() {
         <div className="-mx-4 mb-10 flex flex-wrap items-end lg:mb-[60px]">
           <div className="w-full px-4 lg:w-8/12">
             <SectionTitle
-              mainTitle="WHAT WE DO"
-              title="We help to build clients their dream projects"
+              mainTitle="NOS PRESTATIONS"
+              title="Une solution complète pour votre bien"
               width="625px"
               color="white"
             />
@@ -25,13 +25,13 @@ export default function Service() {
                 href="/service"
                 className="text-lg font-medium text-white underline hover:text-primary"
               >
-                EXPLORE SERVICES
+                EXPLOREZ NOS PRESTATIONS
               </Link>
             </div>
           </div>
         </div>
         <div className="-mx-4 flex flex-wrap">
-          {serviceData.map((service) => (
+          {serviceData.slice(0, 3).map((service) => (
             <SingleService key={service?.id} service={service} />
           ))}
         </div>
