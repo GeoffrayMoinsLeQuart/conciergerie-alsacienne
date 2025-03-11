@@ -48,7 +48,7 @@ export default function About() {
             </h3>
             <p className="mb-10 text-base font-medium text-body-color">
               Notre équipe locale connaît parfaitement les spécificités du
-              marché et s'engage à vous offrir un service d'excellence pour une
+              marché et s&apos;engage à vous offrir un service d&apos;excellence pour une
               rentabilité optimale de votre bien.
             </p>
 
