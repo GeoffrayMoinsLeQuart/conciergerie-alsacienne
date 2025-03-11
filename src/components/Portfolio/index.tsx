@@ -78,8 +78,8 @@ export default function Portfolio() {
             </div>
           </div>
         </div>
-        {properties.map((property) => (
-          <MarkdownRenderer markdownContent={property.longDescription} />
+        {properties.map((property, index) => (
+          <MarkdownRenderer key={index} markdownContent={property.longDescription} />
         ))}
 
         <div className="portfolio-container -mx-4 flex justify-center">

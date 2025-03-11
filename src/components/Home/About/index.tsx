@@ -19,22 +19,22 @@ export default function About() {
             <ul>
               <li>
                 <p className="max-w-[570px] text-base font-medium text-body-color">
-                  "Connaissance approfondie du marché local"
+                  Connaissance approfondie du marché local
                 </p>
               </li>
               <li>
                 <p className="max-w-[570px] text-base font-medium text-body-color">
-                  "Service personnalisé avec interlocuteur unique"
+                  Service personnalisé avec interlocuteur unique
                 </p>
               </li>
               <li>
                 <p className="max-w-[570px] text-base font-medium text-body-color">
-                  "Transparence totale et reporting détaillé"
+                  Transparence totale et reporting détaillé
                 </p>
               </li>
               <li>
                 <p className="max-w-[570px] text-base font-medium text-body-color">
-                  "Optimisation continue de vos revenus"
+                  Optimisation continue de vos revenus
                 </p>
               </li>
             </ul>
