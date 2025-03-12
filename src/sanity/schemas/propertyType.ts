@@ -28,49 +28,34 @@ const propertyType = {
       },
     },
     {
-      name: "image",
-      title: "Image",
+      name: "imagePrincipale",
+      title: "Image Principale",
       type: "image",
       options: {
         hotspot: true,
       },
     },
     {
-      name: "imageButtons",
-      type: "object",
-      title: "Image Buttons",
-      fields: [
+      type: "array",
+      name: "galleryImage",
+      title: "Gallery Image",
+      of: [
         {
-          name: "title",
-          type: "string",
-          title: "Title",
-        },
-        {
-          type: "array",
-          name: "image",
-          title: "Gallery Image",
-          of: [
+          type: "image",
+          options: { hotspot: true },
+          fields: [
             {
-              type: "image",
-              options: { hotspot: true },
-
-              fields: [
-                {
-                  name: "caption",
-                  type: "string",
-                  title: "Caption",
-                  options: {
-                    isHighlighted: true, // <-- make this field easily accessible
-                  },
-                },
-              ],
+              name: "caption",
+              type: "string",
+              title: "Caption",
+              // Option isHighlighted supprimée
             },
           ],
-          options: {
-            layout: "grid",
-          },
         },
       ],
+      options: {
+        layout: "grid",
+      },
     },
     {
       name: "categories",
@@ -98,7 +83,7 @@ const propertyType = {
   preview: {
     select: {
       title: "name",
-      media: "image",
+      media: "imagePrincipale", // Attention, 'image' a été changé pour 'imagePrincipale'
     },
   },
 };

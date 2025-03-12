@@ -1,5 +1,5 @@
 "use client";
-import { Portfolio } from "@/types/portfolio";
+import { Property } from "@/types/property";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,18 +7,15 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-export default function SinglePortfolio({
-  portfolio,
-}: {
-  portfolio: Portfolio;
-}) {
+export default function SingleProperty({ property }: { property: Property }) {
   const [open, setOpen] = useState<boolean>(false);
+  console.log(property);
 
   return (
     <>
       <div className="mb-4">
         <div className="group relative mb-8 aspect-[518/291] overflow-hidden rounded-md shadow-service">
-          <Image src={portfolio?.image} alt="image" fill className="w-full" />
+          <Image src={property?.image} alt="image" fill className="w-full" />
           <div className="invisible absolute left-0 top-0 flex h-full w-full items-center justify-center bg-primary bg-opacity-[17%] opacity-0 transition group-hover:visible group-hover:opacity-100">
             <button
               onClick={() => setOpen(true)}
@@ -38,26 +35,18 @@ export default function SinglePortfolio({
         </div>
         <h3 className="mt-6">
           <Link
-            href={`/portfolio/${portfolio?.slug}`}
+            href={`/property/${property?.slug}`}
             className="mb-3 inline-block text-xl font-semibold text-black hover:text-primary"
           >
-            {portfolio?.title}
+            {property?.name}
           </Link>
         </h3>
         <p className="text-base font-medium text-body-color">
-          {portfolio?.sortDescription}
+          {property?.shortDescription}
         </p>
       </div>
 
-      <Lightbox
-        open={open}
-        close={() => setOpen(false)}
-        slides={[
-          {
-            src: portfolio?.image as string,
-          },
-        ]}
-      />
+      {/* <Lightbox open={open} close={() => setOpen(false)} slides={slides} /> */}
     </>
   );
 }

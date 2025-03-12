@@ -6,8 +6,11 @@ export const propertyQuery = `*[_type == "propertyType"]{
   shortDescription,
   longDescription,
   "slug": slug.current,
-  "image": image.asset->url,
-  imageButtons,
+  "image": imagePrincipale.asset->url,
+  "galleryImage": galleryImage[]{
+    "url": asset->url,
+    caption
+  },
   categories
 }`;
 

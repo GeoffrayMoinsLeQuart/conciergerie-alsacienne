@@ -4,19 +4,16 @@ import { portfolioData } from "@/static-data/portfolio";
 import { useEffect, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import SectionTitle from "../Common/SectionTitle";
-import SinglePortfolio from "./SinglePortfolio";
 import { fetchProperties } from "@/sanity/sanity-utils";
-import ReactMarkdown from "react-markdown";
-import MarkdownRenderer, { markdownComponents } from "@/utils/markdownConfig";
+import { Property } from "@/types/property";
+import SingleProperty from "./property";
 
-export default function Portfolio() {
+export default function Properties() {
   const [activeTag, setActiveTag] = useState("All");
-  const [items, setItems] = useState(portfolioData);
-
   const [properties, setProperties] = useState<Property[]>([]);
+  const [items, setItems] = useState(properties);
 
   useEffect(() => {
-    console.log("properties");
     async function loadProperties() {
       const properties = await fetchProperties();
       if (Array.isArray(properties)) {
@@ -37,10 +34,10 @@ export default function Portfolio() {
   const filterItems = (itemTag: any) => {
     setActiveTag(itemTag);
     if (itemTag === "All") {
-      return setItems(portfolioData);
+      return setItems(properties);
     } else {
-      const findItems = portfolioData.filter((findItem) => {
-        return findItem.tags.includes(itemTag);
+      const findItems = properties.filter((findItem) => {
+        return findItem.categories?.includes(itemTag);
       });
       setItems(findItems);
     }
@@ -78,16 +75,13 @@ export default function Portfolio() {
             </div>
           </div>
         </div>
-        {properties.map((property, index) => (
-          <MarkdownRenderer key={index} markdownContent={property.longDescription} />
-        ))}
 
         <div className="portfolio-container -mx-4 flex justify-center">
           <div className="w-full px-4 xl:w-10/12">
             <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2 }}>
               <Masonry gutter="30px">
-                {items.map((portfolio) => (
-                  <SinglePortfolio key={portfolio?.id} portfolio={portfolio} />
+                {properties.map((property) => (
+                  <SingleProperty key={property?._id} property={property} />
                 ))}
               </Masonry>
             </ResponsiveMasonry>

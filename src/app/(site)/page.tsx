@@ -8,9 +8,10 @@ import Pricing from "@/components/Home/Pricing";
 import Service from "@/components/Home/Service";
 import Team from "@/components/Home/Team";
 import Testimonial from "@/components/Home/Testimonial";
-import Portfolio from "@/components/Portfolio";
+import Portfolio from "@/components/property";
 import { Metadata } from "next";
 import { integrations } from "../../../integrations.config";
+import Properties from "@/components/property";
 
 const siteName = process.env.SITE_NAME;
 
@@ -22,17 +23,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* <Hero />
       <About />
-      <Service />
-      <Portfolio />
-      <Brands />
+      <Service /> */}
+      <Properties />
+      {/* <Brands />
       <Newsletter />
       <Team />
       <Pricing />
       <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
-      <Contact />
+      <Contact /> */}
     </>
   );
 }
