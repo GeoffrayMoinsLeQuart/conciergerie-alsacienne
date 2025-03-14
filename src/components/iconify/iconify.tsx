@@ -20,7 +20,9 @@ const Iconify = forwardRef<HTMLDivElement, Props>(
     >
       <Icon icon={icon} width={width} height={width} />
     </div>
-  )
+  ),
 );
+
+Iconify.displayName = "Iconify";
 
 export default Iconify;

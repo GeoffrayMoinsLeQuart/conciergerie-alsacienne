@@ -17,27 +17,11 @@ type Slide = {
 
 // Supprimez le mot-clé async ici
 export default function ProjectDetailsGallery({ slides }: { slides: Slide[] }) {
-  const [open, setOpen] = useState<boolean>(false);
-
-  //   return (
-  //     <>
-  //       <button
-  //         type="button"
-  //         onClick={() => setOpen(true)}
-  //         className="mb-6 rounded-md bg-primary px-4 py-2 text-white"
-  //       >
-  //         Voir toutes les photos
-  //       </button>
-
-  //     </>
-  //   );
-  // }
-
   const lightbox = useLightbox(slides);
 
   return (
     <>
-      <div className="mb-5 grid grid-cols-1 gap-1 md:mb-10 md:grid-cols-2 cursor-pointer">
+      <div className="mb-5 grid cursor-pointer grid-cols-1 gap-1 md:mb-10 md:grid-cols-2">
         {slides[0] && (
           <PhotoItem
             imageToDisplay={slides[0].src}
