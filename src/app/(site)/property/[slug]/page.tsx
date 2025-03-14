@@ -85,18 +85,6 @@ export default async function PropertyPage({ params }: Props) {
           <div className="-mx-5 flex flex-wrap">
             <div className="w-full px-5 lg:w-8/12">
               <div>
-                <div className="relative mb-8 aspect-[518/291] overflow-hidden rounded-sm bg-stone-100">
-                  {property.image ? (
-                    <Image
-                      src={property.image}
-                      alt={property.name}
-                      fill
-                      className="w-full border border-stroke object-cover object-center"
-                    />
-                  ) : (
-                    "no image found"
-                  )}
-                </div>
                 <ProjectDetailsGallery slides={slides} />
                 <h1 className="mb-7 text-2xl font-bold text-black sm:text-4xl lg:text-3xl">
                   {property.name}
