@@ -53,6 +53,7 @@ export default async function Page({ params }: any) {
         <PageTitle
           pageTitle="Portfolio Details"
           pageDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus"
+          showMenu={true}
         />
 
         <section className="bg-white pb-20 pt-[90px]">

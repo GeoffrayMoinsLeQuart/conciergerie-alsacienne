@@ -20,6 +20,7 @@ export default async function BlogPage() {
       <PageTitle
         pageTitle="Blog Grids"
         pageDescription=" Autem, molestias eum voluptatibus quaerat praesentium laboriosam, eaque accusantium quam ratione veritatis magni ab."
+        showMenu={true}
       />
       <section className="bg-white pb-20 pt-[90px]">
         <div className="container">

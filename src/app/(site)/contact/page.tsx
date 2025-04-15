@@ -16,6 +16,7 @@ export default function ContactPage() {
       <PageTitle
         pageTitle="Contact Page"
         pageDescription="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid eius velit dicta, et distinctio error facilis"
+        showMenu={true}
       />
 
       <Contact />

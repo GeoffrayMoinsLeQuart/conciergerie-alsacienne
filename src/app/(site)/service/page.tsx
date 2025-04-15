@@ -18,6 +18,7 @@ export default function page() {
       <PageTitle
         pageTitle="Service Page"
         pageDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero. "
+        showMenu={true}
       />
 
       <section className="bg-gray-50 pb-20 pt-[90px]">

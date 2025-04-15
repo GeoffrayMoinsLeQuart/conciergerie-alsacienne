@@ -7,6 +7,7 @@ export default function PropertiesPage() {
       <PageTitle
         pageTitle="Portfolio Page"
         pageDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero. "
+        showMenu={true}
       />
 
       <Properties />

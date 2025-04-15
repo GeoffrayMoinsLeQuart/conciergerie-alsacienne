@@ -71,6 +71,7 @@ function PhotoItem({ imageToDisplay, onOpenLightbox }: PhotoItemProps) {
         onClick={onOpenLightbox}
         width={1000}
         height={1000}
+        priority
       />
     </m.div>
   );

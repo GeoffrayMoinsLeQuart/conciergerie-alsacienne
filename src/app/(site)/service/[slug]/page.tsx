@@ -68,6 +68,7 @@ export default async function ServiceDetailPage(props: Props) {
       <PageTitle
         pageTitle="Service Details"
         pageDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero. "
+        showMenu={true}
       />
       <ServiceLayout service={service as Service} />
     </>

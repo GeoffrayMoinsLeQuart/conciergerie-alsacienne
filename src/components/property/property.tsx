@@ -11,7 +11,7 @@ export default function SingleProperty({ property }: { property: Property }) {
     >
       <div className="mb-4">
         <div className="group relative mb-8 aspect-[518/291] overflow-hidden rounded-md shadow-service">
-          <Image src={property?.image} alt="image" fill className="w-full" />
+          <Image src={property?.image} alt="image" fill className="w-full" priority/>
         </div>
         <h3 className="mt-6">{property?.name}</h3>
         <p className="text-base font-medium text-body-color">

@@ -42,13 +42,14 @@ export default async function TagSlugPage(props: Props) {
   const { tag } = params;
   const formattedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
 
-  const posts : Blog[] = await getPostByTag(tag);
+  const posts: Blog[] = await getPostByTag(tag);
 
   return (
     <>
       <PageTitle
         pageTitle={`${formattedTag}`}
         pageDescription="Autem, molestias eum voluptatibus quaerat praesentium laboriosam, eaque accusantium quam ratione veritatis magni ab."
+        showMenu={true}
       />
       <section className="bg-white pb-20">
         <div className="container">

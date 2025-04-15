@@ -3,9 +3,14 @@ import Link from "next/link";
 type Props = {
   pageTitle: string;
   pageDescription: string;
+  showMenu?: boolean;
 };
 
-export default function PageTitle({ pageTitle, pageDescription }: Props) {
+export default function PageTitle({
+  pageTitle,
+  pageDescription,
+  showMenu,
+}: Props) {
   return (
     <section className="relative z-10 overflow-hidden bg-white pb-[50px] pt-[150px]">
       <div className="container">
@@ -20,24 +25,26 @@ export default function PageTitle({ pageTitle, pageDescription }: Props) {
               </p>
             </div>
           </div>
-          <div className="w-full px-4 md:w-4/12 lg:w-5/12">
-            <div className="text-end">
-              <ul className="flex items-center md:justify-end">
-                <li className="flex items-center">
-                  <Link
-                    href="/"
-                    className="pr-1 text-base font-medium text-body-color hover:text-primary"
-                  >
-                    Home
-                  </Link>
-                  <span className="mr-3 block h-2 w-2 rotate-45 border-r-2 border-t-2 border-body-color"></span>
-                </li>
-                <li className="text-base font-medium text-primary">
-                  {pageTitle}
-                </li>
-              </ul>
+          {showMenu && (
+            <div className="w-full px-4 md:w-4/12 lg:w-5/12">
+              <div className="text-end">
+                <ul className="flex items-center md:justify-end">
+                  <li className="flex items-center">
+                    <Link
+                      href="/"
+                      className="pr-1 text-base font-medium text-body-color hover:text-primary"
+                    >
+                      Home
+                    </Link>
+                    <span className="mr-3 block h-2 w-2 rotate-45 border-r-2 border-t-2 border-body-color"></span>
+                  </li>
+                  <li className="text-base font-medium text-primary">
+                    {pageTitle}
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div>
