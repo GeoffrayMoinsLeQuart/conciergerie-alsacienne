@@ -91,7 +91,7 @@ https://app.superhote.com/api/v2/web-site-groups/[TziRKaU5fDux8BLLfljl4wB7V]/fal
 
     // Mettre à jour l'attribut src de l'iframe
     if (iframeRef.current) {
-      iframeRef.current.src = iframeUrl;
+      (iframeRef.current as HTMLIFrameElement).src = iframeUrl;
     }
   }, []);
 
