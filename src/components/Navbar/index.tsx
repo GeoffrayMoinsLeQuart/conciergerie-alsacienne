@@ -50,6 +50,9 @@ export default function Navbar() {
         className={`${stickyMenu ? "sticky-navbar" : ""} header absolute left-0 top-0 z-40 flex w-full items-center bg-transparent transition`}
       >
         <div className="mx-auto w-full px-4 xl:container">
+          <div className="text-3xl mx-auto pt-5 w-full px-4 font-semibold text-black xl:container sm:text-4xl md:text-3xl ">
+            Contactez nous au : 06 21 47 19 22
+          </div>
           <div className="relative mx-[-16px] flex items-center justify-between">
             <div className="w-52 max-w-full px-4 xl:w-60">
               <Link href="/" className="header-logo block w-full py-6 lg:py-8">
@@ -185,7 +188,7 @@ export default function Navbar() {
                   href="/contact"
                   className="rounded-full bg-primary px-8 py-3 text-base font-bold text-white transition duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-signUp md:px-9 lg:px-8 xl:px-9"
                 >
-                  Get a Quote
+                  Contactez nous
                 </Link>
               </div>
             </div>

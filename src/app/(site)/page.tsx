@@ -23,17 +23,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* <Hero />
+      <Hero />
       <About />
-      <Service /> */}
+      <Service />
       <Properties />
-      {/* <Brands />
+      <Brands />
       <Newsletter />
       <Team />
       <Pricing />
       <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
-      <Contact /> */}
+      <Contact />
     </>
   );
 }
