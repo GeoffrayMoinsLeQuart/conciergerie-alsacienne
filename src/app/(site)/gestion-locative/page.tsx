@@ -1,705 +1,1309 @@
-import SectionTitle from "@/components/Common/SectionTitle";
-import { Metadata } from "next";
-import Image from "next/image";
+"use client";
+
+import React from "react";
 import Link from "next/link";
-
-const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
-
-export const metadata: Metadata = {
-  title: `Services de Gestion Locative en Alsace | ${siteName}`,
-  description:
-    "Découvrez nos services de gestion locative en Alsace. Maximisez vos revenus locatifs et libérez-vous des contraintes de gestion grâce à notre expertise.",
-};
+import PageTitle from "@/components/Common/PageTitle";
+import SectionTitle from "@/components/Common/SectionTitle";
 
 export default function GestionLocativePage() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-white pb-20 pt-[120px] lg:pb-[90px] lg:pt-[150px]">
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap items-center">
-            <div className="w-full px-4 lg:w-6/12">
-              <div className="mb-8 lg:mb-0">
-                <h1 className="mb-5 text-3xl font-bold leading-tight text-black sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                  Gestion Locative Professionnelle en Alsace
-                </h1>
-                <p className="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg md:text-xl">
-                  Maximisez vos revenus locatifs et libérez-vous des contraintes
-                  de gestion. Notre service de gestion locative prend en charge
-                  tous les aspects de la location de votre bien immobilier.
-                </p>
-                <div className="flex flex-wrap">
-                  <Link
-                    href="/simulateur"
-                    className="mb-5 mr-5 inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7"
-                  >
-                    Estimer mes revenus
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="mb-5 inline-flex items-center justify-center rounded-md bg-black px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7"
-                  >
-                    Demander un devis
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="w-full px-4 lg:w-6/12">
-              <div className="relative z-10 text-center lg:mr-0 lg:text-right">
-                <Image
-                  src="/images/services/gestion-locative-hero.jpg"
-                  alt="Image de gestion locative"
-                  width={600}
-                  height={400}
-                  className="mx-auto rounded-lg lg:ml-auto"
-                />
-              </div>
-            </div>
+      {/* Section Introduction */}
+      <section className="bg-white py-16 sm:pt-[150px] pt-[50px] ">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="mb-6 text-4xl font-bold text-gray-800">
+              Gestion locative longue durée en Alsace : sérénité et rentabilité
+              garanties
+            </h1>
+            <p className="mb-8 text-xl text-gray-600">
+              Confiez-nous la gestion complète de vos biens immobiliers, qu'ils
+              soient meublés ou non
+            </p>
+            <p className="mb-8 text-gray-600">
+              Chez Conciergerie Alsacienne, nous comprenons que votre bien
+              immobilier représente un investissement précieux. Notre service de
+              gestion locative longue durée vous libère de toutes les
+              contraintes administratives, techniques et relationnelles liées à
+              la location de votre bien, tout en maximisant votre rentabilité.
+            </p>
+            <p className="text-gray-600">
+              Que vous possédiez un studio, un appartement ou une maison, meublé
+              ou non, notre équipe d'experts prend en charge l'intégralité de la
+              gestion pour vous offrir une expérience sans stress et des revenus
+              réguliers.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="bg-[#f8f9ff] py-20 lg:py-[120px]">
-        <div className="container">
+      {/* Section Nos Services */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
           <SectionTitle
             mainTitle="NOS SERVICES"
-            title="Une gestion locative complète"
-            paragraph="Nous proposons une gamme complète de services pour assurer une gestion optimale de votre bien et maximiser vos revenus locatifs."
+            title="Une gestion complète et transparente"
+            paragraph="Nous prenons en charge tous les aspects de la gestion locative pour vous offrir une tranquillité d'esprit totale."
             center
           />
 
-          <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-            <div
-              className="wow fadeInUp group relative overflow-hidden rounded-lg bg-white shadow-service"
-              data-wow-delay="0.1s"
-            >
-              <div className="relative z-10 p-9">
-                <h3 className="mb-4 text-xl font-bold text-black">
-                  Gestion des annonces
-                </h3>
-                <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                  Création et optimisation d&apos;annonces attractives avec
-                  photos professionnelles pour maximiser votre visibilité.
-                </p>
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {/* Service 1 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                <svg
+                  className="h-8 w-8 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
               </div>
+              <h3 className="mb-4 text-xl font-semibold text-gray-800">
+                Recherche et sélection rigoureuse des locataires
+              </h3>
+              <p className="text-gray-600">
+                Notre processus de sélection approfondi comprend la vérification
+                des dossiers, l'analyse de solvabilité, la validation des
+                garants et des entretiens personnalisés pour vous garantir des
+                locataires fiables et respectueux.
+              </p>
             </div>
-            <div
-              className="wow fadeInUp group relative overflow-hidden rounded-lg bg-white shadow-service"
-              data-wow-delay="0.2s"
-            >
-              <div className="relative z-10 p-9">
-                <h3 className="mb-4 text-xl font-bold text-black">
-                  Gestion des réservations
-                </h3>
-                <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                  Traitement des demandes, vérification des voyageurs et
-                  optimisation des tarifs pour maximiser vos revenus.
-                </p>
+
+            {/* Service 2 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                <svg
+                  className="h-8 w-8 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
               </div>
+              <h3 className="mb-4 text-xl font-semibold text-gray-800">
+                Rédaction et gestion des documents juridiques
+              </h3>
+              <p className="text-gray-600">
+                Nous nous chargeons de la rédaction de baux conformes à la
+                législation en vigueur, des annexes obligatoires, et réalisons
+                des états des lieux d'entrée et de sortie détaillés avec
+                reportage photographique pour protéger votre bien.
+              </p>
             </div>
-            <div
-              className="wow fadeInUp group relative overflow-hidden rounded-lg bg-white shadow-service"
-              data-wow-delay="0.3s"
-            >
-              <div className="relative z-10 p-9">
-                <h3 className="mb-4 text-xl font-bold text-black">
-                  Accueil des voyageurs
-                </h3>
-                <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                  Accueil personnalisé, remise des clés et assistance pendant le
-                  séjour pour une expérience client exceptionnelle.
-                </p>
+
+            {/* Service 3 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                <svg
+                  className="h-8 w-8 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
               </div>
+              <h3 className="mb-4 text-xl font-semibold text-gray-800">
+                Gestion financière optimisée
+              </h3>
+              <p className="text-gray-600">
+                Encaissement des loyers, révisions annuelles selon l'IRL,
+                édition des quittances, régularisation des charges, et
+                versements mensuels sur votre compte avec un reporting détaillé
+                accessible 24h/24.
+              </p>
             </div>
-            <div
-              className="wow fadeInUp group relative overflow-hidden rounded-lg bg-white shadow-service"
-              data-wow-delay="0.4s"
-            >
-              <div className="relative z-10 p-9">
-                <h3 className="mb-4 text-xl font-bold text-black">
-                  Entretien du bien
-                </h3>
-                <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                  Ménage professionnel entre chaque séjour, linge de qualité et
-                  maintenance régulière pour préserver la valeur de votre bien.
-                </p>
+
+            {/* Service 4 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                <svg
+                  className="h-8 w-8 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
               </div>
+              <h3 className="mb-4 text-xl font-semibold text-gray-800">
+                Suivi technique proactif
+              </h3>
+              <p className="text-gray-600">
+                Maintenance préventive, organisation et suivi des interventions,
+                gestion des travaux nécessaires, et visites techniques
+                régulières pour préserver la valeur de votre patrimoine.
+              </p>
             </div>
-            <div
-              className="wow fadeInUp group relative overflow-hidden rounded-lg bg-white shadow-service"
-              data-wow-delay="0.5s"
-            >
-              <div className="relative z-10 p-9">
-                <h3 className="mb-4 text-xl font-bold text-black">
-                  Gestion administrative
-                </h3>
-                <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                  Gestion des contrats, déclarations fiscales et respect des
-                  réglementations locales pour une conformité totale.
-                </p>
+
+            {/* Service 5 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                <svg
+                  className="h-8 w-8 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
               </div>
-            </div>
-            <div
-              className="wow fadeInUp group relative overflow-hidden rounded-lg bg-white shadow-service"
-              data-wow-delay="0.6s"
-            >
-              <div className="relative z-10 p-9">
-                <h3 className="mb-4 text-xl font-bold text-black">
-                  Reporting détaillé
-                </h3>
-                <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                  Rapports mensuels sur l&apos;occupation, les revenus et les
-                  dépenses pour une transparence totale.
-                </p>
-              </div>
+              <h3 className="mb-4 text-xl font-semibold text-gray-800">
+                Gestion administrative complète
+              </h3>
+              <p className="text-gray-600">
+                Relations avec le locataire, traitement des réclamations,
+                gestion des sinistres, déclarations fiscales, et veille
+                juridique pour vous tenir informé des évolutions réglementaires.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Advantages Section */}
-      <section className="bg-white py-20 lg:py-[120px]">
-        <div className="container">
+      {/* Section Garantie Loyers Impayés */}
+      <section className="bg-primary bg-opacity-5 py-16">
+        <div className="container mx-auto px-4">
           <SectionTitle
-            mainTitle="AVANTAGES"
-            title="Pourquoi choisir notre gestion locative ?"
-            paragraph="Notre service de gestion locative vous offre de nombreux avantages pour une rentabilité maximale et une tranquillité d'esprit totale."
+            mainTitle="GARANTIE LOYERS IMPAYÉS"
+            title="Une protection financière à toute épreuve"
+            paragraph="Notre garantie vous assure des revenus locatifs stables, quoi qu'il arrive."
             center
           />
 
-          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-            <div className="wow fadeInUp group relative" data-wow-delay="0.1s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M17.5 7.875C8.76562 7.875 1.09375 12.4688 1.09375 18.375C1.09375 21.5625 3.50781 24.5 7.43945 26.6875C6.99023 28.4766 6.37891 31.0156 5.11523 32.9688C4.92383 33.25 5.11523 33.6406 5.46289 33.6406C5.46289 33.6406 5.46289 33.6406 5.53711 33.6406C7.36328 33.3203 11.5234 31.9609 14.0625 29.9375C15.1641 30.0859 16.3398 30.1602 17.5 30.1602C26.2344 30.1602 33.9062 25.5664 33.9062 19.6602C33.9062 13.7539 26.2344 7.875 17.5 7.875Z"
-                    fill="white"
-                  />
-                </svg>
+          <div className="mx-auto mt-12 max-w-4xl">
+            <div className="rounded-lg border-t-4 border-primary bg-white p-8 shadow-md">
+              <div className="mb-8 flex flex-col items-center md:flex-row">
+                <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-primary bg-opacity-10 md:mb-0 md:mr-8">
+                  <svg
+                    className="h-12 w-12 text-primary"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="mb-2 text-2xl font-bold text-gray-800">
+                    Garantie à 100% de vos loyers
+                  </h3>
+                  <p className="text-gray-600">
+                    Même en cas d'impayés, vous recevez l'intégralité de vos
+                    loyers et charges à date fixe chaque mois, vous assurant des
+                    revenus stables et prévisibles.
+                  </p>
+                </div>
               </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Expertise locale
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Notre connaissance approfondie du marché alsacien nous permet
-                d&apos;optimiser votre stratégie de location et vos tarifs.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.2s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M29.531 21.875C29.531 22.9688 28.6562 23.8438 27.5625 23.8438H7.4375C6.34375 23.8438 5.46875 22.9688 5.46875 21.875V7.65625C5.46875 6.5625 6.34375 5.6875 7.4375 5.6875H27.5625C28.6562 5.6875 29.531 6.5625 29.531 7.65625V21.875Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M29.531 9.625H5.46875"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M9.625 29.531V23.8438"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M25.375 29.531V23.8438"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M13.5625 29.5312H21.4375"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Revenus optimisés
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Notre tarification dynamique et notre stratégie de référencement
-                permettent d&apos;augmenter significativement vos revenus
-                locatifs.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.3s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10.8594 29.3594C13.9219 29.3594 16.4062 26.875 16.4062 23.8125C16.4062 20.75 13.9219 18.2656 10.8594 18.2656C7.79688 18.2656 5.3125 20.75 5.3125 23.8125C5.3125 26.875 7.79688 29.3594 10.8594 29.3594Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5.3125 23.8125H1.09375"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M20.6562 23.8125H16.4375"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10.8594 18.2656V14.0469"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10.8594 33.9062V29.6875"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M24.1406 16.7344C27.2031 16.7344 29.6875 14.25 29.6875 11.1875C29.6875 8.125 27.2031 5.64062 24.1406 5.64062C21.0781 5.64062 18.5938 8.125 18.5938 11.1875C18.5938 14.25 21.0781 16.7344 24.1406 16.7344Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M18.5938 11.1875H14.375"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M33.9062 11.1875H29.6875"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M24.1406 5.64062V1.42188"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M24.1406 21.2812V16.7344"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Gestion sans souci
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Nous prenons en charge tous les aspects de la gestion pour vous
-                libérer totalement des contraintes liées à la location.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.4s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M17.5 33.9062C26.2695 33.9062 33.3594 26.8164 33.3594 18.0469C33.3594 9.27734 26.2695 2.1875 17.5 2.1875C8.73047 2.1875 1.64062 9.27734 1.64062 18.0469C1.64062 26.8164 8.73047 33.9062 17.5 33.9062Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                  />
-                  <path
-                    d="M17.5 8.53125V18.0469H25.4844"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Disponibilité 24/7
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Notre équipe est disponible à tout moment pour répondre aux
-                besoins de vos locataires et gérer les situations
-                d&apos;urgence.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.5s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.0625 1.09375H7.65625C4.04688 1.09375 1.09375 4.04688 1.09375 7.65625V14.0625C1.09375 17.6719 4.04688 20.625 7.65625 20.625H14.0625C17.6719 20.625 20.625 17.6719 20.625 14.0625V7.65625C20.625 4.04688 17.6719 1.09375 14.0625 1.09375Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M27.3438 14.375H20.9375C17.3281 14.375 14.375 17.3281 14.375 20.9375V27.3438C14.375 30.9531 17.3281 33.9062 20.9375 33.9062H27.3438C30.9531 33.9062 33.9062 30.9531 33.9062 27.3438V20.9375C33.9062 17.3281 30.9531 14.375 27.3438 14.375Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Qualité premium
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Nous maintenons des standards élevés pour assurer une expérience
-                exceptionnelle à vos locataires et des avis positifs.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.6s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1.09375 12.0312H33.9062"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M29.6875 5.46875H5.3125C3.125 5.46875 1.09375 7.5 1.09375 9.6875V27.5C1.09375 29.6875 3.125 31.7188 5.3125 31.7188H29.6875C31.875 31.7188 33.9062 29.6875 33.9062 27.5V9.6875C33.9062 7.5 31.875 5.46875 29.6875 5.46875Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10.8594 25.375C12.4805 25.375 13.7969 24.0586 13.7969 22.4375C13.7969 20.8164 12.4805 19.5 10.8594 19.5C9.23828 19.5 7.92188 20.8164 7.92188 22.4375C7.92188 24.0586 9.23828 25.375 10.8594 25.375Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Transparence financière
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Nos rapports détaillés vous permettent de suivre précisément
-                l&apos;évolution de vos revenus et dépenses.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Process Section */}
-      <section className="bg-[#f8f9ff] py-20 lg:py-[120px]">
-        <div className="container">
-          <SectionTitle
-            mainTitle="NOTRE PROCESSUS"
-            title="Comment fonctionne notre gestion locative"
-            paragraph="Nous avons développé un processus simple et efficace pour vous offrir un service de gestion locative sans faille."
-            center
-          />
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div className="rounded-lg bg-gray-50 p-6">
+                  <h4 className="mb-3 text-lg font-semibold text-gray-800">
+                    Sans franchise ni délai de carence
+                  </h4>
+                  <p className="text-gray-600">
+                    Notre garantie s'applique dès le premier jour d'impayé, sans
+                    période d'attente ni franchise, pour une protection
+                    immédiate et complète.
+                  </p>
+                </div>
 
-          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
-            <div className="wow fadeInUp group relative" data-wow-delay="0.1s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <span className="text-3xl font-bold text-white">1</span>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Évaluation initiale
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Nous évaluons votre bien et définissons ensemble une stratégie
-                personnalisée pour maximiser vos revenus.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.2s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <span className="text-3xl font-bold text-white">2</span>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Mise en place
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Nous préparons votre bien, créons des annonces attractives et
-                mettons en place tous les éléments nécessaires.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.3s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <span className="text-3xl font-bold text-white">3</span>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Gestion quotidienne
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Nous gérons les réservations, l&apos;accueil des locataires, le
-                ménage et toutes les interventions nécessaires.
-              </p>
-            </div>
-            <div className="wow fadeInUp group relative" data-wow-delay="0.4s">
-              <div className="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-primary">
-                <span className="text-3xl font-bold text-white">4</span>
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Suivi et optimisation
-              </h3>
-              <p className="mb-7 text-base font-medium leading-relaxed text-body-color">
-                Nous vous fournissons des rapports détaillés et optimisons
-                continuellement la stratégie pour améliorer vos revenus.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+                <div className="rounded-lg bg-gray-50 p-6">
+                  <h4 className="mb-3 text-lg font-semibold text-gray-800">
+                    Protection juridique incluse
+                  </h4>
+                  <p className="text-gray-600">
+                    Tous les frais de contentieux, de procédure et d'expulsion
+                    sont pris en charge, vous évitant des démarches coûteuses et
+                    chronophages.
+                  </p>
+                </div>
 
-      {/* Pricing Section */}
-      <section className="bg-white py-20 lg:py-[120px]">
-        <div className="container">
-          <SectionTitle
-            mainTitle="TARIFICATION"
-            title="Des tarifs transparents et compétitifs"
-            paragraph="Nous proposons des formules adaptées à vos besoins avec une tarification claire et sans surprise."
-            center
-          />
-
-          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-            <div
-              className="wow fadeInUp relative z-10 rounded-md bg-white px-8 py-10 shadow-signUp sm:p-12 lg:py-10 xl:p-12"
-              data-wow-delay="0.1s"
-            >
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Formule Essentielle
-              </span>
-              <h2 className="mb-5 text-3xl font-bold text-black">
-                15%{" "}
-                <span className="text-base font-medium text-body-color">
-                  des revenus
-                </span>
-              </h2>
-              <p className="mb-8 border-b border-body-color border-opacity-10 pb-8 text-base font-medium leading-loose text-body-color">
-                La solution idéale pour débuter dans la location saisonnière.
-              </p>
-              <div className="mb-9 flex flex-col gap-[14px]">
-                <p className="text-base font-medium text-body-color">
-                  ✓ Création et gestion des annonces
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Gestion des réservations
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Accueil des voyageurs
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Ménage (facturé en supplément)
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Reporting mensuel
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                className="flex w-full items-center justify-center rounded-md bg-primary px-9 py-4 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
-              >
-                Demander un devis
-              </Link>
-            </div>
-            <div
-              className="wow fadeInUp relative z-10 rounded-md bg-primary px-8 py-10 shadow-signUp sm:p-12 lg:py-10 xl:p-12"
-              data-wow-delay="0.2s"
-            >
-              <span className="mb-2 block text-lg font-semibold text-white">
-                Formule Premium
-              </span>
-              <h2 className="mb-5 text-3xl font-bold text-white">
-                20%{" "}
-                <span className="text-base font-medium text-white text-opacity-70">
-                  des revenus
-                </span>
-              </h2>
-              <p className="mb-8 border-b border-white border-opacity-10 pb-8 text-base font-medium leading-loose text-white text-opacity-90">
-                Notre formule la plus populaire pour une gestion complète.
-              </p>
-              <div className="mb-9 flex flex-col gap-[14px]">
-                <p className="text-base font-medium text-white text-opacity-90">
-                  ✓ Tous les services Essentiels
-                </p>
-                <p className="text-base font-medium text-white text-opacity-90">
-                  ✓ Ménage inclus
-                </p>
-                <p className="text-base font-medium text-white text-opacity-90">
-                  ✓ Linge de qualité hôtelière
-                </p>
-                <p className="text-base font-medium text-white text-opacity-90">
-                  ✓ Gestion des urgences 24/7
-                </p>
-                <p className="text-base font-medium text-white text-opacity-90">
-                  ✓ Optimisation continue des tarifs
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                className="flex w-full items-center justify-center rounded-md bg-white px-9 py-4 text-base font-medium text-primary transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
-              >
-                Demander un devis
-              </Link>
-            </div>
-            <div
-              className="wow fadeInUp relative z-10 rounded-md bg-white px-8 py-10 shadow-signUp sm:p-12 lg:py-10 xl:p-12"
-              data-wow-delay="0.3s"
-            >
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Formule Exclusive
-              </span>
-              <h2 className="mb-5 text-3xl font-bold text-black">
-                25%{" "}
-                <span className="text-base font-medium text-body-color">
-                  des revenus
-                </span>
-              </h2>
-              <p className="mb-8 border-b border-body-color border-opacity-10 pb-8 text-base font-medium leading-loose text-body-color">
-                Le service ultime pour les biens de prestige.
-              </p>
-              <div className="mb-9 flex flex-col gap-[14px]">
-                <p className="text-base font-medium text-body-color">
-                  ✓ Tous les services Premium
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Conciergerie personnalisée
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Services supplémentaires sur demande
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Reporting détaillé hebdomadaire
-                </p>
-                <p className="text-base font-medium text-body-color">
-                  ✓ Conseils d&apos;investissement
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                className="flex w-full items-center justify-center rounded-md bg-primary px-9 py-4 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
-              >
-                Demander un devis
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]">
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap items-center">
-            <div className="w-full px-4 lg:w-1/2">
-              <div className="text-center lg:text-left">
-                <div className="mb-10 lg:mb-0">
-                  <h2 className="mb-3 text-3xl font-bold leading-tight text-white sm:text-4xl sm:leading-tight md:text-[40px] md:leading-tight">
-                    Prêt à maximiser vos revenus locatifs ?
-                  </h2>
-                  <p className="text-base font-medium leading-relaxed text-white">
-                    Contactez-nous dès aujourd&apos;hui pour discuter de votre
-                    projet et découvrir comment notre service de gestion
-                    locative peut vous aider.
+                <div className="rounded-lg bg-gray-50 p-6">
+                  <h4 className="mb-3 text-lg font-semibold text-gray-800">
+                    Couverture des détériorations
+                  </h4>
+                  <p className="text-gray-600">
+                    Les dégradations causées par le locataire au-delà du dépôt
+                    de garantie sont couvertes, préservant ainsi la valeur de
+                    votre investissement.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="w-full px-4 lg:w-1/2">
-              <div className="flex flex-wrap justify-center lg:justify-end">
-                <Link
-                  href="/simulateur"
-                  className="mb-5 mr-5 inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-primary hover:bg-opacity-90"
-                >
-                  Estimer mes revenus
-                </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Processus */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <SectionTitle
+            mainTitle="NOTRE PROCESSUS"
+            title="Un accompagnement étape par étape"
+            paragraph="Nous vous guidons tout au long du processus de gestion locative pour une expérience sans stress."
+            center
+          />
+
+          <div className="mx-auto mt-12 max-w-5xl">
+            <div className="relative">
+              {/* Ligne de progression */}
+              <div className="absolute left-1/2 hidden h-full w-1 -translate-x-1/2 transform bg-primary bg-opacity-20 md:block"></div>
+
+              {/* Étape 1 */}
+              <div className="relative mb-12">
+                <div className="flex flex-col items-center md:flex-row">
+                  <div className="z-10 mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary md:mb-0">
+                    <span className="font-bold text-white">1</span>
+                  </div>
+                  <div className="rounded-lg bg-white p-6 shadow-md md:ml-8 md:w-5/6">
+                    <h3 className="mb-3 text-xl font-semibold text-gray-800">
+                      Évaluation initiale
+                    </h3>
+                    <ul className="space-y-2 text-gray-600">
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Estimation précise du loyer de marché
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Visite détaillée de votre bien
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Conseils personnalisés pour optimiser votre rentabilité
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Signature du mandat de gestion
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Étape 2 */}
+              <div className="relative mb-12">
+                <div className="flex flex-col items-center md:flex-row md:flex-row-reverse">
+                  <div className="z-10 mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary md:mb-0">
+                    <span className="font-bold text-white">2</span>
+                  </div>
+                  <div className="rounded-lg bg-white p-6 shadow-md md:mr-8 md:w-5/6">
+                    <h3 className="mb-3 text-xl font-semibold text-gray-800">
+                      Mise en location
+                    </h3>
+                    <ul className="space-y-2 text-gray-600">
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Reportage photos professionnel
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Diffusion d'annonces sur les plateformes immobilières
+                        majeures
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Organisation et conduite des visites
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Sélection rigoureuse des candidats locataires
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Étape 3 */}
+              <div className="relative mb-12">
+                <div className="flex flex-col items-center md:flex-row">
+                  <div className="z-10 mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary md:mb-0">
+                    <span className="font-bold text-white">3</span>
+                  </div>
+                  <div className="rounded-lg bg-white p-6 shadow-md md:ml-8 md:w-5/6">
+                    <h3 className="mb-3 text-xl font-semibold text-gray-800">
+                      Installation du locataire
+                    </h3>
+                    <ul className="space-y-2 text-gray-600">
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Rédaction du bail et des annexes obligatoires
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        État des lieux d'entrée détaillé avec photos
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Souscription des contrats d'assurance
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Remise des clés et accompagnement du locataire
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Étape 4 */}
+              <div className="relative mb-12">
+                <div className="flex flex-col items-center md:flex-row md:flex-row-reverse">
+                  <div className="z-10 mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary md:mb-0">
+                    <span className="font-bold text-white">4</span>
+                  </div>
+                  <div className="rounded-lg bg-white p-6 shadow-md md:mr-8 md:w-5/6">
+                    <h3 className="mb-3 text-xl font-semibold text-gray-800">
+                      Gestion quotidienne
+                    </h3>
+                    <ul className="space-y-2 text-gray-600">
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Encaissement mensuel des loyers
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Suivi administratif, technique et financier
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Gestion des demandes d'intervention
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Visites techniques annuelles
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Étape 5 */}
+              <div className="relative">
+                <div className="flex flex-col items-center md:flex-row">
+                  <div className="z-10 mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary md:mb-0">
+                    <span className="font-bold text-white">5</span>
+                  </div>
+                  <div className="rounded-lg bg-white p-6 shadow-md md:ml-8 md:w-5/6">
+                    <h3 className="mb-3 text-xl font-semibold text-gray-800">
+                      Renouvellement ou relocation
+                    </h3>
+                    <ul className="space-y-2 text-gray-600">
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Gestion des fins de bail (congés, renouvellements)
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        État des lieux de sortie
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Restitution du dépôt de garantie
+                      </li>
+                      <li className="flex items-start">
+                        <svg
+                          className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                        Remise en location rapide en cas de départ
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Formules */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <SectionTitle
+            mainTitle="NOS FORMULES"
+            title="Des solutions adaptées à vos besoins"
+            paragraph="Choisissez la formule qui correspond le mieux à vos attentes et à votre patrimoine."
+            center
+          />
+
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+            {/* Formule Essentielle */}
+            <div className="overflow-hidden rounded-lg bg-white shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="bg-gray-100 p-6 text-center">
+                <h3 className="text-2xl font-bold text-gray-800">
+                  Formule Essentielle
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  La gestion de base pour les propriétaires autonomes
+                </p>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-primary">6%</span>
+                  <span className="text-gray-600">
+                    {" "}
+                    HT des loyers encaissés
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Recherche et sélection des locataires
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Rédaction du bail et état des lieux
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Encaissement des loyers et quittances
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Révision annuelle du loyer
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Régularisation des charges
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Assistance téléphonique dédiée
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Espace propriétaire en ligne
+                  </li>
+                </ul>
+                <div className="mt-6 text-sm text-gray-600">
+                  <p>
+                    <strong>Idéal pour :</strong> Les propriétaires qui
+                    souhaitent déléguer les tâches administratives tout en
+                    conservant un rôle actif dans la gestion de leur bien.
+                  </p>
+                </div>
+              </div>
+              <div className="border-t border-gray-100 p-6">
                 <Link
                   href="/contact"
-                  className="mb-5 inline-flex items-center justify-center rounded-md bg-[#13C296] px-7 py-3 text-center text-base font-medium text-white hover:bg-opacity-90"
+                  className="block w-full rounded-lg bg-primary px-4 py-3 text-center font-medium text-white transition duration-300 hover:bg-opacity-90"
                 >
-                  Demander un devis
+                  Choisir cette formule
+                </Link>
+              </div>
+            </div>
+
+            {/* Formule Sérénité */}
+            <div className="relative z-10 scale-105 transform overflow-hidden rounded-lg bg-white shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="absolute right-0 top-0 bg-primary px-4 py-1 text-sm font-semibold text-white">
+                Recommandé
+              </div>
+              <div className="bg-primary bg-opacity-10 p-6 text-center">
+                <h3 className="text-2xl font-bold text-gray-800">
+                  Formule Sérénité
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  La tranquillité d'esprit avec garantie loyers impayés
+                </p>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-primary">7%</span>
+                  <span className="text-gray-600">
+                    {" "}
+                    HT des loyers encaissés
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="mb-4 text-gray-600">
+                  Tous les services de la formule Essentielle, plus :
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    <span className="font-semibold">
+                      Garantie loyers impayés à 100%
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Protection juridique complète
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Couverture des détériorations immobilières
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Gestion des sinistres et des contentieux
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Visites techniques annuelles
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Gestion des interventions d'urgence 24h/24
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Bilan de gestion annuel personnalisé
+                  </li>
+                </ul>
+                <div className="mt-6 text-sm text-gray-600">
+                  <p>
+                    <strong>Idéal pour :</strong> Les propriétaires qui
+                    recherchent une sécurité financière maximale et une gestion
+                    sans souci.
+                  </p>
+                </div>
+              </div>
+              <div className="border-t border-gray-100 p-6">
+                <Link
+                  href="/contact"
+                  className="block w-full rounded-lg bg-primary px-4 py-3 text-center font-medium text-white transition duration-300 hover:bg-opacity-90"
+                >
+                  Choisir cette formule
+                </Link>
+              </div>
+            </div>
+
+            {/* Formule Premium */}
+            <div className="overflow-hidden rounded-lg bg-white shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="bg-gray-100 p-6 text-center">
+                <h3 className="text-2xl font-bold text-gray-800">
+                  Formule Premium
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  L'excellence en gestion locative
+                </p>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-primary">8%</span>
+                  <span className="text-gray-600">
+                    {" "}
+                    HT des loyers encaissés
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="mb-4 text-gray-600">
+                  Tous les services de la formule Sérénité, plus :
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Conciergerie pour les locataires
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Gestion complète des travaux de rénovation
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Optimisation fiscale personnalisée
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Reportage photo professionnel renouvelé chaque année
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Visite technique semestrielle
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Garantie vacance locative (1 mois offert)
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    Conseiller dédié joignable 7j/7
+                  </li>
+                </ul>
+                <div className="mt-6 text-sm text-gray-600">
+                  <p>
+                    <strong>Idéal pour :</strong> Les investisseurs exigeants
+                    possédant plusieurs biens et souhaitant maximiser leur
+                    rentabilité tout en bénéficiant d'un service haut de gamme.
+                  </p>
+                </div>
+              </div>
+              <div className="border-t border-gray-100 p-6">
+                <Link
+                  href="/contact"
+                  className="block w-full rounded-lg bg-primary px-4 py-3 text-center font-medium text-white transition duration-300 hover:bg-opacity-90"
+                >
+                  Choisir cette formule
                 </Link>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Section Témoignages */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <SectionTitle
+            mainTitle="TÉMOIGNAGES"
+            title="Ils nous font confiance"
+            paragraph="Découvrez ce que nos clients disent de notre service de gestion locative."
+            center
+          />
+
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+            {/* Témoignage 1 */}
+            <div className="rounded-lg bg-gray-50 p-6 shadow-sm">
+              <div className="mb-4 flex items-center">
+                <div className="mr-4 h-12 w-12 rounded-full bg-gray-300"></div>
+                <div>
+                  <h4 className="font-semibold text-gray-800">Marie L.</h4>
+                  <p className="text-sm text-gray-600">
+                    Propriétaire d'un T3 à Mulhouse
+                  </p>
+                </div>
+              </div>
+              <p className="italic text-gray-600">
+                "Depuis que j'ai confié mon appartement à la Conciergerie
+                Alsacienne, je n'ai plus à me soucier des appels de locataires
+                ou des problèmes de plomberie. Mes loyers sont versés à date
+                fixe et leur garantie loyers impayés m'assure une tranquillité
+                totale."
+              </p>
+            </div>
+
+            {/* Témoignage 2 */}
+            <div className="rounded-lg bg-gray-50 p-6 shadow-sm">
+              <div className="mb-4 flex items-center">
+                <div className="mr-4 h-12 w-12 rounded-full bg-gray-300"></div>
+                <div>
+                  <h4 className="font-semibold text-gray-800">
+                    Pierre et Sophie D.
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Propriétaires de deux studios à Strasbourg
+                  </p>
+                </div>
+              </div>
+              <p className="italic text-gray-600">
+                "En tant qu'expatriés, nous avions besoin d'une gestion à
+                distance fiable. L'équipe de la Conciergerie Alsacienne gère nos
+                biens comme si c'étaient les leurs. Leur réactivité et leur
+                professionnalisme sont remarquables."
+              </p>
+            </div>
+
+            {/* Témoignage 3 */}
+            <div className="rounded-lg bg-gray-50 p-6 shadow-sm">
+              <div className="mb-4 flex items-center">
+                <div className="mr-4 h-12 w-12 rounded-full bg-gray-300"></div>
+                <div>
+                  <h4 className="font-semibold text-gray-800">Jean-Marc B.</h4>
+                  <p className="text-sm text-gray-600">
+                    Investisseur immobilier
+                  </p>
+                </div>
+              </div>
+              <p className="italic text-gray-600">
+                "Après avoir testé plusieurs agences, j'ai enfin trouvé un
+                gestionnaire qui comprend mes objectifs de rentabilité. Leur
+                formule Premium me permet de développer mon patrimoine
+                sereinement, avec un ROI optimisé."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section FAQ */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <SectionTitle
+            mainTitle="FAQ"
+            title="Vos questions fréquentes"
+            paragraph="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
+            center
+          />
+
+          <div className="mx-auto mt-12 max-w-3xl">
+            <div className="space-y-6">
+              {/* Question 1 */}
+              <div className="rounded-lg bg-white p-6 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-800">
+                  Quelle est la différence entre location meublée et non meublée
+                  ?
+                </h3>
+                <p className="text-gray-600">
+                  La location meublée nécessite que le logement soit équipé de
+                  tous les meubles et équipements essentiels à la vie
+                  quotidienne. Elle permet des baux plus courts (1 an, ou 9 mois
+                  pour les étudiants) et offre des avantages fiscaux spécifiques
+                  (statut LMNP). La location non meublée implique un bail de 3
+                  ans minimum (ou 6 ans pour les propriétaires personnes
+                  morales) et un logement vide ou partiellement meublé.
+                </p>
+              </div>
+
+              {/* Question 2 */}
+              <div className="rounded-lg bg-white p-6 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-800">
+                  Comment fonctionne la garantie loyers impayés ?
+                </h3>
+                <p className="text-gray-600">
+                  Notre garantie vous assure le versement de 100% de vos loyers
+                  et charges, même en cas d'impayé du locataire. Elle prend
+                  effet dès le premier jour de retard, sans franchise. En cas
+                  d'impayé, nous engageons les procédures nécessaires tout en
+                  continuant à vous verser vos loyers.
+                </p>
+              </div>
+
+              {/* Question 3 */}
+              <div className="rounded-lg bg-white p-6 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-800">
+                  Puis-je changer de formule en cours de mandat ?
+                </h3>
+                <p className="text-gray-600">
+                  Oui, vous pouvez passer à une formule supérieure à tout
+                  moment. Pour passer à une formule inférieure, un préavis de 3
+                  mois est nécessaire et certaines conditions peuvent
+                  s'appliquer, notamment pour la garantie loyers impayés.
+                </p>
+              </div>
+
+              {/* Question 4 */}
+              <div className="rounded-lg bg-white p-6 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-800">
+                  Comment sont sélectionnés les locataires ?
+                </h3>
+                <p className="text-gray-600">
+                  Nous appliquons un processus de sélection rigoureux :
+                  vérification des justificatifs de revenus (ratio loyer/revenus
+                  ≤ 33%), contrôle des garants, vérification d'emploi, analyse
+                  des antécédents locatifs, et entretien personnalisé. Chaque
+                  dossier est soumis à votre approbation finale.
+                </p>
+              </div>
+
+              {/* Question 5 */}
+              <div className="rounded-lg bg-white p-6 shadow-sm">
+                <h3 className="mb-3 text-lg font-semibold text-gray-800">
+                  Que se passe-t-il en cas de travaux nécessaires ?
+                </h3>
+                <p className="text-gray-600">
+                  Pour les interventions mineures (jusqu'à 200€), nous les
+                  organisons immédiatement. Pour les travaux plus importants,
+                  nous vous soumettons des devis détaillés et n'engageons les
+                  travaux qu'après votre accord. Nous supervisons ensuite
+                  l'intégralité des interventions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Call-to-Action */}
+      <section className="bg-primary bg-opacity-10 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="mb-6 text-3xl font-bold text-gray-800">
+            Prêt à simplifier la gestion de votre bien ?
+          </h2>
+          <div className="mb-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link
+              href="/simulateur"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-4 text-center text-base font-medium text-white transition duration-300 hover:bg-opacity-90"
+            >
+              Estimer mes revenus locatifs
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-4 text-center text-base font-medium text-primary transition duration-300 hover:bg-primary hover:text-white"
+            >
+              Demander un devis personnalisé
+            </Link>
+          </div>
+          <p className="text-gray-600">
+            Ou appelez-nous directement au{" "}
+            <span className="font-semibold">03 XX XX XX XX</span> pour discuter
+            de votre projet avec un conseiller.
+          </p>
         </div>
       </section>
     </>

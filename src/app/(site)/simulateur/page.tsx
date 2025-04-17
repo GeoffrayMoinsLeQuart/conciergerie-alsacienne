@@ -240,7 +240,7 @@ export default function SimulateurPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="mb-8 sm:pt-[150px] pt-[50px] text-center text-3xl font-bold text-gray-800">
+      <h1 className="mb-8 sm:pt-[100px] pt-[50px] text-center text-3xl font-bold text-gray-800">
         Simulateur de Revenus
       </h1>
 

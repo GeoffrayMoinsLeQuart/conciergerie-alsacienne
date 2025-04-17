@@ -1,4 +1,5 @@
 import SectionTitle from "@/components/Common/SectionTitle";
+import Tarification from "@/components/Tarification";
 import { prestationData } from "@/static-data/prestation";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -214,6 +215,8 @@ export default function ConciergeriePage() {
           </div>
         </div>
       </section>
+
+      <Tarification />
 
       {/* CTA Section */}
       <section className="relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]">

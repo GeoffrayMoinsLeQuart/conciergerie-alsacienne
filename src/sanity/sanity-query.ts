@@ -93,3 +93,18 @@ export const postQueryCategory = groq`*[_type == "category"] {
     name,
     slug  
   }`;
+
+// FAQ Queries
+export const faqQuery = groq`*[_type == "faq" && isActive == true] | order(order asc) {
+  _id,
+  question,
+  answer,
+  category
+}`;
+
+export const faqQueryByCategory = groq`*[_type == "faq" && isActive == true && category == $category] | order(order asc) {
+  _id,
+  question,
+  answer,
+  category
+}`;

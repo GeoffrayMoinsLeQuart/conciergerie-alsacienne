@@ -7,10 +7,13 @@ import {
   postQueryBySlug,
   postQueryByTag,
   propertyQuery,
+  faqQuery,
+  faqQueryByCategory,
 } from "./sanity-query";
 import { Blog } from "@/types/blog";
 import { integrations, messages } from "../../integrations.config";
 import { Property } from "@/types/property";
+import { FAQItem } from "@/components/FAQ";
 
 export async function sanityFetch<QueryResponse>({
   query,
@@ -111,4 +114,21 @@ export async function getPostByTag(tag: string) {
 
 export function imageBuilder(source: string) {
   return ImageUrlBuilder(clientConfig as any).image(source);
+}
+
+// FAQ Utility Functions
+export async function getFAQs(category?: string): Promise<FAQItem[]> {
+  if (category) {
+    return await sanityFetch({
+      query: faqQueryByCategory,
+      qParams: { category },
+      tags: ["faq"],
+    });
+  } else {
+    return await sanityFetch({
+      query: faqQuery,
+      qParams: {},
+      tags: ["faq"],
+    });
+  }
 }
