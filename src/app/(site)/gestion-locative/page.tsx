@@ -2,14 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import PageTitle from "@/components/Common/PageTitle";
 import SectionTitle from "@/components/Common/SectionTitle";
+import FAQ from "@/components/FAQ";
+import { getFAQs } from "@/sanity/sanity-utils";
 
-export default function GestionLocativePage() {
+export default async function GestionLocativePage() {
+  // Récupérer les FAQ de la catégorie "gestion-locative" depuis Sanity
+  const faqItems = await getFAQs("gestion-locative");
   return (
     <>
       {/* Section Introduction */}
-      <section className="bg-white py-16 sm:pt-[150px] pt-[50px] ">
+      <section className="bg-white py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="mb-6 text-4xl font-bold text-gray-800">
@@ -673,6 +676,80 @@ export default function GestionLocativePage() {
             center
           />
 
+          {/* Frais initiaux */}
+          <div className="mx-auto mb-12 mt-8 max-w-4xl rounded-lg border-l-4 border-primary bg-white p-6 shadow-md">
+            <h3 className="mb-3 text-xl font-semibold text-gray-800">
+              Frais initiaux de mise en location
+            </h3>
+            <p className="mb-4 text-gray-600">
+              Conformément aux pratiques du marché, des frais équivalents à un
+              mois de loyer hors charges sont appliqués lors de la mise en
+              location initiale. Ces frais couvrent :
+            </p>
+            <ul className="grid grid-cols-1 gap-3 text-gray-600 md:grid-cols-2">
+              <li className="flex items-start">
+                <svg
+                  className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                Établissement du bail conforme à la législation
+              </li>
+              <li className="flex items-start">
+                <svg
+                  className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                État des lieux d'entrée détaillé avec photos
+              </li>
+              <li className="flex items-start">
+                <svg
+                  className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                Vérification complète des dossiers locataires
+              </li>
+              <li className="flex items-start">
+                <svg
+                  className="mr-2 mt-0.5 h-5 w-5 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                Constitution des dossiers d'assurance
+              </li>
+            </ul>
+          </div>
+
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
             {/* Formule Essentielle */}
             <div className="overflow-hidden rounded-lg bg-white shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -1192,114 +1269,40 @@ export default function GestionLocativePage() {
       </section>
 
       {/* Section FAQ */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <SectionTitle
-            mainTitle="FAQ"
-            title="Vos questions fréquentes"
-            paragraph="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
-            center
-          />
-
-          <div className="mx-auto mt-12 max-w-3xl">
-            <div className="space-y-6">
-              {/* Question 1 */}
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <h3 className="mb-3 text-lg font-semibold text-gray-800">
-                  Quelle est la différence entre location meublée et non meublée
-                  ?
-                </h3>
-                <p className="text-gray-600">
-                  La location meublée nécessite que le logement soit équipé de
-                  tous les meubles et équipements essentiels à la vie
-                  quotidienne. Elle permet des baux plus courts (1 an, ou 9 mois
-                  pour les étudiants) et offre des avantages fiscaux spécifiques
-                  (statut LMNP). La location non meublée implique un bail de 3
-                  ans minimum (ou 6 ans pour les propriétaires personnes
-                  morales) et un logement vide ou partiellement meublé.
-                </p>
-              </div>
-
-              {/* Question 2 */}
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <h3 className="mb-3 text-lg font-semibold text-gray-800">
-                  Comment fonctionne la garantie loyers impayés ?
-                </h3>
-                <p className="text-gray-600">
-                  Notre garantie vous assure le versement de 100% de vos loyers
-                  et charges, même en cas d'impayé du locataire. Elle prend
-                  effet dès le premier jour de retard, sans franchise. En cas
-                  d'impayé, nous engageons les procédures nécessaires tout en
-                  continuant à vous verser vos loyers.
-                </p>
-              </div>
-
-              {/* Question 3 */}
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <h3 className="mb-3 text-lg font-semibold text-gray-800">
-                  Puis-je changer de formule en cours de mandat ?
-                </h3>
-                <p className="text-gray-600">
-                  Oui, vous pouvez passer à une formule supérieure à tout
-                  moment. Pour passer à une formule inférieure, un préavis de 3
-                  mois est nécessaire et certaines conditions peuvent
-                  s'appliquer, notamment pour la garantie loyers impayés.
-                </p>
-              </div>
-
-              {/* Question 4 */}
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <h3 className="mb-3 text-lg font-semibold text-gray-800">
-                  Comment sont sélectionnés les locataires ?
-                </h3>
-                <p className="text-gray-600">
-                  Nous appliquons un processus de sélection rigoureux :
-                  vérification des justificatifs de revenus (ratio loyer/revenus
-                  ≤ 33%), contrôle des garants, vérification d'emploi, analyse
-                  des antécédents locatifs, et entretien personnalisé. Chaque
-                  dossier est soumis à votre approbation finale.
-                </p>
-              </div>
-
-              {/* Question 5 */}
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <h3 className="mb-3 text-lg font-semibold text-gray-800">
-                  Que se passe-t-il en cas de travaux nécessaires ?
-                </h3>
-                <p className="text-gray-600">
-                  Pour les interventions mineures (jusqu'à 200€), nous les
-                  organisons immédiatement. Pour les travaux plus importants,
-                  nous vous soumettons des devis détaillés et n'engageons les
-                  travaux qu'après votre accord. Nous supervisons ensuite
-                  l'intégralité des interventions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FAQ
+        items={faqItems}
+        title="Vos questions fréquentes"
+        subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
+        mainTitle="FAQ"
+        center={true}
+      />
 
       {/* Section Call-to-Action */}
       <section className="bg-primary bg-opacity-10 py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-6 text-3xl font-bold text-gray-800">
-            Prêt à simplifier la gestion de votre bien ?
+            Prêt à déléguer la gestion de votre bien ?
           </h2>
-          <div className="mb-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <p className="mx-auto mb-8 max-w-3xl text-xl text-gray-600">
+            Contactez-nous dès aujourd'hui pour une estimation personnalisée et
+            découvrez comment nous pouvons maximiser la rentabilité de votre
+            investissement.
+          </p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/simulateur"
-              className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-4 text-center text-base font-medium text-white transition duration-300 hover:bg-opacity-90"
+              className="rounded-lg bg-primary px-8 py-4 font-medium text-white transition duration-300 hover:bg-opacity-90"
             >
-              Estimer mes revenus locatifs
+              Estimer mes revenus
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-4 text-center text-base font-medium text-primary transition duration-300 hover:bg-primary hover:text-white"
+              className="rounded-lg border border-primary bg-white px-8 py-4 font-medium text-primary transition duration-300 hover:bg-gray-50"
             >
-              Demander un devis personnalisé
+              Nous contacter
             </Link>
           </div>
-          <p className="text-gray-600">
+          <p className="mt-8 text-gray-600">
             Ou appelez-nous directement au{" "}
             <span className="font-semibold">03 XX XX XX XX</span> pour discuter
             de votre projet avec un conseiller.
