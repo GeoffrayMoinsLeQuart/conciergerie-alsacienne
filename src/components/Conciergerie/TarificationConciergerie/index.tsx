@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import SectionTitle from "../Common/SectionTitle";
+import SectionTitle from "../../Common/SectionTitle";
 import { FC } from "react";
 
 interface Plan {
@@ -62,7 +62,7 @@ const Tarification: FC = () => {
       priceLabel: "des revenus (selon taille du bien)",
       features: [
         "Tous les services de la formule Premium",
-        "Linge de qualité hôtelière",
+        "Linge de qualité hôtelière changé réguliérement",
       ],
       bgClass: "bg-white",
       textClass: "text-body-color",

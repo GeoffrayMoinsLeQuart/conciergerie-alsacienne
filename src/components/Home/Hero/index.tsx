@@ -1,6 +1,4 @@
 import Link from "next/link";
-import HeroClients from "./HeroClients";
-import HeroImage from "./HeroImage";
 import Image from "next/image";
 
 export default function Hero() {
@@ -10,7 +8,7 @@ export default function Hero() {
       style={{ backgroundImage: "url(/assets/background/overlay_1.jpg)" }}
     >
       <div className="bg-white/90">
-        <div className="container mx-auto flex flex-col items-center justify-center py-20 text-center md:min-h-screen">
+        <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
           {/* Responsive Image */}
           <div className="w-full">
             <Image
@@ -38,7 +36,7 @@ export default function Hero() {
 
           {/* Text Content */}
           <div className="mt-10 text-center">
-            <h1 className={`mb-4 text-3xl font-bold text-black md:text-4xl`}>
+            <h1 className={`mb-4 text-2xl font-bold text-black md:text-3xl`}>
               Conciergerie & Gestion Locative à Mulhouse
             </h1>
 
