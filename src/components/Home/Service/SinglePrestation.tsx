@@ -2,7 +2,11 @@ import { Prestation } from "@/types/prestation";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SinglePrestation({ prestation }: { prestation: Prestation }) {
+export default function SinglePrestation({
+  prestation,
+}: {
+  prestation: Prestation;
+}) {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
       <div className="mb-10 bg-white">
@@ -30,7 +34,7 @@ export default function SinglePrestation({ prestation }: { prestation: Prestatio
             {prestation?.description}
           </p>
 
-          <Link
+          {/* <Link
             href={`/prestation/${prestation?.slug}`}
             className="inline-flex items-center text-base font-medium text-body-color hover:text-primary"
           >
@@ -49,7 +53,7 @@ export default function SinglePrestation({ prestation }: { prestation: Prestatio
                 />
               </svg>
             </span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

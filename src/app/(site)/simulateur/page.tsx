@@ -240,7 +240,7 @@ export default function SimulateurPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="mb-8 sm:pt-[100px] pt-[50px] text-center text-3xl font-bold text-gray-800">
+      <h1 className="mb-8 pt-[50px] text-center text-3xl font-bold text-gray-800 sm:pt-[100px]">
         Simulateur de Revenus
       </h1>
 
@@ -285,7 +285,7 @@ export default function SimulateurPage() {
                 required={true}
               />
               <p className="mt-1 text-sm text-gray-500">
-                Saisissez l&aposadresse complète pour une estimation précise
+                Saisissez l'adresse complète pour une estimation précise
                 (uniquement en Alsace)
               </p>
             </div>
@@ -448,7 +448,7 @@ export default function SimulateurPage() {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
                   <label className="mb-2 block font-medium text-gray-700">
-                    Ambiance de l&aposappartement
+                    Ambiance de l'appartement
                   </label>
                   <select
                     name="ambiance"
@@ -467,7 +467,7 @@ export default function SimulateurPage() {
 
                 <div>
                   <label className="mb-2 block font-medium text-gray-700">
-                    Qualité de l&aposameublement
+                    Qualité de l'ameublement
                   </label>
                   <select
                     name="furnitureQuality"
@@ -606,7 +606,7 @@ export default function SimulateurPage() {
           <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="rounded-lg bg-purple-50 p-6">
               <h3 className="mb-3 text-xl font-semibold text-gray-800">
-                Taux d&aposoccupation estimé
+                Taux d'occupation estimé
               </h3>
               <p className="text-3xl font-bold text-purple-600">
                 {estimationResults.occupancyRate}

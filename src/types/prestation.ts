@@ -3,6 +3,7 @@ export type Prestation = {
   title: string;
   description: string;
   image: string;
+  icon: string;
   slug: string;
-  details?: JSX.Element;
+  details?: JSX.Element | string;
 };

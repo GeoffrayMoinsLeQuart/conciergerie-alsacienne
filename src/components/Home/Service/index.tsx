@@ -31,7 +31,7 @@ export default function Service() {
           </div>
         </div>
         <div className="-mx-4 flex flex-wrap">
-          {prestationData.slice(0, 3).map((prestation) => (
+          {prestationData.map((prestation) => (
             <SinglePrestation key={prestation?.id} prestation={prestation} />
           ))}
         </div>

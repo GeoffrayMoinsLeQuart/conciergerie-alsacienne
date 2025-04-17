@@ -364,7 +364,7 @@ export default function Contact() {
                           className="mt-1 h-5 w-5 text-primary"
                         />
                         <span className="ml-2 text-sm text-gray-700">
-                          J&aposaccepte que mes données soient traitées par la
+                          J'accepte que mes données soient traitées par la
                           Conciergerie Alsacienne pour traiter ma demande. Pour
                           en savoir plus sur la gestion de vos données et vos
                           droits, consultez notre politique de confidentialité.
@@ -417,7 +417,7 @@ export default function Contact() {
                   href="/"
                   className="inline-block rounded-lg bg-primary px-4 py-2 font-medium text-white transition duration-300 hover:bg-opacity-90"
                 >
-                  Retour à l&aposaccueil
+                  Retour à l'accueil
                 </Link>
               </div>
             )}
