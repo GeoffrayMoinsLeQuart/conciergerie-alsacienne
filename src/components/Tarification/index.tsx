@@ -21,7 +21,7 @@ interface Plan {
 const Tarification: FC = () => {
   const plans: Plan[] = [
     {
-      name: "Formule Premium",
+      name: "Formule Standard",
       price: "À partir de 17%",
       priceLabel: "des revenus (selon taille du bien)",
       features: [
@@ -40,13 +40,12 @@ const Tarification: FC = () => {
       },
     },
     {
-      name: "Formule Exclusive",
+      name: "Formule Premium",
       price: "À partir de 22%",
       priceLabel: "des revenus (selon taille du bien)",
       features: [
         "Tous les services de la formule Premium",
         "Ménage inclus",
-        "Linge de qualité hôtelière",
         "Gestion des urgences 24/7",
       ],
       bgClass: "bg-primary",
@@ -55,6 +54,22 @@ const Tarification: FC = () => {
         text: "Demander un devis",
         href: "/contact",
         style: "bg-white text-primary hover:bg-opacity-80",
+      },
+    },
+    {
+      name: "Formule Exclusive",
+      price: "À partir de 25%",
+      priceLabel: "des revenus (selon taille du bien)",
+      features: [
+        "Tous les services de la formule Premium",
+        "Linge de qualité hôtelière",
+      ],
+      bgClass: "bg-white",
+      textClass: "text-body-color",
+      button: {
+        text: "Demander un devis",
+        href: "/contact",
+        style: "bg-primary text-white hover:bg-opacity-80",
       },
     },
   ];
@@ -69,7 +84,7 @@ const Tarification: FC = () => {
           center
         />
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {plans.map((plan, idx) => (
             <article
               key={plan.name}
@@ -84,14 +99,19 @@ const Tarification: FC = () => {
                 <span className={`text-3xl font-bold ${plan.textClass}`}>
                   {plan.price}
                 </span>
-                <span className={`ml-2 text-base font-medium ${plan.textClass} opacity-70`}>
+                <span
+                  className={`ml-2 text-base font-medium ${plan.textClass} opacity-70`}
+                >
                   {plan.priceLabel}
                 </span>
               </div>
 
               <ul className="mb-9 space-y-3">
                 {plan.features.map((feature) => (
-                  <li key={feature} className={`text-base font-medium ${plan.textClass}`}>
+                  <li
+                    key={feature}
+                    className={`text-base font-medium ${plan.textClass}`}
+                  >
                     ✓ {feature}
                   </li>
                 ))}
