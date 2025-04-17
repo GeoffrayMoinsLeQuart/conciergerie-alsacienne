@@ -9,9 +9,9 @@ const serviceDetails = (
       contraintes.
     </p>
     <p className="mb-10 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
-      Que vous soyez propriétaire d&apos;un studio, d&apos;un appartement ou
-      d&apos;une maison en Alsace, nous vous proposons des services sur mesure
-      adaptés à vos besoins et à votre bien.
+      Que vous soyez propriétaire d'un studio, d'un appartement ou d'une maison
+      en Alsace, nous vous proposons des services sur mesure adaptés à vos
+      besoins et à votre bien.
     </p>
     <h4 className="mb-8 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
       <span className="text-primary">01.</span> Nos engagements
@@ -39,17 +39,16 @@ const serviceDetails = (
       </li>
     </ul>
     <p className="mb-10 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
-      Notre objectif est de vous offrir une tranquillité d&apos;esprit totale
-      tout en maximisant la rentabilité de votre investissement immobilier.
+      Notre objectif est de vous offrir une tranquillité d'esprit totale tout en
+      maximisant la rentabilité de votre investissement immobilier.
     </p>
     <h4 className="mb-8 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
       <span className="text-primary">02.</span> Notre expertise locale
     </h4>
     <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
       Basés en Alsace, nous connaissons parfaitement le marché local et les
-      attentes des voyageurs. Cette expertise nous permet d&apos;optimiser votre
-      bien pour attirer les meilleurs clients et maximiser votre taux
-      d&apos;occupation.
+      attentes des voyageurs. Cette expertise nous permet d'optimiser votre bien
+      pour attirer les meilleurs clients et maximiser votre taux d'occupation.
     </p>
   </div>
 );

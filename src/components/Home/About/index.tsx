@@ -40,7 +40,7 @@ export default function About() {
             </ul>
           </div>
           <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
-            <span className="mb-3 text-lg font-bold text-primary md:text-xl invisible">
+            <span className="invisible mb-3 text-lg font-bold text-primary md:text-xl">
               NOTRE PROMESSE
             </span>
             <h3 className="mb-6 text-2xl font-semibold text-black md:text-3xl">
@@ -48,8 +48,8 @@ export default function About() {
             </h3>
             <p className="mb-10 text-base font-medium text-body-color">
               Notre équipe locale connaît parfaitement les spécificités du
-              marché alsacien et s&apos;engage à vous offrir un service d&apos;excellence pour une
-              rentabilité optimale de votre bien.
+              marché alsacien et s'engage à vous offrir un service d'excellence
+              pour une rentabilité optimale de votre bien.
             </p>
 
             <SocialLinks />
