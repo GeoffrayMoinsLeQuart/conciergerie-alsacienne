@@ -4,6 +4,7 @@ import { prestationData } from "@/static-data/prestation";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import WhatsappButton from "@/components/button-whatsapp/button-whatsapp";
 // import TransformationSlider from "@/components/Transformations/Slider";
 
 const siteName: string = process.env.SITE_NAME || "Conciergerie Alsacienne";
@@ -18,51 +19,74 @@ export default function ConciergeriePage(): JSX.Element {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-white pb-20 pt-[120px]">
-        <div className="container grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
-          <div>
-            <h1 className="text-4xl font-bold leading-tight sm:text-5xl">
-              Conciergerie Premium & Valorisation Immobilière
-            </h1>
-            <p className="mt-6 text-lg text-body-color">
-              Une gestion locative sans stress avec un accompagnement haut de
-              gamme. Notre exigence : des biens parfaitement optimisés et
-              valorisés pour une expérience inoubliable côté voyageur — et des
-              revenus optimisés côté propriétaire.
-            </p>
-            <p className="mt-4 text-lg text-body-color">
-              <strong>Notre engagement d&apos;excellence</strong> nous conduit à
-              sélectionner exclusivement des biens à forte valeur ajoutée,
-              garantissant ainsi une expérience exceptionnelle pour les
-              voyageurs et des revenus maximisés pour vous.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/simulateur"
-                className="rounded-md bg-primary px-6 py-3 font-medium text-white"
-              >
-                Estimer mes revenus
-              </Link>
-              <Link
-                href="/contact"
-                className="rounded-md bg-black px-6 py-3 font-medium text-white"
-              >
-                Nous contacter
-              </Link>
+
+      <section
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url(/assets/background/overlay_1.jpg)" }}
+      >
+        <div className="bg-white/90">
+          <div className="container mx-auto flex flex-col items-center justify-center py-20 text-center md:min-h-screen">
+            {/* Responsive Image */}
+            <div className="w-full">
+              <Image
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-desktop_nddksd.webp"
+                alt="marketing market"
+                width={1200}
+                height={500}
+                className="mx-auto hidden rounded-lg md:block"
+              />
+              <Image
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
+                alt="marketing market"
+                width={800}
+                height={400}
+                className="mx-auto hidden rounded-lg sm:block md:hidden"
+              />
+              <Image
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
+                alt="marketing market"
+                width={400}
+                height={300}
+                className="mx-auto rounded-lg sm:hidden"
+              />
             </div>
-          </div>
-          <div className="text-center">
-            <Image
-              src="/images/services/conciergerie-hero.jpg"
-              alt="Visuel Conciergerie"
-              width={600}
-              height={400}
-              className="mx-auto rounded-lg"
-            />
+
+            {/* Text Content */}
+            <div className="mt-10 text-center">
+              <h1 className={`mb-4 text-3xl font-bold text-black md:text-4xl`}>
+                Conciergerie Premium & Valorisation Immobilière
+              </h1>
+
+              <p className="text-gray-600">
+                Une gestion locative sans stress avec un accompagnement haut de
+                gamme. Notre exigence : des biens parfaitement optimisés et
+                valorisés pour une expérience inoubliable côté voyageur — et des
+                revenus optimisés côté propriétaire.
+                <br />
+                <strong>Notre engagement d&apos;excellence</strong> nous conduit
+                à sélectionner exclusivement des biens à forte valeur ajoutée,
+                garantissant ainsi une expérience exceptionnelle pour les
+                voyageurs et des revenus maximisés pour vous.
+              </p>
+
+              <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-center">
+                <Link
+                  href="/simulateur"
+                  className="rounded-md bg-primary px-6 py-3 font-medium text-white"
+                >
+                  Estimer mes revenus
+                </Link>
+                <Link
+                  href="/contact"
+                  className="rounded-md bg-black px-6 py-3 font-medium text-white"
+                >
+                  Nous contacter
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
       {/* Critères de Sélection Section */}
       <section className="bg-[#f8f9ff] py-20">
         <div className="container">
@@ -121,7 +145,6 @@ export default function ConciergeriePage(): JSX.Element {
           </div>
         </div>
       </section>
-
       {/* Transformations Section */}
       <section className="bg-white py-20">
         <div className="container">
@@ -141,7 +164,6 @@ export default function ConciergeriePage(): JSX.Element {
           </div>
         </div>
       </section>
-
       {/* Service de Décoration Section */}
       <section className="bg-[#f8f9ff] py-20">
         <div className="container">
@@ -250,7 +272,6 @@ export default function ConciergeriePage(): JSX.Element {
           </div>
         </div>
       </section>
-
       {/* Nos Services Section */}
       <section className="bg-white py-20">
         <div className="container">
@@ -293,7 +314,6 @@ export default function ConciergeriePage(): JSX.Element {
           </div>
         </div>
       </section>
-
       {/* Processus Section */}
       <section className="bg-[#f8f9ff] py-20">
         <div className="container">
@@ -338,7 +358,6 @@ export default function ConciergeriePage(): JSX.Element {
           </div>
         </div>
       </section>
-
       {/* Coûts Initiaux Section */}
       <section className="bg-white py-20">
         <div className="container">
@@ -407,7 +426,6 @@ export default function ConciergeriePage(): JSX.Element {
           </div>
         </div>
       </section>
-
       {/* Chiffres Clés & Avantages Section */}
       <section className="bg-[#f8f9ff] py-20">
         <div className="container">
@@ -469,10 +487,8 @@ export default function ConciergeriePage(): JSX.Element {
           </div>
         </div>
       </section>
-
       {/* Tarification */}
       <Tarification />
-
       {/* CTA Section */}
       <section className="bg-primary py-20 text-center">
         <div className="container mx-auto max-w-3xl">

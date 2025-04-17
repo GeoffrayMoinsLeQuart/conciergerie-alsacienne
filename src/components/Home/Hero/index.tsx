@@ -1,55 +1,70 @@
 import Link from "next/link";
 import HeroClients from "./HeroClients";
 import HeroImage from "./HeroImage";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div
-      id="home"
-      className="relative bg-white pb-20 pt-[120px] lg:pb-[110px] lg:pt-[150px]"
+    <section
+      className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url(/assets/background/overlay_1.jpg)" }}
     >
-      <div className="container">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 lg:w-6/12 xl:w-6/12">
-            <div className="hero-content">
-              <h1 className="mb-3 text-4xl font-bold leading-snug text-dark sm:text-[42px] lg:text-[40px] xl:text-[42px]">
-                Conciergerie & Gestion Locative à Mulhouse
-              </h1>
-              <p className="mb-8 max-w-[480px] text-base text-body-color">
-                Service clé en main de gestion Airbnb et locations saisonnières.
-                Maximisez vos revenus et libérez-vous totalement des contraintes
-                de gestion grâce à notre expertise locale.
-              </p>
-              <ul className="flex flex-wrap items-center gap-4">
-                <li>
-                  <Link
-                    href="/simulateur"
-                    className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 lg:px-6 xl:px-8"
-                  >
-                    Estimer mes revenus
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-4 text-center text-base font-normal text-primary hover:bg-primary hover:text-white lg:px-6 xl:px-8"
-                  >
-                    concier
-                  </Link>
-                </li>
-              </ul>
-
-              <HeroClients />
-            </div>
+      <div className="bg-white/90">
+        <div className="container mx-auto flex flex-col items-center justify-center py-20 text-center md:min-h-screen">
+          {/* Responsive Image */}
+          <div className="w-full">
+            <Image
+              src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-desktop_nddksd.webp"
+              alt="marketing market"
+              width={1200}
+              height={500}
+              className="mx-auto hidden rounded-lg md:block"
+            />
+            <Image
+              src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
+              alt="marketing market"
+              width={800}
+              height={400}
+              className="mx-auto hidden rounded-lg sm:block md:hidden"
+            />
+            <Image
+              src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
+              alt="marketing market"
+              width={400}
+              height={300}
+              className="mx-auto rounded-lg sm:hidden"
+            />
           </div>
-          <div className="hidden px-4 xl:block xl:hidden"></div>
-          <div className="w-full px-4 lg:w-6/12">
-            <div className="flex w-full max-lg:mt-10 lg:justify-end">
-              <HeroImage />
+
+          {/* Text Content */}
+          <div className="mt-10 text-center">
+            <h1 className={`mb-4 text-3xl font-bold text-black md:text-4xl`}>
+              Conciergerie & Gestion Locative à Mulhouse
+            </h1>
+
+            <p className="mb-8 text-xl text-gray-600">
+              Service clé en main de gestion Airbnb et locations saisonnières.
+              Maximisez vos revenus et libérez-vous totalement des contraintes
+              de gestion grâce à notre expertise locale.
+            </p>
+
+            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-center">
+              <Link
+                href="/simulateur"
+                className="rounded-md bg-primary px-6 py-3 font-medium text-white"
+              >
+                Estimer mes revenus
+              </Link>
+              <Link
+                href="/contact"
+                className="rounded-md bg-black px-6 py-3 font-medium text-white"
+              >
+                Nous contacter
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

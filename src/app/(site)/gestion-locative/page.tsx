@@ -5,6 +5,9 @@ import Link from "next/link";
 import SectionTitle from "@/components/Common/SectionTitle";
 import FAQ from "@/components/FAQ";
 import { getFAQs } from "@/sanity/sanity-utils";
+import Image from "next/image";
+import HeroClients from "@/components/Home/Hero/HeroClients";
+import HeroImage from "@/components/Home/Hero/HeroImage";
 
 export default async function GestionLocativePage() {
   // Récupérer les FAQ de la catégorie "gestion-locative" depuis Sanity
@@ -12,33 +15,63 @@ export default async function GestionLocativePage() {
   return (
     <>
       {/* Section Introduction */}
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="mb-6 text-4xl font-bold text-gray-800">
-              Gestion locative longue durée en Alsace : sérénité et rentabilité
-              garanties
-            </h1>
-            <p className="mb-8 text-xl text-gray-600">
-              Confiez-nous la gestion complète de vos biens immobiliers, qu'ils
-              soient meublés ou non
-            </p>
-            <p className="mb-8 text-gray-600">
-              Chez Conciergerie Alsacienne, nous comprenons que votre bien
-              immobilier représente un investissement précieux. Notre service de
-              gestion locative longue durée vous libère de toutes les
-              contraintes administratives, techniques et relationnelles liées à
-              la location de votre bien, tout en maximisant votre rentabilité.
-            </p>
-            <p className="text-gray-600">
-              Que vous possédiez un studio, un appartement ou une maison, meublé
-              ou non, notre équipe d'experts prend en charge l'intégralité de la
-              gestion pour vous offrir une expérience sans stress et des revenus
-              réguliers.
-            </p>
+
+      <div
+        id="home"
+        className="relative bg-white pb-20 pt-[120px] lg:pb-[110px] lg:pt-[150px]"
+      >
+        <div className="container">
+          <div className="-mx-4 flex flex-wrap">
+            <div className="w-full px-4 lg:w-6/12 xl:w-6/12">
+              <div className="hero-content">
+                <h1 className="mb-3 text-4xl font-bold leading-snug text-dark sm:text-[42px] lg:text-[40px] xl:text-[42px]">
+                  Gestion locative longue durée en Alsace : sérénité et
+                  rentabilité garanties
+                </h1>
+                <p className="mb-8 max-w-[480px] text-base text-body-color">
+                  Confiez-nous la gestion complète de vos biens immobiliers,
+                  qu'ils soient meublés ou non Chez Conciergerie Alsacienne,
+                  nous comprenons que votre bien immobilier représente un
+                  investissement précieux. Notre service de gestion locative
+                  longue durée vous libère de toutes les contraintes
+                  administratives, techniques et relationnelles liées à la
+                  location de votre bien, tout en maximisant votre rentabilité.
+                  Que vous possédiez un studio, un appartement ou une maison,
+                  meublé ou non, notre équipe d'experts prend en charge
+                  l'intégralité de la gestion pour vous offrir une expérience
+                  sans stress et des revenus réguliers.
+                </p>
+                <ul className="flex flex-wrap items-center gap-4">
+                  <li>
+                    <Link
+                      href="/simulateur"
+                      className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 lg:px-6 xl:px-8"
+                    >
+                      Estimer mes revenus
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-4 text-center text-base font-normal text-primary hover:bg-primary hover:text-white lg:px-6 xl:px-8"
+                    >
+                      concier
+                    </Link>
+                  </li>
+                </ul>
+
+                <HeroClients />
+              </div>
+            </div>
+            <div className="hidden px-4 xl:block xl:hidden"></div>
+            <div className="w-full px-4 lg:w-6/12">
+              <div className="flex w-full max-lg:mt-10 lg:justify-end">
+                <HeroImage />
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Section Nos Services */}
       <section className="bg-gray-50 py-16">
