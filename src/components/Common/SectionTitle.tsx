@@ -1,6 +1,6 @@
 export default function SectionTitle({
   title,
-  mainTitle,
+  mainTitle = "",
   paragraph,
   center,
   width = "600px",
@@ -14,9 +14,11 @@ export default function SectionTitle({
       className={`${center ? "mx-auto text-center" : ""}`}
       style={{ maxWidth: width, marginBottom: marginBottom }}
     >
-      <span className="mb-2 block text-lg font-semibold text-primary">
-        {mainTitle}
-      </span>
+      {mainTitle !== "" && (
+        <span className="mb-2 block text-lg font-semibold text-primary">
+          {mainTitle}
+        </span>
+      )}
       <h2
         className={`text-3xl font-bold sm:text-4xl md:text-[45px]/[55px] ${color === "white" ? "text-white" : "text-black"} ${paragraph && "mb-5"} ${titleWidth && center && "mx-auto"}`}
         style={{ maxWidth: titleWidth }}

@@ -65,7 +65,7 @@ export const footerQuickLinks: FooterLink[] = [
   {
     id: uuid(),
     title: "Demander un Devis",
-    href: "/reserver",
+    href: "/contact",
     external: false,
   },
   {

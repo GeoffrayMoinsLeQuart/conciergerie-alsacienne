@@ -98,7 +98,6 @@ export default function Contact() {
     <section id="contact" className="bg-white py-[120px]">
       <div className="container">
         <SectionTitle
-          mainTitle="CONTACT"
           title="Un projet immobilier en tête ?"
           paragraph="Contactez-nous pour discuter de votre bien et découvrir comment notre service de conciergerie peut maximiser vos revenus locatifs en Alsace."
           center

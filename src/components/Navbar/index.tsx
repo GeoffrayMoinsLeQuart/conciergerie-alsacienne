@@ -153,7 +153,7 @@ export default function Navbar() {
 
               <div className="hidden items-center justify-end gap-4 pr-16 sm:flex lg:pr-0">
                 <Link
-                  href="/reserver"
+                  href="/contact"
                   className="rounded-full bg-primary px-8 py-3 text-base font-bold text-white transition duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-signUp md:px-9 lg:px-8 xl:px-9"
                 >
                   Demander un devis

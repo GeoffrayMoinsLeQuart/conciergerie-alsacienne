@@ -33,10 +33,10 @@ export default function ConciergeriePage() {
                 </p>
                 <div className="flex flex-wrap">
                   <Link
-                    href="/reserver"
+                    href="/simulateur"
                     className="mb-5 mr-5 inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7"
                   >
-                    Demander un devis
+                    Estimer mes revenus
                   </Link>
                   <Link
                     href="/contact"
@@ -236,10 +236,10 @@ export default function ConciergeriePage() {
             <div className="w-full px-4 lg:w-1/2">
               <div className="flex flex-wrap justify-center lg:justify-end">
                 <Link
-                  href="/reserver"
+                  href="/simulateur"
                   className="mb-5 mr-5 inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-primary hover:bg-opacity-90"
                 >
-                  Demander un devis
+                  Estimer mes revenus
                 </Link>
                 <Link
                   href="/contact"

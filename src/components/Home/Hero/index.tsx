@@ -34,44 +34,7 @@ export default function Hero() {
                     href="/contact"
                     className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-4 text-center text-base font-normal text-primary hover:bg-primary hover:text-white lg:px-6 xl:px-8"
                   >
-                    Demander un devis
-                  </Link>
-                </li>
-                <li className="leading-none">
-                  <Link
-                    href="/conciergerie"
-                    className="inline-flex items-center justify-center py-1 text-center text-base font-normal text-body-color hover:text-primary"
-                  >
-                    <span className="mr-2">
-                      <svg
-                        width="22"
-                        height="22"
-                        viewBox="0 0 22 22"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <circle cx="11" cy="11" r="11" fill="#3056D3" />
-                        <rect
-                          x="6.90906"
-                          y="13.3636"
-                          width="8.18182"
-                          height="1.63636"
-                          fill="white"
-                        />
-                        <rect
-                          x="10.1818"
-                          y="6"
-                          width="1.63636"
-                          height="4.09091"
-                          fill="white"
-                        />
-                        <path
-                          d="M11 12.5454L13.8343 9.47726H8.16576L11 12.5454Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </span>
-                    Nos services
+                    concier
                   </Link>
                 </li>
               </ul>

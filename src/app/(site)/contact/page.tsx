@@ -1,4 +1,3 @@
-import PageTitle from "@/components/Common/PageTitle";
 import Contact from "@/components/Contact";
 import { Metadata } from "next";
 
@@ -11,15 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return (
-    <>
-      <PageTitle
-        pageTitle="Contact Page"
-        pageDescription="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid eius velit dicta, et distinctio error facilis"
-        showMenu={true}
-      />
-
-      <Contact />
-    </>
-  );
+  return <Contact />;
 }
