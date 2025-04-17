@@ -28,7 +28,7 @@ export default async function ConciergeriePage(): Promise<JSX.Element> {
     <>
       <Intro
         title="Conciergerie Premium & Valorisation Immobilière"
-        content="Une gestion locative sereine et de qualité, avec un
+        content="Une gestion des locations courtes durées sereine et de qualité, avec un
         accompagnement personnalisé pour valoriser votre bien, offrir
         une belle expérience aux voyageurs et optimiser vos revenus."
       />
