@@ -19,7 +19,7 @@ export default function FooterBottom() {
           ))}
         </div>
         <p className="text-center text-base font-medium text-body-color">
-        Next.js Site Template for Agency and Portfolio - &copy; {new Date().getFullYear()}
+        Conciergerie Alsacienne - Services de conciergerie et gestion locative - &copy; {new Date().getFullYear()}
         </p>
       </div>
     </>

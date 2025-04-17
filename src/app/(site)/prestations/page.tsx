@@ -1,6 +1,6 @@
 import PageTitle from "@/components/Common/PageTitle";
-import SingleService from "@/components/Home/Service/SingleService";
-import { serviceData } from "@/static-data/service";
+import SingleService from "@/components/Home/Service/SinglePrestation";
+import { prestationData } from "@/static-data/prestation";
 
 import { Metadata } from "next";
 
@@ -24,8 +24,8 @@ export default function page() {
       <section className="bg-gray-50 pb-20 pt-[90px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap justify-center">
-            {serviceData.map((service) => (
-              <SingleService key={service?.id} service={service} />
+            {prestationData.map((prestation) => (
+              <SingleService key={prestation?.id} prestation={prestation} />
             ))}
           </div>
         </div>

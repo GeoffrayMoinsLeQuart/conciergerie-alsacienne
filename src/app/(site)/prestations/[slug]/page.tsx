@@ -1,7 +1,7 @@
 import PageTitle from "@/components/Common/PageTitle";
-import ServiceLayout from "@/components/Service/ServiceLayout";
-import { serviceData } from "@/static-data/service";
-import { Service } from "@/types/service";
+import PrestationLayout from "@/components/Service/PrestationLayout";
+import { prestationData } from "@/static-data/prestation";
+import { Prestation } from "@/types/prestation";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -13,7 +13,7 @@ export async function generateMetadata(props: Props) {
   const siteName = process.env.SITE_NAME;
   const authorName = process.env.AUTHOR_NAME;
 
-  const service = serviceData.find((item) => item?.slug === params?.slug);
+  const service = prestationData.find((item) => item?.slug === params?.slug);
 
   if (service) {
     return {
@@ -60,17 +60,17 @@ export async function generateMetadata(props: Props) {
   }
 }
 
-export default async function ServiceDetailPage(props: Props) {
+export default async function PrestationDetailPage(props: Props) {
   const params = await props.params;
-  const service = serviceData.find((item) => item?.slug === params?.slug);
+  const prestation = prestationData.find((item) => item?.slug === params?.slug);
   return (
     <>
       <PageTitle
-        pageTitle="Service Details"
+        pageTitle="Prestation Details"
         pageDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero. "
         showMenu={true}
       />
-      <ServiceLayout service={service as Service} />
+      <PrestationLayout prestation={prestation as Prestation} />
     </>
   );
 }

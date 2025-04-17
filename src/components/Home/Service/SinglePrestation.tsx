@@ -1,18 +1,18 @@
-import { Service } from "@/types/service";
+import { Prestation } from "@/types/prestation";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SingleService({ service }: { service: Service }) {
+export default function SinglePrestation({ prestation }: { prestation: Prestation }) {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
       <div className="mb-10 bg-white">
         <Link
-          href={`/service/${service?.slug}`}
+          href={`/prestation/${prestation?.slug}`}
           className="relative block aspect-[34/23] w-full"
         >
           <Image
-            src={service?.image}
-            alt={service?.title}
+            src={prestation?.image}
+            alt={prestation?.title}
             fill
             className="w-full object-cover object-center"
           />
@@ -20,18 +20,18 @@ export default function SingleService({ service }: { service: Service }) {
         <div className="p-8 sm:p-11 md:p-8 lg:px-6 xl:p-10 2xl:p-11">
           <h3>
             <Link
-              href={`/service/${service?.slug}`}
+              href={`/prestation/${prestation?.slug}`}
               className="mb-4 block text-lg font-bold text-dark hover:text-primary sm:text-xl"
             >
-              {service?.title}
+              {prestation?.title}
             </Link>
           </h3>
           <p className="mb-6 border-b border-[#F3F3F3] pb-7 text-base leading-relaxed text-body-color">
-            {service?.description}
+            {prestation?.description}
           </p>
 
           <Link
-            href={`/service/${service?.slug}`}
+            href={`/prestation/${prestation?.slug}`}
             className="inline-flex items-center text-base font-medium text-body-color hover:text-primary"
           >
             View Details

@@ -1,7 +1,7 @@
 import SectionTitle from "@/components/Common/SectionTitle";
-import { serviceData } from "@/static-data/service";
+import { prestationData } from "@/static-data/prestation";
 import Link from "next/link";
-import SingleService from "./SingleService";
+import SinglePrestation from "./SinglePrestation";
 
 export default function Service() {
   return (
@@ -22,7 +22,7 @@ export default function Service() {
           <div className="w-full px-4 lg:w-4/12">
             <div className="mb-[50px] flex lg:justify-end">
               <Link
-                href="/service"
+                href="/prestations"
                 className="text-lg font-medium text-white underline hover:text-primary"
               >
                 EXPLOREZ NOS PRESTATIONS
@@ -31,8 +31,8 @@ export default function Service() {
           </div>
         </div>
         <div className="-mx-4 flex flex-wrap">
-          {serviceData.slice(0, 3).map((service) => (
-            <SingleService key={service?.id} service={service} />
+          {prestationData.slice(0, 3).map((prestation) => (
+            <SinglePrestation key={prestation?.id} prestation={prestation} />
           ))}
         </div>
       </div>

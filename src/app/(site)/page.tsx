@@ -8,16 +8,15 @@ import Pricing from "@/components/Home/Pricing";
 import Service from "@/components/Home/Service";
 import Team from "@/components/Home/Team";
 import Testimonial from "@/components/Home/Testimonial";
-import Portfolio from "@/components/property";
+import Properties from "@/components/property";
 import { Metadata } from "next";
 import { integrations } from "../../../integrations.config";
-import Properties from "@/components/property";
 
-const siteName = process.env.SITE_NAME;
+const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
 export const metadata: Metadata = {
-  title: `Next.js Portfolio and Agency Site Template | ${siteName}`,
-  description: "This is home page description",
+  title: `Conciergerie Alsacienne | Services de conciergerie et gestion locative en Alsace`,
+  description: "Service clé en main de gestion Airbnb et locations saisonnières. Maximisez vos revenus et libérez-vous totalement des contraintes de gestion grâce à notre expertise locale.",
 };
 
 export default function Home() {
@@ -27,10 +26,6 @@ export default function Home() {
       <About />
       <Service />
       <Properties />
-      <Brands />
-      <Newsletter />
-      <Team />
-      <Pricing />
       <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
       <Contact />

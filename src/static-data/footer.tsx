@@ -4,25 +4,25 @@ import { v4 as uuid } from "uuid";
 export const footerLinks: FooterLink[] = [
   {
     id: uuid(),
-    title: "The Studio",
-    href: "#",
+    title: "Conciergerie",
+    href: "/conciergerie",
     external: false,
   },
   {
     id: uuid(),
-    title: "Sponsoring",
-    href: "#",
+    title: "Gestion Locative",
+    href: "/gestion-locative",
     external: false,
   },
   {
     id: uuid(),
-    title: "Newsletter",
-    href: "#",
+    title: "Nos Biens",
+    href: "/properties",
     external: false,
   },
   {
     id: uuid(),
-    title: "Contact Us",
+    title: "Nous Contacter",
     href: "/contact",
     external: false,
   },
@@ -31,26 +31,26 @@ export const footerLinks: FooterLink[] = [
 export const footerNewsData: FooterLink[] = [
   {
     id: uuid(),
-    title: "Hot Stuff",
-    href: "#",
+    title: "Conseils Propriétaires",
+    href: "/blog",
     external: false,
   },
   {
     id: uuid(),
-    title: "Perfect Place",
-    href: "#",
+    title: "Actualités Airbnb",
+    href: "/blog",
     external: false,
   },
   {
     id: uuid(),
-    title: "Vintage",
-    href: "#",
+    title: "Tourisme en Alsace",
+    href: "/blog",
     external: false,
   },
   {
     id: uuid(),
-    title: "Products",
-    href: "#",
+    title: "Témoignages",
+    href: "/#testimonial",
     external: false,
   },
 ];
@@ -58,26 +58,26 @@ export const footerNewsData: FooterLink[] = [
 export const footerQuickLinks: FooterLink[] = [
   {
     id: uuid(),
-    title: "Style",
-    href: "#",
+    title: "Accueil",
+    href: "/",
     external: false,
   },
   {
     id: uuid(),
-    title: "Health",
-    href: "#",
+    title: "Demander un Devis",
+    href: "/reserver",
     external: false,
   },
   {
     id: uuid(),
-    title: "Relationship",
-    href: "#",
+    title: "À Propos",
+    href: "/#about",
     external: false,
   },
   {
     id: uuid(),
-    title: "Legal & Privacy",
-    href: "#",
+    title: "Mentions Légales",
+    href: "/mentions-legales",
     external: false,
   },
 ];

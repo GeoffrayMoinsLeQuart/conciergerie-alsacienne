@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="w-full px-4 md:w-1/2 lg:w-3/12">
             <div className="mb-10">
               <h3 className="mb-9 text-xl font-semibold text-white">
-                What I Do?
+                Nos Services
               </h3>
               <ul className="space-y-3">
                 {footerLinks.map((linkItem) => (
@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
           <div className="w-full px-4 md:w-1/2 lg:w-2/12">
             <div className="mb-10">
-              <h3 className="mb-9 text-xl font-semibold text-white">News</h3>
+              <h3 className="mb-9 text-xl font-semibold text-white">Blog</h3>
               <ul className="space-y-3">
                 {footerNewsData.map((linkItem) => (
                   <FooterLinkItem key={linkItem?.id} linkItem={linkItem} />
@@ -41,7 +41,7 @@ export default function Footer() {
           <div className="w-full px-4 md:w-1/2 lg:w-3/12">
             <div className="mb-10">
               <h3 className="mb-9 text-xl font-semibold text-white">
-                Quick Links
+                Liens Rapides
               </h3>
               <ul className="space-y-3">
                 {footerQuickLinks.map((linkItem) => (

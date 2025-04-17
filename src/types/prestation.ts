@@ -1,4 +1,4 @@
-export type Service = {
+export type Prestation = {
   id: string | number;
   title: string;
   description: string;

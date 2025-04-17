@@ -1,65 +1,65 @@
-import { Service } from "@/types/service";
+import { Prestation } from "@/types/prestation";
 import { v4 as uuid } from "uuid";
 
 const serviceDetails = (
   <div>
     <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+      Notre équipe de professionnels prend en charge tous les aspects de la
+      gestion de votre bien pour maximiser vos revenus tout en vous libérant des
+      contraintes.
     </p>
     <p className="mb-10 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Quis enim lobortis
-      scelerisque fermentum. Neque sodales ut etiam sit amet. Ligula ullamcorper
-      proin libero nunc consequat interdum varius. Quam pellentesque nec nam.
+      Que vous soyez propriétaire d&apos;un studio, d&apos;un appartement ou
+      d&apos;une maison en Alsace, nous vous proposons des services sur mesure
+      adaptés à vos besoins et à votre bien.
     </p>
     <h4 className="mb-8 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
-      <span className="text-primary">01.</span> Marketing solutions
+      <span className="text-primary">01.</span> Nos engagements
     </h4>
     <ul className="list mb-7 list-inside list-disc">
       <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
         <span className="text-body-color">
-          {" "}
-          Consectetur adipiscing elit in voluptate velit.{" "}
-        </span>
-      </li>
-      <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
-        <span className="text-body-color"> Mattis vulputate cupidatat. </span>
-      </li>
-      <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
-        <span className="text-body-color">
-          {" "}
-          Vulputate enim nulla aliquet porttitor odio pellentesque{" "}
+          Qualité de service irréprochable pour vos locataires
         </span>
       </li>
       <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
         <span className="text-body-color">
-          {" "}
-          Ligula ullamcorper malesuada proin{" "}
+          Transparence totale sur la gestion de votre bien
+        </span>
+      </li>
+      <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
+        <span className="text-body-color">
+          Optimisation continue de vos revenus locatifs
+        </span>
+      </li>
+      <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
+        <span className="text-body-color">
+          Réactivité et disponibilité à toute heure
         </span>
       </li>
     </ul>
     <p className="mb-10 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+      Notre objectif est de vous offrir une tranquillité d&apos;esprit totale
+      tout en maximisant la rentabilité de votre investissement immobilier.
     </p>
     <h4 className="mb-8 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
-      <span className="text-primary">02.</span> Branding solutions
+      <span className="text-primary">02.</span> Notre expertise locale
     </h4>
     <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Quis enim lobortis
-      scelerisque fermentum. Neque sodales ut etiam sit door telium sieat amet.
+      Basés en Alsace, nous connaissons parfaitement le marché local et les
+      attentes des voyageurs. Cette expertise nous permet d&apos;optimiser votre
+      bien pour attirer les meilleurs clients et maximiser votre taux
+      d&apos;occupation.
     </p>
   </div>
 );
 
-export const serviceData: Service[] = [
+export const prestationData: Prestation[] = [
   {
     id: uuid(),
     title: "Gestion des Annonces",
     description: "Création, optimisation, photos professionnelles",
-    slug: "website-development",
+    slug: "gestion-annonces",
     image: "/images/services/service-01.jpg",
     details: serviceDetails,
   },
@@ -67,7 +67,7 @@ export const serviceData: Service[] = [
     id: uuid(),
     title: "Gestion des Réservations",
     description: "Vérification des voyageurs, tarification dynamique",
-    slug: "graphic-design",
+    slug: "gestion-reservations",
     image: "/images/services/service-02.jpg",
     details: serviceDetails,
   },
@@ -75,7 +75,7 @@ export const serviceData: Service[] = [
     id: uuid(),
     title: "Conciergerie Premium",
     description: "Accueil personnalisé, remise des clés, assistance",
-    slug: "app-development",
+    slug: "conciergerie-premium",
     image: "/images/services/service-03.jpg",
     details: serviceDetails,
   },
@@ -83,7 +83,7 @@ export const serviceData: Service[] = [
     id: uuid(),
     title: "Entretien du Bien",
     description: "Ménage professionnel, linge de qualité, maintenance",
-    slug: "app-development",
+    slug: "entretien-bien",
     image: "/images/services/service-03.jpg",
     details: serviceDetails,
   },
@@ -91,7 +91,7 @@ export const serviceData: Service[] = [
     id: uuid(),
     title: "Conseils Personnalisés",
     description: "Aménagements, investissements, réglementations",
-    slug: "app-development",
+    slug: "conseils-personnalises",
     image: "/images/services/service-03.jpg",
     details: serviceDetails,
   },

@@ -9,14 +9,13 @@ export default function Testimonial() {
           <div className="w-full px-4">
             <div className="mx-auto mb-[50px] max-w-[600px] text-center">
               <span className="mb-2 block text-lg font-semibold text-primary">
-                TESTIMONIALS
+                TÉMOIGNAGES
               </span>
               <h2 className="mb-5 text-3xl font-bold text-black sm:text-4xl md:text-[45px]">
-                Hear From Our Clients
+                Ce que disent nos clients
               </h2>
               <p className="text-lg font-medium text-body-color">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                Découvrez les expériences de nos propriétaires qui nous font confiance pour la gestion de leurs biens en Alsace.
               </p>
             </div>
           </div>

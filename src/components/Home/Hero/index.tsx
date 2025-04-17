@@ -20,18 +20,26 @@ export default function Hero() {
                 Maximisez vos revenus et libérez-vous totalement des contraintes
                 de gestion grâce à notre expertise locale.
               </p>
-              <ul className="flex flex-wrap items-center gap-8">
+              <ul className="flex flex-wrap items-center gap-4">
                 <li>
                   <Link
-                    href="/portfolio"
-                    className="inline-flex items-center justify-center rounded-lg bg-primary px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+                    href="/simulateur"
+                    className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 lg:px-6 xl:px-8"
                   >
                     Estimer mes revenus
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-4 text-center text-base font-normal text-primary hover:bg-primary hover:text-white lg:px-6 xl:px-8"
+                  >
+                    Demander un devis
+                  </Link>
+                </li>
                 <li className="leading-none">
                   <Link
-                    href="#"
+                    href="/conciergerie"
                     className="inline-flex items-center justify-center py-1 text-center text-base font-normal text-body-color hover:text-primary"
                   >
                     <span className="mr-2">

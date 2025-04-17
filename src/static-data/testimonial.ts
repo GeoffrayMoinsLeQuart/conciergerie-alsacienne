@@ -1,7 +1,3 @@
-import formbold from "@/../public/images/brands/formbold.svg";
-import lineicons from "@/../public/images/brands/lineicons.svg";
-import tailgrids from "@/../public/images/brands/tailgrids.svg";
-import uideck from "@/../public/images/brands/uideck.svg";
 import { Testimonial } from "@/types/testimonial";
 import { v4 as uuid } from "uuid";
 
@@ -9,41 +5,41 @@ export const testimonialData: Testimonial[] = [
   {
     id: uuid(),
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet tempus augue, ac venenatis lectus tempus ut. Sed sodales erat a libero.",
-    companyLogo: lineicons,
-    companyName: "lineicons",
-    name: "Musharof Chy",
+      "Depuis que j'ai confié mon appartement à la Conciergerie Alsacienne, mes revenus ont augmenté de 30% et je n'ai plus aucun souci à me faire. Leur équipe est réactive et professionnelle.",
+    companyName: "Propriétaire T2 Mulhouse",
+    name: "Sophie Martin",
     image: "/images/testimonial/image-1.png",
-    designation: "Founder @ LineIcons",
+    designation: "Propriétaire depuis 2022",
+    companyLogo: "",
   },
   {
     id: uuid(),
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet tempus augue, ac venenatis lectus tempus ut. Sed sodales erat a libero.",
-    companyLogo: tailgrids,
-    companyName: "tailgrids",
-    name: "Devid Sailio",
+      "Service impeccable ! La gestion de mon bien est entre de bonnes mains. Les voyageurs sont ravis de l'accueil et mon appartement est toujours parfaitement entretenu.",
+    companyName: "Propriétaire Studio Colmar",
+    name: "Thomas Dubois",
     image: "/images/testimonial/image-2.png",
-    designation: "Founder @ TailGrids",
+    designation: "Propriétaire depuis 2021",
+    companyLogo: "",
   },
   {
     id: uuid(),
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet tempus augue, ac venenatis lectus tempus ut. Sed sodales erat a libero.",
-    companyLogo: formbold,
-    companyName: "formbold",
-    name: "Jenifer Lofeez",
+      "Je recommande vivement la Conciergerie Alsacienne pour leur professionnalisme et leur connaissance du marché local. Mes deux appartements affichent un taux d'occupation exceptionnel.",
+    companyName: "Propriétaire 2 biens Strasbourg",
+    name: "Marie Klein",
     image: "/images/testimonial/image-3.png",
-    designation: "Founder @ Formbold",
+    designation: "Propriétaire depuis 2023",
+    companyLogo: "",
   },
   {
     id: uuid(),
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet tempus augue, ac venenatis lectus tempus ut. Sed sodales erat a libero.",
-    companyLogo: uideck,
-    companyName: "uideck",
-    name: "Justin Herry",
+      "Grâce à leurs conseils, j'ai pu optimiser mon bien et augmenter significativement mes revenus. Leur service de conciergerie est irréprochable et très apprécié par mes locataires.",
+    companyName: "Propriétaire T3 Mulhouse",
+    name: "Pierre Schmitt",
     image: "/images/testimonial/image-4.png",
-    designation: "Founder @ UIdeck",
+    designation: "Propriétaire depuis 2020",
+    companyLogo: "",
   },
 ];

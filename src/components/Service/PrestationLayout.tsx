@@ -1,10 +1,10 @@
-import { serviceData } from "@/static-data/service";
-import { Service } from "@/types/service";
+import { prestationData } from "@/static-data/prestation";
+import { Prestation } from "@/types/prestation";
 import CallToActionCard from "./CallToActionCard";
-import ServiceTabButtons from "./ServiceTabButtons";
-import ServiceTabContent from "./ServiceTabContent";
+import PrestationTabButtons from "./PrestationTabButtons";
+import PrestationTabContent from "./PrestationTabContent";
 
-export default function ServiceLayout({ service }: { service: Service }) {
+export default function PrestationLayout({ prestation }: { prestation: Prestation }) {
   return (
     <>
       <section className="bg-gray-50 pb-20 pt-[90px]">
@@ -12,14 +12,14 @@ export default function ServiceLayout({ service }: { service: Service }) {
           <div className="-mx-5 flex flex-wrap">
             <div className="w-full px-5 lg:w-4/12">
               <div className="space-y-10">
-                <ServiceTabButtons serviceData={serviceData} />
+                <PrestationTabButtons prestationData={prestationData} />
 
                 <CallToActionCard />
               </div>
             </div>
 
             <div className="w-full px-5 lg:w-8/12">
-              <ServiceTabContent service={service as Service} />
+              <PrestationTabContent prestation={prestation as Prestation} />
             </div>
           </div>
         </div>
