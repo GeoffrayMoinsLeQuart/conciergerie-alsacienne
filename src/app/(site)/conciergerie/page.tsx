@@ -10,7 +10,7 @@ import ProcessusConciergerie from "@/components/Conciergerie/ProcessusConcierger
 import SectionTransparence from "@/components/Conciergerie/SectionTransparence";
 import SectionConfiance from "@/components/Conciergerie/SectionConfiance";
 import FAQ from "@/components/FAQ";
-import { getFAQs } from "@/sanity/sanity-utils";
+import { getFAQs, getFAQsByType } from "@/sanity/sanity-utils";
 // import TransformationSlider from "@/components/Transformations/Slider";
 
 const siteName: string = process.env.SITE_NAME || "Conciergerie Alsacienne";
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ConciergeriePage(): Promise<JSX.Element> {
-  const faqItems = await getFAQs("conciergerie");
+  const faqItems = await getFAQsByType("conciergerie");
 
   return (
     <>

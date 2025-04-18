@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import FAQ from "@/components/FAQ";
-import { getFAQs } from "@/sanity/sanity-utils";
+import { getFAQs, getFAQsByType } from "@/sanity/sanity-utils";
 import Intro from "@/components/Intro";
 import ServicesGestionLocative from "@/components/GestionLocative/Services";
 import GarantiesLoyers from "@/components/GestionLocative/GarantieLoyerImpaye";
@@ -20,7 +20,8 @@ export const metadata: Metadata = {
 
 export default async function GestionLocativePage() {
   // Récupérer les FAQ de la catégorie "gestion-locative" depuis Sanity
-  const faqItems = await getFAQs("gestion-locative");
+  const faqItems = await getFAQsByType("gestion-locative");
+
   return (
     <>
       {/* Section Introduction */}

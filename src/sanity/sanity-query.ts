@@ -95,16 +95,38 @@ export const postQueryCategory = groq`*[_type == "category"] {
   }`;
 
 // FAQ Queries
-export const faqQuery = groq`*[_type == "faq" && isActive == true] | order(order asc) {
-  _id,
-  question,
-  answer,
-  category
-}`;
+export const faqQuery = groq`
+  *[_type == "faq" && isActive == true] | order(order asc) {
+    _id,
+    question,
+    answer,
+    type,
+    topic,
+    icon,
+    order
+  }
+`;
 
-export const faqQueryByCategory = groq`*[_type == "faq" && isActive == true && category == $category] | order(order asc) {
-  _id,
-  question,
-  answer,
-  category
-}`;
+export const faqQueryByType = groq`
+  *[_type == "faq" && isActive == true && $type in type] | order(order asc) {
+    _id,
+    question,
+    answer,
+    type,
+    topic,
+    icon,
+    order
+  }
+`;
+
+export const faqQueryByTopic = groq`
+  *[_type == "faq" && isActive == true && topic == $topic] | order(order asc) {
+    _id,
+    question,
+    answer,
+    type,
+    topic,
+    icon,
+    order
+  }
+`;

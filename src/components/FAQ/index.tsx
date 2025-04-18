@@ -6,7 +6,10 @@ export interface FAQItem {
   id: string;
   question: string;
   answer: string;
-  category?: string;
+  type: string[]; // ✅ type contextuel (ex: ['conciergerie'])
+  topic?: string; // ✅ thématique (ex: 'travaux')
+  icon?: string; // ✅ icône personnalisée éventuelle
+  order?: number; // optionnel, pour le tri
 }
 
 interface FAQProps {
