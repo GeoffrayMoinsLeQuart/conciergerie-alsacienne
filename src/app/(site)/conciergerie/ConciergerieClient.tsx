@@ -26,25 +26,24 @@ export default function ConciergerieClient() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 max-w-4xl">
-      <h2 className="text-3xl font-bold text-center mb-4">Questions fréquentes</h2>
-      <p className="text-center text-gray-600 mb-10">
-        Retrouvez les réponses aux questions les plus courantes sur notre service de conciergerie.
-      </p>
-      
-      {isLoading ? (
-        <div className="text-center py-10">
-          <p>Chargement des questions fréquentes...</p>
-        </div>
-      ) : (
-        <FAQ 
-          items={faqItems} 
-          defaultType="conciergerie"
-          showTypeFilter={false}
-          showTopicFilter={true}
-          mainTitle=""
-        />
-      )}
-    </div>
+    <section className="bg-white py-16">
+      <div className="max-w-8xl container mx-auto px-4">
+        {isLoading ? (
+          <div className="py-10 text-center">
+            <p>Chargement des questions fréquentes...</p>
+          </div>
+        ) : (
+          <FAQ
+            items={faqItems}
+            defaultType="conciergerie"
+            showTypeFilter={false}
+            showTopicFilter={true}
+            mainTitle=""
+            specificPage={true}
+            subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de conciergerie."
+          />
+        )}
+      </div>
+    </section>
   );
 }

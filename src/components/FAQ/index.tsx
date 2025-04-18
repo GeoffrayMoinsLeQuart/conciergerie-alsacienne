@@ -22,6 +22,7 @@ interface FAQProps {
   showTypeFilter?: boolean; // Afficher le filtre conciergerie/gestion-locative
   defaultType?: string; // Type par défaut (conciergerie, gestion-locative, ou all)
   showTopicFilter?: boolean; // Afficher le filtre par thématique
+  specificPage?: boolean;
 }
 
 // Icônes plus cohérentes pour les catégories et thématiques
@@ -44,7 +45,7 @@ const categoryIcons: Record<string, string> = {
   // Catégories principales
   conciergerie: "🏠", // Maison avec service
   "gestion-locative": "🔑", // Clé (symbolise l'accès, la gestion)
-  
+
   // Thématiques
   fiscalite: "📊", // Graphique (pour les finances)
   technique: "🔧", // Clé à molette (pour aspects techniques)
@@ -59,9 +60,12 @@ const categoryIcons: Record<string, string> = {
 };
 
 // Fonction utilitaire pour vérifier si un type correspond
-const typeMatches = (itemType: string[] | string, filterType: string): boolean => {
+const typeMatches = (
+  itemType: string[] | string,
+  filterType: string,
+): boolean => {
   if (filterType === "all") return true;
-  
+
   if (Array.isArray(itemType)) {
     return itemType.includes(filterType);
   } else {
@@ -79,6 +83,7 @@ const FAQ: React.FC<FAQProps> = (props) => {
     showTypeFilter = true,
     defaultType = "all",
     showTopicFilter = true,
+    specificPage = false,
   } = props;
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -94,7 +99,7 @@ const FAQ: React.FC<FAQProps> = (props) => {
   // Extraire toutes les thématiques uniques des items
   const uniqueTopics = useMemo(() => {
     if (!items || items.length === 0) return [];
-    
+
     const topics = items
       .map((item) => item.topic || "autres")
       .filter((value, index, self) => {
@@ -127,11 +132,11 @@ const FAQ: React.FC<FAQProps> = (props) => {
   // Filtrer les FAQs en fonction des filtres sélectionnés
   const filteredFaqs = useMemo(() => {
     if (!items || items.length === 0) return [];
-    
+
     return items.filter((item) => {
       // Filtre par type (conciergerie/gestion-locative)
       const matchesType = typeMatches(item.type, selectedType);
-      
+
       // Filtre par thématique
       const matchesTopic =
         selectedTopic === "all" || (item.topic || "autres") === selectedTopic;
@@ -167,22 +172,35 @@ const FAQ: React.FC<FAQProps> = (props) => {
         </div>
 
         {/* Search Input */}
-        <div className="mb-10">
-          <div className="relative">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Rechercher une question..."
-              className="w-full rounded-md border border-gray-300 p-3 pl-10 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-            />
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+        {!specificPage && (
+          <div className="mb-10">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Rechercher une question..."
+                className="w-full rounded-md border border-gray-300 p-3 pl-10 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Type Filter Buttons (First Row) */}
         {showTypeFilter && (
@@ -190,15 +208,13 @@ const FAQ: React.FC<FAQProps> = (props) => {
             <button
               onClick={() => handleTypeClick("all")}
               className={`flex items-center justify-center rounded-lg border p-4 transition hover:shadow-md ${
-                selectedType === "all" 
-                  ? "bg-primary text-white shadow-md" 
+                selectedType === "all"
+                  ? "bg-primary text-white shadow-md"
                   : "bg-white hover:bg-gray-50"
               }`}
             >
               <span className="mr-2 text-xl">⭐</span>
-              <span className="font-medium">
-                Toutes les catégories
-              </span>
+              <span className="font-medium">Toutes les catégories</span>
             </button>
             <button
               onClick={() => handleTypeClick("conciergerie")}
@@ -233,27 +249,20 @@ const FAQ: React.FC<FAQProps> = (props) => {
           </div>
         )}
 
-        {/* Reset Filters Button */}
-        <div className="mb-6 flex justify-end">
-          <button
-            onClick={resetFilters}
-            className="flex items-center rounded-md bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200"
-          >
-            <span className="mr-1">↻</span>
-            Réinitialiser les filtres
-          </button>
-        </div>
+
 
         {/* Topic Filter Buttons (Second Row) */}
         {showTopicFilter && uniqueTopics.length > 0 && (
           <div className="mb-8">
-            <h3 className="mb-3 text-sm font-medium text-gray-500">Filtrer par thématique :</h3>
+            <h3 className="mb-3 text-sm font-medium text-gray-500">
+              Filtrer par thématique :
+            </h3>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => handleTopicClick("all")}
                 className={`flex items-center rounded-md px-3 py-2 text-sm transition ${
-                  selectedTopic === "all" 
-                    ? "bg-primary/10 text-primary font-medium" 
+                  selectedTopic === "all"
+                    ? "bg-primary/10 font-medium text-primary"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -265,7 +274,7 @@ const FAQ: React.FC<FAQProps> = (props) => {
                   onClick={() => handleTopicClick(topic)}
                   className={`flex items-center rounded-md px-3 py-2 text-sm transition ${
                     selectedTopic === topic
-                      ? "bg-primary/10 text-primary font-medium"
+                      ? "bg-primary/10 font-medium text-primary"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -276,6 +285,16 @@ const FAQ: React.FC<FAQProps> = (props) => {
                 </button>
               ))}
             </div>
+                    {/* Reset Filters Button */}
+        <div className="mb-6 mt-6 flex justify-end">
+          <button
+            onClick={resetFilters}
+            className="flex items-center rounded-md bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200"
+          >
+            <span className="mr-1">↻</span>
+            Réinitialiser les filtres
+          </button>
+        </div>
           </div>
         )}
 
@@ -339,8 +358,15 @@ const FAQ: React.FC<FAQProps> = (props) => {
                     <div className="mt-3 flex flex-wrap gap-2">
                       {item.type && (
                         <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700">
-                          {categoryIcons[Array.isArray(item.type) ? item.type[0] : item.type] || "🏷️"}{" "}
-                          {categoryLabels[Array.isArray(item.type) ? item.type[0] : item.type] || (Array.isArray(item.type) ? item.type[0] : item.type)}
+                          {categoryIcons[
+                            Array.isArray(item.type) ? item.type[0] : item.type
+                          ] || "🏷️"}{" "}
+                          {categoryLabels[
+                            Array.isArray(item.type) ? item.type[0] : item.type
+                          ] ||
+                            (Array.isArray(item.type)
+                              ? item.type[0]
+                              : item.type)}
                         </span>
                       )}
                       {item.topic && (
@@ -357,8 +383,18 @@ const FAQ: React.FC<FAQProps> = (props) => {
             {filteredFaqs.length === 0 && (
               <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-400">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
                 <p className="text-gray-500">

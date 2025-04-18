@@ -29,7 +29,7 @@ export default function GestionLocativeClient() {
     <section className="bg-white py-16">
       <div className="max-w-8xl container mx-auto px-4">
         {isLoading ? (
-          <div className="text-center py-10">
+          <div className="py-10 text-center">
             <p>Chargement des questions fréquentes...</p>
           </div>
         ) : (
@@ -39,6 +39,7 @@ export default function GestionLocativeClient() {
             showTypeFilter={false}
             showTopicFilter={true}
             mainTitle=""
+            specificPage={true}
             subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
           />
         )}
