@@ -9,6 +9,7 @@ import NotreProcessus from "@/components/GestionLocative/Processus";
 import FormulesSection from "@/components/GestionLocative/Formules";
 import TemoinagesSection from "@/components/GestionLocative/Testimonial";
 import { Metadata } from "next";
+import GestionLocativeClient from "./GestionLocativeClient";
 
 const siteName: string = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
@@ -52,13 +53,9 @@ export default async function GestionLocativePage() {
       <TemoinagesSection />
 
       {/* Section FAQ */}
-      <FAQ
-        items={faqItems}
-        title="Vos questions fréquentes"
-        subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
-        mainTitle="FAQ"
-        center={true}
-      />
+      <section className="bg-white py-16">
+        <GestionLocativeClient faqItems={faqItems} />
+      </section>
 
       {/* Section Call-to-Action */}
       <section className="bg-primary bg-opacity-10 py-16">

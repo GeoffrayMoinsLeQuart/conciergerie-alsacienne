@@ -11,6 +11,8 @@ import SectionTransparence from "@/components/Conciergerie/SectionTransparence";
 import SectionConfiance from "@/components/Conciergerie/SectionConfiance";
 import FAQ from "@/components/FAQ";
 import { getFAQs, getFAQsByType } from "@/sanity/sanity-utils";
+import ConciergerieClient from "./ConciergerieClient";
+
 // import TransformationSlider from "@/components/Transformations/Slider";
 
 const siteName: string = process.env.SITE_NAME || "Conciergerie Alsacienne";
@@ -67,13 +69,9 @@ export default async function ConciergeriePage(): Promise<JSX.Element> {
       {/* Tarification */}
       <Tarification />
       {/* Section FAQ */}
-      <FAQ
-        items={faqItems}
-        title="Vos questions fréquentes"
-        subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de conciergerie."
-        mainTitle="FAQ"
-        center={true}
-      />
+      <section className="bg-white py-16">
+        <ConciergerieClient faqItems={faqItems} />
+      </section>
       {/* CTA Section */}
       <section className="bg-primary py-20 text-center">
         <div className="container mx-auto max-w-3xl">
