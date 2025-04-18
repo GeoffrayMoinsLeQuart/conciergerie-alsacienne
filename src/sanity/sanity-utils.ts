@@ -8,7 +8,6 @@ import {
   postQueryByTag,
   propertyQuery,
   faqQuery,
-  faqQueryByCategory,
   faqQueryByType,
   faqQueryByTopic,
 } from "./sanity-query";

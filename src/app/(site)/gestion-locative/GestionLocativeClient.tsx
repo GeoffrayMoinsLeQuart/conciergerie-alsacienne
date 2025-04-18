@@ -1,29 +1,48 @@
 "use client";
 
-import React from "react";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
+import { getFAQsByType } from "@/sanity/sanity-utils";
 import FAQ, { FAQItem } from "@/components/FAQ";
 
-interface GestionLocativeClientProps {
-  faqItems: FAQItem[];
-}
+export default function GestionLocativeClient() {
+  const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-export default function GestionLocativeClient({
-  faqItems,
-}: GestionLocativeClientProps) {
+  // Récupération asynchrone une seule fois au montage
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getFAQsByType("gestion-locative");
+        setFaqItems(data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des FAQs:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="container mx-auto max-w-8xl px-4">
-      {/* Composant FAQ avec filtrage par défaut sur gestion-locative et filtre de type désactivé */}
-      <FAQ
-        items={faqItems}
-        defaultType="gestion-locative"
-        showTypeFilter={false}
-        showTopicFilter={true}
-        mainTitle=""
-        subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative.
-
-        "
-      />
-    </div>
+    <section className="bg-white py-16">
+      <div className="max-w-8xl container mx-auto px-4">
+        {isLoading ? (
+          <div className="text-center py-10">
+            <p>Chargement des questions fréquentes...</p>
+          </div>
+        ) : (
+          <FAQ
+            items={faqItems}
+            defaultType="gestion-locative"
+            showTypeFilter={false}
+            showTopicFilter={true}
+            mainTitle=""
+            subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
+          />
+        )}
+      </div>
+    </section>
   );
 }
