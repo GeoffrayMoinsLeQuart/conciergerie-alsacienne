@@ -8,7 +8,8 @@ import {
   postQueryByTag,
   propertyQuery,
   faqQuery,
-  faqQueryByCategory,
+  faqQueryByType,
+  faqQueryByTopic,
 } from "./sanity-query";
 import { Blog } from "@/types/blog";
 import { integrations, messages } from "../../integrations.config";
@@ -117,18 +118,26 @@ export function imageBuilder(source: string) {
 }
 
 // FAQ Utility Functions
-export async function getFAQs(category?: string): Promise<FAQItem[]> {
-  if (category) {
-    return await sanityFetch({
-      query: faqQueryByCategory,
-      qParams: { category },
-      tags: ["faq"],
-    });
-  } else {
-    return await sanityFetch({
-      query: faqQuery,
-      qParams: {},
-      tags: ["faq"],
-    });
-  }
+export async function getFAQs(): Promise<FAQItem[]> {
+  return await sanityFetch({
+    query: faqQuery,
+    qParams: {},
+    tags: ["faq"],
+  });
+}
+
+export async function getFAQsByType(type: string): Promise<FAQItem[]> {
+  return await sanityFetch({
+    query: faqQueryByType,
+    qParams: { type },
+    tags: ["faq"],
+  });
+}
+
+export async function getFAQsByTopic(topic: string): Promise<FAQItem[]> {
+  return await sanityFetch({
+    query: faqQueryByTopic,
+    qParams: { topic },
+    tags: ["faq"],
+  });
 }
