@@ -106,20 +106,9 @@ export const faqQueryByTopic = groq`
   }
 `;
 
-// Type pour les paramètres des requêtes de pagination
-interface PaginationParams {
-  categories?: string[];
-  search?: string;
-  start?: number;
-  end?: number;
-}
-
-// Nouvelles requêtes pour la pagination et le filtrage
+// Requêtes simplifiées pour la pagination et le filtrage des posts
 export const postQueryWithPagination = groq`
-  *[_type == "post"
-    ${(params: PaginationParams) => params.categories ? `&& references(*[_type == "category" && slug.current in $categories]._id)` : ''}
-    ${(params: PaginationParams) => params.search ? `&& title match $search` : ''}
-  ] | order(publishedAt desc)[$start...$end] {
+  *[_type == "post"] | order(publishedAt desc)[$start...$end] {
     _id,
     title,
     metadata,
@@ -130,11 +119,55 @@ export const postQueryWithPagination = groq`
   }
 `;
 
-export const postCountQuery = groq`
-  {
-    "total": count(*[_type == "post"
-      ${(params: PaginationParams) => params.categories ? `&& references(*[_type == "category" && slug.current in $categories]._id)` : ''}
-      ${(params: PaginationParams) => params.search ? `&& title match $search` : ''}
-    ])
+export const postQueryWithCategories = groq`
+  *[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id)] | order(publishedAt desc)[$start...$end] {
+    _id,
+    title,
+    metadata,
+    slug,
+    publishedAt,
+    mainImage,
+    "categories": categories[]->{ title, "slug": slug.current },
   }
+`;
+
+export const postQueryWithSearch = groq`
+  *[_type == "post" && title match $search] | order(publishedAt desc)[$start...$end] {
+    _id,
+    title,
+    metadata,
+    slug,
+    publishedAt,
+    mainImage,
+    "categories": categories[]->{ title, "slug": slug.current },
+  }
+`;
+
+export const postQueryWithCategoriesAndSearch = groq`
+  *[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id) && title match $search] | order(publishedAt desc)[$start...$end] {
+    _id,
+    title,
+    metadata,
+    slug,
+    publishedAt,
+    mainImage,
+    "categories": categories[]->{ title, "slug": slug.current },
+  }
+`;
+
+// Requêtes simplifiées pour le comptage des posts
+export const postCountQuery = groq`
+  { "total": count(*[_type == "post"]) }
+`;
+
+export const postCountWithCategoriesQuery = groq`
+  { "total": count(*[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id)]) }
+`;
+
+export const postCountWithSearchQuery = groq`
+  { "total": count(*[_type == "post" && title match $search]) }
+`;
+
+export const postCountWithCategoriesAndSearchQuery = groq`
+  { "total": count(*[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id) && title match $search]) }
 `;

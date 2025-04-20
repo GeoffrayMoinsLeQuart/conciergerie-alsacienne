@@ -3,12 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-
-interface Category {
-  _id: string;
-  title: string;
-  slug: string;
-}
+import { Category } from "@/types/blog";
 
 interface BlogFiltersProps {
   categories: Category[];
