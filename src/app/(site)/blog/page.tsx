@@ -1,7 +1,8 @@
+import { getPosts, getCategories } from "@/sanity/sanity-utils";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import PageTitle from "@/components/Common/PageTitle";
-import { getPosts } from "@/sanity/sanity-utils";
-import { Blog } from "@/types/blog";
+import BlogFilters from "@/components/Blog/BlogFilters";
+import Pagination from "@/components/Blog/Pagination";
 import { Metadata } from "next";
 
 const siteName = process.env.SITE_NAME;
@@ -12,88 +13,69 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-export default async function BlogPage() {
-  const posts = await getPosts();
+export const revalidate = 60;
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  // Récupérer les paramètres de l'URL
+  const page = Number(searchParams.page) || 1;
+  const categoriesParam = searchParams.categories as string;
+  const categories = categoriesParam ? categoriesParam.split(',') : [];
+  const search = searchParams.search as string || "";
+  
+  // Récupérer les posts avec pagination et filtrage
+  const { posts, pagination } = await getPosts({
+    page,
+    limit: 9,
+    categories,
+    search,
+  });
+
+  console.log(posts)
+  
+  // Récupérer toutes les catégories pour le filtre
+  const allCategories = await getCategories();
 
   return (
     <>
       <PageTitle
         pageTitle="Blog Grids"
-        pageDescription=" Autem, molestias eum voluptatibus quaerat praesentium laboriosam, eaque accusantium quam ratione veritatis magni ab."
+        pageDescription="Autem, molestias eum voluptatibus quaerat praesentium laboriosam, eaque accusantium quam ratione veritatis magni ab."
         showMenu={true}
       />
       <section className="bg-white pb-20 pt-[90px]">
         <div className="container">
+          {/* Filtres */}
+          <BlogFilters categories={allCategories} />
+          
+          {/* Liste des articles */}
           <div className="mx-[-16px] flex flex-wrap">
-            {posts.length > 0 &&
-              posts.map((blog: Blog) => (
+            {posts.length > 0 ? (
+              posts.map((blog) => (
                 <SingleBlog key={blog?._id} blog={blog} />
-              ))}
+              ))
+            ) : (
+              <div className="w-full px-4 py-10 text-center">
+                <h3 className="text-xl font-semibold text-black mb-2">
+                  Aucun article trouvé
+                </h3>
+                <p className="text-body-color">
+                  Essayez de modifier vos critères de recherche ou de filtrage.
+                </p>
+              </div>
+            )}
           </div>
 
-          {/* ====== Pagination ====== */}
-          {/* <div className="mx-[-16px] flex flex-wrap">
-            <div className="w-full px-4">
-              <ul className="flex items-center justify-center pt-8">
-                <li className="mx-1">
-                  <a
-                    href="#"
-                    className="flex h-9 min-w-[36px] items-center justify-center rounded-sm bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-                  >
-                    Prev
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a
-                    href="#"
-                    className="flex h-9 min-w-[36px] items-center justify-center rounded-sm bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-                  >
-                    1
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a
-                    href="#"
-                    className="flex h-9 min-w-[36px] items-center justify-center rounded-sm bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-                  >
-                    2
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a
-                    href="#"
-                    className="flex h-9 min-w-[36px] items-center justify-center rounded-sm bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-                  >
-                    3
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a
-                    href="#"
-                    className="flex h-9 min-w-[36px] cursor-not-allowed items-center justify-center rounded-sm bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color"
-                  >
-                    ...
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a
-                    href="#"
-                    className="flex h-9 min-w-[36px] items-center justify-center rounded-sm bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-                  >
-                    12
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a
-                    href="#"
-                    className="flex h-9 min-w-[36px] items-center justify-center rounded-sm bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-                  >
-                    Next
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div> */}
+          {/* Pagination */}
+          <div className="mx-[-16px] flex flex-wrap">
+            <Pagination 
+              currentPage={pagination.page} 
+              totalPages={pagination.pages} 
+            />
+          </div>
         </div>
       </section>
     </>

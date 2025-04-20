@@ -1,5 +1,6 @@
 import CodeWithCopy from "@/components/Common/CodeWithCopy";
 import config from "@/sanity/config/client-config";
+import MarkdownRenderer from "@/utils/markdownConfig";
 import { PortableText } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 import urlBuilder from "@sanity/image-url";
@@ -53,12 +54,12 @@ const TableComponent = (props: any) => {
             return (
               <tr
                 key={i}
-                className="border-body-color text-body-color dark:border-dark-stroke odd:bg-[#F3F6FF] odd:text-dark first-of-type:border-t dark:odd:bg-white/10 dark:odd:text-white"
+                className="dark:border-dark-stroke border-body-color text-body-color odd:bg-[#F3F6FF] odd:text-dark first-of-type:border-t dark:odd:bg-white/10 dark:odd:text-white"
               >
                 {row?.cells?.map((cell: any, i: any) => (
                   <td
                     key={i}
-                    className="border-body-color dark:border-dark-stroke dark:first-of-type:bg-tg-dark-gray max-w-[160px] border-b border-l px-2 py-5 text-center text-base font-medium first-of-type:bg-yellow-100 first-of-type:text-dark last-of-type:border-r dark:first-of-type:text-white"
+                    className="dark:border-dark-stroke dark:first-of-type:bg-tg-dark-gray first-of-type:bg-yellow-100 max-w-[160px] border-b border-l border-body-color px-2 py-5 text-center text-base font-medium first-of-type:text-dark last-of-type:border-r dark:first-of-type:text-white"
                   >
                     {cell}
                   </td>
@@ -112,7 +113,8 @@ const myPortableTextComponents = {
 const RenderBodyContent = ({ post }: any) => {
   return (
     <>
-      <PortableText value={post?.body} components={myPortableTextComponents} />
+      {/* <PortableText value={post?.body} components={myPortableTextComponents} /> */}
+      <MarkdownRenderer markdownContent={post?.body} />
     </>
   );
 };

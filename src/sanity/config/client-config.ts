@@ -4,7 +4,7 @@ const config = {
   token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN as string,
   dataset: "production",
   apiVersion: "2023-06-19",
-  useCdn: true,
+  useCdn: false,
 };
 
 export default config;

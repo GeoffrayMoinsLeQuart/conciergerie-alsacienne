@@ -10,6 +10,8 @@ import {
   faqQuery,
   faqQueryByType,
   faqQueryByTopic,
+  postQueryWithPagination,
+  postCountQuery,
 } from "./sanity-query";
 import { Blog } from "@/types/blog";
 import { integrations, messages } from "../../integrations.config";
@@ -73,7 +75,72 @@ export async function fetchProperties(): Promise<Property[]> {
     return [];
   }
 }
-export async function getPosts() {
+
+// Interface pour le résultat du comptage
+interface CountResult {
+  total: number;
+}
+
+// Fonction modifiée pour récupérer les posts avec pagination et filtrage
+export async function getPosts({
+  page = 1,
+  limit = 9,
+  categories = [],
+  search = "",
+} = {}) {
+  const start = (page - 1) * limit;
+  const end = start + limit;
+  
+  try {
+    // Récupérer les posts avec pagination et filtrage
+    const posts: Blog[] = await sanityFetch({
+      query: postQueryWithPagination,
+      qParams: { 
+        start, 
+        end, 
+        categories: categories.length > 0 ? categories : undefined,
+        search: search ? `*${search}*` : undefined
+      },
+      tags: ["post"],
+    });
+    
+    // Récupérer le nombre total de posts pour la pagination
+    const countResult = await sanityFetch<CountResult>({
+      query: postCountQuery,
+      qParams: { 
+        categories: categories.length > 0 ? categories : undefined,
+        search: search ? `*${search}*` : undefined
+      },
+      tags: ["post"],
+    });
+    
+    const total = countResult?.total || 0;
+    
+    return {
+      posts: posts || [],
+      pagination: {
+        total,
+        pages: Math.ceil(total / limit),
+        page,
+        limit
+      }
+    };
+  } catch (error) {
+    console.error("Error in getPosts with pagination:", error);
+    return {
+      posts: [],
+      pagination: {
+        total: 0,
+        pages: 0,
+        page: 1,
+        limit
+      }
+    };
+  }
+}
+
+// Fonction originale pour la compatibilité
+export async function getPostsOriginal() {
   const posts: Blog[] = await sanityFetch({
     query: postQuery,
     qParams: {},

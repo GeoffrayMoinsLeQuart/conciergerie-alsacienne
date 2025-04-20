@@ -40,24 +40,28 @@ const post = {
         }),
     },
     {
-      name: "tags",
-      title: "Tags",
+      name: "category",
+      title: "Catégories",
       type: "array",
-      of: [
-        {
-          type: "string",
-          validation: (Rule: any) =>
-            Rule.custom((fields: any) => {
-              if (
-                fields !== fields.toLowerCase() ||
-                fields.split(" ").includes("")
-              ) {
-                return "Tags must be lowercase and not be included space";
-              }
-              return true;
-            }),
-        },
-      ],
+      of: [{ type: "string" }],
+      options: {
+        list: [
+          { title: "Conciergerie", value: "conciergerie" },
+          { title: "Gestion locative", value: "gestion-locative" },
+          { title: "Fiscalité", value: "fiscalite" },
+          { title: "LMNP", value: "LMNP" },
+          { title: "Location courte durée", value: "location-courte-duree" },
+          { title: "Location longue durée", value: "location-longue-duree" },
+          { title: "Airbnb", value: "airbnb" },
+          { title: "Rentabilité", value: "rentabilité" },
+          { title: "Investissement", value: "investissement" },
+          { title: "Réglementation", value: "réglementation" },
+          { title: "Autres", value: "autres" },
+        ],
+        layout: "checkbox",
+      },
+      validation: (Rule: any) =>
+        Rule.required().min(1).error("Sélectionnez au moins une catégorie"),
     },
     {
       name: "author",
@@ -83,7 +87,7 @@ const post = {
     {
       name: "body",
       title: "Body",
-      type: "blockContent",
+      type: "text",
     },
   ],
 
