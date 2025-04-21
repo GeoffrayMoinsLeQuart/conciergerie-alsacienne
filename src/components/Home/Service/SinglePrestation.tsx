@@ -16,8 +16,9 @@ export default function SinglePrestation({
         >
           <Image
             src={prestation?.image}
-            alt={prestation?.title}
+            alt={prestation?.title || "Image de la prestation"}
             fill
+            sizes="(max-width: 768px) 100vw"
             className="w-full object-cover object-center"
           />
         </Link>

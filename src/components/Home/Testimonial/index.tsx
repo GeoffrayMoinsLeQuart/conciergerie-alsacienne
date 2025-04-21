@@ -22,7 +22,7 @@ export default function Testimonial() {
         </div>
 
         <div className="-mx-4 flex flex-wrap">
-          {testimonialData.map((testimonial) => (
+          {testimonialData && testimonialData.map((testimonial) => (
             <SingleTestimonial
               key={testimonial?.id}
               testimonial={testimonial}

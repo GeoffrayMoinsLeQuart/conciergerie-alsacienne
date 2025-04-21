@@ -13,6 +13,7 @@ export default function SingleTestimonial({
           <Image
             src={testimonial?.companyLogo}
             alt={testimonial?.companyName}
+            width={25}
             height={25}
           />
         </div>

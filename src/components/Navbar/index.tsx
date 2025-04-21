@@ -53,14 +53,18 @@ export default function Navbar() {
           <div className="relative mx-[-16px] flex items-center justify-between">
             <div className="w-52 max-w-full px-4 xl:w-60">
               <Link href="/" className="header-logo block w-full py-6 lg:py-8">
-                <Image
-                  src="/images/logo/logo.svg"
-                  alt="logo"
-                  width={175}
-                  height={40}
-                />
+                <div className="relative h-10 w-[175px]">
+                  <Image
+                    src="/images/logo/logo.svg"
+                    alt="logo"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100px, 175px"
+                  />
+                </div>
               </Link>
             </div>
+
             <div className="flex w-full items-center justify-between px-4">
               <div>
                 <button

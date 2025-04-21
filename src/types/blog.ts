@@ -8,6 +8,13 @@ export type Author = {
   _ref?: number | string;
 };
 
+export type Category = {
+  title: string;
+  slug: string;
+  description?: string;
+  _id?: string;
+};
+
 export type Blog = {
   _id: number;
   title: string;
@@ -18,4 +25,5 @@ export type Blog = {
   author?: Author;
   tags?: string[];
   publishedAt?: string;
+  categories?: Category[]; // Ajout de cette propriété
 };

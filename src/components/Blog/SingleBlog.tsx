@@ -8,20 +8,23 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
 
   return (
     <div className="mb-10 w-full px-4 lg:w-1/2 xl:w-1/3">
-      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-blog">
+      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-blog pt-8">
         <Link
           href={`/blog/${slug?.current}`}
           className="relative block aspect-video"
         >
-          {mainImage ? (
+          {mainImage && imageBuilder(mainImage).url() ? (
             <Image
-              src={mainImage ? imageBuilder(mainImage).url() : ""}
+              src={imageBuilder(mainImage).url()}
               alt={title}
               fill
-              className="w-full duration-300 group-hover:scale-110"
+              sizes="(max-width: 768px) 100vw"
+              className="w-full duration-300 group-hover:scale-110 rounded-xl"
             />
           ) : (
-            "No image"
+            <div className="flex h-full w-full items-center justify-center bg-gray-100 text-sm text-gray-500">
+              Aucune image
+            </div>
           )}
         </Link>
         <div className="flex flex-1 flex-col justify-between px-6 py-8 sm:px-11">
@@ -43,7 +46,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
               href={`/blog/${slug?.current}`}
               className="text-sm font-medium text-black underline duration-200 hover:text-primary hover:no-underline"
             >
-              Read More
+              Lire l'article
             </Link>
           </div>
         </div>

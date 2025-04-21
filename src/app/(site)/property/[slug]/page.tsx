@@ -1,5 +1,5 @@
 import PageTitle from "@/components/Common/PageTitle";
-import { fetchProperties } from "@/sanity/sanity-utils";
+import { fetchProperties, imageBuilder } from "@/sanity/sanity-utils";
 import { Property } from "@/types/property";
 import { notFound } from "next/navigation";
 import MarkdownRenderer from "@/utils/markdownConfig";
@@ -9,22 +9,24 @@ import ProjectDetailsGallery from "@/components/Gallery/property-gallery";
 export const revalidate = 3600; // 1 heure
 
 export async function generateStaticParams() {
-  try {
-    const properties = await fetchProperties();
-    return properties.map((property) => ({
-      slug: property.slug,
-    }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
+  const properties = await fetchProperties();
+
+  return properties.map((property) => ({
+    slug: property.slug?.current || "",
+  }));
 }
 
-// Simplification maximale des types
-export default async function Page({ params }: any) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   try {
+    const { slug } = await params;
+
     const properties = await fetchProperties();
-    const property = properties?.find((p) => p.slug === params.slug);
+
+    const property = properties?.find((p) => p.slug?.current === slug);
 
     if (!property) {
       return notFound();
@@ -32,17 +34,17 @@ export default async function Page({ params }: any) {
 
     const slides = [];
 
-    if (property?.image) {
+    if (property?.imagePrincipale) {
       slides.push({
-        src: property.image,
-        alt: property.name || "Image principale",
+        src: imageBuilder(property.imagePrincipale).url(), // <== ICI LA CORRECTION
+        alt: property.shortDescription || "Image principale",
       });
     }
 
     if (property?.galleryImage && property.galleryImage.length > 0) {
       property.galleryImage.forEach((img) => {
         slides.push({
-          src: img.url,
+          src: imageBuilder(img).url(),
           alt: img.caption || "Image additionnelle",
         });
       });
@@ -109,31 +111,33 @@ export default async function Page({ params }: any) {
                     <li className="mb-4 flex">
                       <button className="flex w-full items-center rounded-sm bg-primary px-5 py-3 text-base font-medium text-white">
                         <span className="pr-2">
+                          {/* icône */}
                           <svg
                             width="21"
                             height="21"
                             viewBox="0 0 21 21"
                             className="fill-current"
                           >
-                            <path d="M5.00327 2.6569C4.56125 2.65777 4.13767 2.83419 3.82572 3.14736C3.51377 3.46053 3.339 3.88479 3.33986 4.32682L3.3659 17.6601C3.36676 18.1022 3.54318 18.5257 3.85635 18.8377C4.16952 19.1496 4.59379 19.3244 5.03581 19.3235L15.0358 19.304C15.4778 19.3032 15.9014 19.1267 16.2134 18.8136C16.5253 18.5004 16.7001 18.0761 16.6992 17.6341L16.6797 7.63411L11.6699 2.64389L5.00327 2.6569ZM5.00653 4.32357L10.8398 4.31218L10.848 8.47884L15.0146 8.4707L15.0325 17.6374L5.03256 17.6569L5.00653 4.32357ZM6.68621 10.987L6.68946 12.6536L13.3561 12.6406L13.3529 10.9739L6.68621 10.987ZM6.69271 14.3203L6.69597 15.987L10.8626 15.9788L10.8594 14.3122L6.69271 14.3203Z" />
+                            <path d="M5.00327 2.6569C4.56125 2.65777 4.13767 2.83419..." />
                           </svg>
                         </span>
-                        <span> Main-project-file.zif </span>
+                        <span> Main-project-file.zip </span>
                       </button>
                     </li>
                     <li className="flex">
                       <button className="flex w-full items-center rounded-sm bg-primary px-5 py-3 text-base font-medium text-white">
                         <span className="pr-2">
+                          {/* icône */}
                           <svg
                             width="21"
                             height="21"
                             viewBox="0 0 21 21"
                             className="fill-current"
                           >
-                            <path d="M5.00327 2.6569C4.56125 2.65777 4.13767 2.83419 3.82572 3.14736C3.51377 3.46053 3.339 3.88479 3.33986 4.32682L3.3659 17.6601C3.36676 18.1022 3.54318 18.5257 3.85635 18.8377C4.16952 19.1496 4.59379 19.3244 5.03581 19.3235L15.0358 19.304C15.4778 19.3032 15.9014 19.1267 16.2134 18.8136C16.5253 18.5004 16.7001 18.0761 16.6992 17.6341L16.6797 7.63411L11.6699 2.64389L5.00327 2.6569ZM5.00653 4.32357L10.8398 4.31218L10.848 8.47884L15.0146 8.4707L15.0325 17.6374L5.03256 17.6569L5.00653 4.32357ZM6.68621 10.987L6.68946 12.6536L13.3561 12.6406L13.3529 10.9739L6.68621 10.987ZM6.69271 14.3203L6.69597 15.987L10.8626 15.9788L10.8594 14.3122L6.69271 14.3203Z" />
+                            <path d="M5.00327 2.6569C4.56125 2.65777 4.13767 2.83419..." />
                           </svg>
                         </span>
-                        <span> Design-file.zif </span>
+                        <span> Design-file.zip </span>
                       </button>
                     </li>
                   </ul>

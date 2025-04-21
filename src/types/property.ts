@@ -1,13 +1,18 @@
 export interface Property {
   _id: string;
-  name: string;
-  shortDescription: string;
-  longDescription: string;
-  slug: string;
-  image: string;  // Ceci représente imagePrincipale transformée
-  categories?: { value: string }[];
-  galleryImage?: Array<{
-    url: string;     // URL de l'image transformée
+  slug: {
+    _type: string;
+    current: string;
+  };
+  name?: string | null;
+  shortDescription?: string | null;
+  longDescription?: string | null;
+  imagePrincipale?: any; // Image Sanity
+  galleryImage?: {
+    asset: any;
     caption?: string;
-  }>;
+  }[] | null;
+  categories?: {
+    value: string;
+  }[] | null;
 }

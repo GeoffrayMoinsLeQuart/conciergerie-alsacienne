@@ -1,13 +1,13 @@
 import React, { ReactNode } from "react";
 import { Components } from "react-markdown";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-// ✅ Définition correcte des props avec `children?` optionnel
+// ✅ Définition correcte des props
 type MarkdownComponentProps = {
   children?: ReactNode;
 };
 
-// ✅ Définition correcte des composants Markdown
 export const markdownComponents: Components = {
   h1: ({ children, ...props }: MarkdownComponentProps) => (
     <h1
@@ -52,11 +52,77 @@ export const markdownComponents: Components = {
     </strong>
   ),
   hr: (props) => <hr {...props} className="my-6 border-gray-300" />,
+  blockquote: ({ children, ...props }: MarkdownComponentProps) => (
+    <blockquote
+      {...props}
+      className="my-6 border-l-4 border-primary bg-primary/10 p-4 italic text-gray-700"
+    >
+      {children}
+    </blockquote>
+  ),
+  a: ({ children, href, ...props }) => (
+    <a
+      {...props}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary underline hover:text-primary/80"
+    >
+      {children}
+    </a>
+  ),
+  // ✅ Table support
+  table: ({ children, ...props }: MarkdownComponentProps) => (
+    <div className="my-6 overflow-x-auto px-2">
+      <table
+        {...props}
+        className="w-full table-auto border border-gray-300 text-left text-sm text-gray-700"
+      >
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children, ...props }: MarkdownComponentProps) => (
+    <thead {...props} className="bg-gray-100">
+      {children}
+    </thead>
+  ),
+  tbody: ({ children, ...props }: MarkdownComponentProps) => (
+    <tbody {...props}>{children}</tbody>
+  ),
+  tr: ({ children, ...props }: MarkdownComponentProps) => (
+    <tr {...props} className="border-b border-gray-200">
+      {children}
+    </tr>
+  ),
+  th: ({ children, ...props }: MarkdownComponentProps) => (
+    <th {...props} className="p-4 text-sm font-semibold text-black">
+      {children}
+    </th>
+  ),
+  td: ({ children, ...props }: MarkdownComponentProps) => (
+    <td {...props} className="p-4 text-sm text-gray-700">
+      {children}
+    </td>
+  ),
+
+  img: ({ src, alt, ...props }) => (
+    <img
+      src={src || ""}
+      alt={alt || ""}
+      className="my-6 w-full rounded-lg shadow-md"
+      loading="lazy"
+      {...props}
+    />
+  ),
 };
 
 const MarkdownRenderer = ({ markdownContent }: { markdownContent: string }) => {
   return (
-    <ReactMarkdown components={markdownComponents}>
+    <ReactMarkdown
+      components={markdownComponents}
+      remarkPlugins={[remarkGfm]} // ✅ ici
+    >
       {markdownContent}
     </ReactMarkdown>
   );
