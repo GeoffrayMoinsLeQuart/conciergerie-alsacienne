@@ -9,15 +9,14 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-// Définition des types pour les paramètres
+// Types
 type Params = {
   slug: string;
 };
 
-// Fonction pour générer les métadonnées
-export async function generateMetadata({ 
-  params 
-}: { 
+export async function generateMetadata({
+  params,
+}: {
   params: Promise<Params>;
 }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -28,15 +27,14 @@ export async function generateMetadata({
   const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
   const authorName = process.env.AUTHOR_NAME || "Conciergerie Alsacienne";
 
-  // Si l'article n'existe pas, retourner des métadonnées par défaut
-  if (!post)  {
+  if (!post) {
     return {
       title: "Article non trouvé | " + siteName,
-      description: "L'article que vous recherchez n'existe pas ou a été déplacé.",
+      description:
+        "L'article que vous recherchez n'existe pas ou a été déplacé.",
     };
   }
 
-  // Fallback pour l'image
   const defaultOg = `${siteURL}/default-og.jpg`;
   const imageUrl = post?.mainImage
     ? imageBuilder(post.mainImage).url()
@@ -44,7 +42,9 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} | ${siteName}`,
-    description: post.metadata ? `${post.metadata.slice(0, 155)}...` : `Article sur ${post.title}`,
+    description: post.metadata
+      ? `${post.metadata.slice(0, 155)}...`
+      : `Article sur ${post.title}`,
     authors: [{ name: authorName }],
     robots: {
       index: true,
@@ -77,7 +77,9 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: `${post.title} | ${siteName}`,
-      description: post.metadata ? `${post.metadata.slice(0, 155)}...` : `Article sur ${post.title}`,
+      description: post.metadata
+        ? `${post.metadata.slice(0, 155)}...`
+        : `Article sur ${post.title}`,
       creator: `@${authorName}`,
       site: `@${siteName}`,
       images: [imageUrl],
@@ -85,16 +87,15 @@ export async function generateMetadata({
   };
 }
 
-// Composant de page principal
 const BlogSlugPage = async (props: { params: Promise<Params> }) => {
   const resolvedParams = await props.params;
   const { slug } = resolvedParams;
   const post: Blog = await getPostBySlug(slug);
-  
+
   if (!post) {
     notFound();
   }
-  
+
   const defaultImage = "/default-blog.jpg";
   const defaultAvatar = "/avatar-placeholder.png";
 
@@ -105,7 +106,6 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
     ? imageBuilder(post.author.image).url()
     : defaultAvatar;
 
-  // Indexation Algolia (avec gestion d'erreur)
   try {
     await structuredAlgoliaHtmlData({
       type: "blog",
@@ -116,7 +116,6 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
     });
   } catch (error) {
     console.error("Erreur lors de l'indexation Algolia:", error);
-    // Continuer l'exécution même en cas d'erreur d'indexation
   }
 
   return (
@@ -126,27 +125,37 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
           <div className="mx-[-16px] flex flex-wrap justify-center">
             <div className="w-full px-4 lg:w-8/12">
               <div>
-                <div className="relative mb-10 aspect-[848/384] w-full overflow-hidden rounded">
-                  <Image
-                    src={mainImageUrl}
-                    alt={post.title || "Image de l'article"}
-                    fill
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
+                {mainImageUrl ? (
+                  <div className="relative mb-10 aspect-[848/384] w-full overflow-hidden rounded">
+                    <Image
+                      src={mainImageUrl}
+                      alt={post.title || "Image de l'article"}
+                      fill
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative mb-10 aspect-[848/384] w-full overflow-hidden rounded bg-gray-200" />
+                )}
+
                 <h1 className="mb-8 text-3xl font-bold leading-tight text-black sm:text-4xl sm:leading-tight">
                   {post.title || "Sans titre"}
                 </h1>
+
                 <div className="mb-10 flex flex-wrap items-center justify-between border-b border-[#E9ECF8] pb-4">
                   <div className="flex items-center">
-                    <div className="mr-4 h-[40px] w-[40px] overflow-hidden rounded-full">
-                      <Image
-                        src={authorImageUrl}
-                        alt={post.author?.name || "Auteur"}
-                        width={40}
-                        height={40}
-                      />
-                    </div>
+                    {authorImageUrl ? (
+                      <div className="mr-4 h-[40px] w-[40px] overflow-hidden rounded-full">
+                        <Image
+                          src={authorImageUrl}
+                          alt={post.author?.name || "Auteur"}
+                          width={40}
+                          height={40}
+                        />
+                      </div>
+                    ) : (
+                      <div className="mr-4 h-[40px] w-[40px] overflow-hidden rounded-full bg-gray-300" />
+                    )}
                     <h4 className="text-base font-medium text-body-color">
                       Par {post.author?.name || "l'équipe"}
                     </h4>
@@ -154,26 +163,31 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
                   {post.publishedAt && (
                     <div className="mb-2 flex items-center md:mb-0">
                       <span className="text-sm text-body-color">
-                        {new Date(post.publishedAt).toLocaleDateString('fr-FR', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
+                        {new Date(post.publishedAt).toLocaleDateString(
+                          "fr-FR",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          },
+                        )}
                       </span>
                     </div>
                   )}
                 </div>
+
                 <div className="prose prose-zinc mb-8 max-w-none">
                   <RenderBodyContent post={post} />
                 </div>
-                
-                {/* Catégories */}
+
                 {post.categories && post.categories.length > 0 && (
                   <div className="mt-8">
-                    <h5 className="mb-3 text-sm font-medium text-body-color">Catégories:</h5>
+                    <h5 className="mb-3 text-sm font-medium text-body-color">
+                      Catégories:
+                    </h5>
                     <div className="flex flex-wrap gap-2">
                       {post.categories.map((category, index) => (
-                        <Link 
+                        <Link
                           key={index}
                           href={`/blog?categories=${category.slug}`}
                           className="inline-block rounded-md bg-primary/10 px-4 py-2 text-xs font-medium text-primary hover:bg-primary hover:text-white"

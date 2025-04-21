@@ -23,6 +23,7 @@ import { Blog, Category } from "@/types/blog";
 import { integrations, messages } from "../../integrations.config";
 import { Property } from "@/types/property";
 import { FAQItem } from "@/components/FAQ";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export async function sanityFetch<QueryResponse>({
   query,
@@ -36,11 +37,10 @@ export async function sanityFetch<QueryResponse>({
   if (integrations?.isSanityEnabled) {
     try {
       console.log("Attempting to create Sanity client");
-      // Nettoyer les paramètres pour éviter les valeurs undefined
       const cleanParams = Object.fromEntries(
-        Object.entries(qParams).filter(([_, value]) => value !== undefined)
+        Object.entries(qParams).filter(([_, value]) => value !== undefined),
       );
-      
+
       console.log("Sanity query params:", JSON.stringify(cleanParams));
       const client = createClient(clientConfig);
 
@@ -59,7 +59,6 @@ export async function sanityFetch<QueryResponse>({
   }
 }
 
-// Function to fetch properties
 export async function fetchProperties(): Promise<Property[]> {
   console.log("Starting fetchProperties...");
 
@@ -70,12 +69,10 @@ export async function fetchProperties(): Promise<Property[]> {
       tags: ["propertyType"],
     });
 
-    // Vérifier si le tableau est vide ou si les propriétés n'ont pas de slug
     if (!properties || properties.length === 0) {
       console.log("No properties found");
     } else if (properties.some((p) => !p.slug)) {
       console.log("Warning: Some properties don't have a slug property");
-      // Log the properties with missing slugs
       properties
         .filter((p) => !p.slug)
         .forEach((p, i) => console.log(`Property ${i} missing slug:`, p));
@@ -88,12 +85,10 @@ export async function fetchProperties(): Promise<Property[]> {
   }
 }
 
-// Interface pour le résultat du comptage
 interface CountResult {
   total: number;
 }
 
-// Interface pour les paramètres de getPosts
 interface GetPostsParams {
   page?: number;
   limit?: number;
@@ -101,7 +96,6 @@ interface GetPostsParams {
   search?: string;
 }
 
-// Fonction simplifiée pour récupérer les posts avec pagination et filtrage
 export async function getPosts({
   page = 1,
   limit = 9,
@@ -110,96 +104,96 @@ export async function getPosts({
 }: GetPostsParams = {}) {
   const start = (page - 1) * limit;
   const end = start + limit;
-  
+
   try {
-    console.log("Fetching posts with params:", { page, limit, categories, search });
-    
+    console.log("Fetching posts with params:", {
+      page,
+      limit,
+      categories,
+      search,
+    });
+
     let posts: Blog[] = [];
     let countResult: CountResult = { total: 0 };
-    
-    // Sélectionner la requête appropriée en fonction des filtres
+
     if (categories.length > 0 && search) {
-      // Cas 1: Catégories ET recherche
       posts = await sanityFetch({
         query: postQueryWithCategoriesAndSearch,
-        qParams: { 
-          start, 
+        qParams: {
+          start,
           end,
           categories,
-          search: `*${search}*`
+          search: `*${search}*`,
         },
         tags: ["post"],
       });
-      
+
       countResult = await sanityFetch<CountResult>({
         query: postCountWithCategoriesAndSearchQuery,
-        qParams: { 
+        qParams: {
           categories,
-          search: `*${search}*`
+          search: `*${search}*`,
         },
         tags: ["post"],
       });
     } else if (categories.length > 0) {
-      // Cas 2: Seulement catégories
       posts = await sanityFetch({
         query: postQueryWithCategories,
-        qParams: { 
-          start, 
+        qParams: {
+          start,
           end,
-          categories
+          categories,
         },
         tags: ["post"],
       });
-      
+
       countResult = await sanityFetch<CountResult>({
         query: postCountWithCategoriesQuery,
         qParams: { categories },
         tags: ["post"],
       });
     } else if (search) {
-      // Cas 3: Seulement recherche
       posts = await sanityFetch({
         query: postQueryWithSearch,
-        qParams: { 
-          start, 
+        qParams: {
+          start,
           end,
-          search: `*${search}*`
+          search: `*${search}*`,
         },
         tags: ["post"],
       });
-      
+
       countResult = await sanityFetch<CountResult>({
         query: postCountWithSearchQuery,
         qParams: { search: `*${search}*` },
         tags: ["post"],
       });
     } else {
-      // Cas 4: Aucun filtre
       posts = await sanityFetch({
         query: postQueryWithPagination,
         qParams: { start, end },
         tags: ["post"],
       });
-      
+
       countResult = await sanityFetch<CountResult>({
         query: postCountQuery,
         qParams: {},
         tags: ["post"],
       });
     }
-    
+
     console.log(`Retrieved ${posts?.length || 0} posts`);
-    
+
     const total = countResult?.total || 0;
-    
+
     return {
       posts: posts || [],
       pagination: {
         total,
         pages: Math.ceil(total / limit),
         page,
-        limit
-      }
+        limit,
+      },
     };
   } catch (error) {
     console.error("Error in getPosts with pagination:", error);
@@ -209,25 +203,24 @@ export async function getPosts({
         total: 0,
         pages: 0,
         page: 1,
-        limit
-      }
+        limit,
+      },
     };
   }
 }
 
-// Fonction pour récupérer tous les posts sans pagination
 export async function getAllPosts() {
   try {
     console.log("Fetching all posts");
-    
+
     const posts: Blog[] = await sanityFetch({
       query: postQuery,
       qParams: {},
       tags: ["post"],
     });
-    
+
     console.log(`Retrieved ${posts?.length || 0} posts`);
-    
+
     return posts || [];
   } catch (error) {
     console.error("Error in getAllPosts:", error);
@@ -265,11 +258,12 @@ export async function getPostByTag(tag: string) {
   return posts;
 }
 
-export function imageBuilder(source: string) {
-  return ImageUrlBuilder(clientConfig as any).image(source);
+export function imageBuilder(source: SanityImageSource) {
+  const client = createClient(clientConfig);
+  const builder = ImageUrlBuilder(client);
+  return builder.image(source);
 }
 
-// FAQ Utility Functions
 export async function getFAQs(): Promise<FAQItem[]> {
   return await sanityFetch({
     query: faqQuery,

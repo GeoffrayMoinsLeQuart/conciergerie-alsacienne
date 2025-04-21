@@ -51,27 +51,23 @@ export const postQueryByTag = groq`
 `;
 
 export const propertyQuery = groq`
-  *[_type == "property"] | order(_createdAt desc) {
+  *[_type == "propertyType"] | order(_createdAt desc) {
     _id,
-    title,
+    name,
+    shortDescription,
+    longDescription,
     slug,
-    propertyType,
-    description,
-    mainImage,
-    images,
-    address,
-    price,
-    bedrooms,
-    bathrooms,
-    surface,
-    features,
-    "owner": owner->{
-      name,
-      email,
-      phone
+    imagePrincipale,
+    galleryImage[]{
+      asset,
+      caption
+    },
+    categories[]{
+      value
     }
   }
 `;
+
 
 export const faqQuery = groq`
   *[_type == "faq"] | order(order asc) {

@@ -10,7 +10,7 @@ export const testimonialData: Testimonial[] = [
     name: "Sophie Martin",
     image: "/images/testimonial/image-1.png",
     designation: "Propriétaire depuis 2022",
-    companyLogo: "",
+    companyLogo: "/images/testimonial/image-1.png",
   },
   {
     id: uuid(),
@@ -20,7 +20,7 @@ export const testimonialData: Testimonial[] = [
     name: "Thomas Dubois",
     image: "/images/testimonial/image-2.png",
     designation: "Propriétaire depuis 2021",
-    companyLogo: "",
+    companyLogo: "/images/testimonial/image-1.png",
   },
   {
     id: uuid(),
@@ -30,7 +30,7 @@ export const testimonialData: Testimonial[] = [
     name: "Marie Klein",
     image: "/images/testimonial/image-3.png",
     designation: "Propriétaire depuis 2023",
-    companyLogo: "",
+    companyLogo: "/images/testimonial/image-1.png",
   },
   {
     id: uuid(),
@@ -40,6 +40,6 @@ export const testimonialData: Testimonial[] = [
     name: "Pierre Schmitt",
     image: "/images/testimonial/image-4.png",
     designation: "Propriétaire depuis 2020",
-    companyLogo: "",
+    companyLogo: "/images/testimonial/image-1.png",
   },
 ];
