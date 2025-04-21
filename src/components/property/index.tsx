@@ -80,7 +80,7 @@ export default function Properties() {
           <div className="w-full px-4 xl:w-10/12">
             <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2 }}>
               <Masonry gutter="30px">
-                {properties.map((property) => (
+                {properties && properties.map((property) => (
                   <SingleProperty key={property?._id} property={property} />
                 ))}
               </Masonry>

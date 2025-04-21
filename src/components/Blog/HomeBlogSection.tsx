@@ -3,7 +3,9 @@ import { Blog } from "@/types/blog";
 import SingleBlog from "./SingleBlog";
 
 export default async function HomeBlogSection() {
-  const posts = await getPosts();
+  const result = await getPosts();
+  // Vérifier si posts est un tableau ou un objet avec une propriété posts
+  const posts = Array.isArray(result) ? result : result.posts || [];
 
   return (
     <section id="news" className="bg-[#f8f9ff] py-20 lg:pt-[120px]">

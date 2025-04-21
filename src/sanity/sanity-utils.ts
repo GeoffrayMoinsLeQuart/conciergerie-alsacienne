@@ -30,7 +30,7 @@ export async function sanityFetch<QueryResponse>({
   tags,
 }: {
   query: string;
-  qParams: QueryParams;
+  qParams: any;
   tags: string[];
 }): Promise<QueryResponse> {
   if (integrations?.isSanityEnabled) {
@@ -258,7 +258,7 @@ export async function getPostBySlug(slug: string) {
 export async function getPostByTag(tag: string) {
   const posts: Blog[] = await sanityFetch({
     query: postQueryByTag,
-    qParams: { tag: tag as any },
+    qParams: { tag },
     tags: ["post"],
   });
 

@@ -26,19 +26,21 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-export default async function BlogPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  // Attendre que searchParams soit disponible
-  const resolvedSearchParams = await Promise.resolve(searchParams);
-  
+// Définition des types pour les paramètres de recherche
+type SearchParams = {
+  page?: string;
+  categories?: string;
+  search?: string;
+  [key: string]: string | undefined;
+};
+
+const BlogPage = async (props: { searchParams: Promise<SearchParams> }) => {
   // Récupérer les paramètres de l'URL
-  const page = Number(resolvedSearchParams.page) || 1;
-  const categoriesParam = resolvedSearchParams.categories as string;
+  const searchParams = await props.searchParams;
+  const page = Number(searchParams.page) || 1;
+  const categoriesParam = searchParams.categories;
   const categories = categoriesParam ? categoriesParam.split(',') : [];
-  const search = resolvedSearchParams.search as string || "";
+  const search = searchParams.search || "";
   
   // Récupérer toutes les catégories pour le filtre
   const allCategories = await getCategories() as Category[];
@@ -113,4 +115,6 @@ export default async function BlogPage({
       </section>
     </>
   );
-}
+};
+
+export default BlogPage;
