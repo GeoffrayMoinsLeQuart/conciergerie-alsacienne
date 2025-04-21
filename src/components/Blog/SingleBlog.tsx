@@ -8,7 +8,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
 
   return (
     <div className="mb-10 w-full px-4 lg:w-1/2 xl:w-1/3">
-      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-blog">
+      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-blog pt-8">
         <Link
           href={`/blog/${slug?.current}`}
           className="relative block aspect-video"
@@ -19,7 +19,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw"
-              className="w-full duration-300 group-hover:scale-110"
+              className="w-full duration-300 group-hover:scale-110 rounded-xl"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gray-100 text-sm text-gray-500">
