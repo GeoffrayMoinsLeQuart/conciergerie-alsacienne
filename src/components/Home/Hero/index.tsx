@@ -3,10 +3,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section
-      className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url(/assets/background/overlay_1.jpg)" }}
-    >
+    <section className="relative overflow-hidden bg-cover bg-center bg-no-repeat">
       <div className="bg-white/90">
         <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
           {/* Responsive Image */}
@@ -17,6 +14,7 @@ export default function Hero() {
               width={1200}
               height={500}
               className="mx-auto hidden rounded-lg md:block"
+              priority
             />
             <Image
               src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
@@ -24,6 +22,7 @@ export default function Hero() {
               width={800}
               height={400}
               className="mx-auto hidden rounded-lg sm:block md:hidden"
+              priority
             />
             <Image
               src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
@@ -31,6 +30,7 @@ export default function Hero() {
               width={400}
               height={300}
               className="mx-auto rounded-lg sm:hidden"
+              priority
             />
           </div>
 

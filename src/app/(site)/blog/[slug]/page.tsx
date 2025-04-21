@@ -131,6 +131,7 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
                       src={mainImageUrl}
                       alt={post.title || "Image de l'article"}
                       fill
+                      sizes="(max-width: 768px) 100vw"
                       className="h-full w-full object-cover object-center"
                     />
                   </div>
@@ -145,7 +146,7 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
                 <div className="mb-10 flex flex-wrap items-center justify-between border-b border-[#E9ECF8] pb-4">
                   <div className="flex items-center">
                     {authorImageUrl ? (
-                      <div className="mr-4 h-[40px] w-[40px] overflow-hidden rounded-full">
+                      <div className="mr-4 overflow-hidden rounded-full">
                         <Image
                           src={authorImageUrl}
                           alt={post.author?.name || "Auteur"}

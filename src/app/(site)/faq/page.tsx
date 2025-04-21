@@ -13,9 +13,10 @@ export default async function FAQPage() {
 
   return (
     <section className="bg-white py-16">
-      <FAQPageClient />
+      {/* ✅ On passe les FAQs au composant client */}
+      <FAQPageClient faqs={faqs} />
 
-      {/* Structured data for SEO */}
+      {/* ✅ Données structurées SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

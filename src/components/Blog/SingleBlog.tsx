@@ -18,6 +18,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
               src={imageBuilder(mainImage).url()}
               alt={title}
               fill
+              sizes="(max-width: 768px) 100vw"
               className="w-full duration-300 group-hover:scale-110"
             />
           ) : (

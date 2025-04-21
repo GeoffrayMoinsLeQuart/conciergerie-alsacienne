@@ -249,8 +249,6 @@ const FAQ: React.FC<FAQProps> = (props) => {
           </div>
         )}
 
-
-
         {/* Topic Filter Buttons (Second Row) */}
         {showTopicFilter && uniqueTopics.length > 0 && (
           <div className="mb-8">
@@ -268,9 +266,9 @@ const FAQ: React.FC<FAQProps> = (props) => {
               >
                 <span className="font-medium">Toutes les thématiques</span>
               </button>
-              {uniqueTopics.map((topic) => (
+              {uniqueTopics.map((topic, index) => (
                 <button
-                  key={topic}
+                  key={topic || `topic-${index}`}
                   onClick={() => handleTopicClick(topic)}
                   className={`flex items-center rounded-md px-3 py-2 text-sm transition ${
                     selectedTopic === topic
@@ -285,16 +283,16 @@ const FAQ: React.FC<FAQProps> = (props) => {
                 </button>
               ))}
             </div>
-                    {/* Reset Filters Button */}
-        <div className="mb-6 mt-6 flex justify-end">
-          <button
-            onClick={resetFilters}
-            className="flex items-center rounded-md bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200"
-          >
-            <span className="mr-1">↻</span>
-            Réinitialiser les filtres
-          </button>
-        </div>
+            {/* Reset Filters Button */}
+            <div className="mb-6 mt-6 flex justify-end">
+              <button
+                onClick={resetFilters}
+                className="flex items-center rounded-md bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200"
+              >
+                <span className="mr-1">↻</span>
+                Réinitialiser les filtres
+              </button>
+            </div>
           </div>
         )}
 
@@ -310,7 +308,7 @@ const FAQ: React.FC<FAQProps> = (props) => {
           <div className="space-y-4">
             {filteredFaqs.map((item, index) => (
               <div
-                key={item.id}
+                key={item.id || `faq-${index}`}
                 className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300"
               >
                 <button
