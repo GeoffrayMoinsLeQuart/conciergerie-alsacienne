@@ -19,11 +19,11 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* <Hero />
+      <Hero />
       <About /> 
-      <Prestation />*/}
-      {/* <Properties homePage />
-      <Testimonial /> */}
+      <Prestation />
+      <Properties homePage />
+      <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
       <Contact />
     </>

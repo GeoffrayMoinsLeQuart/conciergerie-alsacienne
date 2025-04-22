@@ -2,7 +2,6 @@ import PageTitle from "@/components/Common/PageTitle";
 import { fetchProperties, imageBuilder } from "@/sanity/sanity-utils";
 import { notFound } from "next/navigation";
 import MarkdownRenderer from "@/utils/markdownConfig";
-import { Property } from "@/types/property";
 import Link from "next/link";
 import ProjectDetailsGallery from "@/components/Gallery/property-gallery";
 
@@ -15,6 +14,7 @@ export async function generateStaticParams() {
   }));
 }
 
+// ✅ NE PAS utiliser "await params"
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
@@ -67,12 +67,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <section className="bg-white pb-20 pt-[90px]">
         <div className="container">
           <div className="-mx-5 flex flex-wrap gap-y-10">
-            {/* Colonne gauche : galerie + description */}
+            {/* COLONNE GAUCHE (TOUJOURS AFFICHÉE) */}
             <div className="w-full px-5 lg:w-8/12">
-              {/* Galerie */}
               <ProjectDetailsGallery slides={slides} />
 
-              {/* Infos clés sous la galerie en mobile */}
+              {/* INFOS CLÉS – MOBILE SEULEMENT */}
               <div className="mt-10 block lg:hidden">
                 <ul className="divide-y divide-gray-200 border-t text-sm text-gray-700">
                   {surface && (
@@ -120,7 +119,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </ul>
               </div>
 
-              {/* Titre + description */}
+              {/* DESCRIPTION */}
               <h1 className="mb-7 mt-8 text-2xl font-bold text-black sm:text-4xl lg:text-3xl">
                 {name}
               </h1>
@@ -130,6 +129,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
               )}
 
+              {/* CTA MOBILE */}
               <div className="mt-12 block rounded-md border border-[#D7DFFF] bg-[#F8F9FF] px-6 py-8 lg:hidden">
                 <h3 className="mb-6 text-xl font-bold text-primary">
                   Vous avez un bien similaire ?
@@ -145,7 +145,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </Link>
               </div>
 
-              {/* Navigation entre biens */}
+              {/* NAVIGATION ENTRE BIENS */}
               <div className="mt-16 flex justify-between text-sm text-primary">
                 {prev ? (
                   <Link href={`/property/${prev.slug.current}`}>
@@ -162,7 +162,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </div>
             </div>
 
-            {/* Colonne droite desktop uniquement */}
+            {/* COLONNE DROITE – DESKTOP SEULEMENT */}
             <div className="hidden px-5 lg:block lg:w-4/12">
               <div className="mb-8 rounded-md border border-[#D7DFFF] bg-[#F8F9FF] px-6 py-8">
                 <h3 className="mb-6 text-xl font-bold text-primary">
