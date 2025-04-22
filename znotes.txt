@@ -1,0 +1,32 @@
+Accueil
+Photo principale
+Verifier homogeneite des bouton cta 
+Mettre a jour partie promesse pour les chiffres et design button et titre
+Creer les page pour social
+Temoignage : trustpilot ou google review ou les 3 (local)
+
+Blog afficher un lien pour aller vers la page
+
+
+
+
+
+
+
+Dans les articles de blog, ajouter des liens vers le simulateur
+
+Regarder où sont envoyés les information du forumlaire
+
+
+
+Mettre à jour le footer
+
+
+
+Faire sous domaine pour la partie reservation
+
+
+
+Trouver nouveau nom pour la boite
+
+
