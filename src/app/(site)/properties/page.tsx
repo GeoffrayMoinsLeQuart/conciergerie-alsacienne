@@ -1,5 +1,5 @@
 import PageTitle from "@/components/Common/PageTitle";
-import Properties from "@/components/property";
+import Properties from "@/components/Property";
 
 export default function PropertiesPage() {
   return (

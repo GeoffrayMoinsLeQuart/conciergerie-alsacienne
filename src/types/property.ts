@@ -4,15 +4,26 @@ export interface Property {
     _type: string;
     current: string;
   };
-  name?: string | null;
-  shortDescription?: string | null;
-  longDescription?: string | null;
-  imagePrincipale?: any; // Image Sanity
+  name?: string;
+  shortDescription?: string;
+  longDescription?: string;
+  imagePrincipale?: any;
   galleryImage?: {
     asset: any;
     caption?: string;
-  }[] | null;
+  }[];
   categories?: {
     value: string;
-  }[] | null;
+  }[];
+  modeGestion?: "Conciergerie" | "Gestion Locative";
+  surface?: number;
+  revenuMensuel?: number;
+  occupation?: number;
+  loyer?: number;
+  nbChambres?: number;
+  nbSdb?: number;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
 }

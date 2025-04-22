@@ -8,6 +8,10 @@ Temoignage : trustpilot ou google review ou les 3 (local)
 Blog afficher un lien pour aller vers la page
 
 
+Loader general pour tout le site 
+
+CTA pied de page accueil
+
 
 
 
@@ -29,4 +33,52 @@ Faire sous domaine pour la partie reservation
 
 Trouver nouveau nom pour la boite
 
+
+faire en sorte que sanity ne soit pas accessible en prod
+
+
+Il se pourrait que l'erreur d'hydratation soit dans le header ou le footer
+
+
+intégrer google analiucs
+
+
+Verifier que tout le site soit bien en ISR
+
+Refaire une passe de toutes les metadata
+
+Lighthouse
+
+Ajouter une page cas pratique
+
+Mettre en place l'ia pour rénover
+
+Intégrer une carte interactive (Google Maps / Leaflet) dans la page détail ?
+
+Optimiser le SEO des pages de propriétés avec metadata et balises <meta> ?
+
+Ajouter un système de partage (ex: bouton “Partager ce bien”) ?
+
+Continuer sur une autre page du site ?
+
+Préparer l’intégration multilingue (FR / EN) pour les biens si c’est prévu plus tard ?
+
+📍 Carte interactive (Leaflet ou Google Maps) en bas de page ?
+
+🧪 Tests utilisateurs ou accessibilité (focus visible, lecture mobile, contraste) ?
+
+🔍 Optimisation SEO technique (balises meta, open graph, balisage sémantique) ?
+
+✨ Animations ou effets de transition pour enrichir l’expérience ?
+
+⚡️ Performance : lazy loading, audit Lighthouse rapide ?
+
+📄 Un PDF de présentation imprimable auto-généré depuis Sanity ?
+
+
+
+
+ design immersif
+ 🔄 Connecter GPT + Zapier + Notion/Google Sheet pour automatiser : suivis Airbnb, relance paiements, FAQ auto, chat site web.
+ 🧰 Utiliser Innovia pour booster la présentation de tes biens à rénover ou en faible demande.
 

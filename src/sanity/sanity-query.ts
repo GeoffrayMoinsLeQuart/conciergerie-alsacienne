@@ -58,13 +58,21 @@ export const propertyQuery = groq`
     longDescription,
     slug,
     imagePrincipale,
-    galleryImage[]{
+    galleryImage[] {
       asset,
       caption
     },
-    categories[]{
+    categories[] {
       value
-    }
+    },
+    modeGestion,
+    surface,
+    revenuMensuel,
+    occupation,
+    nbChambres,
+    nbSdb,
+    coordinates,
+    loyer
   }
 `;
 

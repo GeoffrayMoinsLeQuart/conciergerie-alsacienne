@@ -4,7 +4,7 @@ import About from "@/components/Home/About";
 import Hero from "@/components/Home/Hero";
 import Prestation from "@/components/Home/Prestation";
 import Testimonial from "@/components/Home/Testimonial";
-import Properties from "@/components/property";
+import Properties from "@/components/Property";
 import { Metadata } from "next";
 import { integrations } from "../../../integrations.config";
 
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <About />
-      <Prestation />
+      {/* <Hero />
+      <About /> 
+      <Prestation />*/}
       <Properties />
       <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
