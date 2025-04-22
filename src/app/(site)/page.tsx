@@ -7,6 +7,7 @@ import Testimonial from "@/components/Home/Testimonial";
 import Properties from "@/components/property";
 import { Metadata } from "next";
 import { integrations } from "../../../integrations.config";
+import StatList from "@/components/About/StatList";
 
 const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
@@ -19,8 +20,9 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* <Hero />*/}
-      <About /> 
+      <Hero />
+      <About />
+      {/* <StatList /> */}
       <Prestation />
       <Properties />
       <Testimonial />
