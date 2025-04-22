@@ -1,7 +1,6 @@
 import { Portfolio } from "@/types/portfolio";
 import { v4 as uuid } from "uuid";
 
-
 const portfolioDetails = (
   <div>
     <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
@@ -60,7 +59,7 @@ const portfolioDetails = (
       <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
         <span className="text-body-color">
           🛠 <strong>Maintenance proactive</strong> : suivi régulier et
-          réactivité en cas d’intervention nécessaire.
+          réactivité en cas d'intervention nécessaire.
         </span>
       </li>
     </ul>

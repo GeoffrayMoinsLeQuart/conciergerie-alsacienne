@@ -60,7 +60,8 @@ export default defineType({
       name: "icon",
       title: "Icône personnalisée (optionnelle)",
       type: "string",
-      description: "Emoji ou nom d’icône à afficher pour cette question si besoin",
+      description:
+        "Emoji ou nom d'icône à afficher pour cette question si besoin",
     }),
     defineField({
       name: "order",
@@ -82,4 +83,3 @@ export default defineType({
     },
   },
 });
-

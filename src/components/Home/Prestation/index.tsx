@@ -20,52 +20,40 @@ export default function ServicesGrid() {
       : prestationGestionLocative;
 
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-white py-16">
       <div className="container">
+        {/* Titre & sous‑titre */}
+        <div className="mb-12 text-center">
+          <SectionTitle
+            mainTitle="NOS PRESTATIONS"
+            title="Une solution complète pour votre bien"
+            paragraph="Découvrez notre accompagnement sur mesure, que vous soyez en location courte durée ou en gestion locative classique."
+            center
+          />
+        </div>
+
         {/* Onglets */}
-        <div className="mb-10 flex justify-center space-x-6">
+        <div className="mb-12 flex justify-center gap-4">
           <button
             onClick={() => setActiveTab("conciergerie")}
-            className={`px-4 py-2 font-semibold transition ${
+            className={`rounded-full px-6 py-2 text-sm font-semibold transition ${
               activeTab === "conciergerie"
-                ? "border-b-2 border-primary text-primary"
-                : "text-gray-600 hover:text-primary"
+                ? "bg-primary text-white shadow-md"
+                : "border border-gray-300 bg-white text-gray-700 hover:text-primary"
             }`}
           >
-            Conciergerie Premium
+            🛏 Conciergerie Premium
           </button>
           <button
             onClick={() => setActiveTab("gestion")}
-            className={`px-4 py-2 font-semibold transition ${
+            className={`rounded-full px-6 py-2 text-sm font-semibold transition ${
               activeTab === "gestion"
-                ? "border-b-2 border-primary text-primary"
-                : "text-gray-600 hover:text-primary"
+                ? "bg-primary text-white shadow-md"
+                : "border border-gray-300 bg-white text-gray-700 hover:text-primary"
             }`}
           >
-            Gestion Locative
+            🏠 Gestion Locative
           </button>
-        </div>
-
-        {/* Titre & sous‑titre */}
-        <div className="-mx-4 mb-10 flex flex-wrap items-end lg:mb-[60px]">
-          <div className="w-full px-4 lg:w-8/12">
-            <SectionTitle
-              mainTitle="NOS PRESTATIONS"
-              title="Une solution complète pour votre bien"
-              width="625px"
-              color="white"
-            />
-          </div>
-          <div className="w-full px-4 lg:w-4/12">
-            <div className="mb-[50px] flex lg:justify-end">
-              <Link
-                href="/prestations"
-                className="text-lg font-medium text-white underline hover:text-primary"
-              >
-                EXPLOREZ NOS PRESTATIONS
-              </Link>
-            </div>
-          </div>
         </div>
 
         {/* Grille animée, clé = activeTab pour forcer le remount */}
