@@ -4,14 +4,16 @@ import { Prestation } from "@/types/prestation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function PrestationTabButtons({ prestationData }: any) {
+export default function PrestationTabButtons({ prestationConciergerie }: any) {
   const pathname = usePathname();
 
   return (
     <div>
-      <h3 className="mb-[22px] text-[34px] font-bold text-black">prestations</h3>
+      <h3 className="mb-[22px] text-[34px] font-bold text-black">
+        prestations
+      </h3>
       <div className="rounded-sm border border-stroke">
-        {prestationData.map((prestation: Prestation) => (
+        {prestationConciergerie.map((prestation: Prestation) => (
           <Link
             href={`/prestation/${prestation?.slug}`}
             key={prestation?.id}

@@ -1,6 +1,6 @@
 import PageTitle from "@/components/Common/PageTitle";
 import PrestationLayout from "@/components/Service/PrestationLayout";
-import { prestationData } from "@/static-data/prestation";
+import { prestationConciergerie } from "@/static-data/prestation";
 import { Prestation } from "@/types/prestation";
 
 type Props = {
@@ -13,7 +13,9 @@ export async function generateMetadata(props: Props) {
   const siteName = process.env.SITE_NAME;
   const authorName = process.env.AUTHOR_NAME;
 
-  const service = prestationData.find((item) => item?.slug === params?.slug);
+  const service = prestationConciergerie.find(
+    (item) => item?.slug === params?.slug,
+  );
 
   if (service) {
     return {
@@ -62,7 +64,9 @@ export async function generateMetadata(props: Props) {
 
 export default async function PrestationDetailPage(props: Props) {
   const params = await props.params;
-  const prestation = prestationData.find((item) => item?.slug === params?.slug);
+  const prestation = prestationConciergerie.find(
+    (item) => item?.slug === params?.slug,
+  );
   return (
     <>
       <PageTitle

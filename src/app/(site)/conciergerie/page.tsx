@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import Intro from "@/components/Intro";
 import SelectionEtAccompagnement from "@/components/Conciergerie/SelectionEtAccompagnement";
 import NotreExpertise from "@/components/Conciergerie/NotreExpertise";
-import NosPrestations from "@/components/Conciergerie/NosPrestations";
+import NosPrestations from "@/components/Prestations";
 import ProcessusConciergerie from "@/components/Conciergerie/ProcessusConciergerie";
 import SectionTransparence from "@/components/Conciergerie/SectionTransparence";
 import SectionConfiance from "@/components/Conciergerie/SectionConfiance";
@@ -31,6 +31,7 @@ export default function ConciergeriePage() {
 
       {/* Critères de Sélection Section */}
       <SelectionEtAccompagnement />
+      <NosPrestations />
       {/* Transformations Section */}
       <NosTransformations />
       {/* Service de Décoration Section */}
