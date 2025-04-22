@@ -8,7 +8,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
 
   return (
     <div className="mb-10 w-full px-4 lg:w-1/2 xl:w-1/3">
-      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-blog pt-8">
+      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-blog pt-6">
         <Link
           href={`/blog/${slug?.current}`}
           className="relative block aspect-video"
@@ -18,7 +18,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
               src={imageBuilder(mainImage).url()}
               alt={title}
               fill
-              sizes="(max-width: 768px) 100vw"
+              sizes="100vw"
               className="w-full duration-300 group-hover:scale-110 rounded-xl"
             />
           ) : (
@@ -27,7 +27,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
             </div>
           )}
         </Link>
-        <div className="flex flex-1 flex-col justify-between px-6 py-8 sm:px-11">
+        <div className="flex flex-1 flex-col justify-between px-4 py-8 sm:px-6">
           <div>
             <h3 className="mb-3 line-clamp-2">
               <Link

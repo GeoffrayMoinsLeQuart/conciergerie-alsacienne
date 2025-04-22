@@ -36,12 +36,12 @@ export async function sanityFetch<QueryResponse>({
 }): Promise<QueryResponse> {
   if (integrations?.isSanityEnabled) {
     try {
-      console.log("Attempting to create Sanity client");
+      // console.log("Attempting to create Sanity client");
       const cleanParams = Object.fromEntries(
         Object.entries(qParams).filter(([_, value]) => value !== undefined),
       );
 
-      console.log("Sanity query params:", JSON.stringify(cleanParams));
+      // console.log("Sanity query params:", JSON.stringify(cleanParams));
       const client = createClient(clientConfig);
 
       const result = await client.fetch<QueryResponse>(query, cleanParams, {
@@ -60,7 +60,7 @@ export async function sanityFetch<QueryResponse>({
 }
 
 export async function fetchProperties(): Promise<Property[]> {
-  console.log("Starting fetchProperties...");
+  // console.log("Starting fetchProperties...");
 
   try {
     const properties = await sanityFetch<Property[]>({
@@ -106,12 +106,12 @@ export async function getPosts({
   const end = start + limit;
 
   try {
-    console.log("Fetching posts with params:", {
-      page,
-      limit,
-      categories,
-      search,
-    });
+    // console.log("Fetching posts with params:", {
+    //   page,
+    //   limit,
+    //   categories,
+    //   search,
+    // });
 
     let posts: Blog[] = [];
     let countResult: CountResult = { total: 0 };
@@ -182,7 +182,7 @@ export async function getPosts({
       });
     }
 
-    console.log(`Retrieved ${posts?.length || 0} posts`);
+    // console.log(`Retrieved ${posts?.length || 0} posts`);
 
     const total = countResult?.total || 0;
 
@@ -211,7 +211,7 @@ export async function getPosts({
 
 export async function getAllPosts() {
   try {
-    console.log("Fetching all posts");
+    // console.log("Fetching all posts");
 
     const posts: Blog[] = await sanityFetch({
       query: postQuery,
@@ -219,7 +219,7 @@ export async function getAllPosts() {
       tags: ["post"],
     });
 
-    console.log(`Retrieved ${posts?.length || 0} posts`);
+    // console.log(`Retrieved ${posts?.length || 0} posts`);
 
     return posts || [];
   } catch (error) {

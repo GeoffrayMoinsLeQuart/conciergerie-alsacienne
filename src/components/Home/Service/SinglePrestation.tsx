@@ -8,8 +8,8 @@ export default function SinglePrestation({
   prestation: Prestation;
 }) {
   return (
-    <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div className="mb-10 bg-white">
+    <div className="w-full px-4 md:w-1/2 lg:w-1/3 rounded-xl">
+      <div className="mb-10 bg-white rounded-xl">
         <Link
           href={`/prestation/${prestation?.slug}`}
           className="relative block aspect-[34/23] w-full"
@@ -19,7 +19,7 @@ export default function SinglePrestation({
             alt={prestation?.title || "Image de la prestation"}
             fill
             sizes="(max-width: 768px) 100vw"
-            className="w-full object-cover object-center"
+            className="w-full object-cover object-center rounded-xl p-3"
           />
         </Link>
         <div className="p-8 sm:p-11 md:p-8 lg:px-6 xl:p-10 2xl:p-11">

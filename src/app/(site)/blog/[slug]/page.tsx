@@ -131,7 +131,7 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
                       src={mainImageUrl}
                       alt={post.title || "Image de l'article"}
                       fill
-                      sizes="(max-width: 768px) 100vw"
+                      sizes="100vw"
                       className="h-full w-full object-cover object-center"
                     />
                   </div>
