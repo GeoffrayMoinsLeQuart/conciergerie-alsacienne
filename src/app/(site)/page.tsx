@@ -22,8 +22,8 @@ export default function HomePage() {
       {/* <Hero />
       <About /> 
       <Prestation />*/}
-      <Properties />
-      <Testimonial />
+      {/* <Properties homePage />
+      <Testimonial /> */}
       {integrations?.isSanityEnabled && <HomeBlogSection />}
       <Contact />
     </>

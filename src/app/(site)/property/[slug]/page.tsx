@@ -62,11 +62,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <PageTitle
-        pageTitle={name}
-        pageDescription={shortDescription || ""}
-        showMenu={true}
-      />
+      <PageTitle pageTitle={name} pageDescription={shortDescription || ""} />
 
       <section className="bg-white pb-20 pt-[90px]">
         <div className="container">
@@ -185,7 +181,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                       <span>{surface} m²</span>
                     </li>
                   )}
-                  {nbChambres && (
+                  {nbChambres !== undefined && (
                     <li className="flex justify-between">
                       <span className="font-medium">Chambres</span>
                       <span>{nbChambres}</span>

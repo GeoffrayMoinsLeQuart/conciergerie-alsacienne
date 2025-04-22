@@ -14,7 +14,11 @@ const propertyTags = [
   { label: "Gestion Locative", value: "Gestion Locative", icon: "🏠" },
 ];
 
-export default function Properties() {
+export default function Properties({
+  homePage = false,
+}: {
+  homePage?: boolean;
+}) {
   const [activeTag, setActiveTag] = useState("All");
   const [properties, setProperties] = useState<Property[]>([]);
   const [items, setItems] = useState<Property[]>([]);
@@ -34,9 +38,11 @@ export default function Properties() {
   const filterItems = (tag: string) => {
     setActiveTag(tag);
     if (tag === "All") {
-      return setItems(properties);
+      return setItems(properties.slice(0, 3));
     }
-    const filtered = properties.filter((p) => p.modeGestion === tag);
+    const filtered = homePage
+      ? properties.filter((p) => p.modeGestion === tag).slice(0, 3)
+      : properties.filter((p) => p.modeGestion === tag);
     setItems(filtered);
   };
 
@@ -64,7 +70,7 @@ export default function Properties() {
                     activeTag === tag.value
                       ? "bg-primary text-white"
                       : "text-body-color hover:bg-primary/10 hover:text-primary"
-                  } mb-2 mx-2 flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold capitalize transition`}
+                  } mx-2 mb-2 flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold capitalize transition`}
                 >
                   <span>{tag.icon}</span>
                   {tag.label}
@@ -80,7 +86,9 @@ export default function Properties() {
         ) : (
           <div className="portfolio-container -mx-4 flex justify-center">
             <div className="w-full px-4 xl:w-10/12">
-              <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2 }}>
+              <ResponsiveMasonry
+                columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+              >
                 <Masonry gutter="30px">
                   {items.map((property) => (
                     <PropertyCard key={property._id} property={property} />
@@ -89,17 +97,16 @@ export default function Properties() {
               </ResponsiveMasonry>
 
               {/* CTA bas */}
-              <div className="mt-16 text-center">
-                <h4 className="mb-4 text-xl font-semibold text-black">
-                  Vous possédez un bien ?
-                </h4>
-                <Link
-                  href="/simulateur"
-                  className="inline-block rounded-md bg-primary px-6 py-3 font-medium text-white transition hover:bg-primary/90"
-                >
-                  Estimez vos revenus locatifs
-                </Link>
-              </div>
+              {homePage && (
+                <div className="mt-10 text-center">
+                  <Link
+                    href="/nos-biens"
+                    className="inline-block rounded bg-primary px-6 py-3 font-medium text-white transition hover:bg-primary/90"
+                  >
+                    Voir tous nos biens
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}
