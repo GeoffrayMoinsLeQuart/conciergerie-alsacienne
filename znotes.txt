@@ -40,7 +40,7 @@ faire en sorte que sanity ne soit pas accessible en prod
 Il se pourrait que l'erreur d'hydratation soit dans le header ou le footer
 
 
-intégrer google analiucs
+intégrer google analiucs Google Tag Manager. Mettre en place tous les trackage possibles
 
 
 Verifier que tout le site soit bien en ISR
