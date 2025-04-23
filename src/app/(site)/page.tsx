@@ -7,6 +7,7 @@ import Testimonial from "@/components/Home/Testimonial";
 import Properties from "@/components/Property";
 import { Metadata } from "next";
 import { integrations } from "../../../integrations.config";
+import { fetchProperties } from "@/sanity/sanity-utils";
 
 const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
@@ -16,13 +17,15 @@ export const metadata: Metadata = {
     "Boostez vos revenus locatifs en Alsace avec la Conciergerie Alsacienne : conciergerie dédiée à la location courte durée, optimisation Airbnb, suivi 24/7 et prestation personnalisé.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const properties = await fetchProperties();
+
   return (
     <>
       {/* <Hero />
-      <About /> 
+      <About />
       <Prestation />
-      <Properties homePage />
+      {properties && <Properties properties={properties} homePage />}
       <Testimonial /> */}
       {integrations?.isSanityEnabled && <HomeBlogSection />}
       <Contact />

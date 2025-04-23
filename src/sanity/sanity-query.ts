@@ -76,6 +76,31 @@ export const propertyQuery = groq`
   }
 `;
 
+export const propertyQueryBySlug = groq`
+  *[_type == "propertyType" && slug.current == $slug][0] {
+    _id,
+    name,
+    shortDescription,
+    longDescription,
+    slug,
+    imagePrincipale,
+    galleryImage[] {
+      asset,
+      caption
+    },
+    categories[] {
+      value
+    },
+    modeGestion,
+    surface,
+    revenuMensuel,
+    occupation,
+    nbChambres,
+    coordinates,
+    loyer
+  }
+`;
+
 
 export const faqQuery = groq`
   *[_type == "faq"] | order(order asc) {

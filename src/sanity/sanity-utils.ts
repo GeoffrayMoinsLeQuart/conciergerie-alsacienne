@@ -18,6 +18,7 @@ import {
   postCountWithCategoriesQuery,
   postCountWithSearchQuery,
   postCountWithCategoriesAndSearchQuery,
+  propertyQueryBySlug,
 } from "./sanity-query";
 import { Blog, Category } from "@/types/blog";
 import { integrations, messages } from "../../integrations.config";
@@ -83,6 +84,15 @@ export async function fetchProperties(): Promise<Property[]> {
     console.error("Error in fetchProperties:", error);
     return [];
   }
+}
+
+
+export async function getPropertyBySlug(slug: string): Promise<Property> {
+  return await sanityFetch<Property>({
+    query: propertyQueryBySlug,
+    tags: ["property"],
+    qParams: { slug },
+  });
 }
 
 interface CountResult {

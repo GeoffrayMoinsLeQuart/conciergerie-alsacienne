@@ -26,14 +26,13 @@ export default function HomeBlogSection() {
     fetchData();
   }, []);
 
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
-
   return (
     <section
       id="news"
-      className="flex flex-wrap justify-center bg-[#f8f9ff] py-20 lg:pt-[120px]"
+      className="bg-[#f8f9ff] py-20 lg:pt-[120px]"
     >
-      <div className="container">
+      <div className="container flex flex-col">
+        {/* En-tête */}
         <div className="mx-[-16px] flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[50px] max-w-[600px] text-center">
@@ -51,18 +50,16 @@ export default function HomeBlogSection() {
           </div>
         </div>
 
-        {/* --- Carrousel mobile --- */}
-        <div className="relative block lg:hidden">
+        {/* Carousel mobile */}
+        <div className="relative block lg:hidden mb-10">
           {/* Flèches customisées */}
           <div
-            className="swiper-button-prev-custom absolute -left-5 top-[50%] z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary shadow transition hover:bg-primary hover:text-white"
-            style={{ transform: "translateY(-50%)", cursor: "pointer" }}
+            className="swiper-button-prev-custom absolute -left-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90 cursor-pointer"
           >
             ←
           </div>
           <div
-            className="swiper-button-next-custom absolute -right-5 top-[50%] z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary shadow transition hover:bg-primary hover:text-white"
-            style={{ transform: "translateY(-50%)", cursor: "pointer" }}
+            className="swiper-button-next-custom absolute -right-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90 cursor-pointer"
           >
             →
           </div>
@@ -86,8 +83,8 @@ export default function HomeBlogSection() {
           </Swiper>
         </div>
 
-        {/* --- Masonry desktop --- */}
-        <div className="hidden lg:block">
+        {/* Masonry desktop */}
+        <div className="hidden lg:block flex-1">
           <Masonry
             breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
             className="-mx-4 flex w-auto"
@@ -98,13 +95,17 @@ export default function HomeBlogSection() {
             ))}
           </Masonry>
         </div>
+
+        {/* CTA toujours centré en bas */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/blog"
+            className="inline-block rounded bg-primary px-6 py-3 text-white transition hover:bg-primary/90"
+          >
+            Voir tous les articles
+          </Link>
+        </div>
       </div>
-      <Link
-        href="/blog"
-        className="mt-10 rounded bg-primary px-6 py-3 text-white hover:bg-primary/90"
-      >
-        Voir tous les articles
-      </Link>
     </section>
   );
 }

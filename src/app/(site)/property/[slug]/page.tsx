@@ -1,25 +1,91 @@
 import PageTitle from "@/components/Common/PageTitle";
-import { fetchProperties, imageBuilder } from "@/sanity/sanity-utils";
+import {
+  fetchProperties,
+  getPropertyBySlug,
+  imageBuilder,
+} from "@/sanity/sanity-utils";
 import { notFound } from "next/navigation";
 import MarkdownRenderer from "@/utils/markdownConfig";
 import Link from "next/link";
 import ProjectDetailsGallery from "@/components/Gallery/property-gallery";
+import { Metadata } from "next";
+import Script from "next/script";
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 export async function generateStaticParams() {
   const properties = await fetchProperties();
-  return properties.map((property) => ({
-    slug: property.slug?.current || "",
-  }));
+  return properties
+    .filter((p) => !!p.slug?.current)
+    .map((property) => ({
+      slug: property.slug.current,
+    }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const property = await getPropertyBySlug(slug);
+
+  const siteURL = process.env.SITE_URL || "https://conciergerie-alsacienne.fr";
+  const siteName = "Conciergerie Alsacienne";
+
+  if (!property) {
+    return {
+      title: `Bien introuvable | ${siteName}`,
+      description: "Ce bien n'existe pas ou a été retiré de notre catalogue.",
+    };
+  }
+
+  const imageUrl = property.imagePrincipale
+    ? imageBuilder(property.imagePrincipale).url()
+    : `${siteURL}/default-property.jpg`;
+
+  const fullTitle = `${property.name} | ${siteName}`;
+  const shortDesc =
+    property.shortDescription ||
+    "Découvrez ce bien unique géré par notre équipe.";
+
+  return {
+    title: fullTitle,
+    description: shortDesc,
+    openGraph: {
+      title: fullTitle,
+      description: shortDesc,
+      url: `${siteURL}/property/${property.slug?.current}`,
+      siteName,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: property.name,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description: shortDesc,
+      images: [imageUrl],
+    },
+  };
 }
 
 // ✅ NE PAS utiliser "await params"
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-  const properties = await fetchProperties();
-  const property = properties.find((p) => p.slug?.current === slug);
+  const property = await getPropertyBySlug(slug); // ✅ Plus efficace que fetchAll puis .find()
 
   if (!property) return notFound();
 
@@ -56,9 +122,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
     });
   }
 
-  const currentIndex = properties.findIndex((p) => p.slug?.current === slug);
-  const prev = properties[currentIndex - 1];
-  const next = properties[currentIndex + 1];
+  // Optional: navigation entre propriétés (si tu veux vraiment garder ça avec ISR)
+  const allProperties = await fetchProperties();
+  const currentIndex = allProperties.findIndex((p) => p.slug?.current === slug);
+  const prev = allProperties[currentIndex - 1];
+  const next = allProperties[currentIndex + 1];
 
   return (
     <>
@@ -231,6 +299,58 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
+        <Script id="json-ld-property" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: name,
+            description: shortDescription || longDescription?.slice(0, 150),
+            image:
+              slides.length > 0
+                ? slides[0].src
+                : `${process.env.SITE_URL}/default-property.jpg`,
+            sku: slug,
+            brand: {
+              "@type": "Organization",
+              name: "Conciergerie Alsacienne",
+            },
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "EUR",
+              price:
+                modeGestion === "Conciergerie"
+                  ? revenuMensuel || "0"
+                  : loyer || "0",
+              availability: "https://schema.org/InStock",
+              url: `${process.env.SITE_URL}/property/${slug}`,
+            },
+            additionalProperty: [
+              {
+                "@type": "PropertyValue",
+                name: "Surface",
+                value: `${surface} m²`,
+              },
+              ...(nbChambres !== undefined
+                ? [
+                    {
+                      "@type": "PropertyValue",
+                      name: "Chambres",
+                      value: nbChambres,
+                    },
+                  ]
+                : []),
+              ...(categories?.length
+                ? [
+                    {
+                      "@type": "PropertyValue",
+                      name: "Type",
+                      value: categories.map((c) => c.value).join(", "),
+                    },
+                  ]
+                : []),
+            ],
+          })}
+        </Script>
       </section>
     </>
   );

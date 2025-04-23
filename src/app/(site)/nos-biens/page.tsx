@@ -1,9 +1,10 @@
-// src/app/(site)/nos-biens/page.tsx
-
 import Properties from "@/components/Property";
+import { fetchProperties } from "@/sanity/sanity-utils";
 
 export const revalidate = 3600;
 
 export default async function Page() {
-  return <Properties />;
+  const properties = await fetchProperties();
+
+  return <>{properties && <Properties properties={properties} />}</>;
 }

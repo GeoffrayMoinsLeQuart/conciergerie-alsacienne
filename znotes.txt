@@ -8,7 +8,7 @@ Temoignage : trustpilot ou google review ou les 3 (local)
 Blog afficher un lien pour aller vers la page
 
 
-Loader general pour tout le site 
+Loader general pour tout le site ==> Mise en place des suspens
 
 CTA pied de page accueil
 
@@ -82,3 +82,4 @@ Préparer l’intégration multilingue (FR / EN) pour les biens si c’est prév
  🔄 Connecter GPT + Zapier + Notion/Google Sheet pour automatiser : suivis Airbnb, relance paiements, FAQ auto, chat site web.
  🧰 Utiliser Innovia pour booster la présentation de tes biens à rénover ou en faible demande.
 
+Ou qu’on ajoute les balises canonical, robots, ou structured data en JSON-LD ?
