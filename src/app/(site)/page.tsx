@@ -22,11 +22,11 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* <Hero />
+      <Hero />
       <About />
       <Prestation />
       {properties && <Properties properties={properties} homePage />}
-      <Testimonial /> */}
+      <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
       <Contact />
     </>
