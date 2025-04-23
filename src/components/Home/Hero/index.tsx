@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-cover bg-center bg-no-repeat">
+    <section className="relative overflow-hidden bg-cover bg-center bg-no-repeat mb-24">
       <div className="bg-white/90">
         <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
           {/* Responsive Image */}

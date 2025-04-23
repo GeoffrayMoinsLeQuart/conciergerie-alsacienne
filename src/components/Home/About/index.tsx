@@ -1,63 +1,120 @@
+"use client";
+
+import { FC } from "react";
+import { motion } from "framer-motion";
 import Graphic from "./Graphic";
 import SocialLinks from "./SocialLinks";
+import Link from "next/link";
+// import SocialLinks from "./SocialLinks"; // Tu pourras le réactiver une fois prêt
 
-export default function About() {
+// Sécurise motion (évite un crash si undefined)
+
+const stats = [
+  { label: "Biens gérés", value: 120 },
+  { label: "Voyageurs accueillis", value: 3500 },
+  { label: "Années d'expérience", value: 8 },
+  { label: "Taux d'occupation moyen", value: "85%" },
+];
+
+const About: FC = () => {
   return (
     <section
       id="about"
-      className="relative z-10 bg-white pb-[120px] pt-20 lg:pt-[145px]"
+      className="relative z-10 bg-[#f8f9ff] p-[40px] sm:p-[80px]"
     >
       <div className="container">
-        <div className="mx-[-16px] flex flex-wrap">
-          <div className="mb-8 w-full px-4 lg:mb-0 lg:w-1/2 xl:w-7/12">
-            <span className="mb-3 text-lg font-bold text-primary md:text-xl">
-              NOTRE PROMESSE
-            </span>
-            <h2 className="mb-5 max-w-[570px] text-2xl font-semibold leading-tight text-black sm:text-4xl sm:leading-tight md:text-3xl md:leading-tight">
-              Une gestion sans souci pour des revenus maximisés
-            </h2>
-            <ul>
-              <li>
-                <p className="max-w-[570px] text-base font-medium text-body-color">
-                  Connaissance approfondie du marché local
-                </p>
-              </li>
-              <li>
-                <p className="max-w-[570px] text-base font-medium text-body-color">
-                  Service personnalisé avec interlocuteur unique
-                </p>
-              </li>
-              <li>
-                <p className="max-w-[570px] text-base font-medium text-body-color">
-                  Transparence totale et reporting détaillé
-                </p>
-              </li>
-              <li>
-                <p className="max-w-[570px] text-base font-medium text-body-color">
-                  Optimisation continue de vos revenus
-                </p>
-              </li>
-            </ul>
+        <div className="mx-[-16px] max-sm:grid max-sm:grid-cols-1 sm:flex sm:flex-wrap sm:justify-between ">
+          {/* Col gauche : texte */}
+          <div className="flex flex-col justify-between text-center max-xl:mb-16 max-lg:w-full lg:text-left ">
+            <div>
+              <span className="mb-3 inline-block text-lg font-bold text-primary md:text-xl">
+                NOTRE PROMESSE
+              </span>
+              <ul className="mb-8 space-y-2">
+                <li className="text-base font-medium text-body-color">
+                  ✅ Connaissance approfondie du marché local
+                </li>
+                <li className="text-base font-medium text-body-color">
+                  ✅ Service personnalisé avec interlocuteur unique
+                </li>
+                <li className="text-base font-medium text-body-color">
+                  ✅ Transparence totale et reporting détaillé
+                </li>
+                <li className="text-base font-medium text-body-color">
+                  ✅ Optimisation continue de vos revenus
+                </li>
+              </ul>
+            </div>
+
+            <Link
+              href="tel:0033621471922"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button
+                type="button"
+                aria-label="contact-us-whatsapp"
+                className="text-md inline-block rounded-md bg-primary px-6 py-3 font-medium text-white transition hover:bg-primary/90"
+              >
+                📞 Discutons de votre projet
+              </button>
+            </Link>
           </div>
-          <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
-            <span className="invisible mb-3 text-lg font-bold text-primary md:text-xl">
-              NOTRE PROMESSE
-            </span>
-            <h3 className="mb-6 text-2xl font-semibold text-black md:text-3xl">
-              Conciergerie Alsacienne
+
+          {/* Col droite : chiffres & identité */}
+          <div className="w-full lg:w-1/2 xl:w-5/12">
+            <h3 className="mb-4 text-xl font-semibold text-black md:text-2xl ">
+              Une gestion sans souci pour des revenus maximisés
             </h3>
-            <p className="mb-10 text-base font-medium text-body-color">
-              Notre équipe locale connaît parfaitement les spécificités du
-              marché alsacien et s'engage à vous offrir un service d'excellence
-              pour une rentabilité optimale de votre bien.
+
+            <p
+              className="mb-8 text-justify text-base text-body-color
+"
+            >
+              Une équipe locale engagée pour valoriser votre bien et assurer une
+              expérience 5 étoiles à vos voyageurs. L'expertise alsacienne au
+              service de votre rentabilité.
             </p>
 
-            <SocialLinks />
+            {/* Statistiques animées */}
+            <motion.div
+              className="grid grid-cols-2 gap-6 text-center md:grid-cols-2"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.2 } },
+              }}
+            >
+              {stats.map((stat) => (
+                <motion.li
+                  key={stat.label}
+                  className="flex flex-col items-center"
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                >
+                  <span className="mb-1 text-3xl font-bold text-primary">
+                    {typeof stat.value === "number"
+                      ? stat.value.toLocaleString()
+                      : stat.value}
+                  </span>
+                  <span className="text-sm text-gray-600">{stat.label}</span>
+                </motion.li>
+              ))}
+            </motion.div>
+
+            {/* Social links si réactivé */}
           </div>
+          <SocialLinks />
         </div>
       </div>
 
       <Graphic />
     </section>
   );
-}
+};
+
+export default About;

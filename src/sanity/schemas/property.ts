@@ -58,26 +58,46 @@ const propertyType = {
       },
     },
     {
-      name: "categories",
-      title: "Categories",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          name: "category",
-          fields: [
-            {
-              name: "value",
-              title: "Value",
-              type: "string",
-              options: {
-                list: ["Studio", "T1", "T2", "T3"],
-                layout: "radio",
-              },
-            },
-          ],
-        },
-      ],
+      name: "modeGestion",
+      title: "Mode de gestion",
+      type: "string",
+      options: {
+        list: ["Conciergerie", "Gestion Locative"],
+        layout: "radio",
+      },
+    },
+    {
+      name: "surface",
+      title: "Surface (m²)",
+      type: "number",
+    },
+    {
+      name: "revenuMensuel",
+      title: "Revenu Mensuel Estimé (€)",
+      type: "number",
+      hidden: ({ document }) => document?.modeGestion === "Gestion Locative",
+    },
+    {
+      name: "occupation",
+      title: "Taux d'occupation (%)",
+      type: "number",
+      hidden: ({ document }) => document?.modeGestion === "Gestion Locative",
+    },
+    {
+      name: "loyer",
+      title: "Loyer mensuel (€)",
+      type: "number",
+      hidden: ({ document }) => document?.modeGestion === "Conciergerie",
+    },
+    {
+      name: "nbChambres",
+      title: "Nombre de chambres",
+      type: "number",
+    },
+    {
+      name: "coordinates",
+      title: "Localisation",
+      type: "geopoint",
     },
   ],
   preview: {

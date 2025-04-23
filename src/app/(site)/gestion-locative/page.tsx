@@ -1,7 +1,6 @@
 // ./src/app/(site)/gestion-locative/page.tsx
 import React from "react";
 import Intro from "@/components/Intro";
-import ServicesGestionLocative from "@/components/GestionLocative/Services";
 import GarantiesLoyers from "@/components/GestionLocative/GarantieLoyerImpaye";
 import NotreProcessus from "@/components/GestionLocative/Processus";
 import FormulesSection from "@/components/GestionLocative/Formules";
@@ -9,6 +8,7 @@ import TemoinagesSection from "@/components/GestionLocative/Testimonial";
 import GestionLocativeClient from "./GestionLocativeClient";
 import { Metadata } from "next";
 import CTAGestionLocative from "@/components/GestionLocative/CTAGestionLocative";
+import NosPrestations from "@/components/Prestations";
 
 const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
@@ -25,8 +25,8 @@ export default function GestionLocativePage() {
         title="Gestion locative longue durée en Alsace : sérénité et rentabilité garanties"
         content="Confiez-nous la gestion de votre bien, meublé ou non. Chez Conciergerie Alsacienne, nous gérons votre location longue durée de A à Z : démarches administratives, suivi technique, relation avec les locataires. Studio, appartement ou maison, notre équipe s'occupe de tout pour vous garantir sérénité et rentabilité."
       />
+      <NosPrestations />
 
-      <ServicesGestionLocative />
       <GarantiesLoyers />
       <NotreProcessus />
       <FormulesSection />

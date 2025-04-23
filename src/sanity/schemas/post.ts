@@ -40,7 +40,7 @@ const post = {
         }),
     },
     {
-      name: "category",
+      name: "categories",
       title: "Catégories",
       type: "array",
       of: [{ type: "string" }],

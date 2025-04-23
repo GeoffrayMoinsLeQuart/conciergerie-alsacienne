@@ -56,7 +56,7 @@ const socialData = [
 
 export default function SocialLinks() {
   return (
-    <div className="flex items-center">
+    <div className="w-full mt-12 flex justify-center gap-3 flex-wrap items-center">
       {socialData.map((social) => (
         <a
           key={social?.id}

@@ -2,27 +2,30 @@ import HomeBlogSection from "@/components/Blog/HomeBlogSection";
 import Contact from "@/components/Contact";
 import About from "@/components/Home/About";
 import Hero from "@/components/Home/Hero";
-import Service from "@/components/Home/Service";
+import Prestation from "@/components/Home/Prestation";
 import Testimonial from "@/components/Home/Testimonial";
-import Properties from "@/components/property";
+import Properties from "@/components/Property";
 import { Metadata } from "next";
 import { integrations } from "../../../integrations.config";
+import { fetchProperties } from "@/sanity/sanity-utils";
 
 const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
 export const metadata: Metadata = {
-  title: `Conciergerie Alsacienne | Services de conciergerie et gestion locative en Alsace`,
+  title: "Conciergerie Alsacienne | Gestion locative premium en Alsace",
   description:
-    "Service clé en main de gestion Airbnb et locations saisonnières. Maximisez vos revenus et libérez-vous totalement des contraintes de gestion grâce à notre expertise locale.",
+    "Boostez vos revenus locatifs en Alsace avec la Conciergerie Alsacienne : conciergerie dédiée à la location courte durée, optimisation Airbnb, suivi 24/7 et prestation personnalisé.",
 };
 
-export default function Home() {
+export default async function HomePage() {
+  const properties = await fetchProperties();
+
   return (
     <>
       <Hero />
       <About />
-      <Service />
-      <Properties />
+      <Prestation />
+      {properties && <Properties properties={properties} homePage />}
       <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
       <Contact />

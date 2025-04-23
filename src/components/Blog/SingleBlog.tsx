@@ -4,11 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function SingleBlog({ blog }: { blog: Blog }) {
-  const { title, metadata, slug, mainImage } = blog;
+  const { title, metadata, slug, mainImage, publishedAt } = blog;
+
+  const formattedDate = new Date(publishedAt).toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
-    <div className="mb-10 w-full px-4 lg:w-1/2 xl:w-1/3">
-      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-blog pt-6">
+    <div className="mb-10 w-full">
+      <div className="group flex h-full flex-col overflow-hidden rounded-xl bg-white pt-6 shadow-blog">
         <Link
           href={`/blog/${slug?.current}`}
           className="relative block aspect-video"
@@ -19,7 +25,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
               alt={title}
               fill
               sizes="100vw"
-              className="w-full duration-300 group-hover:scale-110 rounded-xl"
+              className="w-full rounded-xl object-cover duration-300 group-hover:scale-105"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gray-100 text-sm text-gray-500">
@@ -27,11 +33,15 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
             </div>
           )}
         </Link>
-        <div className="flex flex-1 flex-col justify-between px-4 py-8 sm:px-6">
+        <div className="flex flex-1 flex-col justify-between px-4 py-6 sm:px-6 sm:py-8">
+          {/* Date publication */}
+          <div className="mb-2 text-sm text-gray-500">Publié le {formattedDate}</div>
+
           <div>
             <h3 className="mb-3 line-clamp-2">
               <Link
                 href={`/blog/${slug?.current}`}
+                title={`Lire l'article : ${title}`}
                 className="block text-xl font-semibold text-black duration-200 hover:text-primary"
               >
                 {title}
@@ -41,8 +51,11 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
               {metadata}
             </p>
           </div>
+
+          {/* CTA */}
           <div>
             <Link
+              data-analytics-id="homepage_blog_click"
               href={`/blog/${slug?.current}`}
               className="text-sm font-medium text-black underline duration-200 hover:text-primary hover:no-underline"
             >

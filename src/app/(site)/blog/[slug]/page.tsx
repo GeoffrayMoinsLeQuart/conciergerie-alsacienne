@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 // Types
 type Params = {
@@ -204,6 +205,33 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
           </div>
         </div>
       </div>
+      <Script id="json-ld-blog" type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          image: mainImageUrl,
+          datePublished: post.publishedAt,
+          dateModified: post.publishedAt,
+          author: {
+            "@type": "Organization",
+            name: "Conciergerie Alsacienne",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Conciergerie Alsacienne",
+            logo: {
+              "@type": "ImageObject",
+              url: `${process.env.SITE_URL}/logo.png`,
+            },
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `${process.env.SITE_URL}/blog/${post.slug?.current}`,
+          },
+          description: post.metadata || post.title,
+        })}
+      </Script>
     </section>
   );
 };

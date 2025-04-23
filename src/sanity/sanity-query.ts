@@ -9,12 +9,12 @@ export const postQuery = groq`
     slug,
     publishedAt,
     mainImage,
-    "categories": categories[]->{ title, "slug": slug.current },
+    categories
   }
 `;
 
 export const categoryQuery = groq`
-  *[_type == "category"] | order(title asc) {
+  *[_type == "categories"] | order(title asc) {
     _id,
     title,
     "slug": slug.current,
@@ -35,7 +35,7 @@ export const postQueryBySlug = groq`
       name,
       image
     },
-    "categories": categories[]->{ title, "slug": slug.current },
+    categories
   }
 `;
 
@@ -58,16 +58,48 @@ export const propertyQuery = groq`
     longDescription,
     slug,
     imagePrincipale,
-    galleryImage[]{
+    galleryImage[] {
       asset,
       caption
     },
-    categories[]{
+    categories[] {
       value
-    }
+    },
+    modeGestion,
+    surface,
+    revenuMensuel,
+    occupation,
+    nbChambres,
+    nbSdb,
+    coordinates,
+    loyer
   }
 `;
 
+export const propertyQueryBySlug = groq`
+  *[_type == "propertyType" && slug.current == $slug][0] {
+    _id,
+    name,
+    shortDescription,
+    longDescription,
+    slug,
+    imagePrincipale,
+    galleryImage[] {
+      asset,
+      caption
+    },
+    categories[] {
+      value
+    },
+    modeGestion,
+    surface,
+    revenuMensuel,
+    occupation,
+    nbChambres,
+    coordinates,
+    loyer
+  }
+`;
 
 export const faqQuery = groq`
   *[_type == "faq"] | order(order asc) {
@@ -111,19 +143,19 @@ export const postQueryWithPagination = groq`
     slug,
     publishedAt,
     mainImage,
-    "categories": categories[]->{ title, "slug": slug.current },
+    categories
   }
 `;
 
 export const postQueryWithCategories = groq`
-  *[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id)] | order(publishedAt desc)[$start...$end] {
+  *[_type == "post" && references(*[_type == "categories" && slug.current in $categories]._id)] | order(publishedAt desc)[$start...$end] {
     _id,
     title,
     metadata,
     slug,
     publishedAt,
     mainImage,
-    "categories": categories[]->{ title, "slug": slug.current },
+    categories
   }
 `;
 
@@ -140,14 +172,14 @@ export const postQueryWithSearch = groq`
 `;
 
 export const postQueryWithCategoriesAndSearch = groq`
-  *[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id) && title match $search] | order(publishedAt desc)[$start...$end] {
+  *[_type == "post" && references(*[_type == "categories" && slug.current in $categories]._id) && title match $search] | order(publishedAt desc)[$start...$end] {
     _id,
     title,
     metadata,
     slug,
     publishedAt,
     mainImage,
-    "categories": categories[]->{ title, "slug": slug.current },
+    categories
   }
 `;
 
@@ -157,7 +189,7 @@ export const postCountQuery = groq`
 `;
 
 export const postCountWithCategoriesQuery = groq`
-  { "total": count(*[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id)]) }
+  { "total": count(*[_type == "post" && references(*[_type == "categories" && slug.current in $categories]._id)]) }
 `;
 
 export const postCountWithSearchQuery = groq`
@@ -165,5 +197,5 @@ export const postCountWithSearchQuery = groq`
 `;
 
 export const postCountWithCategoriesAndSearchQuery = groq`
-  { "total": count(*[_type == "post" && references(*[_type == "category" && slug.current in $categories]._id) && title match $search]) }
+  { "total": count(*[_type == "post" && references(*[_type == "categories" && slug.current in $categories]._id) && title match $search]) }
 `;
