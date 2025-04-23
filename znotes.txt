@@ -25,6 +25,8 @@ Regarder où sont envoyés les information du forumlaire
 
 Mettre à jour le footer
 
+Bouton cta flottant en bas de page ?
+
 
 
 Faire sous domaine pour la partie reservation

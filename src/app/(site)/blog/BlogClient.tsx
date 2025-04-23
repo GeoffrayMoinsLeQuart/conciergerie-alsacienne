@@ -32,11 +32,7 @@ export default function BlogClient() {
     posts.forEach((post) => {
       post.categories?.forEach((category) => {
         // déterminer la clé : si c'est un string on l'utilise, sinon on prend category.title
-        const key =
-          typeof category === "string"
-            ? category
-            : // si Category est un objet { title, slug, ... }
-              category.title;
+        const key = category;
         if (key) {
           counts[key] = (counts[key] || 0) + 1;
         }
@@ -55,9 +51,7 @@ export default function BlogClient() {
       if (selectedCats.length > 0) {
         if (!post.categories) return false;
         // Vérifier si la catégorie est un string ou un objet avec un titre
-        const postCategories = post.categories.map((category) =>
-          typeof category === "string" ? category : category.title,
-        );
+        const postCategories = post.categories.map((category) => category);
 
         // Exige que *toutes* les catégories sélectionnées soient présentes dans post.categories
         if (
@@ -87,7 +81,7 @@ export default function BlogClient() {
     filteredPosts.forEach((post) => {
       post.categories?.forEach((cat) => {
         // Vérifier si la catégorie est un string ou un objet avec un titre
-        const categoryTitle = typeof cat === "string" ? cat : cat.title;
+        const categoryTitle = cat;
         if (categoryTitle) {
           filteredCategories.add(categoryTitle);
         }

@@ -25,5 +25,5 @@ export type Blog = {
   author?: Author;
   tags?: string[];
   publishedAt?: string;
-  categories?: Category[]; // Ajout de cette propriété
+  categories?: string[]; // Ajout de cette propriété
 };
