@@ -1,101 +1,156 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import BlogFilters from "@/components/Blog/BlogFilters";
-import { getCategories, getPosts } from "@/sanity/sanity-utils";
-import { Category, Blog } from "@/types/blog";
+import { useEffect, useState, useMemo } from "react";
+import { getAllPosts } from "@/sanity/sanity-utils"; // renvoie tous les posts
+import { Blog } from "@/types/blog";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import Masonry from "react-masonry-css";
 import SkeletonMasonryBlog from "@/components/Blog/SkeletonMasonryBlog";
+import BlogFilters from "@/components/Blog/BlogFilters";
 
 export default function BlogClient() {
-  const searchParams = useSearchParams();
   const [posts, setPosts] = useState<Blog[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
 
-  const selectedCategories = searchParams.get("categories")?.split(",") || [];
-  const search = searchParams.get("search") || "";
+  // L’état de tes filtres
+  const [selectedCats, setSelectedCats] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
+  // 1️⃣ Charger tous les posts au montage
   useEffect(() => {
-    async function fetchInitialData() {
-      setIsLoading(true);
-      const cats = await getCategories();
-      setCategories(cats);
-      const { posts: initialPosts, pagination } = await getPosts({
-        page: 1,
-        limit: 9,
-        categories: selectedCategories,
-        search,
-      });
-      setPosts(initialPosts);
-      setPage(1);
-      setHasMore(pagination.pages > 1);
+    setIsLoading(true);
+    getAllPosts().then((all) => {
+      setPosts(all);
       setIsLoading(false);
-    }
+    });
+  }, []);
 
-    fetchInitialData();
-  }, [searchParams.toString()]);
+  // 2️⃣ Calculer le comptage de chaque catégorie sur l’ensemble des posts
+  const categoriesWithCount = useMemo(() => {
+    const counts: Record<string, number> = {};
 
-  async function loadMorePosts() {
-    const nextPage = page + 1;
-    const { posts: newPosts, pagination } = await getPosts({
-      page: nextPage,
-      limit: 9,
-      categories: selectedCategories,
-      search,
+    posts.forEach((post) => {
+      post.categories?.forEach((category) => {
+        // déterminer la clé : si c'est un string on l'utilise, sinon on prend category.title
+        const key =
+          typeof category === "string"
+            ? category
+            : // si Category est un objet { title, slug, ... }
+              category.title;
+        if (key) {
+          counts[key] = (counts[key] || 0) + 1;
+        }
+      });
     });
 
-    setPosts((prev) => [...prev, ...newPosts]);
-    setPage(nextPage);
-    setHasMore(pagination.page < pagination.pages);
+    return Object.entries(counts)
+      .map(([title, count]) => ({ title, count }))
+      .sort((a, b) => a.title.localeCompare(b.title));
+  }, [posts]);
+
+  // 3️⃣ Filtrer les posts en mémoire selon selectedCats et searchTerm
+  const filteredPosts = useMemo(() => {
+    return posts.filter((post) => {
+      // Filtre catégories
+      if (selectedCats.length > 0) {
+        if (!post.categories) return false;
+        // Vérifier si la catégorie est un string ou un objet avec un titre
+        const postCategories = post.categories.map((category) =>
+          typeof category === "string" ? category : category.title,
+        );
+
+        // Exige que *toutes* les catégories sélectionnées soient présentes dans post.categories
+        if (
+          !selectedCats.every((selectedCategory) =>
+            postCategories.includes(selectedCategory),
+          )
+        ) {
+          return false;
+        }
+      }
+
+      // Filtre recherche full-text dans title ou metadata
+      if (searchTerm.trim()) {
+        const s = searchTerm.toLowerCase();
+        const inTitle = post.title.toLowerCase().includes(s);
+        const inMeta = post.metadata?.toLowerCase().includes(s);
+        if (!inTitle && !inMeta) return false;
+      }
+
+      return true;
+    });
+  }, [posts, selectedCats, searchTerm]);
+
+  // 4️⃣ Calculer les catégories disponibles après application des filtres
+  const availableCategories = useMemo(() => {
+    const filteredCategories = new Set<string>();
+    filteredPosts.forEach((post) => {
+      post.categories?.forEach((cat) => {
+        // Vérifier si la catégorie est un string ou un objet avec un titre
+        const categoryTitle = typeof cat === "string" ? cat : cat.title;
+        if (categoryTitle) {
+          filteredCategories.add(categoryTitle);
+        }
+      });
+    });
+
+    return categoriesWithCount.filter(({ title }) =>
+      filteredCategories.has(title),
+    );
+  }, [filteredPosts, categoriesWithCount]);
+
+  if (isLoading) {
+    return <SkeletonMasonryBlog />;
   }
 
   return (
-    <section className="bg-white pb-20 pt-[90px]">
+    <section className="bg-white pb-20 pt-[40px]">
       <div className="container">
-        <BlogFilters categories={categories} />
+        {/* 🛠️ On passe tout l’état + setters à BlogFilters */}
+        <BlogFilters
+          categoriesWithCount={availableCategories} // Categories mises à jour dynamiquement
+          selectedCats={selectedCats}
+          onToggleCat={(cat) =>
+            setSelectedCats((prev) =>
+              prev.includes(cat)
+                ? prev.filter((c) => c !== cat)
+                : [...prev, cat],
+            )
+          }
+          searchTerm={searchTerm}
+          onSearchTermChange={setSearchTerm}
+          onReset={() => {
+            setSelectedCats([]);
+            setSearchTerm("");
+          }}
+        />
 
-        {isLoading ? (
-          <SkeletonMasonryBlog />
-        ) : posts.length === 0 ? (
-          <div className="text-center py-12">
-            <h3 className="text-xl font-semibold text-black mb-2">Aucun article trouvé</h3>
+        {filteredPosts.length === 0 ? (
+          <div className="py-12 text-center">
+            <h3 className="mb-2 text-xl font-semibold text-black">
+              Aucun article trouvé
+            </h3>
             <p className="text-body-color">
-              Essayez de modifier vos filtres ou votre recherche.
+              Essayez d’ajuster vos filtres ou votre recherche.
             </p>
           </div>
         ) : (
           <>
             <Masonry
               breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
-              className="flex w-auto -mx-4"
+              className="-mx-4 flex w-auto"
               columnClassName="px-4 space-y-10"
             >
-              {posts.map((post, index) => (
+              {filteredPosts.map((post, i) => (
                 <div
                   key={post._id}
                   className="animate-fadeInUp"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  style={{ animationDelay: `${i * 0.1}s` }}
                 >
                   <SingleBlog blog={post} />
                 </div>
               ))}
             </Masonry>
-
-            {hasMore && (
-              <div className="mt-10 text-center">
-                <button
-                  onClick={loadMorePosts}
-                  className="inline-block rounded bg-primary px-6 py-3 text-white transition hover:bg-primary/90"
-                >
-                  Charger plus d’articles
-                </button>
-              </div>
-            )}
           </>
         )}
       </div>

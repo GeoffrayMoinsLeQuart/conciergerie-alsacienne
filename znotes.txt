@@ -14,7 +14,7 @@ CTA pied de page accueil
 
 
 
-
+metadata sur les pages de blog
 
 
 Dans les articles de blog, ajouter des liens vers le simulateur

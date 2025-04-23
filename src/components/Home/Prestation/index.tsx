@@ -121,7 +121,7 @@ export default function ServicesGrid() {
                 {prestation.description}
               </p>
 
-              {/* Lien « + d’infos » */}
+              {/* Lien « + d'infos » */}
               <Link
                 href={
                   activeTab === "conciergerie"
@@ -145,7 +145,7 @@ export default function ServicesGrid() {
       hover:bg-primary/90
     "
               >
-                Plus d’infos
+                Plus d'infos
               </Link>
             </motion.div>
           ))}

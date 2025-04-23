@@ -12,20 +12,20 @@ import Link from "next/link";
 const stats = [
   { label: "Biens gérés", value: 120 },
   { label: "Voyageurs accueillis", value: 3500 },
-  { label: "Années d’expérience", value: 8 },
-  { label: "Taux d’occupation moyen", value: "85%" },
+  { label: "Années d'expérience", value: 8 },
+  { label: "Taux d'occupation moyen", value: "85%" },
 ];
 
 const About: FC = () => {
   return (
     <section
       id="about"
-      className="relative z-10 bg-[#f8f9ff] sm:p-[80px] p-[40px]"
+      className="relative z-10 bg-[#f8f9ff] p-[40px] sm:p-[80px]"
     >
       <div className="container">
         <div className="mx-[-16px] max-sm:grid max-sm:grid-cols-1 sm:flex sm:flex-wrap sm:justify-between ">
           {/* Col gauche : texte */}
-          <div className="flex max-lg:w-full flex-col justify-between text-center lg:text-left max-xl:mb-16 ">
+          <div className="flex flex-col justify-between text-center max-xl:mb-16 max-lg:w-full lg:text-left ">
             <div>
               <span className="mb-3 inline-block text-lg font-bold text-primary md:text-xl">
                 NOTRE PROMESSE

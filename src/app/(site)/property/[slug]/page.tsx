@@ -269,7 +269,7 @@ export default async function Page({
                   )}
                   {occupation && modeGestion === "Conciergerie" && (
                     <li className="flex justify-between">
-                      <span className="font-medium">Taux d’occupation</span>
+                      <span className="font-medium">Taux d'occupation</span>
                       <span>{occupation}%</span>
                     </li>
                   )}

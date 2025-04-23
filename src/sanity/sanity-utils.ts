@@ -25,6 +25,7 @@ import { integrations, messages } from "../../integrations.config";
 import { Property } from "@/types/property";
 import { FAQItem } from "@/components/FAQ";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { log } from "console";
 
 export async function sanityFetch<QueryResponse>({
   query,
@@ -86,7 +87,6 @@ export async function fetchProperties(): Promise<Property[]> {
   }
 }
 
-
 export async function getPropertyBySlug(slug: string): Promise<Property> {
   return await sanityFetch<Property>({
     query: propertyQueryBySlug,
@@ -116,13 +116,6 @@ export async function getPosts({
   const end = start + limit;
 
   try {
-    // console.log("Fetching posts with params:", {
-    //   page,
-    //   limit,
-    //   categories,
-    //   search,
-    // });
-
     let posts: Blog[] = [];
     let countResult: CountResult = { total: 0 };
 
@@ -132,7 +125,7 @@ export async function getPosts({
         qParams: {
           start,
           end,
-          categories,
+          categories, // Assurez-vous que ce sont des slugs valides
           search: `*${search}*`,
         },
         tags: ["post"],
@@ -152,7 +145,7 @@ export async function getPosts({
         qParams: {
           start,
           end,
-          categories,
+          categories, // Assurez-vous que ce sont des slugs valides
         },
         tags: ["post"],
       });
@@ -191,8 +184,6 @@ export async function getPosts({
         tags: ["post"],
       });
     }
-
-    // console.log(`Retrieved ${posts?.length || 0} posts`);
 
     const total = countResult?.total || 0;
 
@@ -242,7 +233,7 @@ export async function getCategories() {
   const categories = await sanityFetch<Category[]>({
     query: categoryQuery,
     qParams: {},
-    tags: ["category"],
+    tags: ["categories"],
   });
 
   return categories;

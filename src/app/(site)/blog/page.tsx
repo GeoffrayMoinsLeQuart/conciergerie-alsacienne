@@ -16,7 +16,7 @@ export default function BlogPage() {
         }
       >
         <BlogClient />
-      </Suspense>{" "}
+      </Suspense>
     </>
   );
 }

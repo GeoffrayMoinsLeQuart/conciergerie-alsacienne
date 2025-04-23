@@ -79,7 +79,7 @@ const propertyType = {
     },
     {
       name: "occupation",
-      title: "Taux d’occupation (%)",
+      title: "Taux d'occupation (%)",
       type: "number",
       hidden: ({ document }) => document?.modeGestion === "Gestion Locative",
     },
