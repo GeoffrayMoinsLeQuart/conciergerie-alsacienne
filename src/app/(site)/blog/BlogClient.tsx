@@ -12,7 +12,7 @@ export default function BlogClient() {
   const [posts, setPosts] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // L’état de tes filtres
+  // L'état de tes filtres
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -25,7 +25,7 @@ export default function BlogClient() {
     });
   }, []);
 
-  // 2️⃣ Calculer le comptage de chaque catégorie sur l’ensemble des posts
+  // 2️⃣ Calculer le comptage de chaque catégorie sur l'ensemble des posts
   const categoriesWithCount = useMemo(() => {
     const counts: Record<string, number> = {};
 
@@ -100,7 +100,7 @@ export default function BlogClient() {
   return (
     <section className="bg-white pb-20 pt-[40px]">
       <div className="container">
-        {/* 🛠️ On passe tout l’état + setters à BlogFilters */}
+        {/* 🛠️ On passe tout l'état + setters à BlogFilters */}
         <BlogFilters
           categoriesWithCount={availableCategories} // Categories mises à jour dynamiquement
           selectedCats={selectedCats}
@@ -125,7 +125,7 @@ export default function BlogClient() {
               Aucun article trouvé
             </h3>
             <p className="text-body-color">
-              Essayez d’ajuster vos filtres ou votre recherche.
+              Essayez d'ajuster vos filtres ou votre recherche.
             </p>
           </div>
         ) : (

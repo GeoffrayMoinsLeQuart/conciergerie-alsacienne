@@ -4,12 +4,13 @@ import Intro from "@/components/Intro";
 import SelectionEtAccompagnement from "@/components/Conciergerie/SelectionEtAccompagnement";
 import NotreExpertise from "@/components/Conciergerie/NotreExpertise";
 import NosPrestations from "@/components/Prestations";
-import ProcessusConciergerie from "@/components/Conciergerie/ProcessusConciergerie";
+import TimelineProcess from "@/components/Conciergerie/ProcessusConciergerie";
 import SectionTransparence from "@/components/Conciergerie/SectionTransparence";
-import SectionConfiance from "@/components/Conciergerie/SectionConfiance";
-import ConciergerieClient from "./ConciergerieClient";
+import FaqConciergerie from "./FaqConciergerie";
 import NosTransformations from "@/components/Conciergerie/NosTransformations";
 import CTAConciergerie from "@/components/Conciergerie/CTAConciergerie";
+import TemoignagesClients from "@/components/Conciergerie/TemoignagesClients";
+import SectionResultatsConciergerie from "@/components/Conciergerie/SectionResultatsConciergerie";
 
 const siteName: string = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
@@ -29,26 +30,16 @@ export default function ConciergeriePage() {
         une belle expérience aux voyageurs et optimiser vos revenus."
       />
 
-      {/* Critères de Sélection Section */}
       <SelectionEtAccompagnement />
-      <NosPrestations />
-      {/* Transformations Section */}
       <NosTransformations />
-      {/* Service de Décoration Section */}
-      <NotreExpertise />
-      {/* Nos Services Section */}
       <NosPrestations />
-      {/* Processus Section */}
-      <ProcessusConciergerie />
-      {/* Coûts Initiaux Section */}
+      <TimelineProcess />
+      <NotreExpertise />
       <SectionTransparence />
-      {/* Chiffres Clés & Avantages Section */}
-      <SectionConfiance />
-      {/* Tarification */}
+      <SectionResultatsConciergerie />
+      <TemoignagesClients />
       <Tarification />
-      {/* Section FAQ */}
-      <ConciergerieClient />
-      {/* CTA Section */}
+      <FaqConciergerie />
       <CTAConciergerie />
     </>
   );

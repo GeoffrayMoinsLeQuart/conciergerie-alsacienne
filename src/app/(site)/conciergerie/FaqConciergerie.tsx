@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { getFAQsByType } from "@/sanity/sanity-utils";
 import FAQ, { FAQItem } from "@/components/FAQ";
 
-export default function ConciergerieClient() {
+export default function FaqConciergerie() {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,8 +26,8 @@ export default function ConciergerieClient() {
   }, []);
 
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-8xl container mx-auto px-4">
+    <section className="bg-white py-16 max-w-8xl">
+      <div className="container mx-auto px-4">
         {isLoading ? (
           <div className="py-10 text-center">
             <p>Chargement des questions fréquentes...</p>

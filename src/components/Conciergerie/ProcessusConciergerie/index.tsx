@@ -1,55 +1,73 @@
 "use client";
 
 import { FC } from "react";
+import { motion } from "framer-motion";
 import SectionTitle from "@/components/Common/SectionTitle";
 
 const processSteps = [
   {
-    num: "1",
     title: "Évaluation préliminaire",
     description:
-      "Visite de votre bien, diagnostic selon nos critères de qualité, et recommandations personnalisées. Si des améliorations sont nécessaires, nous vous proposons notre service d'accompagnement.",
+      "Visite de votre bien, diagnostic selon nos critères de qualité, et recommandations personnalisées.",
   },
   {
-    num: "2",
     title: "Préparation du bien",
     description:
-      "État des lieux complet, création d'annonces attractives avec photos professionnelles, et mise en place de tous les éléments nécessaires. Si vous avez opté pour notre service de décoration, nous coordonnons l'ensemble des interventions.",
+      "Création d'annonces, photos pros, décoration si nécessaire, mise en service du logement.",
   },
   {
-    num: "3",
     title: "Gestion quotidienne",
     description:
-      "Gestion complète des réservations, accueil personnalisé des voyageurs, ménage professionnel entre chaque séjour, et résolution de toutes les problématiques qui pourraient survenir.",
+      "Réservations, accueil, ménage, maintenance – nous gérons tout pour vous.",
   },
   {
-    num: "4",
     title: "Suivi & Optimisation",
     description:
-      "Rapports détaillés sur l'activité de votre bien, optimisation continue des tarifs selon la saisonnalité et les événements locaux, et conseils pour améliorer constamment la performance de votre investissement.",
+      "Rapports réguliers, ajustement des prix, conseil stratégique pour booster vos revenus.",
   },
 ];
 
-const ProcessusConciergerie: FC = () => {
+const TimelineProcessEnhanced: FC = () => {
   return (
-    <section className="bg-[#f8f9ff] py-20" aria-label="Processus Conciergerie">
+    <section className="bg-white py-24">
       <div className="container">
         <SectionTitle
           mainTitle="PROCESSUS"
-          title="Un accompagnement fluide et sur-mesure"
-          paragraph="Notre méthodologie vous garantit une mise en location rapide, optimisée, et sans effort de votre part."
+          title="Un parcours clair, maîtrisé, et évolutif"
+          paragraph="Notre approche étape par étape vous garantit sérénité et performance, dès la mise en service."
           center
         />
 
-        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((step) => (
-            <div key={step.num} className="text-center">
-              <div className="mx-auto mb-4 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-primary font-bold text-white">
-                {step.num}
+        <div className="relative mt-16 flex flex-col gap-10 lg:flex-row lg:justify-between">
+          {processSteps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.3 }}
+              viewport={{ once: true }}
+              className="relative flex-1 text-center"
+            >
+              <div className="mb-6 flex justify-center">
+                <div className="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg">
+                  {i + 1}
+                </div>
               </div>
-              <h3 className="mb-2 text-lg font-bold text-black">{step.title}</h3>
-              <p className="text-base text-body-color">{step.description}</p>
-            </div>
+              <h3 className="mb-2 text-xl font-semibold text-black">
+                {step.title}
+              </h3>
+              <p className="mx-auto max-w-xs text-base text-body-color">
+                {step.description}
+              </p>
+
+              {/* Ligne de connexion (desktop only) */}
+              {i < processSteps.length - 1 && (
+                <>
+                  <div className="absolute right-[-50%] top-[35px] z-[-1] hidden h-1 w-full bg-primary lg:block"></div>
+                  <div className="absolute right-[-7px] top-[29px] hidden h-0 w-0 border-b-[6px] border-l-[10px] border-t-[6px] border-b-transparent border-l-primary border-t-transparent lg:block" />
+                </>
+              )}
+            </motion.div>
           ))}
         </div>
       </div>
@@ -57,4 +75,4 @@ const ProcessusConciergerie: FC = () => {
   );
 };
 
-export default ProcessusConciergerie;
+export default TimelineProcessEnhanced;

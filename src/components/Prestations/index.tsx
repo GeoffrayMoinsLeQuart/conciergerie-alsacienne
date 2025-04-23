@@ -24,7 +24,7 @@ const NosPrestations: FC = () => {
     : "Nous proposons une gamme complète de services pour assurer une gestion optimale de votre bien et une expérience exceptionnelle pour vos voyageurs.";
 
   return (
-    <section id="prestations" className="bg-white py-20">
+    <section id="prestations" className="bg-[#f8f9ff] py-20">
       <div className="container">
         <SectionTitle
           mainTitle="NOS PRESTATIONS"
