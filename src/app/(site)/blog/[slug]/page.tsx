@@ -100,7 +100,6 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
   const resolvedParams = await props.params;
   const { slug } = resolvedParams;
   const post: Blog = await getPostBySlug(slug);
-  console.log(post);
 
   if (!post) {
     notFound(); // Affiche 404 si l'article n'est pas trouvé

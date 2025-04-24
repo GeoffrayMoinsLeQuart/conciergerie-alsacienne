@@ -1,5 +1,6 @@
+import { Suspense } from "react";
 import HomeBlogSection from "@/components/Blog/HomeBlogSection";
-import Contact from "@/components/Contact";
+import ContactForm from "@/components/Contact";
 import About from "@/components/Home/About";
 import Hero from "@/components/Home/Hero";
 import Prestation from "@/components/Home/Prestation";
@@ -40,7 +41,11 @@ export default async function HomePage() {
       {properties && <Properties properties={properties} homePage />}
       <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
-      <Contact />
+
+      {/* Wrap the client ContactForm in Suspense so useSearchParams() is handled correctly */}
+      <Suspense fallback={<p>Chargement du formulaire…</p>}>
+        <ContactForm />
+      </Suspense>
     </>
   );
 }

@@ -1,4 +1,5 @@
-import Contact from "@/components/Contact";
+import { Suspense } from "react";
+import ContactForm from "@/components/Contact";
 import { Metadata } from "next";
 
 const siteName = process.env.SITE_NAME;
@@ -10,5 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <Contact />;
+  return (
+    <Suspense fallback={<p>Chargement du formulaire…</p>}>
+      <ContactForm />
+    </Suspense>
+  );
 }
