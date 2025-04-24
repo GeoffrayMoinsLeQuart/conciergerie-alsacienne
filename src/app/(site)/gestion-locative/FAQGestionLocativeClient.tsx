@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { getFAQsByType } from "@/sanity/sanity-utils";
 import FAQ, { FAQItem } from "@/components/FAQ";
 
-export default function GestionLocativeClient() {
+export default function FAQGestionLocativeClient() {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,11 +36,10 @@ export default function GestionLocativeClient() {
           <FAQ
             items={faqItems}
             defaultType="gestion-locative"
-            showTypeFilter={false}
-            showTopicFilter={true}
             mainTitle=""
-            specificPage={true}
             subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
+            showTopicFilter={true}
+            specificPage={true}
           />
         )}
       </div>

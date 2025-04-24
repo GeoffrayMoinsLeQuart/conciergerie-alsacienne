@@ -26,7 +26,7 @@ export default function FaqConciergerie() {
   }, []);
 
   return (
-    <section className="bg-white py-16 max-w-8xl">
+    <section className="max-w-8xl bg-white py-16">
       <div className="container mx-auto px-4">
         {isLoading ? (
           <div className="py-10 text-center">
@@ -36,7 +36,6 @@ export default function FaqConciergerie() {
           <FAQ
             items={faqItems}
             defaultType="conciergerie"
-            showTypeFilter={false}
             showTopicFilter={true}
             mainTitle=""
             specificPage={true}

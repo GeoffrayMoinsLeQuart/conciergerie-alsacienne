@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Graphic from "./Graphic";
 import SocialLinks from "./SocialLinks";
 import Link from "next/link";
+import { Phone } from "lucide-react";
+import CTAButtons from "@/components/Buttons/CTAButtons";
 // import SocialLinks from "./SocialLinks"; // Tu pourras le réactiver une fois prêt
 
 // Sécurise motion (évite un crash si undefined)
@@ -46,19 +48,14 @@ const About: FC = () => {
               </ul>
             </div>
 
-            <Link
-              href="tel:0033621471922"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button
-                type="button"
-                aria-label="contact-us-whatsapp"
-                className="text-md inline-block rounded-md bg-primary px-6 py-3 font-medium text-white transition hover:bg-primary/90"
-              >
-                📞 Discutons de votre projet
-              </button>
-            </Link>
+            <CTAButtons
+              primary={{
+                label: "Discutons de votre projet",
+                href: "tel:0033621471922",
+                icon: <Phone className="h-5 w-5" />,
+                colorClass: "bg-primary text-white hover:bg-primary/90",
+              }}
+            />
           </div>
 
           {/* Col droite : chiffres & identité */}

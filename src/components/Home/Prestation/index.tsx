@@ -83,6 +83,7 @@ export default function ServicesGrid() {
     flex
     h-full
     flex-col
+    justify-between
     overflow-hidden
     rounded-lg
     bg-white
@@ -100,52 +101,35 @@ export default function ServicesGrid() {
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              {/* Icône agrandie */}
-              <div className="relative mx-auto mb-6 h-28 w-28">
-                <Image
-                  src={prestation.icon}
-                  alt={`${prestation.title} icon`}
-                  fill
-                  className="object-contain"
-                  sizes="120px"
-                />
+              <div>
+                <div className="relative mx-auto mb-6 h-28 w-28">
+                  <Image
+                    src={prestation.icon}
+                    alt={`${prestation.title} icon`}
+                    fill
+                    className="object-contain"
+                    sizes="120px"
+                  />
+                </div>
+
+                <h3 className="mb-3 text-2xl font-semibold text-black">
+                  {prestation.title}
+                </h3>
+
+                <p className="mb-6 line-clamp-2 text-gray-700">
+                  {prestation.description}
+                </p>
               </div>
 
-              {/* Titre */}
-              <h3 className="mb-3 text-2xl font-semibold text-black">
-                {prestation.title}
-              </h3>
-
-              {/* Description courte (2 lignes max) */}
-              <p className="mb-6 line-clamp-2 text-gray-700">
-                {prestation.description}
-              </p>
-
-              {/* Lien « + d'infos » */}
               <Link
                 href={
                   activeTab === "conciergerie"
                     ? "/conciergerie#prestations"
                     : "/gestion-locative#prestations"
                 }
-                className="
-      mx-auto
-      mt-auto
-      inline-flex
-      w-auto
-      items-center
-      justify-center
-      rounded-md
-      bg-primary
-      px-6
-      py-2
-      font-medium
-      text-white
-      transition
-      hover:bg-primary/90
-    "
+                className="mt-auto text-primary underline underline-offset-4 transition hover:text-primary/80"
               >
-                Plus d'infos
+                En savoir plus
               </Link>
             </motion.div>
           ))}

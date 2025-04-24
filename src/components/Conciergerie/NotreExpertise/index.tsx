@@ -3,6 +3,8 @@
 import { FC } from "react";
 import Link from "next/link";
 import SectionTitle from "@/components/Common/SectionTitle";
+import CTAButtons from "@/components/Buttons/CTAButtons";
+import { Mail } from "lucide-react";
 
 interface ExpertiseLevel {
   name: string;
@@ -59,14 +61,20 @@ const NotreExpertise: FC = () => {
               className={`wow fadeInUp rounded-lg p-8 shadow-md ${niveau.bgClass}`}
               data-wow-delay={niveau.delay}
             >
-              <h3 className={`mb-4 text-2xl font-bold ${index === 0 ? "text-black" : "text-white"}`}>
+              <h3
+                className={`mb-4 text-2xl font-bold ${index === 0 ? "text-black" : "text-white"}`}
+              >
                 {niveau.name}
               </h3>
               <ul className="mb-6 space-y-4">
                 {niveau.items.map((item, idx) => (
                   <li key={idx} className="flex items-start">
                     <span className={`mr-2 ${niveau.textClass}`}>✓</span>
-                    <span className={`text-base font-medium ${niveau.textClass}`}>{item}</span>
+                    <span
+                      className={`text-base font-medium ${niveau.textClass}`}
+                    >
+                      {item}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -79,12 +87,15 @@ const NotreExpertise: FC = () => {
             Les tarifs de ces services sont déterminés sur devis après
             évaluation complète de votre bien et de vos objectifs.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7"
-          >
-            Demander un devis personnalisé
-          </Link>
+          <CTAButtons
+            primary={{
+              label: "Demander un devis personnalisé",
+              href: "/contact",
+              icon: <Mail className="h-5 w-5" />,
+              colorClass:
+                "inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7",
+            }}
+          />
         </div>
       </div>
     </section>

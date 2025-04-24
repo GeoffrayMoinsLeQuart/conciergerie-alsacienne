@@ -2,13 +2,14 @@
 import React from "react";
 import Intro from "@/components/Intro";
 import GarantiesLoyers from "@/components/GestionLocative/GarantieLoyerImpaye";
-import NotreProcessus from "@/components/GestionLocative/Processus";
-import FormulesSection from "@/components/GestionLocative/Formules";
 import TemoinagesSection from "@/components/GestionLocative/Testimonial";
-import GestionLocativeClient from "./GestionLocativeClient";
+import FAQGestionLocativeClient from "./FAQGestionLocativeClient";
 import { Metadata } from "next";
 import CTAGestionLocative from "@/components/GestionLocative/CTAGestionLocative";
-import NosPrestations from "@/components/Prestations";
+import BlocProcessusEtPrestations from "@/components/GestionLocative/BlocProcessusEtPrestations";
+import TabsProfilProprietaire from "@/components/GestionLocative/TabsProfilProprietaire";
+import FraisInitiauxCard from "@/components/GestionLocative/FraisInitiauxCard";
+import TarificationGestionLocative from "@/components/GestionLocative/TarificationGestion";
 
 const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
 
@@ -21,21 +22,22 @@ export const metadata: Metadata = {
 export default function GestionLocativePage() {
   return (
     <>
-      <Intro
-        title="Gestion locative longue durée en Alsace : sérénité et rentabilité garanties"
-        content="Confiez-nous la gestion de votre bien, meublé ou non. Chez Conciergerie Alsacienne, nous gérons votre location longue durée de A à Z : démarches administratives, suivi technique, relation avec les locataires. Studio, appartement ou maison, notre équipe s'occupe de tout pour vous garantir sérénité et rentabilité."
-      />
-      <NosPrestations />
+      <Intro variant="gestion" />
+
+      <BlocProcessusEtPrestations />
+
+      <TabsProfilProprietaire />
 
       <GarantiesLoyers />
-      <NotreProcessus />
-      <FormulesSection />
+
       <TemoinagesSection />
 
-      {/* Section FAQ */}
-      <GestionLocativeClient />
+      <FraisInitiauxCard />
 
-      {/* Call-to-Action */}
+      <TarificationGestionLocative />
+
+      <FAQGestionLocativeClient />
+
       <CTAGestionLocative />
     </>
   );

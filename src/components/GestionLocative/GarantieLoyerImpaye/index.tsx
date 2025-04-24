@@ -2,28 +2,59 @@
 
 import SectionTitle from "../../Common/SectionTitle";
 import { FC } from "react";
+import {
+  ShieldCheck,
+  Gavel,
+  AlertTriangle,
+  Home,
+  Slash,
+  Timer,
+  CheckCircle,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 const GarantiesLoyers: FC = () => {
   const garanties = [
     {
-      title: "Sans franchise ni délai de carence",
+      icon: ShieldCheck,
+      title: "Vos loyers versés quoi qu'il arrive",
       description:
-        "Notre garantie s'applique dès le premier jour d'impayé, sans période d'attente ni franchise, pour une protection immédiate et complète.",
+        "Même en cas d'impayé, nous vous versons 100 % de votre loyer (loyer + charges) à la date convenue chaque mois. Vos revenus locatifs restent ainsi stables et prévisibles, sans interruption*.",
     },
     {
-      title: "Protection juridique incluse",
+      icon: Timer,
+      title: "Aucune carence, aucune franchise",
       description:
-        "Tous les frais de contentieux, de procédure et d'expulsion sont pris en charge, vous évitant des démarches coûteuses et chronophages.",
+        "Notre garantie prend effet dès le premier jour de retard de paiement, sans délai d'attente. Vous n'avez aucune franchise à supporter – chaque euro de loyer impayé est couvert, dès le premier impayé.",
     },
     {
-      title: "Couverture des détériorations",
+      icon: Gavel,
+      title: "Tranquillité juridique incluse",
       description:
-        "Les dégradations causées par le locataire au-delà du dépôt de garantie sont couvertes, préservant ainsi la valeur de votre investissement.",
+        "Vous profitez d'une protection juridique complète : tous les frais de contentieux, d'huissier, d'expulsion et de justice sont pris en charge. Nous gérons tout pour vous, sans frais supplémentaires.",
+    },
+    {
+      icon: AlertTriangle,
+      title: "Dégradations du bien couvertes",
+      description:
+        "Les détériorations causées par le locataire sont indemnisées au-delà du dépôt de garantie. Les réparations sont prises en charge*, préservant ainsi la valeur de votre bien.",
+    },
+    {
+      icon: Slash,
+      title: "Protection contre le squat",
+      description:
+        "Les loyers perdus en cas d'occupation illégale sont couverts, et nous prenons en charge les frais de procédure pour évincer les squatteurs.",
+    },
+    {
+      icon: Home,
+      title: "Vacance locative (optionnelle)",
+      description:
+        "Entre deux locataires, nous pouvons compenser les loyers non perçus pour sécuriser votre trésorerie, même en période d'inoccupation.*",
     },
   ];
 
   return (
-    <section className="bg-primary bg-opacity-5 py-16">
+    <section className="bg-primary bg-opacity-5 py-20">
       <div className="container mx-auto px-4">
         <SectionTitle
           mainTitle="GARANTIE LOYERS IMPAYÉS"
@@ -32,43 +63,59 @@ const GarantiesLoyers: FC = () => {
           center
         />
 
-        <div className="mx-auto mt-12 max-w-4xl">
+        <div className="mx-auto mt-12 max-w-6xl">
           <div className="rounded-lg border-t-4 border-primary bg-white p-8 shadow-md">
-            <div className="mb-8 flex flex-col items-center md:flex-row">
-              <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-primary bg-opacity-10 md:mb-0 md:mr-8">
-                <svg
-                  className="h-12 w-12 text-primary"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
+            {/* Bloc central haut visible */}
+            <div className="mb-10 flex flex-col items-center justify-center gap-6 md:flex-row md:items-start">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary bg-opacity-10">
+                <CheckCircle className="h-10 w-10 text-primary" />
               </div>
-              <div>
+              <div className="text-center md:text-left">
                 <h3 className="mb-2 text-2xl font-bold text-gray-800">
                   Garantie à 100% de vos loyers
                 </h3>
-                <p className="text-gray-600">
-                  Même en cas d'impayés, vous recevez l'intégralité de vos loyers et charges à date fixe chaque mois, vous assurant des revenus stables et prévisibles.
+                <p className="max-w-2xl text-gray-600">
+                  Même en cas d'impayés, vous recevez l'intégralité de vos
+                  loyers et charges à date fixe chaque mois, vous assurant des
+                  revenus stables et prévisibles.
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {garanties.map((item) => (
-                <div key={item.title} className="rounded-lg bg-gray-50 p-6">
-                  <h4 className="mb-3 text-lg font-semibold text-gray-800">
-                    {item.title}
+            {/* Cartes garanties */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {garanties.map(({ title, description, icon: Icon }) => (
+                <motion.div
+                  key={title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="flex h-full flex-col rounded-lg bg-gray-50 p-6 shadow-sm transition duration-300 ease-in-out hover:shadow-md"
+                >
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-800">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10">
+                      <Icon className="h-7 w-7 text-primary" />
+                    </span>
+                    {title}
                   </h4>
-                  <p className="text-gray-600">{item.description}</p>
-                </div>
+                  <p className="flex-grow text-sm leading-relaxed text-gray-600">
+                    {description}
+                  </p>
+                </motion.div>
               ))}
             </div>
+
+            {/* Mentions */}
+            <p className="mt-10 text-sm text-gray-500">
+              *Conditions : Contrat assuré par GALIAN-SMABTP. Plafonds
+              d'indemnisation : 100 000 € pour les loyers impayés et frais de
+              procédure, 10 000 € pour les dégradations immobilières.
+              Détérioration : vétusté déduite, dépôt de garantie déduit. Option
+              vacance locative sous réserve de souscription spécifique. Garantie
+              valable pour les locations de résidence principale, sous réserve
+              de l'acceptation du dossier du locataire.
+            </p>
           </div>
         </div>
       </div>

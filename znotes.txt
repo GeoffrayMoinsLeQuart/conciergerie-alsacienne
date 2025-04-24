@@ -98,3 +98,22 @@ Trouver les bons prompts pour lui demander de me faire atteindre les 10K euros d
 
 PArtie avant apres sur la conciergerie
 
+
+
+Un badge “Réponse en 24h garantie” ou “Conseiller dédié” près du bouton en bas de la page conciergerie
+
+Ou même brancher un suivi des clics pour voir quel profil attire le plus…
+
+
+
+🟣 Option B : CTA sticky mobile en bas de page 
+Discret mais toujours visible lors du scroll.
+
+Affiché uniquement en mobile.
+
+Design cohérent avec le reste du site.
+
+Je peux te le coder si tu veux cette version aussi.
+
+
+Mettre en place avec n8n recherche de question frequente pour chaque domaine et creation de question dans faq ou creation d'articles

@@ -6,6 +6,8 @@ import SectionTitle from "../Common/SectionTitle";
 import { Property } from "@/types/property";
 import Link from "next/link";
 import PropertyCard from "./PropertyCard";
+import CTAButtons from "../Buttons/CTAButtons";
+import { Home } from "lucide-react";
 
 const propertyTags = [
   { label: "Tous", value: "All", icon: "✨" },
@@ -28,7 +30,7 @@ export default function Properties({
     if (activeTag === "All") return properties;
     return properties.filter((p) => p.modeGestion === activeTag);
   })();
-  
+
   const displayedItems = homePage ? filteredItems.slice(0, 3) : filteredItems;
 
   return (
@@ -45,16 +47,17 @@ export default function Properties({
           </div>
 
           <div className="w-full px-4">
-            <div className="portfolio-buttons mb-12 flex flex-wrap items-center justify-center">
+            <div className="portfolio-buttons mb-12 flex flex-wrap items-center justify-center gap-3">
               {propertyTags.map((tag) => (
                 <button
                   key={tag.value}
                   onClick={() => setActiveTag(tag.value)}
-                  className={`${
-                    activeTag === tag.value
-                      ? "bg-primary text-white"
-                      : "text-body-color hover:bg-primary/10 hover:text-primary"
-                  } mx-2 mb-2 flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold capitalize transition`}
+                  className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold capitalize transition
+          ${
+            activeTag === tag.value
+              ? "bg-primary text-white shadow-md"
+              : "border border-gray-300 bg-white text-gray-700 hover:text-primary"
+          }`}
                 >
                   <span>{tag.icon}</span>
                   {tag.label}
@@ -82,12 +85,14 @@ export default function Properties({
 
             {homePage && (
               <div className="mt-10 text-center">
-                <Link
-                  href="/nos-biens"
-                  className="inline-block rounded bg-primary px-6 py-3 font-medium text-white transition hover:bg-primary/90"
-                >
-                  Voir tous nos biens
-                </Link>
+                <CTAButtons
+                  primary={{
+                    label: "Voir tous nos biens",
+                    href: "/nos-biens",
+                    icon: <Home className="h-5 w-5" />,
+                    colorClass: "bg-primary text-white hover:bg-primary/90",
+                  }}
+                />
               </div>
             )}
           </div>

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Calculator, Mail } from "lucide-react";
+import CTAButtons from "@/components/Buttons/CTAButtons";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-cover bg-center bg-no-repeat mb-24">
+    <section className="relative mb-24 overflow-hidden bg-cover bg-center bg-no-repeat">
       <div className="bg-white/90">
         <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
           {/* Responsive Image */}
@@ -49,18 +51,18 @@ export default function Hero() {
             </p>
 
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-center">
-              <Link
-                href="/simulateur"
-                className="rounded-md bg-primary px-6 py-3 font-medium text-white"
-              >
-                Estimer mes revenus
-              </Link>
-              <Link
-                href="/contact"
-                className="rounded-md bg-black px-6 py-3 font-medium text-white"
-              >
-                Nous contacter
-              </Link>
+              <CTAButtons
+                primary={{
+                  label: "Estimer mes revenus",
+                  href: "/simulateur",
+                  icon: <Calculator className="h-5 w-5" />,
+                }}
+                secondary={{
+                  label: "Nous contacter",
+                  href: "/contact",
+                  icon: <Mail className="h-5 w-5" />,
+                }}
+              />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { Check, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import CTAButtons from "@/components/Buttons/CTAButtons";
 
@@ -88,7 +88,10 @@ const Tarification: FC = () => {
 
               <ul className="mb-6 space-y-3">
                 {plan.features.map((feature, idx) => (
-                  <li key={idx} className={`flex items-start gap-2 ${plan.text}`}>
+                  <li
+                    key={idx}
+                    className={`flex items-start gap-2 ${plan.text}`}
+                  >
                     <Check size={18} className="mt-1 shrink-0 text-green-500" />
                     <span className="text-base leading-tight">{feature}</span>
                   </li>
@@ -112,10 +115,10 @@ const Tarification: FC = () => {
         <div className="mt-14 text-center">
           <CTAButtons
             primary={{
-              text: "📩 Demander un devis",
+              label: "Demander un devis",
               href: "/contact",
-              colorClass:
-                "inline-block rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-opacity-90",
+              icon: <Mail className="h-5 w-5" />,
+              colorClass: "bg-primary text-white hover:bg-opacity-90",
             }}
           />
         </div>

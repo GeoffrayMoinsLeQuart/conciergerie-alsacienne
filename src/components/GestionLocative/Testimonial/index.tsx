@@ -1,7 +1,10 @@
+// Témoignages améliorés avec animation et harmonisation visuelle
+
 "use client";
 
 import { FC } from "react";
 import SectionTitle from "@/components/Common/SectionTitle";
+import { motion } from "framer-motion";
 
 interface Testimonial {
   name: string;
@@ -29,7 +32,7 @@ const testimonials: Testimonial[] = [
 
 const TemoinagesSection: FC = () => {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-10 md:py-16">
       <div className="container mx-auto px-4">
         <SectionTitle
           mainTitle="TÉMOIGNAGES"
@@ -39,17 +42,28 @@ const TemoinagesSection: FC = () => {
         />
 
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-          {testimonials.map(({ name, subtitle, text }) => (
-            <article key={name} className="rounded-lg bg-gray-50 p-6 shadow-sm">
+          {testimonials.map(({ name, subtitle, text }, idx) => (
+            <motion.article
+              key={name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="rounded-lg bg-gray-50 p-6 shadow-sm transition duration-300 hover:shadow-md"
+            >
               <div className="mb-4 flex items-center">
-                <div className="mr-4 h-12 w-12 rounded-full bg-gray-300" />
+                <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">
+                  {name.charAt(0)}
+                </div>
                 <div>
                   <h4 className="font-semibold text-gray-800">{name}</h4>
                   <p className="text-sm text-gray-600">{subtitle}</p>
                 </div>
               </div>
-              <p className="italic text-gray-600">"{text}"</p>
-            </article>
+              <p className="italic text-gray-600">
+                "<span className="font-medium text-gray-700">{text}</span>"
+              </p>
+            </motion.article>
           ))}
         </div>
       </div>

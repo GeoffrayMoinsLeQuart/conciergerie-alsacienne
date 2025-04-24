@@ -13,6 +13,8 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import CTAButtons from "../Buttons/CTAButtons";
+import { BookOpen } from "lucide-react";
 
 export default function HomeBlogSection() {
   const [posts, setPosts] = useState<Blog[]>([]);
@@ -27,10 +29,7 @@ export default function HomeBlogSection() {
   }, []);
 
   return (
-    <section
-      id="news"
-      className="bg-[#f8f9ff] py-20 lg:pt-[120px]"
-    >
+    <section id="news" className="bg-[#f8f9ff] py-20 lg:pt-[120px]">
       <div className="container flex flex-col">
         {/* En-tête */}
         <div className="mx-[-16px] flex flex-wrap">
@@ -51,16 +50,12 @@ export default function HomeBlogSection() {
         </div>
 
         {/* Carousel mobile */}
-        <div className="relative block lg:hidden mb-10">
+        <div className="relative mb-10 block lg:hidden">
           {/* Flèches customisées */}
-          <div
-            className="swiper-button-prev-custom absolute -left-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90 cursor-pointer"
-          >
+          <div className="swiper-button-prev-custom absolute -left-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90">
             ←
           </div>
-          <div
-            className="swiper-button-next-custom absolute -right-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90 cursor-pointer"
-          >
+          <div className="swiper-button-next-custom absolute -right-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90">
             →
           </div>
 
@@ -84,7 +79,7 @@ export default function HomeBlogSection() {
         </div>
 
         {/* Masonry desktop */}
-        <div className="hidden lg:block flex-1">
+        <div className="hidden flex-1 lg:block">
           <Masonry
             breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
             className="-mx-4 flex w-auto"
@@ -98,12 +93,14 @@ export default function HomeBlogSection() {
 
         {/* CTA toujours centré en bas */}
         <div className="mt-12 text-center">
-          <Link
-            href="/blog"
-            className="inline-block rounded bg-primary px-6 py-3 text-white transition hover:bg-primary/90"
-          >
-            Voir tous les articles
-          </Link>
+          <CTAButtons
+            primary={{
+              label: "Voir tous les articles",
+              href: "/blog",
+              icon: <BookOpen className="h-5 w-5" />,
+              colorClass: "bg-primary text-white hover:bg-primary/90",
+            }}
+          />
         </div>
       </div>
     </section>
