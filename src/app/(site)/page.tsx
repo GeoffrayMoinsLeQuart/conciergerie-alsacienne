@@ -8,8 +8,19 @@ import Properties from "@/components/Property";
 import { Metadata } from "next";
 import { integrations } from "../../../integrations.config";
 import { fetchProperties } from "@/sanity/sanity-utils";
+import SeoSchemaInjector from "@/components/SEO/SeoSchemaInjector";
 
-const siteName = process.env.SITE_NAME || "Conciergerie Alsacienne";
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Conciergerie Alsacienne",
+  url: "https://www.conciergerie-alsacienne.fr",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://www.conciergerie-alsacienne.fr/faq?q={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
 
 export const metadata: Metadata = {
   title: "Conciergerie Alsacienne | Gestion locative premium en Alsace",
@@ -22,6 +33,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <SeoSchemaInjector schema={homeSchema} />
       <Hero />
       <About />
       <Prestation />

@@ -121,3 +121,9 @@ Mettre en place avec n8n recherche de question frequente pour chaque domaine et 
 
 
 Changer image d'accueil et image de gestion locative
+
+
+Peut etre intégrer page : nos renovations pour location
+
+Maillage interne : Crée des liens internes entre les pages pour améliorer la navigation et la distribution du PageRank.
+

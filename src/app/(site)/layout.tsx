@@ -8,6 +8,7 @@ import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import AuthProvider from "../context/AuthContext";
 import ToasterContext from "../context/ToastContext";
+import SeoSchemaInjector from "@/components/SEO/SeoSchemaInjector";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body className={inter.className}>
         <NextTopLoader
           color="#006BFF"
@@ -32,6 +33,7 @@ export default function RootLayout({
           defaultTheme="light"
         >
           <AuthProvider>
+            <SeoSchemaInjector />
             <ToasterContext />
             <Navbar />
             {children}

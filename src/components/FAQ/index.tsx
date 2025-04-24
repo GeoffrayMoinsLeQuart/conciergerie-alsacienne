@@ -95,7 +95,9 @@ const FAQ: React.FC<FAQProps> = ({
       <div className="container mx-auto max-w-6xl px-4">
         <div className={`${center ? "text-center" : "text-left"} mb-10`}>
           {mainTitle && (
-            <h1 className="mb-4 text-4xl font-bold text-gray-800">{mainTitle}</h1>
+            <h1 className="mb-4 text-4xl font-bold text-gray-800">
+              {mainTitle}
+            </h1>
           )}
           {title && (
             <h2 className="mb-4 text-3xl font-bold text-primary">{title}</h2>
@@ -111,6 +113,7 @@ const FAQ: React.FC<FAQProps> = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Rechercher une question..."
+            aria-label="Rechercher une question dans la FAQ"
             className="w-full rounded-md border border-gray-300 p-3 pl-10 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
@@ -145,6 +148,7 @@ const FAQ: React.FC<FAQProps> = ({
             </button>
             {uniqueTopics.map((topic, index) => (
               <button
+                aria-pressed={selectedTopic === topic}
                 key={topic || `topic-${index}`}
                 onClick={() => setSelectedTopic(topic)}
                 className={`rounded-md px-3 py-2 text-sm transition ${
@@ -169,7 +173,9 @@ const FAQ: React.FC<FAQProps> = ({
         )}
 
         <div className="mb-4 text-sm text-gray-500">
-          {filteredFaqs.length} {filteredFaqs.length === 1 ? "résultat" : "résultats"} trouvé{filteredFaqs.length === 1 ? "" : "s"}
+          {filteredFaqs.length}{" "}
+          {filteredFaqs.length === 1 ? "résultat" : "résultats"} trouvé
+          {filteredFaqs.length === 1 ? "" : "s"}
         </div>
 
         <div className="mx-auto max-w-3xl space-y-4">
@@ -185,6 +191,8 @@ const FAQ: React.FC<FAQProps> = ({
               >
                 <button
                   onClick={() => toggleFAQ(index)}
+                  aria-expanded={openIndex === index}
+                  aria-controls={`faq-answer-${index}`}
                   className="flex w-full items-center justify-between p-5 text-left"
                 >
                   <h3 className="text-lg font-medium text-gray-800">
@@ -201,12 +209,16 @@ const FAQ: React.FC<FAQProps> = ({
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       className="border-t border-gray-100 bg-white px-5 py-4"
+                      role="region"
+                      aria-labelledby={`faq-question-${index}`}
+                      id={`faq-answer-${index}`}
                     >
                       <p className="text-gray-600">{item.answer}</p>
                       <div className="mt-3 flex flex-wrap gap-2">
                         {item.topic && (
                           <span className="inline-flex items-center rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700">
-                            {categoryIcons[item.topic] || "📌"} {categoryLabels[item.topic] || item.topic}
+                            {categoryIcons[item.topic] || "📌"}{" "}
+                            {categoryLabels[item.topic] || item.topic}
                           </span>
                         )}
                       </div>
