@@ -15,6 +15,7 @@ import {
 import { motion } from "framer-motion";
 import { Dialog } from "@headlessui/react";
 import CTAButtons from "@/components/Buttons/CTAButtons";
+import { Activity, FormuleGestionLocative } from "@/types/form";
 
 interface Plan {
   name: string;
@@ -62,7 +63,7 @@ const TarificationGestionLocative: FC = () => {
       iconButton: <UserCheck className="h-5 w-5" />,
       button: {
         text: "Je choisis la simplicité",
-        href: "/contact?service=gestionlocative&formule=essentielle",
+        href: `/contact?service=${Activity.GestionLocative}&formule=${FormuleGestionLocative.Essentielle}`,
         style: "bg-primary text-white hover:bg-opacity-90",
       },
     },
@@ -87,7 +88,7 @@ const TarificationGestionLocative: FC = () => {
       iconButton: <ShieldCheck className="h-5 w-5" />,
       button: {
         text: "Je choisis la tranquillité",
-        href: "/contact?service=gestionlocative&formule=serenite",
+        href: `/contact?service=${Activity.GestionLocative}&formule=${FormuleGestionLocative.Serenite}`,
         style: "bg-primary text-white hover:bg-opacity-90",
       },
     },
@@ -111,7 +112,7 @@ const TarificationGestionLocative: FC = () => {
       iconButton: <Sparkles className="h-5 w-5" />,
       button: {
         text: "Je choisis l'excellence",
-        href: "/contact?service=gestionlocative&formule=premium",
+        href: `/contact?service=${Activity.GestionLocative}&formule=${FormuleGestionLocative.Premium}`,
         style: "bg-primary text-white hover:bg-opacity-90",
       },
     },

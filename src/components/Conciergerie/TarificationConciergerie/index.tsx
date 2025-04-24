@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import CTAButtons from "@/components/Buttons/CTAButtons";
+import { Activity, FormuleConciergerie } from "@/types/form";
 
 const plans = [
   {
@@ -21,6 +22,7 @@ const plans = [
     color: "bg-white",
     text: "text-gray-900",
     badge: null,
+    href: `/contact?service=${Activity.Conciergerie}&formule=${FormuleConciergerie.Standard}`,
   },
   {
     name: "Formule Premium",
@@ -34,6 +36,7 @@ const plans = [
     color: "bg-gradient-to-br from-blue-500 to-indigo-600",
     text: "text-white",
     badge: "Recommandée",
+    href: `/contact?service=${Activity.Conciergerie}&formule=${FormuleConciergerie.Premium}`,
   },
   {
     name: "Formule Exclusive",
@@ -46,6 +49,7 @@ const plans = [
     color: "bg-white",
     text: "text-gray-900",
     badge: null,
+    href: `/contact?service=${Activity.Conciergerie}&formule=${FormuleConciergerie.Exclusive}`,
   },
 ];
 
@@ -99,7 +103,7 @@ const Tarification: FC = () => {
               </ul>
 
               <Link
-                href="/contact"
+                href={plan.href}
                 className={`mt-auto inline-block w-full rounded-lg px-6 py-3 text-center text-sm font-semibold transition ${
                   plan.recommended
                     ? "bg-white text-primary hover:bg-white/80"
