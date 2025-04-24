@@ -117,3 +117,7 @@ Je peux te le coder si tu veux cette version aussi.
 
 
 Mettre en place avec n8n recherche de question frequente pour chaque domaine et creation de question dans faq ou creation d'articles
+
+
+
+Changer image d'accueil et image de gestion locative

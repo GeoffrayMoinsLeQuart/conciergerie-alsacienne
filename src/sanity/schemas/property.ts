@@ -36,6 +36,12 @@ const propertyType = {
       },
     },
     {
+      name: "createdAt",
+      title: "created at",
+      type: "datetime",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       type: "array",
       name: "galleryImage",
       title: "Gallery Image",

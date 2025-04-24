@@ -37,11 +37,8 @@ export default function SinglePricing({ price }: any) {
           $
           {(price.unit_amount / 100).toLocaleString("en-US", {
             currency: "USD",
-          })}{" "}
-          <span className="text-base font-medium text-body-color">
-            {" "}
-            / year{" "}
-          </span>
+          })}
+          <span className="text-base font-medium text-body-color">/ year</span>
         </h2>
         <p className="mb-8 border-b border-[#F2F2F2] pb-8 text-base text-body-color">
           Perfect for using in a personal website or a client project.

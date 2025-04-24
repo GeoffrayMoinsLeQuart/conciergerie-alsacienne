@@ -9,7 +9,7 @@ const integrations = {
 const messages = {
   sanity: (
     <div style={{ whiteSpace: "pre-wrap" }}>
-      Sanity is not enabled. Follow the{" "}
+      Sanity is not enabled. Follow the
       <a
         href="https://nextjstemplates.com/docs/enableintegration"
         className="text-primary underline"
@@ -17,13 +17,13 @@ const messages = {
         rel="noopener noreferrer"
       >
         documentation
-      </a>{" "}
+      </a>
       to enable it.
     </div>
   ),
   stripe: (
     <div style={{ whiteSpace: "pre-wrap" }}>
-      Stripe is not enabled. Follow the{" "}
+      Stripe is not enabled. Follow the
       <a
         href="https://nextjstemplates.com/docs/enableintegration"
         className="text-primary underline"
@@ -31,19 +31,19 @@ const messages = {
         rel="noopener noreferrer"
       >
         documentation
-      </a>{" "}
+      </a>
       to enable it.
     </div>
   ),
   algolia: (
     <div style={{ whiteSpace: "pre-wrap" }}>
-      Algolia is not enabled. Follow the{" "}
+      Algolia is not enabled. Follow the
       <a
         href="https://nextjstemplates.com/docs/enableintegration"
         className="text-primary underline"
       >
         documentation
-      </a>{" "}
+      </a>
       to enable it.
     </div>
   ),
@@ -55,19 +55,19 @@ const messages = {
         className="text-primary underline"
       >
         documentation
-      </a>{" "}
+      </a>
       to enable it.
     </div>
   ),
   auth: (
     <div style={{ whiteSpace: "pre-wrap" }}>
-      Auth is not enabled. Follow the{" "}
+      Auth is not enabled. Follow the
       <a
         href="https://nextjstemplates.com/docs/enableintegration"
         className="text-primary underline"
       >
         documentation
-      </a>{" "}
+      </a>
       to enable it.
     </div>
   ),

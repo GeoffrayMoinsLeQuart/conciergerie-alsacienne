@@ -38,12 +38,12 @@ export default function DocsPage() {
                   purposes and is not intended for any official use.
                 </p>
                 <p>
-                  Please visit:{" "}
+                  Please visit:
                   <b>
                     <a href="https://nextjstemplates.com/docs">
                       nextjstemplates.com/docs
                     </a>
-                  </b>{" "}
+                  </b>
                   to check out the real docs, setup guide and even video
                   instructions
                 </p>

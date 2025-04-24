@@ -9,7 +9,8 @@ export const postQuery = groq`
     slug,
     publishedAt,
     mainImage,
-    categories
+    categories, 
+    createdAt
   }
 `;
 

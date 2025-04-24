@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 const portfolioDetails = (
   <div>
     <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
-      Niché au <strong>10ᵉ étage</strong>, cet appartement offre une{" "}
+      Niché au <strong>10ᵉ étage</strong>, cet appartement offre une
       <strong>vue panoramique</strong> et un cadre de vie exceptionnel pour
       séduire une clientèle premium. Un bien pensé pour maximiser lexpérience
       client et la rentabilité.
@@ -82,7 +82,7 @@ const portfolioDetails = (
       </li>
       <li className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
         <span className="text-body-color">
-          📊 <strong>Rentabilité projetée</strong> : revenus estimés entre{" "}
+          📊 <strong>Rentabilité projetée</strong> : revenus estimés entre
           <strong>XXX€ et XXX€/mois</strong>.
         </span>
       </li>

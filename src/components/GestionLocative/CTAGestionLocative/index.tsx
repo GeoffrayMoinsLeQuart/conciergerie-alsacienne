@@ -37,13 +37,13 @@ const CTAGestionLocative: FC = () => {
           }}
         />
         <p className="mt-8 text-sm text-gray-600">
-          Ou appelez-nous directement au{" "}
+          Ou appelez-nous directement au
           <a
             href="tel:0033621471922"
             className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
           >
             06 21 47 19 22
-          </a>{" "}
+          </a>
           pour discuter de votre projet.
         </p>
       </div>

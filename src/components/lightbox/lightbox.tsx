@@ -138,8 +138,7 @@ export function DisplayTotal({ totalItems, disabledTotal }: DisplayTotalProps) {
         justifyContent: "center",
       }}
     >
-      <strong className="text-base "> {currentIndex + 1} </strong> /{" "}
-      {totalItems}
+      <strong className="text-base "> {currentIndex + 1} </strong> /{totalItems}
     </span>
   );
 }

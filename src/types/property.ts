@@ -26,4 +26,5 @@ export interface Property {
     lat: number;
     lng: number;
   };
+  createdAt: Date
 }

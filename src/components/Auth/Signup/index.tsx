@@ -135,7 +135,6 @@ export default function Signup() {
                       </svg>
                     </span>
                     <span className="hidden md:inline-flex">
-                      {" "}
                       Sign up with Google
                     </span>
                   </button>
@@ -337,7 +336,7 @@ export default function Signup() {
                         </div>
                         <div className="mb-4">
                           <p className="text-body-color">
-                            Have an account?{" "}
+                            Have an account?
                             <Link
                               href="/auth/signin"
                               className="text-primary hover:underline"

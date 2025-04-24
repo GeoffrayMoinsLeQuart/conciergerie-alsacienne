@@ -31,7 +31,7 @@ const SectionTransparence: FC = () => {
                 <li className="flex items-start">
                   <span className="mr-2 text-primary">•</span>
                   <span className="text-base font-medium text-body-color">
-                    <strong>Création d'annonces</strong> et{" "}
+                    <strong>Création d'annonces</strong> et
                     <strong>photos professionnelles</strong>
                   </span>
                 </li>
@@ -53,13 +53,15 @@ const SectionTransparence: FC = () => {
                 <li className="flex items-start">
                   <span className="mr-2 text-primary">•</span>
                   <span className="text-base font-medium text-body-color">
-                    <strong>Décoration niveau Standard</strong> (sur devis personnalisé)
+                    <strong>Décoration niveau Standard</strong> (sur devis
+                    personnalisé)
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="mr-2 text-primary">•</span>
                   <span className="text-base font-medium text-body-color">
-                    <strong>Décoration niveau Luxe</strong> (sur devis personnalisé)
+                    <strong>Décoration niveau Luxe</strong> (sur devis
+                    personnalisé)
                   </span>
                 </li>
               </ul>
@@ -67,8 +69,9 @@ const SectionTransparence: FC = () => {
           </div>
 
           <p className="mt-6 text-center text-sm italic text-body-color">
-            Ces montants sont indicatifs et peuvent varier selon les spécificités de votre bien.
-            Une évaluation personnalisée vous sera proposée lors de notre première rencontre.
+            Ces montants sont indicatifs et peuvent varier selon les
+            spécificités de votre bien. Une évaluation personnalisée vous sera
+            proposée lors de notre première rencontre.
           </p>
         </div>
       </div>
