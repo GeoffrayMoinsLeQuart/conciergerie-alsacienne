@@ -130,3 +130,7 @@ Maillage interne : Crée des liens internes entre les pages pour améliorer la n
 Toutes les failles de securité
 
 Changeers adresse de nos-biens pour tout le sites
+
+
+
+Faire un loader general

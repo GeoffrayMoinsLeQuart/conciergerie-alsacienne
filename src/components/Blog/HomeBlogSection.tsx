@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { getPosts } from '@/sanity/sanity-utils';
 import { Blog } from '@/types/blog';
 import SingleBlog from './SingleBlog';
-import Link from 'next/link';
 import Masonry from 'react-masonry-css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -63,16 +62,18 @@ export default function HomeBlogSection() {
                 Nos derniers conseils et actualités
               </h2>
               <p className="text-lg font-medium text-body-color">
-                Optimisation, réglementation, bonnes pratiques : tout pour booster vos revenus locatifs.
+                Optimisation, réglementation, bonnes pratiques : tout pour booster vos revenus
+                locatifs.
               </p>
             </div>
           </div>
         </header>
 
         {/* Carousel mobile */}
-        <div className="relative mb-10 block lg:hidden"
-             aria-roledescription="carousel"
-             aria-label="Articles récents du blog"
+        <div
+          className="relative mb-10 block lg:hidden"
+          aria-roledescription="carousel"
+          aria-label="Articles récents du blog"
         >
           {/* Flèches customisées */}
           <div className="swiper-button-prev-custom absolute -left-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90">
@@ -120,7 +121,7 @@ export default function HomeBlogSection() {
             primary={{
               label: 'Voir tous les articles',
               href: '/blog',
-              icon: <BookOpen className="h-5 w-5" />, 
+              icon: <BookOpen className="h-5 w-5" />,
               colorClass: 'bg-primary text-white hover:bg-primary/90',
             }}
           />

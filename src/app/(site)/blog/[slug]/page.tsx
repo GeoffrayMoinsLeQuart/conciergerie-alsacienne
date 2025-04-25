@@ -126,9 +126,11 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
                     <Image
                       src={mainImageUrl}
                       alt={post.title || "Image de l'article"}
-                      width={1200} // Ajuste la largeur de l'image
-                      height={600} // Ajuste la hauteur de l'image
-                      className="w-full h-auto object-cover" // L'image occupe toute la largeur, avec hauteur automatique
+                      width={1200}
+                      height={600}
+                      className="w-full h-auto object-cover"
+                      priority
+                      fetchPriority="high"
                     />
                   </div>
                 ) : (

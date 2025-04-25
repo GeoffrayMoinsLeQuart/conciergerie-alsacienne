@@ -1,5 +1,5 @@
 import ImageUrlBuilder from '@sanity/image-url';
-import { createClient, type QueryParams } from 'next-sanity';
+import { createClient } from 'next-sanity';
 import clientConfig from './config/client-config';
 import {
   postQuery,
@@ -21,11 +21,10 @@ import {
   propertyQueryBySlug,
 } from './sanity-query';
 import { Blog, Category } from '@/types/blog';
-import { integrations, messages } from '../../integrations.config';
+import { integrations } from '../../integrations.config';
 import { Property } from '@/types/property';
 import { FAQItem } from '@/components/FAQ';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import { log } from 'console';
 
 export async function sanityFetch<QueryResponse>({
   query,
