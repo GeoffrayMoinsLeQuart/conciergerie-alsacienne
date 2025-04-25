@@ -1,3 +1,4 @@
+// src/components/Properties.tsx
 'use client';
 
 import { useState } from 'react';
@@ -85,11 +86,7 @@ export default function Properties({
                 </Masonry>
               </ResponsiveMasonry>
             ) : (
-              <p
-                className="text-center text-gray-500"
-                role="status"
-                aria-live="polite"
-              >
+              <p className="text-center text-gray-500" role="status" aria-live="polite">
                 Aucun bien trouvé pour ce filtre.
               </p>
             )}

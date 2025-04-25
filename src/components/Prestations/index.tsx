@@ -1,3 +1,4 @@
+// src/components/NosPrestations.tsx
 'use client';
 
 import { FC } from 'react';
@@ -8,7 +9,6 @@ import Prestations from '@/components/Prestations/Prestations';
 
 const NosPrestations: FC = () => {
   const pathname = usePathname() || '';
-
   const isGestion = pathname.includes('gestion-locative');
   const prestations = isGestion ? prestationGestionLocative : prestationConciergerie;
 
@@ -26,7 +26,7 @@ const NosPrestations: FC = () => {
       className="bg-[#f8f9ff] py-20"
       aria-labelledby="nos-prestations-title"
     >
-      <div className="container">
+      <div className="container mx-auto">
         <header className="mb-12 text-center">
           <SectionTitle
             id="nos-prestations-title"
@@ -37,9 +37,8 @@ const NosPrestations: FC = () => {
           />
         </header>
 
-        <div role="list" aria-label="Liste des prestations proposées">
-          <Prestations prestations={prestations} />
-        </div>
+        {/* Semantic list for accessibility/mobile */}
+        <Prestations prestations={prestations} />
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+// src/components/Hero.tsx
 'use client';
 
 import { Calculator, Mail } from 'lucide-react';
@@ -13,35 +14,52 @@ export default function Hero() {
     >
       <div className="bg-white/90">
         <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
-          {/* ✅ Images responsive avec priorité et optimisation */}
+          {/* Images responsive avec ratio correct */}
           <div className="w-full">
-            <Image
-              src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-desktop_nddksd.webp"
-              alt="Location meublée premium en Alsace"
-              width={1200}
-              height={500}
-              className="mx-auto hidden rounded-lg md:block"
-              priority
-            />
-            <Image
-              src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
-              alt="Location meublée premium en Alsace"
-              width={800}
-              height={400}
-              className="mx-auto hidden rounded-lg sm:block md:hidden"
-              priority
-            />
-            <Image
-              src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
-              alt="Location meublée premium en Alsace"
-              width={400}
-              height={300}
-              className="mx-auto rounded-lg sm:hidden"
-              priority
-            />
+            {/* Desktop */}
+            <div
+              className="relative hidden rounded-lg md:block w-full"
+              style={{ aspectRatio: '12 / 5' }}
+            >
+              <Image
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-desktop_nddksd.webp"
+                alt="Location meublée premium en Alsace"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+
+            {/* Tablet */}
+            <div
+              className="relative mx-auto hidden rounded-lg sm:block md:hidden w-full"
+              style={{ aspectRatio: '2 / 1' }}
+            >
+              <Image
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
+                alt="Location meublée premium en Alsace"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+
+            {/* Mobile */}
+            <div
+              className="relative mx-auto rounded-lg sm:hidden w-full"
+              style={{ aspectRatio: '4 / 3' }}
+            >
+              <Image
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
+                alt="Location meublée premium en Alsace"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
           </div>
 
-          {/* ✅ Texte animé & accessibilité */}
+          {/* Texte animé & accessibilité */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -59,11 +77,10 @@ export default function Hero() {
             <p className="text-lg text-gray-600 md:text-xl">
               Une expertise locale pour une gestion rentable et sereine.
             </p>
-            <p className="mb-8 text-lg text-gray-600 md:text-xl">
-              Proximité, exigence, sérénité.
-            </p>
+            <p className="mb-8 text-lg text-gray-600 md:text-xl">Proximité, exigence, sérénité.</p>
 
-            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-center">
+            {/* Boutons centrés en mobile et desktop */}
+            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <CTAButtons
                 primary={{
                   label: 'Estimer mes revenus',

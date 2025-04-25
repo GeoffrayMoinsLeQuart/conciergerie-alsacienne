@@ -1,3 +1,4 @@
+// src/components/PropertyCard.tsx
 'use client';
 
 import { imageBuilder } from '@/sanity/sanity-utils';
@@ -20,9 +21,7 @@ export default function PropertyCard({ property }: { property: Property }) {
     nbChambres,
   } = property;
 
-  const imageSrc = imagePrincipale
-    ? imageBuilder(imagePrincipale).url()
-    : '/default-property.jpg';
+  const imageSrc = imagePrincipale ? imageBuilder(imagePrincipale).url() : '/default-property.jpg';
 
   const url = slug?.current ? `/property/${slug.current}` : '#';
 
@@ -51,47 +50,57 @@ export default function PropertyCard({ property }: { property: Property }) {
             <h3 id={`property-${_id}`} className="mb-2 text-lg font-semibold text-black">
               {name}
             </h3>
-            <p className="mb-4 text-sm text-gray-600 line-clamp-2">
-              {shortDescription}
-            </p>
+            <p className="mb-4 text-sm text-gray-600 line-clamp-2">{shortDescription}</p>
           </div>
 
           <dl className="grid grid-cols-2 gap-2 text-sm text-gray-700 mt-auto">
             {surface && (
-              <div>
-                <dt className="sr-only">Surface</dt>
-                <dd>📐 {surface} m²</dd>
-              </div>
+              <>
+                <dt className="sr-only" key={`${_id}-surface-dt`}>
+                  Surface
+                </dt>
+                <dd key={`${_id}-surface-dd`}>📐 {surface} m²</dd>
+              </>
             )}
             {nbChambres && (
-              <div>
-                <dt className="sr-only">Chambres</dt>
-                <dd>🛏 {nbChambres} ch.</dd>
-              </div>
+              <>
+                <dt className="sr-only" key={`${_id}-rooms-dt`}>
+                  Chambres
+                </dt>
+                <dd key={`${_id}-rooms-dd`}>🛏 {nbChambres} ch.</dd>
+              </>
             )}
             {modeGestion && (
-              <div>
-                <dt className="sr-only">Mode de gestion</dt>
-                <dd>🔧 {modeGestion}</dd>
-              </div>
+              <>
+                <dt className="sr-only" key={`${_id}-mode-dt`}>
+                  Mode de gestion
+                </dt>
+                <dd key={`${_id}-mode-dd`}>🔧 {modeGestion}</dd>
+              </>
             )}
             {modeGestion === 'Conciergerie' && revenuMensuel && (
-              <div>
-                <dt className="sr-only">Revenu mensuel</dt>
-                <dd>💰 {revenuMensuel} €</dd>
-              </div>
+              <>
+                <dt className="sr-only" key={`${_id}-rev-dt`}>
+                  Revenu mensuel
+                </dt>
+                <dd key={`${_id}-rev-dd`}>💰 {revenuMensuel} €</dd>
+              </>
             )}
             {modeGestion === 'Gestion Locative' && loyer && (
-              <div>
-                <dt className="sr-only">Loyer</dt>
-                <dd>💶 {loyer} €</dd>
-              </div>
+              <>
+                <dt className="sr-only" key={`${_id}-rent-dt`}>
+                  Loyer
+                </dt>
+                <dd key={`${_id}-rent-dd`}>💶 {loyer} €</dd>
+              </>
             )}
             {modeGestion === 'Conciergerie' && occupation && (
-              <div>
-                <dt className="sr-only">Taux d’occupation</dt>
-                <dd>📊 {occupation}%</dd>
-              </div>
+              <>
+                <dt className="sr-only" key={`${_id}-occ-dt`}>
+                  Taux d’occupation
+                </dt>
+                <dd key={`${_id}-occ-dd`}>📊 {occupation}%</dd>
+              </>
             )}
           </dl>
         </div>
