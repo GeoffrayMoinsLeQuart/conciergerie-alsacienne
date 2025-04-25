@@ -3,7 +3,11 @@ import SingleTestimonial from './SingleTestimonial';
 
 export default function Testimonial() {
   return (
-    <section id="testimonial" className="bg-white pb-20 pt-[120px]">
+    <section
+      id="testimonial"
+      className="bg-white pb-20 pt-[120px]"
+      aria-labelledby="testimonial-title"
+    >
       <div className="container">
         <div className="mx-[-16px] flex flex-wrap">
           <div className="w-full px-4">

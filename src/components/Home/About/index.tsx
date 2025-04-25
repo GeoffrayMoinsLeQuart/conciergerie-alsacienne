@@ -2,14 +2,10 @@
 
 import { FC } from 'react';
 import { motion } from 'framer-motion';
-import Graphic from './Graphic';
-import SocialLinks from './SocialLinks';
-import Link from 'next/link';
 import { Phone } from 'lucide-react';
 import CTAButtons from '@/components/Buttons/CTAButtons';
-// import SocialLinks from "./SocialLinks"; // Tu pourras le réactiver une fois prêt
-
-// Sécurise motion (évite un crash si undefined)
+import Graphic from './Graphic';
+import SocialLinks from './SocialLinks';
 
 const stats = [
   { label: 'Biens gérés', value: 120 },
@@ -20,30 +16,32 @@ const stats = [
 
 const About: FC = () => {
   return (
-    <section id="about" className="relative z-10 bg-[#f8f9ff] p-[40px] sm:p-[80px]">
+    <section
+      id="about"
+      aria-labelledby="about-title"
+      className="relative z-10 bg-[#f8f9ff] py-16 sm:py-24"
+    >
       <div className="container">
-        <div className="mx-[-16px] max-sm:grid max-sm:grid-cols-1 sm:flex sm:flex-wrap sm:justify-between ">
-          {/* Col gauche : texte */}
-          <div className="flex flex-col justify-between text-center max-xl:mb-16 max-lg:w-full lg:text-left ">
-            <div>
-              <span className="mb-3 inline-block text-lg font-bold text-primary md:text-xl">
-                NOTRE PROMESSE
-              </span>
-              <ul className="mb-8 space-y-2">
-                <li className="text-base font-medium text-body-color">
-                  ✅ Connaissance approfondie du marché local
-                </li>
-                <li className="text-base font-medium text-body-color">
-                  ✅ Service personnalisé avec interlocuteur unique
-                </li>
-                <li className="text-base font-medium text-body-color">
-                  ✅ Transparence totale et reporting détaillé
-                </li>
-                <li className="text-base font-medium text-body-color">
-                  ✅ Optimisation continue de vos revenus
-                </li>
-              </ul>
-            </div>
+        <header className="mb-12 text-center">
+          <h2 id="about-title" className="text-3xl font-bold text-gray-800 md:text-4xl">
+            Une gestion sans souci, pensée pour votre rentabilité
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+            Une équipe locale, expérimentée et exigeante — pour une gestion réellement optimisée,
+            centrée sur vos objectifs.
+          </p>
+        </header>
+
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
+          {/* ✅ Colonne de gauche : Promesses + CTA */}
+          <div>
+            <h3 className="mb-4 text-xl font-semibold text-primary">Notre promesse</h3>
+            <ul className="mb-8 space-y-3 text-base text-gray-700">
+              <li>✅ Connaissance approfondie du marché local</li>
+              <li>✅ Service personnalisé avec interlocuteur unique</li>
+              <li>✅ Transparence totale et reporting détaillé</li>
+              <li>✅ Optimisation continue de vos revenus</li>
+            </ul>
 
             <CTAButtons
               primary={{
@@ -55,23 +53,10 @@ const About: FC = () => {
             />
           </div>
 
-          {/* Col droite : chiffres & identité */}
-          <div className="w-full lg:w-1/2 xl:w-5/12">
-            <h3 className="mb-4 text-xl font-semibold text-black md:text-2xl ">
-              Une gestion sans souci pour des revenus maximisés
-            </h3>
-
-            <p
-              className="mb-8 text-justify text-base text-body-color
-"
-            >
-              Une équipe locale engagée pour valoriser votre bien et assurer une expérience 5
-              étoiles à vos voyageurs. L'expertise alsacienne au service de votre rentabilité.
-            </p>
-
-            {/* Statistiques animées */}
-            <motion.div
-              className="grid grid-cols-2 gap-6 text-center md:grid-cols-2"
+          {/* ✅ Colonne de droite : Statistiques animées */}
+          <div>
+            <motion.ul
+              className="grid grid-cols-2 gap-6 text-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -95,14 +80,17 @@ const About: FC = () => {
                   <span className="text-sm text-gray-600">{stat.label}</span>
                 </motion.li>
               ))}
-            </motion.div>
+            </motion.ul>
 
-            {/* Social links si réactivé */}
+            {/* Lien vers réseaux si activés */}
+            <div className="mt-8">
+              <SocialLinks />
+            </div>
           </div>
-          <SocialLinks />
         </div>
       </div>
 
+      {/* ✅ Élément graphique animé */}
       <Graphic />
     </section>
   );

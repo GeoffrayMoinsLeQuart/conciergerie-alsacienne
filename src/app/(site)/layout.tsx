@@ -21,8 +21,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.conciergerie-alsacienne.fr" />
+      </head>
       <body className={inter.className}>
         <GTMNoScript />
+
+        {/* Barre de chargement */}
         <NextTopLoader
           color="#006BFF"
           crawlSpeed={300}
@@ -30,13 +38,22 @@ export default function RootLayout({
           shadow="none"
           zIndex={9999999}
         />
+
         <ThemeProvider enableSystem={false} attribute="class" defaultTheme="light">
           <AuthProvider>
             <GTMScript />
             <SeoSchemaInjector />
             <ToasterContext />
+
+            {/* Navigation principale */}
             <Navbar />
-            {children}
+
+            {/* Contenu principal */}
+            <main id="main-content" role="main">
+              {children}
+            </main>
+
+            {/* Pied de page */}
             <Footer />
           </AuthProvider>
         </ThemeProvider>

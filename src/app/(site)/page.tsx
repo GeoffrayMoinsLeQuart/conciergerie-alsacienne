@@ -45,7 +45,7 @@ export default async function HomePage() {
   const properties = await fetchProperties();
 
   return (
-    <>
+    <main id="home" aria-label="Page d'accueil de la Conciergerie Alsacienne">
       <SeoSchemaInjector schema={homeSchema} />
       <Hero />
       <About />
@@ -54,10 +54,9 @@ export default async function HomePage() {
       <Testimonial />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
 
-      {/* Wrap the client ContactForm in Suspense so useSearchParams() is handled correctly */}
-      <Suspense fallback={<p>Chargement du formulaire…</p>}>
+      <Suspense fallback={<p className="text-center py-10">Chargement du formulaire…</p>}>
         <ContactForm />
       </Suspense>
-    </>
+    </main>
   );
 }

@@ -40,7 +40,7 @@ export default function PropertyStats({ property, variant = 'extended' }: Props)
   ].filter(Boolean) as { label: string; value: string | number }[];
 
   return (
-    <div
+    <dl
       className={
         variant === 'compact'
           ? 'mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-gray-600'
@@ -49,10 +49,11 @@ export default function PropertyStats({ property, variant = 'extended' }: Props)
     >
       {items.map(({ label, value }) => (
         <div key={label}>
+          <dt className="sr-only">{label}</dt>
           <strong className="text-black">{label}</strong>
-          <div>{value}</div>
+          <dd>{value}</dd>
         </div>
       ))}
-    </div>
+    </dl>
   );
 }

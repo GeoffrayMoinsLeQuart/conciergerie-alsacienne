@@ -1,5 +1,3 @@
-// src/components/Blog/HomeBlogSection.tsx
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -15,6 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import CTAButtons from '../Buttons/CTAButtons';
 import { BookOpen } from 'lucide-react';
+import Script from 'next/script';
 
 export default function HomeBlogSection() {
   const [posts, setPosts] = useState<Blog[]>([]);
@@ -28,26 +27,41 @@ export default function HomeBlogSection() {
     fetchData();
   }, []);
 
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Blog de la Conciergerie Alsacienne',
+    url: 'https://www.conciergerie-alsacienne.fr/blog',
+    blogPost: posts.slice(0, 6).map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.metadata || '',
+      url: `https://www.conciergerie-alsacienne.fr/blog/${post.slug}`,
+      datePublished: post.publishedAt,
+    })),
+  };
+
   return (
-    <section id="news" className="bg-[#f8f9ff] py-20 lg:pt-[120px]">
+    <section
+      id="news"
+      className="bg-[#f8f9ff] py-20 lg:pt-[120px]"
+      aria-labelledby="blog-section-title"
+    >
       <div className="container flex flex-col">
         {/* En-tête */}
-        <div className="mx-[-16px] flex flex-wrap">
+        <header className="mx-[-16px] flex flex-wrap text-center">
           <div className="w-full px-4">
-            <div className="mx-auto mb-[50px] max-w-[600px] text-center">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Blog de la Conciergerie
-              </span>
-              <h2 className="mb-5 text-3xl font-bold text-black sm:text-4xl md:text-[45px]">
+            <div className="mx-auto mb-[50px] max-w-[600px]">
+              <span className="mb-2 block text-lg font-semibold text-primary">Blog de la Conciergerie</span>
+              <h2 id="blog-section-title" className="mb-5 text-3xl font-bold text-black sm:text-4xl md:text-[45px]">
                 Nos derniers conseils et actualités
               </h2>
               <p className="text-lg font-medium text-body-color">
-                Optimisation, réglementation, bonnes pratiques : tout pour booster vos revenus
-                locatifs.
+                Optimisation, réglementation, bonnes pratiques : tout pour booster vos revenus locatifs.
               </p>
             </div>
           </div>
-        </div>
+        </header>
 
         {/* Carousel mobile */}
         <div className="relative mb-10 block lg:hidden">
@@ -69,6 +83,8 @@ export default function HomeBlogSection() {
               nextEl: '.swiper-button-next-custom',
             }}
             className="pb-12"
+            aria-roledescription="carousel"
+            aria-label="Articles récents du blog"
           >
             {posts.slice(0, 6).map((blog) => (
               <SwiperSlide key={blog._id}>
@@ -79,7 +95,7 @@ export default function HomeBlogSection() {
         </div>
 
         {/* Masonry desktop */}
-        <div className="hidden flex-1 lg:block">
+        <div className="hidden flex-1 lg:block" role="list">
           <Masonry
             breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
             className="-mx-4 flex w-auto"
@@ -103,6 +119,16 @@ export default function HomeBlogSection() {
           />
         </div>
       </div>
+
+      {/* Schema.org injecté dynamiquement */}
+      {posts.length > 0 && (
+        <Script
+          id="blog-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+        />
+      )}
     </section>
   );
 }
