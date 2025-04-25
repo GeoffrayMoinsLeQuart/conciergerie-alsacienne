@@ -9,7 +9,7 @@ const TabsContext = React.createContext<{
   setActiveTab: (tab: string) => void;
 } | null>(null);
 
-// Tabs
+// Tabs Root
 interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultValue: string;
   children: React.ReactNode;
@@ -19,12 +19,7 @@ export function Tabs({ defaultValue, children, className, ...props }: TabsProps)
   const [activeTab, setActiveTab] = React.useState(defaultValue);
 
   return (
-    <div
-      className={cn('w-full', className)}
-      {...props}
-      role="tablist"
-      aria-label="Profils de propriétaires"
-    >
+    <div className={cn('w-full', className)} {...props}>
       <TabsContext.Provider value={{ activeTab, setActiveTab }}>{children}</TabsContext.Provider>
     </div>
   );
@@ -39,9 +34,9 @@ export function TabsList({ children, className, ...props }: TabsListProps) {
   return (
     <div
       className={cn('flex flex-wrap justify-center gap-4 rounded-xl bg-gray-100 p-4', className)}
-      {...props}
       role="tablist"
       aria-label="Choisissez votre profil de propriétaire"
+      {...props}
     >
       {children}
     </div>
@@ -98,6 +93,7 @@ export function TabsContent({ value, children, className, ...props }: TabsConten
       id={`tabpanel-${value}`}
       role="tabpanel"
       aria-labelledby={`tab-${value}`}
+      tabIndex={0}
       className={cn('animate-fade-in-up mt-6', className)}
       {...props}
     >
@@ -106,72 +102,76 @@ export function TabsContent({ value, children, className, ...props }: TabsConten
   );
 }
 
-// TimelineProcessus
+// Timeline
 interface TimelineItem {
   title: string;
   points: string[];
 }
 
-const TimelineProcessus: React.FC<{ steps: TimelineItem[] }> = ({ steps }) => {
-  return (
-    <div
-      className="relative flex flex-col gap-10 md:flex-row md:flex-wrap md:justify-between"
-      aria-label="Étapes du parcours"
-    >
-      {steps.map((step, index) => (
-        <div
-          key={index}
-          className="animate-slide-up relative flex-1 rounded-xl bg-white p-6 shadow-lg md:max-w-[32%]"
-        >
-          {index < steps.length - 1 && (
-            <div className="absolute right-0 top-1/2 hidden h-1 w-10 translate-x-full transform bg-primary md:block" />
-          )}
-          <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow">
-            {index + 1}
-          </div>
-          <h3 className="mb-2 text-lg font-semibold text-gray-800">{step.title}</h3>
-          <ul className="list-disc pl-5 text-gray-700">
-            {step.points.map((point, idx) => (
-              <li key={idx} className="mb-1 text-sm">
-                {point}
-              </li>
-            ))}
-          </ul>
+const TimelineProcessus: React.FC<{ steps: TimelineItem[] }> = ({ steps }) => (
+  <div
+    className="relative flex flex-col gap-10 md:flex-row md:flex-wrap md:justify-between"
+    aria-label="Étapes du parcours"
+  >
+    {steps.map((step, index) => (
+      <div
+        key={index}
+        className="animate-slide-up relative flex-1 rounded-xl bg-white p-6 shadow-lg md:max-w-[32%]"
+      >
+        {index < steps.length - 1 && (
+          <div className="absolute right-0 top-1/2 hidden h-1 w-10 translate-x-full transform bg-primary md:block" />
+        )}
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow">
+          {index + 1}
         </div>
-      ))}
-    </div>
-  );
-};
+        <h3 className="mb-2 text-lg font-semibold text-gray-800">{step.title}</h3>
+        <ul className="list-disc pl-5 text-gray-700">
+          {step.points.map((point, idx) => (
+            <li key={idx} className="mb-1 text-sm">
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+);
 
-const TabsProfilProprietaire: React.FC = () => {
-  return (
-    <section className="bg-white py-20" aria-labelledby="proprietaire-title" id="profils">
-      <div className="container">
-        <h2 id="proprietaire-title" className="mb-10 text-center text-3xl font-bold">
+// Component exporté
+const TabsProfilProprietaire: React.FC = () => (
+  <section
+    className="bg-white py-20"
+    id="profils"
+    role="region"
+    aria-labelledby="proprietaire-title"
+  >
+    <div className="container">
+      <header className="text-center mb-10">
+        <h2 id="proprietaire-title" className="text-3xl font-bold">
           Un parcours adapté à chaque propriétaire
         </h2>
+      </header>
 
-        <Tabs defaultValue="investisseur">
-          <TabsList>
-            <TabsTrigger value="investisseur">📊 Investisseur</TabsTrigger>
-            <TabsTrigger value="expatrie">✈️ Expatrié</TabsTrigger>
-            <TabsTrigger value="primo">🧭 Primo-bailleur</TabsTrigger>
-          </TabsList>
+      <Tabs defaultValue="investisseur">
+        <TabsList>
+          <TabsTrigger value="investisseur">📊 Investisseur</TabsTrigger>
+          <TabsTrigger value="expatrie">✈️ Expatrié</TabsTrigger>
+          <TabsTrigger value="primo">🧭 Primo-bailleur</TabsTrigger>
+        </TabsList>
 
-          <TabsContent value="investisseur">
-            <TimelineProcessus steps={timelineInvestisseur} />
-          </TabsContent>
-          <TabsContent value="expatrie">
-            <TimelineProcessus steps={timelineExpatrie} />
-          </TabsContent>
-          <TabsContent value="primo">
-            <TimelineProcessus steps={timelinePrimo} />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </section>
-  );
-};
+        <TabsContent value="investisseur">
+          <TimelineProcessus steps={timelineInvestisseur} />
+        </TabsContent>
+        <TabsContent value="expatrie">
+          <TimelineProcessus steps={timelineExpatrie} />
+        </TabsContent>
+        <TabsContent value="primo">
+          <TimelineProcessus steps={timelinePrimo} />
+        </TabsContent>
+      </Tabs>
+    </div>
+  </section>
+);
 
 export default TabsProfilProprietaire;
 

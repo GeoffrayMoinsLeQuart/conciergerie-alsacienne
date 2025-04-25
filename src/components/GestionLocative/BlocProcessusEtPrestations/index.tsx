@@ -98,9 +98,9 @@ const BlocProcessusEtPrestations: FC = () => {
                   className="object-contain"
                 />
               </div>
-              <h4 id={`step-${step.number}`} className="mb-2 text-xl font-bold text-dark">
+              <h3 id={`step-${step.number}`} className="mb-2 text-xl font-bold text-dark">
                 {step.number}. {step.title}
-              </h4>
+              </h3>
               <p className="mb-4 text-sm font-medium text-body-color">{step.description}</p>
               <ul className="list-disc space-y-1 pl-4 text-sm text-gray-700">
                 {step.details.map((item, idx) => (
