@@ -12,7 +12,12 @@ import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { GTMScript } from '@/components/Pixels/GTM';
 import { GTMNoScript } from '@/components/Pixels/GTMNoScript';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter',
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

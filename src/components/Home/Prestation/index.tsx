@@ -5,9 +5,15 @@
 import { useState } from 'react';
 import { prestationConciergerie, prestationGestionLocative } from '@/static-data/prestation';
 import SectionTitle from '@/components/Common/SectionTitle';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.div),
+  { ssr: false }
+);
+
 
 export default function Prestation() {
   const [activeTab, setActiveTab] = useState<'conciergerie' | 'gestion'>('conciergerie');
@@ -59,7 +65,7 @@ export default function Prestation() {
         </div>
 
         {/* Grid cartes */}
-        <motion.div
+        <MotionDiv
           key={activeTab}
           className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
@@ -70,7 +76,7 @@ export default function Prestation() {
           }}
         >
           {prestations.map((prestation, index) => (
-            <motion.div
+            <MotionDiv
               key={prestation.id}
               className="group flex flex-col rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-xl transition duration-300 hover:shadow-2xl"
               variants={{
@@ -102,9 +108,9 @@ export default function Prestation() {
               >
                 En savoir plus
               </Link>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

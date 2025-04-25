@@ -1,8 +1,12 @@
 'use client';
 
 import { FC } from 'react';
-import { motion } from 'framer-motion';
 import SectionTitle from '@/components/Common/SectionTitle';
+import dynamic from 'next/dynamic';
+
+const MotionLi = dynamic(() => import('framer-motion').then((mod) => mod.motion.li), {
+  ssr: false,
+});
 
 const processSteps = [
   {
@@ -46,7 +50,7 @@ const TimelineProcess: FC = () => {
           aria-label="Étapes du processus de gestion locative"
         >
           {processSteps.map((step, i) => (
-            <motion.li
+            <MotionLi
               key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +80,7 @@ const TimelineProcess: FC = () => {
                   <div className="absolute right-[-7px] top-[29px] hidden h-0 w-0 border-b-[6px] border-l-[10px] border-t-[6px] border-b-transparent border-l-primary border-t-transparent lg:block" />
                 </>
               )}
-            </motion.li>
+            </MotionLi>
           ))}
         </ol>
       </div>

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import 'yet-another-react-lightbox/styles.css';
 import Video from 'yet-another-react-lightbox/plugins/video';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
@@ -8,7 +7,11 @@ import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import Lightbox, { useLightbox } from '@/components/lightbox';
 import { varTranHover } from '../animate/variants';
 import Image from 'next/image';
-import { m } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
+  ssr: false,
+});
 
 type Slide = {
   src: string;
@@ -58,7 +61,7 @@ type PhotoItemProps = {
 
 function PhotoItem({ imageToDisplay, onOpenLightbox }: PhotoItemProps) {
   return (
-    <m.div
+    <MotionDiv
       whileHover="hover"
       variants={{
         hover: { opacity: 0.8 },
@@ -73,6 +76,6 @@ function PhotoItem({ imageToDisplay, onOpenLightbox }: PhotoItemProps) {
         height={1000}
         priority
       />
-    </m.div>
+    </MotionDiv>
   );
 }

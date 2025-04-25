@@ -23,8 +23,8 @@ import {
 import { Blog, Category } from '@/types/blog';
 import { integrations } from '../../integrations.config';
 import { Property } from '@/types/property';
-import { FAQItem } from '@/components/FAQ';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { FAQItem } from '@/types/faq';
 
 export async function sanityFetch<QueryResponse>({
   query,

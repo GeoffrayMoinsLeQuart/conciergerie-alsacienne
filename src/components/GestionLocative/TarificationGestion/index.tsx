@@ -5,10 +5,16 @@
 import SectionTitle from '../../Common/SectionTitle';
 import { FC, useState } from 'react';
 import { ShieldCheck, UserCheck, Sparkles, Calculator } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { Dialog } from '@headlessui/react';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Activity, FormuleGestionLocative } from '@/types/form';
+import dynamic from 'next/dynamic';
+
+const MotionArticle = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.article),
+  { ssr: false }
+);
+
 
 interface Plan {
   name: string;
@@ -165,7 +171,7 @@ const TarificationGestionLocative: FC = () => {
 
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {plans.map((plan, idx) => (
-            <motion.article
+            <MotionArticle
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * idx }}
@@ -212,7 +218,7 @@ const TarificationGestionLocative: FC = () => {
                   icon: plan.iconButton,
                 }}
               />
-            </motion.article>
+            </MotionArticle>
           ))}
         </div>
 

@@ -1,10 +1,11 @@
 'use client';
 
 import { getFAQsByType } from '@/sanity/sanity-utils';
-import FAQ, { FAQItem } from '@/components/FAQ';
+import FAQ from '@/components/FAQ';
 import SectionTitle from '@/components/Common/SectionTitle';
 import Script from 'next/script';
 import { Metadata } from 'next';
+import { FAQItem } from '@/types/faq';
 
 export const metadata: Metadata = {
   title: 'Réponses à vos questions fréquentes | Conciergerie Alsacienne',
@@ -69,7 +70,10 @@ export default async function FAQPage() {
         name: faq.question,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: faq.answer.replace(/<[^>]*>/g, '').replaceAll('\n', ' ').trim(),
+          text: faq.answer
+            .replace(/<[^>]*>/g, '')
+            .replaceAll('\n', ' ')
+            .trim(),
         },
       })),
     })),

@@ -2,7 +2,11 @@
 
 import { FC } from 'react';
 import SectionTitle from '@/components/Common/SectionTitle';
-import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+const MotionArticle = dynamic(() => import('framer-motion').then((mod) => mod.motion.article), {
+  ssr: false,
+});
 
 interface Testimonial {
   name: string;
@@ -45,7 +49,7 @@ const TemoinagesSection: FC = () => {
 
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
           {testimonials.map(({ name, subtitle, text }, idx) => (
-            <motion.article
+            <MotionArticle
               key={name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +74,7 @@ const TemoinagesSection: FC = () => {
                 <span className="sr-only">Témoignage : </span>“
                 <span className="font-medium text-gray-700">{text}</span>”
               </blockquote>
-            </motion.article>
+            </MotionArticle>
           ))}
         </div>
       </div>

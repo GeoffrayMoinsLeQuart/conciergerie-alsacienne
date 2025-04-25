@@ -1,6 +1,10 @@
 import { Suspense } from 'react';
-import ContactForm from '@/components/Contact';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
+const ContactForm = dynamic(() => import('../../../components/Contact'), {
+  loading: () => <div className="animate-pulse h-96 bg-gray-100 rounded-lg"></div>
+});
 
 const siteName = process.env.SITE_NAME;
 

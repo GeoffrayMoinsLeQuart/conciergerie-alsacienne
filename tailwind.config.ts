@@ -1,11 +1,28 @@
 import type { Config } from 'tailwindcss';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  // Option purge legacy pour Tailwind v2, activé en production
+  // Si vous utilisez Tailwind v3+, cette option est ignorée
+  purge: isProd
+    ? {
+        enabled: true,
+        content: [
+          './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+          './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+          './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+        ],
+        options: {
+          safelist: [],
+        },
+      }
+    : false,
   theme: {
     container: {
       center: true,
@@ -13,19 +30,10 @@ const config: Config = {
     },
     screens: {
       sm: '540px',
-      // => @media (min-width: 576px) { ... }
-
       md: '720px',
-      // => @media (min-width: 768px) { ... }
-
       lg: '960px',
-      // => @media (min-width: 992px) { ... }
-
       xl: '1140px',
-      // => @media (min-width: 1200px) { ... }
-
       '2xl': '1320px',
-      // => @media (min-width: 1400px) { ... }
     },
     extend: {
       colors: {
@@ -51,4 +59,5 @@ const config: Config = {
   },
   plugins: [require('@tailwindcss/typography')],
 };
+
 export default config;

@@ -1,7 +1,5 @@
 'use client';
 
-import HeroImage from '@/components/Home/Hero/HeroImage';
-import Link from 'next/link';
 import { FC } from 'react';
 import { Calculator, Sparkles } from 'lucide-react';
 import Image from 'next/image';

@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { getFAQsByType } from '@/sanity/sanity-utils';
-import FAQ, { FAQItem } from '@/components/FAQ';
 import SectionTitle from '@/components/Common/SectionTitle';
 import Script from 'next/script';
+import FAQ from '@/components/FAQ';
+import { FAQItem } from '@/types/faq';
 
 export default function FAQGestionLocativeClient() {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);

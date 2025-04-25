@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import HomeBlogSection from '@/components/Blog/HomeBlogSection';
-import ContactForm from '@/components/Contact';
 import About from '@/components/Home/About';
 import Hero from '@/components/Home/Hero';
 import Prestation from '@/components/Home/Prestation';
@@ -10,6 +9,11 @@ import { Metadata } from 'next';
 import { integrations } from '../../../integrations.config';
 import { fetchProperties } from '@/sanity/sanity-utils';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
+import dynamic from 'next/dynamic';
+
+const ContactForm = dynamic(() => import('./contact/page'), {
+  loading: () => <div className="animate-pulse h-96 bg-gray-100 rounded-lg"></div>
+});
 
 const homeSchema = {
   '@context': 'https://schema.org',

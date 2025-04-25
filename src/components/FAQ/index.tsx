@@ -1,29 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { FAQProps } from '@/types/faq';
+import dynamic from 'next/dynamic';
 
-export interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-  type: string[] | string;
-  topic?: string;
-  icon?: string;
-  order?: number;
-}
-
-interface FAQProps {
-  items: FAQItem[];
-  title?: string;
-  subtitle?: string;
-  mainTitle?: string;
-  center?: boolean;
-  showTopicFilter?: boolean;
-  defaultType?: string;
-  specificPage?: boolean;
-}
+const MotionDiv = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.div),
+  { ssr: false }
+);
 
 const categoryLabels: Record<string, string> = {
   fiscalite: 'Fiscalité',
@@ -59,7 +45,6 @@ const FAQ: React.FC<FAQProps> = ({
   center = true,
   showTopicFilter = true,
   defaultType = 'all',
-  specificPage = false,
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
@@ -198,7 +183,7 @@ const FAQ: React.FC<FAQProps> = ({
         <div className="mx-auto max-w-3xl space-y-4">
           <AnimatePresence>
             {filteredFaqs.map((item, index) => (
-              <motion.div
+              <MotionDiv
                 key={item.id || `faq-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -219,7 +204,7 @@ const FAQ: React.FC<FAQProps> = ({
                 </button>
                 <AnimatePresence>
                   {openIndex === index && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
@@ -237,10 +222,10 @@ const FAQ: React.FC<FAQProps> = ({
                           </span>
                         )}
                       </div>
-                    </motion.div>
+                    </MotionDiv>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </MotionDiv>
             ))}
           </AnimatePresence>
         </div>

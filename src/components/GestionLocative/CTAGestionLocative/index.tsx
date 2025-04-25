@@ -3,11 +3,17 @@
 import { FC } from 'react';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Calculator, Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+const MotionSection = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.section),
+  { ssr: false }
+);
+
 
 const CTAGestionLocative: FC = () => {
   return (
-    <motion.section
+    <MotionSection
       id="cta-gestion"
       role="contentinfo"
       aria-labelledby="cta-gestion-title"
@@ -49,7 +55,7 @@ const CTAGestionLocative: FC = () => {
           pour discuter de votre projet.
         </p>
       </div>
-    </motion.section>
+    </MotionSection>
   );
 };
 

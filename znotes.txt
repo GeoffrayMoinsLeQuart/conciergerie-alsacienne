@@ -134,3 +134,8 @@ Changeers adresse de nos-biens pour tout le sites
 
 
 Faire un loader general
+
+
+Optimiser les scripts de tracking avec l'attribut strategy="afterInteractive".
+
+

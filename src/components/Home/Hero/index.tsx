@@ -3,8 +3,14 @@
 
 import { Calculator, Mail } from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import CTAButtons from '@/components/Buttons/CTAButtons';
+import dynamic from 'next/dynamic';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.div),
+  { ssr: false }
+);
+
 
 export default function Hero() {
   return (
@@ -60,7 +66,7 @@ export default function Hero() {
           </div>
 
           {/* Texte animé & accessibilité */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -94,7 +100,7 @@ export default function Hero() {
                 }}
               />
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

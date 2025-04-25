@@ -1,11 +1,19 @@
 'use client';
 
 import { FC } from 'react';
-import { motion } from 'framer-motion';
 import { Phone } from 'lucide-react';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import Graphic from './Graphic';
 import SocialLinks from './SocialLinks';
+import dynamic from 'next/dynamic';
+
+const MotionLi = dynamic(() => import('framer-motion').then((mod) => mod.motion.li), {
+  ssr: false,
+});
+
+const MotionUl = dynamic(() => import('framer-motion').then((mod) => mod.motion.ul), {
+  ssr: false,
+});
 
 const stats = [
   { label: 'Biens gérés', value: 120 },
@@ -55,7 +63,7 @@ const About: FC = () => {
 
           {/* ✅ Colonne de droite : Statistiques animées */}
           <div>
-            <motion.ul
+            <MotionUl
               className="grid grid-cols-2 gap-6 text-center"
               initial="hidden"
               whileInView="visible"
@@ -66,7 +74,7 @@ const About: FC = () => {
               }}
             >
               {stats.map((stat) => (
-                <motion.li
+                <MotionLi
                   key={stat.label}
                   className="flex flex-col items-center"
                   variants={{
@@ -78,9 +86,9 @@ const About: FC = () => {
                     {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}
                   </span>
                   <span className="text-sm text-gray-600">{stat.label}</span>
-                </motion.li>
+                </MotionLi>
               ))}
-            </motion.ul>
+            </MotionUl>
 
             {/* Lien vers réseaux si activés */}
             <div className="mt-8">

@@ -3,8 +3,14 @@
 import SectionTitle from '../../Common/SectionTitle';
 import { FC } from 'react';
 import { ShieldCheck, Gavel, AlertTriangle, Home, Slash, Timer, CheckCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
 import Script from 'next/script';
+import dynamic from 'next/dynamic';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.div),
+  { ssr: false }
+);
+
 
 const GarantiesLoyers: FC = () => {
   const garanties = [
@@ -81,7 +87,7 @@ const GarantiesLoyers: FC = () => {
             <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {garanties.map(({ title, description, icon: Icon }) => (
                 <li key={title}>
-                  <motion.div
+                  <MotionDiv
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
@@ -95,7 +101,7 @@ const GarantiesLoyers: FC = () => {
                       {title}
                     </h4>
                     <p className="flex-grow text-sm leading-relaxed text-gray-600">{description}</p>
-                  </motion.div>
+                  </MotionDiv>
                 </li>
               ))}
             </ul>

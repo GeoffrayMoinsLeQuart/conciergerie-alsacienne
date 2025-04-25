@@ -4,9 +4,20 @@ import { FC } from 'react';
 import SectionTitle from '@/components/Common/SectionTitle';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const MotionArticle = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.article),
+  { ssr: false }
+);
+
+const MotionSpan = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.span),
+  { ssr: false }
+);
+
 
 // ✅ data/tarifs.ts
 export const tarifsConciergerie = [
@@ -60,7 +71,7 @@ interface TarifPlan {
 }
 
 const TarifCard: FC<{ plan: TarifPlan; index: number }> = ({ plan, index }) => (
-  <motion.article
+  <MotionArticle
     className={`relative flex flex-col justify-between rounded-2xl p-8 pt-10 shadow-pricing transition-transform duration-300 hover:scale-[1.02] ${plan.color}`}
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -69,14 +80,14 @@ const TarifCard: FC<{ plan: TarifPlan; index: number }> = ({ plan, index }) => (
     aria-label={`Offre ${plan.name}`}
   >
     {plan.recommended && (
-      <motion.span
+      <MotionSpan
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2 }}
         className="absolute right-4 top-2 rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-primary shadow-sm"
       >
         ⭐ {plan.badge}
-      </motion.span>
+      </MotionSpan>
     )}
 
     <header className="mb-6">
@@ -104,7 +115,7 @@ const TarifCard: FC<{ plan: TarifPlan; index: number }> = ({ plan, index }) => (
     >
       Choisir cette formule
     </Link>
-  </motion.article>
+  </MotionArticle>
 );
 
 const Tarification: FC = () => {
