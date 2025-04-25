@@ -1,14 +1,14 @@
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
-import Video from "yet-another-react-lightbox/plugins/video";
-import Captions from "yet-another-react-lightbox/plugins/captions";
-import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
-import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import ReactLightbox, { useLightboxState } from "yet-another-react-lightbox";
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import Video from 'yet-another-react-lightbox/plugins/video';
+import Captions from 'yet-another-react-lightbox/plugins/captions';
+import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
+import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import ReactLightbox, { useLightboxState } from 'yet-another-react-lightbox';
 
-import Iconify from "../iconify";
-import StyledLightbox from "./styles";
-import { LightBoxProps } from "./types";
+import Iconify from '../iconify';
+import StyledLightbox from './styles';
+import { LightBoxProps } from './types';
 
 // ----------------------------------------------------------------------
 
@@ -52,12 +52,8 @@ export default function Lightbox({
         }}
         toolbar={{
           buttons: [
-            <DisplayTotal
-              key={0}
-              totalItems={totalItems}
-              disabledTotal={disabledTotal}
-            />,
-            "close",
+            <DisplayTotal key={0} totalItems={totalItems} disabledTotal={disabledTotal} />,
+            'close',
           ],
         }}
         render={{
@@ -68,12 +64,8 @@ export default function Lightbox({
           iconSlideshowPause: () => <Iconify width={24} icon="carbon:pause" />,
           iconPrev: () => <Iconify width={32} icon="carbon:chevron-left" />,
           iconNext: () => <Iconify width={32} icon="carbon:chevron-right" />,
-          iconExitFullscreen: () => (
-            <Iconify width={24} icon="carbon:center-to-fit" />
-          ),
-          iconEnterFullscreen: () => (
-            <Iconify width={24} icon="carbon:fit-to-screen" />
-          ),
+          iconExitFullscreen: () => <Iconify width={24} icon="carbon:center-to-fit" />,
+          iconEnterFullscreen: () => <Iconify width={24} icon="carbon:fit-to-screen" />,
         }}
         {...other}
       />
@@ -133,9 +125,9 @@ export function DisplayTotal({ totalItems, disabledTotal }: DisplayTotalProps) {
     <span
       className="yarl__button"
       style={{
-        alignItems: "center",
-        display: "inline-flex",
-        justifyContent: "center",
+        alignItems: 'center',
+        display: 'inline-flex',
+        justifyContent: 'center',
       }}
     >
       <strong className="text-base "> {currentIndex + 1} </strong> /{totalItems}

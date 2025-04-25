@@ -1,14 +1,14 @@
-import { headers } from "next/headers";
-import Stripe from "stripe";
+import { headers } from 'next/headers';
+import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
-  apiVersion: "2023-10-16",
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
+  apiVersion: '2023-10-16',
   typescript: true,
 });
 
 export async function POST(request: Request) {
   const body = await request.text();
-  const signature = (await headers()).get("Stripe-Signature") ?? "";
+  const signature = (await headers()).get('Stripe-Signature') ?? '';
 
   let event: Stripe.Event;
 
@@ -16,13 +16,12 @@ export async function POST(request: Request) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET || "",
+      process.env.STRIPE_WEBHOOK_SECRET || '',
     );
   } catch (err) {
-    return new Response(
-      `Webhook Error: ${err instanceof Error ? err.message : "Unknown Error"}`,
-      { status: 400 },
-    );
+    return new Response(`Webhook Error: ${err instanceof Error ? err.message : 'Unknown Error'}`, {
+      status: 400,
+    });
   }
 
   const session = event.data.object as Stripe.Checkout.Session;
@@ -34,20 +33,16 @@ export async function POST(request: Request) {
   }
 
   // when first purchased
-  if (event.type === "checkout.session.completed") {
-    const subscription = await stripe.subscriptions.retrieve(
-      session.subscription as string,
-    );
+  if (event.type === 'checkout.session.completed') {
+    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
 
     // Save or use the subscriptions data as needed
   }
 
   // when renewed the subscription
-  if (event.type === "invoice.payment_succeeded") {
+  if (event.type === 'invoice.payment_succeeded') {
     // Retrieve the subscription details from Stripe.
-    const subscription = await stripe.subscriptions.retrieve(
-      session.subscription as string,
-    );
+    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
 
     // Save or use the subscriptions data as needed
   }

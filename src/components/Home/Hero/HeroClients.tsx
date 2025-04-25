@@ -1,5 +1,5 @@
-import { heroClientsData } from "@/static-data/brands";
-import Image from "next/image";
+import { heroClientsData } from '@/static-data/brands';
+import Image from 'next/image';
 
 export default function HeroClients() {
   return (

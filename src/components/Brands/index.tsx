@@ -1,5 +1,5 @@
-import { brandsData } from "@/static-data/brands";
-import Image from "next/image";
+import { brandsData } from '@/static-data/brands';
+import Image from 'next/image';
 
 export default function Brands() {
   return (
@@ -12,8 +12,8 @@ export default function Brands() {
                 Some of Our Happy Clients
               </h2>
               <p className="text-lg font-medium text-body-color">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have
+                suffered alteration in some form.
               </p>
             </div>
           </div>

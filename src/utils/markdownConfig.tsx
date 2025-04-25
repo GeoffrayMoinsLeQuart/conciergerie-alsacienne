@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
-import { Components } from "react-markdown";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import React, { ReactNode } from 'react';
+import { Components } from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // ✅ Définition correcte des props
 type MarkdownComponentProps = {
@@ -18,18 +18,12 @@ export const markdownComponents: Components = {
     </h1>
   ),
   h2: ({ children, ...props }: MarkdownComponentProps) => (
-    <h2
-      {...props}
-      className="mb-6 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl"
-    >
+    <h2 {...props} className="mb-6 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
       {children}
     </h2>
   ),
   p: ({ children, ...props }: MarkdownComponentProps) => (
-    <p
-      {...props}
-      className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg"
-    >
+    <p {...props} className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg">
       {children}
     </p>
   ),
@@ -39,10 +33,7 @@ export const markdownComponents: Components = {
     </ul>
   ),
   li: ({ children, ...props }: MarkdownComponentProps) => (
-    <li
-      {...props}
-      className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg"
-    >
+    <li {...props} className="mb-3 text-base text-primary sm:text-lg lg:text-base xl:text-lg">
       <span className="text-body-color">{children}</span>
     </li>
   ),
@@ -87,9 +78,7 @@ export const markdownComponents: Components = {
       {children}
     </thead>
   ),
-  tbody: ({ children, ...props }: MarkdownComponentProps) => (
-    <tbody {...props}>{children}</tbody>
-  ),
+  tbody: ({ children, ...props }: MarkdownComponentProps) => <tbody {...props}>{children}</tbody>,
   tr: ({ children, ...props }: MarkdownComponentProps) => (
     <tr {...props} className="border-b border-gray-200">
       {children}
@@ -108,8 +97,8 @@ export const markdownComponents: Components = {
 
   img: ({ src, alt, ...props }) => (
     <img
-      src={src || ""}
-      alt={alt || ""}
+      src={src || ''}
+      alt={alt || ''}
       className="my-6 w-full rounded-lg shadow-md"
       loading="lazy"
       {...props}

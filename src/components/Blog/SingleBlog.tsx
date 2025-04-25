@@ -1,24 +1,21 @@
-import { imageBuilder } from "@/sanity/sanity-utils";
-import { Blog } from "@/types/blog";
-import Image from "next/image";
-import Link from "next/link";
+import { imageBuilder } from '@/sanity/sanity-utils';
+import { Blog } from '@/types/blog';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function SingleBlog({ blog }: { blog: Blog }) {
   const { title, metadata, slug, mainImage, publishedAt } = blog;
 
-  const formattedDate = new Date(publishedAt).toLocaleDateString("fr-FR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
+  const formattedDate = new Date(publishedAt).toLocaleDateString('fr-FR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
   });
 
   return (
     <div className="mb-10 w-full">
       <div className="group flex h-full flex-col overflow-hidden rounded-xl bg-white pt-6 shadow-blog">
-        <Link
-          href={`/blog/${slug?.current}`}
-          className="relative block aspect-video"
-        >
+        <Link href={`/blog/${slug?.current}`} className="relative block aspect-video">
           {mainImage && imageBuilder(mainImage).url() ? (
             <Image
               src={imageBuilder(mainImage).url()}
@@ -47,9 +44,7 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
                 {title}
               </Link>
             </h3>
-            <p className="mb-4 line-clamp-3 text-base font-medium text-body-color">
-              {metadata}
-            </p>
+            <p className="mb-4 line-clamp-3 text-base font-medium text-body-color">{metadata}</p>
           </div>
 
           {/* CTA */}

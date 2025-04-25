@@ -1,37 +1,35 @@
 // components/Form/ContactForm.tsx
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
-import * as Yup from "yup";
-import toast from "react-hot-toast";
-import AddressAutocomplete, {
-  AddressComponents,
-} from "@/components/AddressAutocomplete";
-import SectionTitle from "../Common/SectionTitle";
+import React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import * as Yup from 'yup';
+import toast from 'react-hot-toast';
+import AddressAutocomplete, { AddressComponents } from '@/components/AddressAutocomplete';
+import SectionTitle from '../Common/SectionTitle';
 import {
   Activity,
   ContactFormValues,
   FormuleConciergerie,
   FormuleGestionLocative,
-} from "@/types/form";
+} from '@/types/form';
 
 const ContactForm: React.FC = () => {
   const router = useRouter();
   const params = useSearchParams();
 
-  const initialService = (params.get("service") || "") as Activity;
-  const initialFormule = (params.get("formule") || "") as
+  const initialService = (params.get('service') || '') as Activity;
+  const initialFormule = (params.get('formule') || '') as
     | FormuleConciergerie
     | FormuleGestionLocative;
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Obligatoire"),
-    email: Yup.string().email("Email invalide").required("Obligatoire"),
-    phone: Yup.string().required("Obligatoire"),
-    serviceType: Yup.string().required("Choisissez un service"),
-    consent: Yup.boolean().oneOf([true], "Accepter la politique est requis"),
+    name: Yup.string().required('Obligatoire'),
+    email: Yup.string().email('Email invalide').required('Obligatoire'),
+    phone: Yup.string().required('Obligatoire'),
+    serviceType: Yup.string().required('Choisissez un service'),
+    consent: Yup.boolean().oneOf([true], 'Accepter la politique est requis'),
   });
 
   const FormuleSelector = () => {
@@ -40,15 +38,15 @@ const ContactForm: React.FC = () => {
     const options =
       values.serviceType === Activity.GestionLocative
         ? [
-            { label: "Formule Essentielle", value: "essentielle" },
-            { label: "Formule Serenite", value: "serenite" },
-            { label: "Formule Premium", value: "premium" },
+            { label: 'Formule Essentielle', value: 'essentielle' },
+            { label: 'Formule Serenite', value: 'serenite' },
+            { label: 'Formule Premium', value: 'premium' },
           ]
         : values.serviceType === Activity.Conciergerie
           ? [
-              { label: "Formule Standard", value: "standard" },
-              { label: "Formule Premium", value: "premium" },
-              { label: "Formule Exclusive", value: "exclusive" },
+              { label: 'Formule Standard', value: 'standard' },
+              { label: 'Formule Premium', value: 'premium' },
+              { label: 'Formule Exclusive', value: 'exclusive' },
             ]
           : [];
 
@@ -72,20 +70,13 @@ const ContactForm: React.FC = () => {
             </label>
           ))}
         </div>
-        <ErrorMessage
-          name="formule"
-          component="div"
-          className="text-sm text-red-500"
-        />
+        <ErrorMessage name="formule" component="div" className="text-sm text-red-500" />
       </div>
     );
   };
 
   return (
-    <section
-      id="contact-formulaire-projet-immobilier"
-      className="bg-white py-[120px]"
-    >
+    <section id="contact-formulaire-projet-immobilier" className="bg-white py-[120px]">
       <div className="container">
         <h1 className="sr-only">Contactez-nous pour votre projet immobilier</h1>
         <SectionTitle
@@ -96,33 +87,33 @@ const ContactForm: React.FC = () => {
         <div className="container mx-auto max-w-4xl px-4">
           <Formik
             initialValues={{
-              name: "",
-              email: "",
-              phone: "",
-              availability: "",
-              serviceType: initialService || "",
-              formule: initialFormule || "",
-              address: "",
-              city: "",
-              postalCode: "",
-              propertyType: "",
-              surface: "",
-              budget: "",
-              message: "",
+              name: '',
+              email: '',
+              phone: '',
+              availability: '',
+              serviceType: initialService || '',
+              formule: initialFormule || '',
+              address: '',
+              city: '',
+              postalCode: '',
+              propertyType: '',
+              surface: '',
+              budget: '',
+              message: '',
               consent: false,
             }}
             enableReinitialize
             validationSchema={validationSchema}
             onSubmit={async (values, { setSubmitting }) => {
               try {
-                const res = await fetch("/api/contact", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
+                const res = await fetch('/api/contact', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify(values),
                 });
-                if (!res.ok) throw new Error("Erreur API");
-                toast.success("Demande envoyée !");
-                router.push("/merci#confirmation");
+                if (!res.ok) throw new Error('Erreur API');
+                toast.success('Demande envoyée !');
+                router.push('/merci#confirmation');
               } catch {
                 toast.error("Échec de l'envoi, réessayez.");
               } finally {
@@ -132,15 +123,10 @@ const ContactForm: React.FC = () => {
           >
             {({ isSubmitting, setFieldValue, values }) => (
               <Form className="space-y-6" aria-live="polite">
-                <h3 className="text-xl font-semibold text-gray-800">
-                  Vos informations
-                </h3>
+                <h3 className="text-xl font-semibold text-gray-800">Vos informations</h3>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label
-                      htmlFor="name"
-                      className="mb-2 block font-medium text-gray-700"
-                    >
+                    <label htmlFor="name" className="mb-2 block font-medium text-gray-700">
                       Nom & Prénom <span className="text-red-500">*</span>
                     </label>
                     <Field
@@ -156,10 +142,7 @@ const ContactForm: React.FC = () => {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="mb-2 block font-medium text-gray-700"
-                    >
+                    <label htmlFor="email" className="mb-2 block font-medium text-gray-700">
                       Email <span className="text-red-500">*</span>
                     </label>
                     <Field
@@ -176,10 +159,7 @@ const ContactForm: React.FC = () => {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="phone"
-                      className="mb-2 block font-medium text-gray-700"
-                    >
+                    <label htmlFor="phone" className="mb-2 block font-medium text-gray-700">
                       Téléphone <span className="text-red-500">*</span>
                     </label>
                     <Field
@@ -195,27 +175,14 @@ const ContactForm: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-xl font-semibold text-gray-800">
-                  Service souhaité
-                </h3>
+                <h3 className="text-xl font-semibold text-gray-800">Service souhaité</h3>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label
-                      id="serviceType-group"
-                      className="mb-4 block font-medium"
-                    >
+                    <label id="serviceType-group" className="mb-4 block font-medium">
                       Type de service <span className="text-red-500">*</span>
                     </label>
-                    <div
-                      role="group"
-                      aria-labelledby="serviceType-group"
-                      className="space-y-2"
-                    >
-                      {[
-                        "gestion-locative",
-                        "conciergerie",
-                        "transformation",
-                      ].map((opt) => (
+                    <div role="group" aria-labelledby="serviceType-group" className="space-y-2">
+                      {['gestion-locative', 'conciergerie', 'transformation'].map((opt) => (
                         <label key={opt} className="flex items-center">
                           <Field
                             aria-required="true"
@@ -225,11 +192,11 @@ const ContactForm: React.FC = () => {
                             className="h-5 w-5 text-primary"
                           />
                           <span className="ml-2 text-gray-700">
-                            {opt === "transformation"
-                              ? "Transformation du design"
-                              : opt === "gestion-locative"
-                                ? "Gestion locative"
-                                : "Conciergerie"}
+                            {opt === 'transformation'
+                              ? 'Transformation du design'
+                              : opt === 'gestion-locative'
+                                ? 'Gestion locative'
+                                : 'Conciergerie'}
                           </span>
                         </label>
                       ))}
@@ -243,15 +210,13 @@ const ContactForm: React.FC = () => {
                   <FormuleSelector />
                 </div>
 
-                <h3 className="text-xl font-semibold text-gray-800">
-                  Détails du bien
-                </h3>
+                <h3 className="text-xl font-semibold text-gray-800">Détails du bien</h3>
                 <div>
                   <AddressAutocomplete
                     onAddressSelect={(c: AddressComponents) => {
-                      setFieldValue("address", c.fullAddress);
-                      setFieldValue("city", c.city);
-                      setFieldValue("postalCode", c.postalCode);
+                      setFieldValue('address', c.fullAddress);
+                      setFieldValue('city', c.city);
+                      setFieldValue('postalCode', c.postalCode);
                     }}
                     placeholder="Saisissez votre adresse"
                   />
@@ -259,10 +224,7 @@ const ContactForm: React.FC = () => {
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label
-                      htmlFor="propertyType"
-                      className="mb-2 block font-medium text-gray-700"
-                    >
+                    <label htmlFor="propertyType" className="mb-2 block font-medium text-gray-700">
                       Type de bien
                     </label>
                     <Field
@@ -281,10 +243,7 @@ const ContactForm: React.FC = () => {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="surface"
-                      className="mb-2 block font-medium text-gray-700"
-                    >
+                    <label htmlFor="surface" className="mb-2 block font-medium text-gray-700">
                       Surface (m²)
                     </label>
                     <Field
@@ -296,10 +255,7 @@ const ContactForm: React.FC = () => {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block font-medium text-gray-700"
-                  >
+                  <label htmlFor="message" className="mb-2 block font-medium text-gray-700">
                     Message / Commentaires
                   </label>
                   <Field
@@ -319,15 +275,11 @@ const ContactForm: React.FC = () => {
                       className="h-5 w-5 text-primary"
                     />
                     <span className="ml-2 text-sm text-gray-700">
-                      J'accepte la politique de confidentialité{" "}
+                      J'accepte la politique de confidentialité{' '}
                       <span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <ErrorMessage
-                    name="consent"
-                    component="div"
-                    className="text-sm text-red-500"
-                  />
+                  <ErrorMessage name="consent" component="div" className="text-sm text-red-500" />
                 </div>
 
                 <div className="text-center">
@@ -337,7 +289,7 @@ const ContactForm: React.FC = () => {
                     className="inline-flex items-center justify-center rounded-full bg-primary px-9 py-4 font-semibold text-white shadow-md transition hover:bg-opacity-90"
                     aria-busy={isSubmitting}
                   >
-                    {isSubmitting ? "Envoi en cours…" : "Envoyer ma demande"}
+                    {isSubmitting ? 'Envoi en cours…' : 'Envoyer ma demande'}
                   </button>
                 </div>
               </Form>

@@ -1,11 +1,11 @@
-import CodeWithCopy from "@/components/Common/CodeWithCopy";
-import config from "@/sanity/config/client-config";
-import MarkdownRenderer from "@/utils/markdownConfig";
-import { PortableText } from "@portabletext/react";
-import { getImageDimensions } from "@sanity/asset-utils";
-import urlBuilder from "@sanity/image-url";
-import Image from "next/image";
-import Link from "next/link";
+import CodeWithCopy from '@/components/Common/CodeWithCopy';
+import config from '@/sanity/config/client-config';
+import MarkdownRenderer from '@/utils/markdownConfig';
+import { PortableText } from '@portabletext/react';
+import { getImageDimensions } from '@sanity/asset-utils';
+import urlBuilder from '@sanity/image-url';
+import Image from 'next/image';
+import Link from 'next/link';
 
 // Barebones lazy-loaded image component
 const SampleImageComponent = (props: any) => {
@@ -17,16 +17,16 @@ const SampleImageComponent = (props: any) => {
     <Image
       src={urlBuilder(config as any)
         .image(value)
-        .fit("max")
-        .auto("format")
+        .fit('max')
+        .auto('format')
         .url()}
       width={width}
       height={height}
-      alt={value?.attribution || "blog image"}
+      alt={value?.attribution || 'blog image'}
       loading="lazy"
       style={{
         // Display alongside text if image appears inside a block text span
-        display: isInline ? "inline-block" : "block",
+        display: isInline ? 'inline-block' : 'block',
 
         // Avoid jumping around with aspect-ratio CSS property
         aspectRatio: width / height,
@@ -86,22 +86,14 @@ const myPortableTextComponents = {
     link: ({ value, children }: any) => {
       if (value?.blank === true) {
         return (
-          <a
-            href={value?.href}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
+          <a href={value?.href} target="_blank" rel="noopener noreferrer nofollow">
             {children}
           </a>
         );
       }
       return (
         <Link
-          href={
-            value?.href?.toString()?.startsWith("/")
-              ? `${value?.href}`
-              : `/${value?.href}`
-          }
+          href={value?.href?.toString()?.startsWith('/') ? `${value?.href}` : `/${value?.href}`}
         >
           {children}
         </Link>

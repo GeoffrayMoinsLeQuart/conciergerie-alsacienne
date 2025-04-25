@@ -1,15 +1,12 @@
-import PageTitle from "@/components/Common/PageTitle";
-import {
-  fetchProperties,
-  getPropertyBySlug,
-  imageBuilder,
-} from "@/sanity/sanity-utils";
-import { notFound } from "next/navigation";
-import MarkdownRenderer from "@/utils/markdownConfig";
-import Link from "next/link";
-import ProjectDetailsGallery from "@/components/Gallery/property-gallery";
-import { Metadata } from "next";
-import Script from "next/script";
+import PageTitle from '@/components/Common/PageTitle';
+import { fetchProperties, getPropertyBySlug, imageBuilder } from '@/sanity/sanity-utils';
+import { notFound } from 'next/navigation';
+import MarkdownRenderer from '@/utils/markdownConfig';
+import Link from 'next/link';
+import ProjectDetailsGallery from '@/components/Gallery/property-gallery';
+import { Metadata } from 'next';
+import Script from 'next/script';
+import { generateBreadcrumbList } from '@/utils/BreadcrumbGenerator';
 
 export const revalidate = 600;
 
@@ -30,14 +27,14 @@ export async function generateMetadata({
   const { slug } = await params;
 
   const property = await getPropertyBySlug(slug);
-
-  const siteURL = process.env.SITE_URL || "https://conciergerie-alsacienne.fr";
-  const siteName = "Conciergerie Alsacienne";
+  const siteURL = process.env.SITE_URL || 'https://www.conciergerie-alsacienne.fr';
+  const siteName = 'Conciergerie Alsacienne';
 
   if (!property) {
     return {
       title: `Bien introuvable | ${siteName}`,
-      description: "Ce bien n'existe pas ou a été retiré de notre catalogue.",
+      description: "Ce bien n'existe plus ou a été retiré de notre catalogue.",
+      robots: { index: false, follow: false },
     };
   }
 
@@ -46,17 +43,18 @@ export async function generateMetadata({
     : `${siteURL}/default-property.jpg`;
 
   const fullTitle = `${property.name} | ${siteName}`;
-  const shortDesc =
-    property.shortDescription ||
-    "Découvrez ce bien unique géré par notre équipe.";
+
+  const description =
+    property.shortDescription?.slice(0, 155) ||
+    `Découvrez ce bien pris en charge par notre conciergerie, entre rigueur et performance.`;
 
   return {
     title: fullTitle,
-    description: shortDesc,
+    description,
     openGraph: {
       title: fullTitle,
-      description: shortDesc,
-      url: `${siteURL}/property/${property.slug?.current}`,
+      description,
+      url: `${siteURL}/property/${property.slug.current}`,
       siteName,
       images: [
         {
@@ -66,23 +64,23 @@ export async function generateMetadata({
           alt: property.name,
         },
       ],
-      type: "article",
+      type: 'article',
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: fullTitle,
-      description: shortDesc,
+      description,
       images: [imageUrl],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
 
 // ✅ NE PAS utiliser "await params"
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
   const property = await getPropertyBySlug(slug); // ✅ Plus efficace que fetchAll puis .find()
@@ -109,7 +107,7 @@ export default async function Page({
   if (imagePrincipale) {
     slides.push({
       src: imageBuilder(imagePrincipale).url(),
-      alt: shortDescription || "Image principale",
+      alt: shortDescription || 'Image principale',
     });
   }
 
@@ -117,7 +115,7 @@ export default async function Page({
     galleryImage.forEach((img) => {
       slides.push({
         src: imageBuilder(img).url(),
-        alt: img.caption || "Image additionnelle",
+        alt: img.caption || 'Image additionnelle',
       });
     });
   }
@@ -130,7 +128,7 @@ export default async function Page({
 
   return (
     <>
-      <PageTitle pageTitle={name} pageDescription={shortDescription || ""} />
+      <PageTitle pageTitle={name} pageDescription={shortDescription || ''} />
 
       <section className="bg-white pb-20 pt-[90px]">
         <div className="container">
@@ -160,19 +158,19 @@ export default async function Page({
                       <span>{nbChambres}</span>
                     </li>
                   )}
-                  {loyer && modeGestion === "Gestion Locative" && (
+                  {loyer && modeGestion === 'Gestion Locative' && (
                     <li className="flex justify-between py-2">
                       <span className="font-medium">Loyer</span>
                       <span>{loyer} €</span>
                     </li>
                   )}
-                  {revenuMensuel && modeGestion === "Conciergerie" && (
+                  {revenuMensuel && modeGestion === 'Conciergerie' && (
                     <li className="flex justify-between py-2">
                       <span className="font-medium">Revenu</span>
                       <span>{revenuMensuel} €</span>
                     </li>
                   )}
-                  {occupation && modeGestion === "Conciergerie" && (
+                  {occupation && modeGestion === 'Conciergerie' && (
                     <li className="flex justify-between py-2">
                       <span className="font-medium">Occupation</span>
                       <span>{occupation}%</span>
@@ -181,7 +179,7 @@ export default async function Page({
                   {categories?.length > 0 && (
                     <li className="flex justify-between py-2">
                       <span className="font-medium">Type</span>
-                      <span>{categories.map((c) => c.value).join(", ")}</span>
+                      <span>{categories.map((c) => c.value).join(', ')}</span>
                     </li>
                   )}
                 </ul>
@@ -216,26 +214,18 @@ export default async function Page({
               {/* NAVIGATION ENTRE BIENS */}
               <div className="mt-16 flex justify-between text-sm text-primary">
                 {prev ? (
-                  <Link href={`/property/${prev.slug.current}`}>
-                    ← Propriété précédente
-                  </Link>
+                  <Link href={`/property/${prev.slug.current}`}>← Propriété précédente</Link>
                 ) : (
                   <span />
                 )}
-                {next && (
-                  <Link href={`/property/${next.slug.current}`}>
-                    Propriété suivante →
-                  </Link>
-                )}
+                {next && <Link href={`/property/${next.slug.current}`}>Propriété suivante →</Link>}
               </div>
             </div>
 
             {/* COLONNE DROITE – DESKTOP SEULEMENT */}
             <div className="hidden px-5 lg:block lg:w-4/12">
               <div className="mb-8 rounded-md border border-[#D7DFFF] bg-[#F8F9FF] px-6 py-8">
-                <h3 className="mb-6 text-xl font-bold text-primary">
-                  Informations clés
-                </h3>
+                <h3 className="mb-6 text-xl font-bold text-primary">Informations clés</h3>
                 <ul className="space-y-3 text-base text-body-color">
                   {modeGestion && (
                     <li className="flex justify-between">
@@ -255,19 +245,19 @@ export default async function Page({
                       <span>{nbChambres}</span>
                     </li>
                   )}
-                  {loyer && modeGestion === "Gestion Locative" && (
+                  {loyer && modeGestion === 'Gestion Locative' && (
                     <li className="flex justify-between">
                       <span className="font-medium">Loyer mensuel</span>
                       <span>{loyer} €</span>
                     </li>
                   )}
-                  {revenuMensuel && modeGestion === "Conciergerie" && (
+                  {revenuMensuel && modeGestion === 'Conciergerie' && (
                     <li className="flex justify-between">
                       <span className="font-medium">Revenu estimé</span>
                       <span>{revenuMensuel} €</span>
                     </li>
                   )}
-                  {occupation && modeGestion === "Conciergerie" && (
+                  {occupation && modeGestion === 'Conciergerie' && (
                     <li className="flex justify-between">
                       <span className="font-medium">Taux d'occupation</span>
                       <span>{occupation}%</span>
@@ -276,7 +266,7 @@ export default async function Page({
                   {categories?.length > 0 && (
                     <li className="flex justify-between">
                       <span className="font-medium">Type</span>
-                      <span>{categories.map((c) => c.value).join(", ")}</span>
+                      <span>{categories.map((c) => c.value).join(', ')}</span>
                     </li>
                   )}
                 </ul>
@@ -301,40 +291,35 @@ export default async function Page({
         </div>
         <Script id="json-ld-property" type="application/ld+json">
           {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
+            '@context': 'https://schema.org',
+            '@type': 'Product',
             name: name,
             description: shortDescription || longDescription?.slice(0, 150),
             image:
-              slides.length > 0
-                ? slides[0].src
-                : `${process.env.SITE_URL}/default-property.jpg`,
+              slides.length > 0 ? slides[0].src : `${process.env.SITE_URL}/default-property.jpg`,
             sku: slug,
             brand: {
-              "@type": "Organization",
-              name: "Conciergerie Alsacienne",
+              '@type': 'Organization',
+              name: 'Conciergerie Alsacienne',
             },
             offers: {
-              "@type": "Offer",
-              priceCurrency: "EUR",
-              price:
-                modeGestion === "Conciergerie"
-                  ? revenuMensuel || "0"
-                  : loyer || "0",
-              availability: "https://schema.org/InStock",
+              '@type': 'Offer',
+              priceCurrency: 'EUR',
+              price: modeGestion === 'Conciergerie' ? revenuMensuel || '0' : loyer || '0',
+              availability: 'https://schema.org/InStock',
               url: `${process.env.SITE_URL}/property/${slug}`,
             },
             additionalProperty: [
               {
-                "@type": "PropertyValue",
-                name: "Surface",
+                '@type': 'PropertyValue',
+                name: 'Surface',
                 value: `${surface} m²`,
               },
               ...(nbChambres !== undefined
                 ? [
                     {
-                      "@type": "PropertyValue",
-                      name: "Chambres",
+                      '@type': 'PropertyValue',
+                      name: 'Chambres',
                       value: nbChambres,
                     },
                   ]
@@ -342,14 +327,32 @@ export default async function Page({
               ...(categories?.length
                 ? [
                     {
-                      "@type": "PropertyValue",
-                      name: "Type",
-                      value: categories.map((c) => c.value).join(", "),
+                      '@type': 'PropertyValue',
+                      name: 'Type',
+                      value: categories.map((c) => c.value).join(', '),
                     },
                   ]
                 : []),
             ],
           })}
+        </Script>
+        <Script id="json-ld-breadcrumb" type="application/ld+json">
+          {JSON.stringify(
+            generateBreadcrumbList([
+              {
+                name: 'Accueil',
+                url: 'https://www.conciergerie-alsacienne.fr',
+              },
+              {
+                name: 'Nos biens',
+                url: 'https://www.conciergerie-alsacienne.fr/nos-biens',
+              },
+              {
+                name: name,
+                url: `https://www.conciergerie-alsacienne.fr/property/${slug}`,
+              },
+            ]),
+          )}
         </Script>
       </section>
     </>

@@ -1,16 +1,18 @@
-"use client";
+'use client';
 
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import "@/styles/globals.css";
-import { ThemeProvider } from "next-themes";
-import { Inter } from "next/font/google";
-import NextTopLoader from "nextjs-toploader";
-import AuthProvider from "../context/AuthContext";
-import ToasterContext from "../context/ToastContext";
-import SeoSchemaInjector from "@/components/SEO/SeoSchemaInjector";
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
+import '@/styles/globals.css';
+import { ThemeProvider } from 'next-themes';
+import { Inter } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
+import AuthProvider from '../context/AuthContext';
+import ToasterContext from '../context/ToastContext';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
+import { GTMScript } from '@/components/Pixels/GTM';
+import { GTMNoScript } from '@/components/Pixels/GTMNoScript';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -20,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
+        <GTMNoScript />
         <NextTopLoader
           color="#006BFF"
           crawlSpeed={300}
@@ -27,12 +30,9 @@ export default function RootLayout({
           shadow="none"
           zIndex={9999999}
         />
-        <ThemeProvider
-          enableSystem={false}
-          attribute="class"
-          defaultTheme="light"
-        >
+        <ThemeProvider enableSystem={false} attribute="class" defaultTheme="light">
           <AuthProvider>
+            <GTMScript />
             <SeoSchemaInjector />
             <ToasterContext />
             <Navbar />

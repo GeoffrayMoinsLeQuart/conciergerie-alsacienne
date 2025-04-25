@@ -1,11 +1,11 @@
-"use client";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { integrations, messages } from "../../../../integrations.config";
-import z from "zod";
+'use client';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { integrations, messages } from '../../../../integrations.config';
+import z from 'zod';
 
 const signinSchema = z.object({
   email: z.string().email(),
@@ -20,15 +20,15 @@ const signinSchema = z.object({
         /[@$!%*?&]/.test(val), // At least one special character
       {
         message:
-          "Password must be at least 8 characters long and contain uppercase and lowercase letters, a number, and a special character.",
+          'Password must be at least 8 characters long and contain uppercase and lowercase letters, a number, and a special character.',
       },
     ),
 });
 
 export default function Signin() {
   const [data, setData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const router = useRouter();
 
@@ -48,14 +48,14 @@ export default function Signin() {
       return;
     }
 
-    signIn("credentials", { ...data, redirect: false }).then((callback) => {
+    signIn('credentials', { ...data, redirect: false }).then((callback) => {
       if (callback?.error) {
         toast.error(callback.error);
       }
 
       if (callback?.ok && !callback?.error) {
-        toast.success("Logged in successfully");
-        router.push("/auth/success");
+        toast.success('Logged in successfully');
+        router.push('/auth/success');
       }
     });
   };
@@ -74,12 +74,10 @@ export default function Signin() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
 
-                <h3 className="mb-8 text-xl text-dark ">
-                  Sign in with Social Media
-                </h3>
+                <h3 className="mb-8 text-xl text-dark ">Sign in with Social Media</h3>
                 <div className="mb-12 flex flex-wrap items-center gap-4">
                   <button
-                    onClick={() => signIn("google")}
+                    onClick={() => signIn('google')}
                     className="flex h-[50px] min-w-[50px] items-center justify-center whitespace-nowrap rounded border text-base text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary md:w-auto md:px-7"
                   >
                     <span className="md:pr-3">
@@ -115,13 +113,11 @@ export default function Signin() {
                         </defs>
                       </svg>
                     </span>
-                    <span className="hidden md:inline-flex">
-                      Sign up with Google
-                    </span>
+                    <span className="hidden md:inline-flex">Sign up with Google</span>
                   </button>
 
                   <button
-                    onClick={() => signIn("github")}
+                    onClick={() => signIn('github')}
                     className="flex h-[50px] w-[50px] items-center justify-center rounded-md border text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary"
                   >
                     <svg
@@ -188,19 +184,14 @@ export default function Signin() {
                   <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-10">
-                        <label
-                          htmlFor="email"
-                          className="mb-3 block text-base text-dark "
-                        >
+                        <label htmlFor="email" className="mb-3 block text-base text-dark ">
                           Email Address
                         </label>
                         <input
                           type="email"
                           name="email"
                           value={data.email}
-                          onChange={(e) =>
-                            setData({ ...data, email: e.target.value })
-                          }
+                          onChange={(e) => setData({ ...data, email: e.target.value })}
                           placeholder="jhonandrio@domain.com"
                           className="placeholder-dark-text w-full border-b bg-transparent py-5 text-base font-medium text-dark outline-none focus:border-primary   "
                         />
@@ -208,19 +199,14 @@ export default function Signin() {
                     </div>
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-10">
-                        <label
-                          htmlFor="password"
-                          className="mb-3 block text-base text-dark "
-                        >
+                        <label htmlFor="password" className="mb-3 block text-base text-dark ">
                           Password
                         </label>
                         <input
                           type="password"
                           name="password"
                           value={data.password}
-                          onChange={(e) =>
-                            setData({ ...data, password: e.target.value })
-                          }
+                          onChange={(e) => setData({ ...data, password: e.target.value })}
                           placeholder="**********"
                           className="placeholder-dark-text w-full border-b bg-transparent py-5 text-base font-medium text-dark outline-none focus:border-primary   "
                         />
@@ -236,11 +222,7 @@ export default function Signin() {
                               className="flex cursor-pointer select-none text-body-color hover:text-primary"
                             >
                               <div className="relative">
-                                <input
-                                  type="checkbox"
-                                  id="supportCheckbox"
-                                  className="sr-only"
-                                />
+                                <input type="checkbox" id="supportCheckbox" className="sr-only" />
                                 <div className="box mr-4 mt-0.5 flex h-5 w-5 items-center justify-center rounded border">
                                   <span className="fill-white opacity-0">
                                     <svg
@@ -275,10 +257,7 @@ export default function Signin() {
                         <div className="mb-4">
                           <p className="text-body-color">
                             Don&#39;t have an account yet?
-                            <Link
-                              href="/auth/signup"
-                              className="text-primary hover:underline"
-                            >
+                            <Link href="/auth/signup" className="text-primary hover:underline">
                               Sign up
                             </Link>
                           </p>

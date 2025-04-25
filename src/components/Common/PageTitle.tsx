@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 type Props = {
   pageTitle: string;
@@ -6,20 +6,14 @@ type Props = {
   showMenu?: boolean;
 };
 
-export default function PageTitle({
-  pageTitle,
-  pageDescription,
-  showMenu,
-}: Props) {
+export default function PageTitle({ pageTitle, pageDescription, showMenu }: Props) {
   return (
     <section className="relative z-10 overflow-hidden bg-white pb-[50px] pt-[150px]">
       <div className="container">
         <div className="mx-[-16px] flex flex-wrap items-center">
           <div className="w-full px-4 md:w-8/12 lg:w-7/12">
             <div className="mb-12 max-w-[570px] md:mb-0">
-              <h1 className="mb-5 text-2xl font-bold text-black sm:text-3xl">
-                {pageTitle}
-              </h1>
+              <h1 className="mb-5 text-2xl font-bold text-black sm:text-3xl">{pageTitle}</h1>
               <p className="text-base font-medium leading-relaxed text-body-color">
                 {pageDescription}
               </p>
@@ -38,9 +32,7 @@ export default function PageTitle({
                     </Link>
                     <span className="mr-3 block h-2 w-2 rotate-45 border-r-2 border-t-2 border-body-color"></span>
                   </li>
-                  <li className="text-base font-medium text-primary">
-                    {pageTitle}
-                  </li>
+                  <li className="text-base font-medium text-primary">{pageTitle}</li>
                 </ul>
               </div>
             </div>

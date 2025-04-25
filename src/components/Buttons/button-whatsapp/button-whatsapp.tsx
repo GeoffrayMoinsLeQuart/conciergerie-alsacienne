@@ -7,8 +7,7 @@ interface WhatsappButtonProps {
 }
 
 export default function WhatsappButton({ color }: WhatsappButtonProps) {
-  const baseClass =
-    'inline-block text-white text-lg font-medium py-3 px-6 rounded-md transition';
+  const baseClass = 'inline-block text-white text-lg font-medium py-3 px-6 rounded-md transition';
 
   const colorClasses = {
     inherit: 'bg-gray-500 hover:bg-gray-600',
@@ -20,7 +19,9 @@ export default function WhatsappButton({ color }: WhatsappButtonProps) {
     warning: 'bg-yellow-500 hover:bg-yellow-600',
   };
 
-  const selectedClass = color ? colorClasses[color] ?? colorClasses.inherit : colorClasses.inherit;
+  const selectedClass = color
+    ? (colorClasses[color] ?? colorClasses.inherit)
+    : colorClasses.inherit;
 
   return (
     <Link href="https://wa.me/+33621471922" target="_blank" rel="noopener noreferrer">
@@ -28,7 +29,7 @@ export default function WhatsappButton({ color }: WhatsappButtonProps) {
         type="button"
         aria-label="contact-us-whatsapp"
         className="rounded-md bg-black px-6 py-3 font-medium text-white"
-        >
+      >
         Avez vous WhatsApp?
       </button>
     </Link>

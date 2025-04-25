@@ -1,8 +1,8 @@
-import algoliasearch from "algoliasearch";
-import { useEffect } from "react";
-import { Hits, InstantSearch, SearchBox } from "react-instantsearch";
-import CustomHits from "./CustomHits";
-import { integrations, messages } from "../../../integrations.config";
+import algoliasearch from 'algoliasearch';
+import { useEffect } from 'react';
+import { Hits, InstantSearch, SearchBox } from 'react-instantsearch';
+import CustomHits from './CustomHits';
+import { integrations, messages } from '../../../integrations.config';
 
 const APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_PROJECT_ID as string;
 const API_KEY = process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string;
@@ -21,17 +21,17 @@ const GlobalSearchModal = (props: Props) => {
   useEffect(() => {
     // closing modal while clicking outside
     function handleClickOutside(event: any) {
-      if (!event.target.closest(".modal-content")) {
+      if (!event.target.closest('.modal-content')) {
         setSearchModalOpen(false);
       }
     }
 
     if (searchModalOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [searchModalOpen, setSearchModalOpen]);
 
@@ -67,15 +67,15 @@ const GlobalSearchModal = (props: Props) => {
                   autoFocus
                   placeholder="Search Entire Site | Products, Docs, Pages ..."
                   classNames={{
-                    form: "sticky top-0 z-[999] border-b",
+                    form: 'sticky top-0 z-[999] border-b',
                     input:
-                      "h-[74px] w-full bg-white rounded-t-lg pl-[60px] pr-5 text-dark outline-none",
+                      'h-[74px] w-full bg-white rounded-t-lg pl-[60px] pr-5 text-dark outline-none',
                     submitIcon:
-                      "absolute left-0 top-0 flex h-[74px] w-[60px] p-5 items-center justify-center fill-dark-text",
-                    reset: "hidden",
-                    resetIcon: "hidden",
-                    loadingIndicator: "hidden",
-                    loadingIcon: "hidden",
+                      'absolute left-0 top-0 flex h-[74px] w-[60px] p-5 items-center justify-center fill-dark-text',
+                    reset: 'hidden',
+                    resetIcon: 'hidden',
+                    loadingIndicator: 'hidden',
+                    loadingIcon: 'hidden',
                   }}
                 />
 
@@ -83,10 +83,7 @@ const GlobalSearchModal = (props: Props) => {
                   {integrations?.isSanityEnabled ? (
                     <Hits
                       hitComponent={(props) => (
-                        <CustomHits
-                          {...props}
-                          setSearchModalOpen={setSearchModalOpen}
-                        />
+                        <CustomHits {...props} setSearchModalOpen={setSearchModalOpen} />
                       )}
                     />
                   ) : (

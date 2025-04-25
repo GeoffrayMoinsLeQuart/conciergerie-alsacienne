@@ -1,22 +1,19 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import SectionTitle from "@/components/Common/SectionTitle";
-import { motion } from "framer-motion";
+import { FC } from 'react';
+import SectionTitle from '@/components/Common/SectionTitle';
+import { motion } from 'framer-motion';
 
 const ResultatsConciergerie: FC = () => {
   const stats = [
-    ["+35%", "de revenus en moyenne"],
-    ["100%", "automatisé & délégué"],
-    ["0€", "de frais fixes (formule au % seulement)"],
-    ["4.6⭐", "moyenne des avis voyageurs"],
+    ['+35%', 'de revenus en moyenne'],
+    ['100%', 'automatisé & délégué'],
+    ['0€', 'de frais fixes (formule au % seulement)'],
+    ['4.6⭐', 'moyenne des avis voyageurs'],
   ];
 
   return (
-    <section
-      className="bg-[#f8f9ff] py-20"
-      aria-label="Résultats concrets conciergerie"
-    >
+    <section className="bg-[#f8f9ff] py-20" aria-label="Résultats concrets conciergerie">
       <div className="container">
         <SectionTitle
           mainTitle="RÉSULTATS CONCRETS"

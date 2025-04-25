@@ -1,29 +1,26 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { motion } from "framer-motion";
-import Graphic from "./Graphic";
-import SocialLinks from "./SocialLinks";
-import Link from "next/link";
-import { Phone } from "lucide-react";
-import CTAButtons from "@/components/Buttons/CTAButtons";
+import { FC } from 'react';
+import { motion } from 'framer-motion';
+import Graphic from './Graphic';
+import SocialLinks from './SocialLinks';
+import Link from 'next/link';
+import { Phone } from 'lucide-react';
+import CTAButtons from '@/components/Buttons/CTAButtons';
 // import SocialLinks from "./SocialLinks"; // Tu pourras le réactiver une fois prêt
 
 // Sécurise motion (évite un crash si undefined)
 
 const stats = [
-  { label: "Biens gérés", value: 120 },
-  { label: "Voyageurs accueillis", value: 3500 },
+  { label: 'Biens gérés', value: 120 },
+  { label: 'Voyageurs accueillis', value: 3500 },
   { label: "Années d'expérience", value: 8 },
-  { label: "Taux d'occupation moyen", value: "85%" },
+  { label: "Taux d'occupation moyen", value: '85%' },
 ];
 
 const About: FC = () => {
   return (
-    <section
-      id="about"
-      className="relative z-10 bg-[#f8f9ff] p-[40px] sm:p-[80px]"
-    >
+    <section id="about" className="relative z-10 bg-[#f8f9ff] p-[40px] sm:p-[80px]">
       <div className="container">
         <div className="mx-[-16px] max-sm:grid max-sm:grid-cols-1 sm:flex sm:flex-wrap sm:justify-between ">
           {/* Col gauche : texte */}
@@ -50,10 +47,10 @@ const About: FC = () => {
 
             <CTAButtons
               primary={{
-                label: "Discutons de votre projet",
-                href: "tel:0033621471922",
+                label: 'Discutons de votre projet',
+                href: 'tel:0033621471922',
                 icon: <Phone className="h-5 w-5" />,
-                colorClass: "bg-primary text-white hover:bg-primary/90",
+                colorClass: 'bg-primary text-white hover:bg-primary/90',
               }}
             />
           </div>
@@ -68,9 +65,8 @@ const About: FC = () => {
               className="mb-8 text-justify text-base text-body-color
 "
             >
-              Une équipe locale engagée pour valoriser votre bien et assurer une
-              expérience 5 étoiles à vos voyageurs. L'expertise alsacienne au
-              service de votre rentabilité.
+              Une équipe locale engagée pour valoriser votre bien et assurer une expérience 5
+              étoiles à vos voyageurs. L'expertise alsacienne au service de votre rentabilité.
             </p>
 
             {/* Statistiques animées */}
@@ -94,9 +90,7 @@ const About: FC = () => {
                   }}
                 >
                   <span className="mb-1 text-3xl font-bold text-primary">
-                    {typeof stat.value === "number"
-                      ? stat.value.toLocaleString()
-                      : stat.value}
+                    {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}
                   </span>
                   <span className="text-sm text-gray-600">{stat.label}</span>
                 </motion.li>

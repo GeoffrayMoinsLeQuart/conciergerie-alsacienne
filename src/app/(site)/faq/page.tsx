@@ -1,11 +1,23 @@
-import { Metadata } from "next";
-import { getFAQs } from "@/sanity/sanity-utils";
-import FAQPageClient from "./FAQPageClient";
+import { Metadata } from 'next';
+import { getFAQs } from '@/sanity/sanity-utils';
+import FAQPageClient from './FAQPageClient';
 
 export const metadata: Metadata = {
-  title: "FAQ - Toutes vos questions | Conciergerie Alsacienne",
+  title: 'Réponses à vos questions fréquentes | Conciergerie Alsacienne',
   description:
-    "Retrouvez les réponses aux questions les plus courantes sur la conciergerie, la gestion locative et nos autres services.",
+    'Transparence totale sur nos prestations, tarifs, garanties. Tout ce que vous devez savoir, sans jargon.',
+  openGraph: {
+    title: 'Foire aux questions',
+    description: 'Une conciergerie sérieuse, c’est aussi une réponse claire à chaque question.',
+    url: 'https://www.conciergerie-alsacienne.fr/faq',
+    siteName: 'Conciergerie Alsacienne',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FAQ | Conciergerie Alsacienne',
+    description: 'Réponses simples et concrètes sur nos services.',
+  },
 };
 
 export default async function FAQPage() {
@@ -21,13 +33,13 @@ export default async function FAQPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
             mainEntity: faqs.map((faq) => ({
-              "@type": "Question",
+              '@type': 'Question',
               name: faq.question,
               acceptedAnswer: {
-                "@type": "Answer",
+                '@type': 'Answer',
                 text: faq.answer,
               },
             })),

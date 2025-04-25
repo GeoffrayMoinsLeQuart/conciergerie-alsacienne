@@ -1,25 +1,25 @@
-import SectionTitle from "@/components/Common/SectionTitle";
-import Image from "next/image";
+import SectionTitle from '@/components/Common/SectionTitle';
+import Image from 'next/image';
 
 const testimonials = [
   {
-    name: "Claire R.",
-    role: "Propriétaire à Colmar",
-    image: "/avatars/avatar1.jpg",
+    name: 'Claire R.',
+    role: 'Propriétaire à Colmar',
+    image: '/avatars/avatar1.jpg',
     quote:
       "Grâce à La Conciergerie Alsacienne, je n'ai plus à me soucier de rien. Mon bien est mieux noté et mieux rempli qu'avant !",
   },
   {
-    name: "Julien M.",
-    role: "Investisseur Mulhousien",
-    image: "/avatars/avatar2.jpg",
+    name: 'Julien M.',
+    role: 'Investisseur Mulhousien',
+    image: '/avatars/avatar2.jpg',
     quote:
-      "Une équipe réactive, des conseils design précieux, et un vrai suivi de mes performances. Je recommande à 100%.",
+      'Une équipe réactive, des conseils design précieux, et un vrai suivi de mes performances. Je recommande à 100%.',
   },
   {
-    name: "Sophie L.",
-    role: "Propriétaire débutante",
-    image: "/avatars/avatar3.jpg",
+    name: 'Sophie L.',
+    role: 'Propriétaire débutante',
+    image: '/avatars/avatar3.jpg',
     quote:
       "Ils m'ont accompagnée dès le départ. Tout a été pensé pour faciliter ma vie de propriétaire. Un vrai soulagement !",
   },

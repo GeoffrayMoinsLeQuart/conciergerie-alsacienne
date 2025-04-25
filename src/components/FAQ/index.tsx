@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import React, { useState, useMemo, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import Link from 'next/link';
+import React, { useState, useMemo, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export interface FAQItem {
   id: string;
@@ -26,64 +26,63 @@ interface FAQProps {
 }
 
 const categoryLabels: Record<string, string> = {
-  fiscalite: "Fiscalité",
-  technique: "Technique",
-  client: "Relations clients",
-  travaux: "Travaux",
-  baux: "Baux & Contrats",
-  loyers: "Loyers & Paiements",
-  rentabilite: "Rentabilité",
-  "relations-locataires": "Relations locataires",
-  obligations: "Obligations légales",
-  autres: "Autres questions",
+  fiscalite: 'Fiscalité',
+  technique: 'Technique',
+  client: 'Relations clients',
+  travaux: 'Travaux',
+  baux: 'Baux & Contrats',
+  loyers: 'Loyers & Paiements',
+  rentabilite: 'Rentabilité',
+  'relations-locataires': 'Relations locataires',
+  obligations: 'Obligations légales',
+  autres: 'Autres questions',
 };
 
 const categoryIcons: Record<string, string> = {
-  fiscalite: "📊",
-  technique: "🔧",
-  client: "👥",
-  travaux: "🛠️",
-  baux: "📝",
-  loyers: "💶",
-  rentabilite: "📈",
-  "relations-locataires": "🤝",
-  obligations: "⚖️",
-  autres: "❓",
+  fiscalite: '📊',
+  technique: '🔧',
+  client: '👥',
+  travaux: '🛠️',
+  baux: '📝',
+  loyers: '💶',
+  rentabilite: '📈',
+  'relations-locataires': '🤝',
+  obligations: '⚖️',
+  autres: '❓',
 };
 
 const FAQ: React.FC<FAQProps> = ({
   items = [],
-  title = "Questions fréquentes",
-  subtitle = "Retrouvez les réponses aux questions les plus courantes.",
-  mainTitle = "FAQ",
+  title = 'Questions fréquentes',
+  subtitle = 'Retrouvez les réponses aux questions les plus courantes.',
+  mainTitle = 'FAQ',
   center = true,
   showTopicFilter = true,
-  defaultType = "all",
+  defaultType = 'all',
   specificPage = false,
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [selectedTopic, setSelectedTopic] = useState<string>("all");
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedTopic, setSelectedTopic] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   const resetFilters = () => {
-    setSelectedTopic("all");
-    setSearchTerm("");
+    setSelectedTopic('all');
+    setSearchTerm('');
   };
 
   const uniqueTopics = useMemo(() => {
-    return [...new Set(items.map((item) => item.topic || "autres"))];
+    return [...new Set(items.map((item) => item.topic || 'autres'))];
   }, [items]);
 
   const filteredFaqs = useMemo(() => {
     return items.filter((item) => {
-      const matchesTopic =
-        selectedTopic === "all" || (item.topic || "autres") === selectedTopic;
+      const matchesTopic = selectedTopic === 'all' || (item.topic || 'autres') === selectedTopic;
       const matchesSearch =
-        searchTerm === "" ||
+        searchTerm === '' ||
         item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.answer.toLowerCase().includes(searchTerm.toLowerCase());
       return matchesTopic && matchesSearch;
@@ -93,18 +92,10 @@ const FAQ: React.FC<FAQProps> = ({
   return (
     <section className="bg-white py-16">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className={`${center ? "text-center" : "text-left"} mb-10`}>
-          {mainTitle && (
-            <h1 className="mb-4 text-4xl font-bold text-gray-800">
-              {mainTitle}
-            </h1>
-          )}
-          {title && (
-            <h2 className="mb-4 text-3xl font-bold text-primary">{title}</h2>
-          )}
-          {subtitle && (
-            <p className="mb-10 text-base text-gray-700">{subtitle}</p>
-          )}
+        <div className={`${center ? 'text-center' : 'text-left'} mb-10`}>
+          {mainTitle && <h1 className="mb-4 text-4xl font-bold text-gray-800">{mainTitle}</h1>}
+          {title && <h2 className="mb-4 text-3xl font-bold text-primary">{title}</h2>}
+          {subtitle && <p className="mb-10 text-base text-gray-700">{subtitle}</p>}
         </div>
 
         <div className="relative mb-10">
@@ -137,11 +128,11 @@ const FAQ: React.FC<FAQProps> = ({
         {showTopicFilter && uniqueTopics.length > 0 && (
           <div className="mb-6 flex flex-wrap gap-2">
             <button
-              onClick={() => setSelectedTopic("all")}
+              onClick={() => setSelectedTopic('all')}
               className={`rounded-md px-3 py-2 text-sm transition ${
-                selectedTopic === "all"
-                  ? "bg-primary/10 font-medium text-primary"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                selectedTopic === 'all'
+                  ? 'bg-primary/10 font-medium text-primary'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
               Toutes les thématiques
@@ -153,15 +144,15 @@ const FAQ: React.FC<FAQProps> = ({
                 onClick={() => setSelectedTopic(topic)}
                 className={`rounded-md px-3 py-2 text-sm transition ${
                   selectedTopic === topic
-                    ? "bg-primary/10 font-medium text-primary"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? 'bg-primary/10 font-medium text-primary'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                <span className="mr-1">{categoryIcons[topic] || "📌"}</span>
+                <span className="mr-1">{categoryIcons[topic] || '📌'}</span>
                 {categoryLabels[topic] || topic}
               </button>
             ))}
-            {(selectedTopic !== "all" || searchTerm) && (
+            {(selectedTopic !== 'all' || searchTerm) && (
               <button
                 onClick={resetFilters}
                 className="ml-auto rounded-md bg-gray-100 px-3 py-2 text-sm text-gray-700 hover:bg-gray-200"
@@ -173,9 +164,8 @@ const FAQ: React.FC<FAQProps> = ({
         )}
 
         <div className="mb-4 text-sm text-gray-500">
-          {filteredFaqs.length}{" "}
-          {filteredFaqs.length === 1 ? "résultat" : "résultats"} trouvé
-          {filteredFaqs.length === 1 ? "" : "s"}
+          {filteredFaqs.length} {filteredFaqs.length === 1 ? 'résultat' : 'résultats'} trouvé
+          {filteredFaqs.length === 1 ? '' : 's'}
         </div>
 
         <div className="mx-auto max-w-3xl space-y-4">
@@ -195,18 +185,16 @@ const FAQ: React.FC<FAQProps> = ({
                   aria-controls={`faq-answer-${index}`}
                   className="flex w-full items-center justify-between p-5 text-left"
                 >
-                  <h3 className="text-lg font-medium text-gray-800">
-                    {item.question}
-                  </h3>
+                  <h3 className="text-lg font-medium text-gray-800">{item.question}</h3>
                   <span className="ml-6 flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500">
-                    {openIndex === index ? "▲" : "▼"}
+                    {openIndex === index ? '▲' : '▼'}
                   </span>
                 </button>
                 <AnimatePresence>
                   {openIndex === index && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
+                      animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       className="border-t border-gray-100 bg-white px-5 py-4"
                       role="region"
@@ -217,7 +205,7 @@ const FAQ: React.FC<FAQProps> = ({
                       <div className="mt-3 flex flex-wrap gap-2">
                         {item.topic && (
                           <span className="inline-flex items-center rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700">
-                            {categoryIcons[item.topic] || "📌"}{" "}
+                            {categoryIcons[item.topic] || '📌'}{' '}
                             {categoryLabels[item.topic] || item.topic}
                           </span>
                         )}

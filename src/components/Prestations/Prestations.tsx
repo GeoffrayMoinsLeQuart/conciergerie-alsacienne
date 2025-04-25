@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import Image from "next/image";
-import { Prestation } from "@/types/prestation";
+import { FC } from 'react';
+import Image from 'next/image';
+import { Prestation } from '@/types/prestation';
 
 interface PrestationsProps {
   prestations: Prestation[];
@@ -29,19 +29,13 @@ const Prestations: FC<PrestationsProps> = ({ prestations }) => {
           </div>
 
           {/* Titre */}
-          <h3 className="mb-3 text-xl font-bold text-black">
-            {prestation.title}
-          </h3>
+          <h3 className="mb-3 text-xl font-bold text-black">{prestation.title}</h3>
 
           {/* Sous‑titre */}
-          <p className="mb-4 text-lg font-medium text-gray-700">
-            {prestation.description}
-          </p>
+          <p className="mb-4 text-lg font-medium text-gray-700">{prestation.description}</p>
 
           {/* Détails */}
-          <p className="text-base leading-relaxed text-body-color">
-            {prestation.details}
-          </p>
+          <p className="text-base leading-relaxed text-body-color">{prestation.details}</p>
         </div>
       ))}
     </div>

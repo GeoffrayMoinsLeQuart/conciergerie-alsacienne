@@ -1,11 +1,11 @@
 // Nouveau composant CTA Conciergerie avec ajustements stylistiques et UX
 
-"use client";
+'use client';
 
-import { FC } from "react";
-import CTAButtons from "@/components/Buttons/CTAButtons";
-import { Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { FC } from 'react';
+import CTAButtons from '@/components/Buttons/CTAButtons';
+import { Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const CTAConciergerie: FC = () => {
   return (
@@ -21,16 +21,15 @@ const CTAConciergerie: FC = () => {
           Votre bien mérite le meilleur.
         </h2>
         <p className="mb-6 text-white text-opacity-90">
-          Offrez à votre location courte durée un accompagnement premium.
-          Nous transformons chaque bien en une expérience remarquable — pour vos voyageurs et pour votre rentabilité.
+          Offrez à votre location courte durée un accompagnement premium. Nous transformons chaque
+          bien en une expérience remarquable — pour vos voyageurs et pour votre rentabilité.
         </p>
         <CTAButtons
           secondary={{
-            label: "Parler de mon projet",
-            href: "/contact",
+            label: 'Parler de mon projet',
+            href: '/contact',
             icon: <Sparkles className="h-5 w-5" />,
-            colorClass:
-              "bg-white text-primary border-white hover:bg-primary hover:text-white",
+            colorClass: 'bg-white text-primary border-white hover:bg-primary hover:text-white',
           }}
         />
       </div>

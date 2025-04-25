@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useMemo } from "react";
-import { getAllPosts } from "@/sanity/sanity-utils"; // renvoie tous les posts
-import { Blog } from "@/types/blog";
-import SingleBlog from "@/components/Blog/SingleBlog";
-import Masonry from "react-masonry-css";
-import SkeletonMasonryBlog from "@/components/Blog/SkeletonMasonryBlog";
-import BlogFilters from "@/components/Blog/BlogFilters";
+import { useEffect, useState, useMemo } from 'react';
+import { getAllPosts } from '@/sanity/sanity-utils'; // renvoie tous les posts
+import { Blog } from '@/types/blog';
+import SingleBlog from '@/components/Blog/SingleBlog';
+import Masonry from 'react-masonry-css';
+import SkeletonMasonryBlog from '@/components/Blog/SkeletonMasonryBlog';
+import BlogFilters from '@/components/Blog/BlogFilters';
 
 export default function BlogClient() {
   const [posts, setPosts] = useState<Blog[]>([]);
@@ -14,7 +14,7 @@ export default function BlogClient() {
 
   // L'état de tes filtres
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   // 1️⃣ Charger tous les posts au montage
   useEffect(() => {
@@ -54,11 +54,7 @@ export default function BlogClient() {
         const postCategories = post.categories.map((category) => category);
 
         // Exige que *toutes* les catégories sélectionnées soient présentes dans post.categories
-        if (
-          !selectedCats.every((selectedCategory) =>
-            postCategories.includes(selectedCategory),
-          )
-        ) {
+        if (!selectedCats.every((selectedCategory) => postCategories.includes(selectedCategory))) {
           return false;
         }
       }
@@ -88,9 +84,7 @@ export default function BlogClient() {
       });
     });
 
-    return categoriesWithCount.filter(({ title }) =>
-      filteredCategories.has(title),
-    );
+    return categoriesWithCount.filter(({ title }) => filteredCategories.has(title));
   }, [filteredPosts, categoriesWithCount]);
 
   if (isLoading) {
@@ -106,27 +100,21 @@ export default function BlogClient() {
           selectedCats={selectedCats}
           onToggleCat={(cat) =>
             setSelectedCats((prev) =>
-              prev.includes(cat)
-                ? prev.filter((c) => c !== cat)
-                : [...prev, cat],
+              prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
             )
           }
           searchTerm={searchTerm}
           onSearchTermChange={setSearchTerm}
           onReset={() => {
             setSelectedCats([]);
-            setSearchTerm("");
+            setSearchTerm('');
           }}
         />
 
         {filteredPosts.length === 0 ? (
           <div className="py-12 text-center">
-            <h3 className="mb-2 text-xl font-semibold text-black">
-              Aucun article trouvé
-            </h3>
-            <p className="text-body-color">
-              Essayez d'ajuster vos filtres ou votre recherche.
-            </p>
+            <h3 className="mb-2 text-xl font-semibold text-black">Aucun article trouvé</h3>
+            <p className="text-body-color">Essayez d'ajuster vos filtres ou votre recherche.</p>
           </div>
         ) : (
           <>

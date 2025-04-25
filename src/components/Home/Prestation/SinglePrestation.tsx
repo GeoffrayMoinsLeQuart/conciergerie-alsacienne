@@ -1,12 +1,8 @@
-import { Prestation } from "@/types/prestation";
-import Image from "next/image";
-import Link from "next/link";
+import { Prestation } from '@/types/prestation';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export default function SinglePrestation({
-  prestation,
-}: {
-  prestation: Prestation;
-}) {
+export default function SinglePrestation({ prestation }: { prestation: Prestation }) {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3 rounded-xl">
       <div className="mb-10 bg-white rounded-xl">
@@ -16,7 +12,7 @@ export default function SinglePrestation({
         >
           <Image
             src={prestation?.image}
-            alt={prestation?.title || "Image de la prestation"}
+            alt={prestation?.title || 'Image de la prestation'}
             fill
             sizes="(max-width: 768px) 100vw"
             className="w-full object-cover object-center rounded-xl p-3"

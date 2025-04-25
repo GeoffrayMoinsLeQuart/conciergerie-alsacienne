@@ -1,10 +1,10 @@
 // Témoignages améliorés avec animation et harmonisation visuelle
 
-"use client";
+'use client';
 
-import { FC } from "react";
-import SectionTitle from "@/components/Common/SectionTitle";
-import { motion } from "framer-motion";
+import { FC } from 'react';
+import SectionTitle from '@/components/Common/SectionTitle';
+import { motion } from 'framer-motion';
 
 interface Testimonial {
   name: string;
@@ -14,18 +14,18 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    name: "Marie L.",
+    name: 'Marie L.',
     subtitle: "Propriétaire d'un T3 à Mulhouse",
     text: `Depuis que j'ai confié mon appartement à la Conciergerie Alsacienne, je n'ai plus à me soucier des appels de locataires ou des problèmes de plomberie. Mes loyers sont versés à date fixe et leur garantie loyers impayés m'assure une tranquillité totale.`,
   },
   {
-    name: "Pierre et Sophie D.",
-    subtitle: "Propriétaires de deux studios à Strasbourg",
+    name: 'Pierre et Sophie D.',
+    subtitle: 'Propriétaires de deux studios à Strasbourg',
     text: `En tant qu'expatriés, nous avions besoin d'une gestion à distance fiable. L'équipe de la Conciergerie Alsacienne gère nos biens comme si c'étaient les leurs. Leur réactivité et leur professionnalisme sont remarquables.`,
   },
   {
-    name: "Jean-Marc B.",
-    subtitle: "Investisseur immobilier",
+    name: 'Jean-Marc B.',
+    subtitle: 'Investisseur immobilier',
     text: `Après avoir testé plusieurs agences, j'ai enfin trouvé un gestionnaire qui comprend mes objectifs de rentabilité. Leur formule Premium me permet de développer mon patrimoine sereinement, avec un ROI optimisé.`,
   },
 ];

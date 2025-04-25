@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { CheckCircle, FileText, Camera, BadgeCheck, Shield } from "lucide-react";
-import SectionTitle from "../../Common/SectionTitle";
+import { FC } from 'react';
+import { CheckCircle, FileText, Camera, BadgeCheck, Shield } from 'lucide-react';
+import SectionTitle from '../../Common/SectionTitle';
 
 const FraisInitiauxCard: FC = () => {
   const items = [
     {
       icon: FileText,
-      text: "Établissement du bail conforme à la législation",
+      text: 'Établissement du bail conforme à la législation',
     },
     {
       icon: Camera,
@@ -16,7 +16,7 @@ const FraisInitiauxCard: FC = () => {
     },
     {
       icon: BadgeCheck,
-      text: "Vérification complète des dossiers locataires",
+      text: 'Vérification complète des dossiers locataires',
     },
     {
       icon: Shield,
@@ -37,13 +37,12 @@ const FraisInitiauxCard: FC = () => {
         <div className="mx-auto mt-10 max-w-5xl rounded-2xl border-l-4 border-primary bg-white p-8 shadow-md">
           <div className="mb-6 flex items-center gap-3 text-gray-800">
             <CheckCircle className="h-6 w-6 text-primary" />
-            <h3 className="text-xl font-semibold">
-              Frais initiaux de mise en location
-            </h3>
+            <h3 className="text-xl font-semibold">Frais initiaux de mise en location</h3>
           </div>
 
           <p className="mb-6 text-gray-600">
-            Des frais équivalents à un mois de loyer hors charges sont appliqués lors de la mise en location initiale. Ces frais couvrent les éléments suivants :
+            Des frais équivalents à un mois de loyer hors charges sont appliqués lors de la mise en
+            location initiale. Ces frais couvrent les éléments suivants :
           </p>
 
           <ul className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">

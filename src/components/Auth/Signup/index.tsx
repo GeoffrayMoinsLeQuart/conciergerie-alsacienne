@@ -1,12 +1,12 @@
-"use client";
-import axios from "axios";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { integrations, messages } from "../../../../integrations.config";
-import z from "zod";
+'use client';
+import axios from 'axios';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { integrations, messages } from '../../../../integrations.config';
+import z from 'zod';
 
 const signupSchema = z
   .object({
@@ -23,24 +23,24 @@ const signupSchema = z
           /[@$!%*?&]/.test(val), // At least one special character
         {
           message:
-            "Password must be at least 8 characters long and contain uppercase and lowercase letters, a number, and a special character.",
+            'Password must be at least 8 characters long and contain uppercase and lowercase letters, a number, and a special character.',
         },
       ),
     rePassword: z.string().min(8),
   })
   .refine((data) => data.password === data.rePassword, {
-    message: "Passwords do not match",
-    path: ["rePassword"], // Error message will be attached to `rePassword`
+    message: 'Passwords do not match',
+    path: ['rePassword'], // Error message will be attached to `rePassword`
   });
 
 export default function Signup() {
   const router = useRouter();
 
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    rePassword: "",
+    name: '',
+    email: '',
+    password: '',
+    rePassword: '',
   });
 
   const { name, email, password, rePassword } = data;
@@ -62,22 +62,22 @@ export default function Signup() {
     }
 
     axios
-      .post("/api/register", {
+      .post('/api/register', {
         name,
         email,
         password,
       })
       .then(() => {
-        toast.success("User has been registered.");
-        router.push("/auth/signin");
+        toast.success('User has been registered.');
+        router.push('/auth/signin');
         setData({
-          name: "",
-          email: "",
-          password: "",
-          rePassword: "",
+          name: '',
+          email: '',
+          password: '',
+          rePassword: '',
         });
       })
-      .catch(() => toast.error("Something went wrong"));
+      .catch(() => toast.error('Something went wrong'));
   };
   return (
     <section className="pt-[120px] lg:pt-[240px]">
@@ -93,12 +93,10 @@ export default function Signup() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
 
-                <h3 className="mb-8 text-xl text-dark">
-                  Sign Up with Social Media
-                </h3>
+                <h3 className="mb-8 text-xl text-dark">Sign Up with Social Media</h3>
                 <div className="mb-12 flex items-center space-x-4">
                   <button
-                    onClick={() => signIn("google")}
+                    onClick={() => signIn('google')}
                     className="flex h-[50px] min-w-[50px] items-center justify-center whitespace-nowrap rounded border text-base text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary md:w-auto md:px-7"
                   >
                     <span className="md:pr-3">
@@ -134,13 +132,11 @@ export default function Signup() {
                         </defs>
                       </svg>
                     </span>
-                    <span className="hidden md:inline-flex">
-                      Sign up with Google
-                    </span>
+                    <span className="hidden md:inline-flex">Sign up with Google</span>
                   </button>
 
                   <button
-                    onClick={() => signIn("github")}
+                    onClick={() => signIn('github')}
                     className="flex h-[50px] w-[50px] items-center justify-center rounded-md border text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary"
                   >
                     <svg
@@ -207,10 +203,7 @@ export default function Signup() {
                   <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-10">
-                        <label
-                          htmlFor="name"
-                          className="mb-3 block text-base text-dark"
-                        >
+                        <label htmlFor="name" className="mb-3 block text-base text-dark">
                           Full Name
                         </label>
                         <input
@@ -230,10 +223,7 @@ export default function Signup() {
                     </div>
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-10">
-                        <label
-                          htmlFor="email"
-                          className="mb-3 block text-base text-dark"
-                        >
+                        <label htmlFor="email" className="mb-3 block text-base text-dark">
                           Email Address
                         </label>
                         <input
@@ -253,10 +243,7 @@ export default function Signup() {
                     </div>
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-10">
-                        <label
-                          htmlFor="password"
-                          className="mb-3 block text-base text-dark"
-                        >
+                        <label htmlFor="password" className="mb-3 block text-base text-dark">
                           Password
                         </label>
                         <input
@@ -276,10 +263,7 @@ export default function Signup() {
                     </div>
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-10">
-                        <label
-                          htmlFor="rePassword"
-                          className="mb-3 block text-base text-dark"
-                        >
+                        <label htmlFor="rePassword" className="mb-3 block text-base text-dark">
                           Retype Password
                         </label>
                         <input
@@ -306,11 +290,7 @@ export default function Signup() {
                             className="flex max-w-[425px] cursor-pointer select-none text-body-color hover:text-primary"
                           >
                             <div className="relative">
-                              <input
-                                type="checkbox"
-                                id="supportCheckbox"
-                                className="sr-only"
-                              />
+                              <input type="checkbox" id="supportCheckbox" className="sr-only" />
                               <div className="box mr-4 mt-1 flex h-5 w-5 items-center justify-center rounded border">
                                 <span className="fill-white opacity-0">
                                   <svg
@@ -330,17 +310,14 @@ export default function Signup() {
                                 </span>
                               </div>
                             </div>
-                            By creating account means you agree to the Terms and
-                            Conditions and our Privacy Policy
+                            By creating account means you agree to the Terms and Conditions and our
+                            Privacy Policy
                           </label>
                         </div>
                         <div className="mb-4">
                           <p className="text-body-color">
                             Have an account?
-                            <Link
-                              href="/auth/signin"
-                              className="text-primary hover:underline"
-                            >
+                            <Link href="/auth/signin" className="text-primary hover:underline">
                               Sign in
                             </Link>
                           </p>

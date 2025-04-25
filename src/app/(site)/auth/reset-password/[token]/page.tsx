@@ -1,12 +1,12 @@
-import ResetPassword from "@/components/Auth/ResetPassword";
+import ResetPassword from '@/components/Auth/ResetPassword';
 
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 const siteName = process.env.SITE_NAME;
 
 export const metadata: Metadata = {
   title: `Reset Password Page | ${siteName}`,
-  description: "This is Reset Password page description",
+  description: 'This is Reset Password page description',
 };
 
 const ResetPasswordPage = async (props: { params: Promise<{ token: string }> }) => {

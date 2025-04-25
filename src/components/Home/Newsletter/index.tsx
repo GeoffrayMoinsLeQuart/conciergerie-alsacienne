@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import Graphic from "./Graphic";
+import axios from 'axios';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import Graphic from './Graphic';
 
 export default function Newsletter() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (!email || email == "") {
-      toast.error("Please enter your email address.");
+    if (!email || email == '') {
+      toast.error('Please enter your email address.');
 
       return;
     }
 
     try {
-      const res = await axios.post("/api/newsletter", { email });
+      const res = await axios.post('/api/newsletter', { email });
 
       if (res.data.status == 400) {
         toast.error(res.data?.detail);
-        setEmail("");
+        setEmail('');
       } else {
-        toast.success("Thanks for signing up!");
-        setEmail("");
+        toast.success('Thanks for signing up!');
+        setEmail('');
       }
     } catch (error: any) {
       toast.error(error?.response?.data);
@@ -40,10 +40,7 @@ export default function Newsletter() {
             <h2 className="mb-10 text-2xl font-bold leading-tight text-white md:text-[40px]">
               Subscribe our newsletter to receive future updates
             </h2>
-            <form
-              onSubmit={handleSubmit}
-              className="relative mx-auto max-w-[480px]"
-            >
+            <form onSubmit={handleSubmit} className="relative mx-auto max-w-[480px]">
               <input
                 type="email"
                 name="email"

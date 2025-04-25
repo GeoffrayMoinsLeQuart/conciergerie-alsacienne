@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { getFAQsByType } from "@/sanity/sanity-utils";
-import FAQ, { FAQItem } from "@/components/FAQ";
+import { useState, useEffect } from 'react';
+import { getFAQsByType } from '@/sanity/sanity-utils';
+import FAQ, { FAQItem } from '@/components/FAQ';
 
 export default function FAQGestionLocativeClient() {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
@@ -13,10 +13,10 @@ export default function FAQGestionLocativeClient() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data = await getFAQsByType("gestion-locative");
+        const data = await getFAQsByType('gestion-locative');
         setFaqItems(data);
       } catch (error) {
-        console.error("Erreur lors de la récupération des FAQs:", error);
+        console.error('Erreur lors de la récupération des FAQs:', error);
       } finally {
         setIsLoading(false);
       }

@@ -1,12 +1,12 @@
-import CommonCard from "@/components/Common/CommonCard";
-import { Metadata } from "next";
-import Link from "next/link";
+import CommonCard from '@/components/Common/CommonCard';
+import { Metadata } from 'next';
+import Link from 'next/link';
 
 const siteName = process.env.SITE_NAME;
 
 export const metadata: Metadata = {
   title: `Login Success | ${siteName}`,
-  description: "This is Login success page description",
+  description: 'This is Login success page description',
 };
 
 export default function SuccessPage() {
@@ -16,9 +16,7 @@ export default function SuccessPage() {
         <div className="px-4 xl:container">
           <CommonCard>
             <div className="relative pt-6 text-center md:pt-8">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                SUCCESS
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">SUCCESS</span>
               <h1 className="font-heading mb-5 text-3xl font-semibold text-dark sm:text-4xl md:text-[50px] md:leading-[60px]">
                 Congratulations!
               </h1>

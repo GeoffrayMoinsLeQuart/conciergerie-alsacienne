@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import "yet-another-react-lightbox/styles.css";
-import Video from "yet-another-react-lightbox/plugins/video";
-import "yet-another-react-lightbox/plugins/thumbnails.css";
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Lightbox, { useLightbox } from "@/components/lightbox";
-import { varTranHover } from "../animate/variants";
-import Image from "next/image";
-import { m } from "framer-motion";
+import { useState } from 'react';
+import 'yet-another-react-lightbox/styles.css';
+import Video from 'yet-another-react-lightbox/plugins/video';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import Lightbox, { useLightbox } from '@/components/lightbox';
+import { varTranHover } from '../animate/variants';
+import Image from 'next/image';
+import { m } from 'framer-motion';
 
 type Slide = {
   src: string;

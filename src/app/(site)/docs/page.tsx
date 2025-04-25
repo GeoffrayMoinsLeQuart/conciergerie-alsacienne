@@ -1,17 +1,17 @@
-import { getAllPosts } from "@/app/libs/markdown";
-import SidebarLink from "@/components/Docs/SidebarLink";
-import { Metadata } from "next";
+import { getAllPosts } from '@/app/libs/markdown';
+import SidebarLink from '@/components/Docs/SidebarLink';
+import { Metadata } from 'next';
 
 const siteName = process.env.SITE_NAME;
 
 export const metadata: Metadata = {
   title: `Docs Page | ${siteName}`,
-  description: "This is Docs page",
+  description: 'This is Docs page',
   // other metadata
 };
 
 export default function DocsPage() {
-  const posts = getAllPosts(["title", "date", "excerpt", "coverImage", "slug"]);
+  const posts = getAllPosts(['title', 'date', 'excerpt', 'coverImage', 'slug']);
 
   return (
     <>
@@ -33,19 +33,16 @@ export default function DocsPage() {
                 <h1>Welcome to Startup Documentation</h1>
 
                 <p>
-                  This document serves as a simple template to showcase a sample
-                  layout and format. It is solely created for demonstration
-                  purposes and is not intended for any official use.
+                  This document serves as a simple template to showcase a sample layout and format.
+                  It is solely created for demonstration purposes and is not intended for any
+                  official use.
                 </p>
                 <p>
                   Please visit:
                   <b>
-                    <a href="https://nextjstemplates.com/docs">
-                      nextjstemplates.com/docs
-                    </a>
+                    <a href="https://nextjstemplates.com/docs">nextjstemplates.com/docs</a>
                   </b>
-                  to check out the real docs, setup guide and even video
-                  instructions
+                  to check out the real docs, setup guide and even video instructions
                 </p>
               </div>
             </div>

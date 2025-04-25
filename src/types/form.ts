@@ -1,18 +1,18 @@
 export enum Activity {
-  GestionLocative = "gestion-locative",
-  Conciergerie = "conciergerie",
+  GestionLocative = 'gestion-locative',
+  Conciergerie = 'conciergerie',
 }
 
 export enum FormuleConciergerie {
-  Standard = "standard",
-  Premium = "premium",
-  Exclusive = "exclusive",
+  Standard = 'standard',
+  Premium = 'premium',
+  Exclusive = 'exclusive',
 }
 
 export enum FormuleGestionLocative {
-  Essentielle = "essentielle",
-  Serenite = "serenite",
-  Premium = "premium",
+  Essentielle = 'essentielle',
+  Serenite = 'serenite',
+  Premium = 'premium',
 }
 
 export interface ContactFormValues {

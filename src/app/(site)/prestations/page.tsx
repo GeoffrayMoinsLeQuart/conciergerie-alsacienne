@@ -1,14 +1,14 @@
-import PageTitle from "@/components/Common/PageTitle";
-import SingleService from "@/components/Home/Prestation/SinglePrestation";
-import { prestationConciergerie } from "@/static-data/prestation";
+import PageTitle from '@/components/Common/PageTitle';
+import SingleService from '@/components/Home/Prestation/SinglePrestation';
+import { prestationConciergerie } from '@/static-data/prestation';
 
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 const siteName = process.env.SITE_NAME;
 
 export const metadata: Metadata = {
   title: `Services Page | ${siteName}`,
-  description: "This is Blog page description",
+  description: 'This is Blog page description',
   // other metadata
 };
 

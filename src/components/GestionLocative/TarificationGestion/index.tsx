@@ -1,21 +1,14 @@
 // Nouveau composant de tarification amélioré
 
-"use client";
+'use client';
 
-import Link from "next/link";
-import SectionTitle from "../../Common/SectionTitle";
-import { FC, useState } from "react";
-import {
-  ShieldCheck,
-  CheckCircle,
-  UserCheck,
-  Sparkles,
-  Calculator,
-} from "lucide-react";
-import { motion } from "framer-motion";
-import { Dialog } from "@headlessui/react";
-import CTAButtons from "@/components/Buttons/CTAButtons";
-import { Activity, FormuleGestionLocative } from "@/types/form";
+import SectionTitle from '../../Common/SectionTitle';
+import { FC, useState } from 'react';
+import { ShieldCheck, UserCheck, Sparkles, Calculator } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Dialog } from '@headlessui/react';
+import CTAButtons from '@/components/Buttons/CTAButtons';
+import { Activity, FormuleGestionLocative } from '@/types/form';
 
 interface Plan {
   name: string;
@@ -41,123 +34,118 @@ const TarificationGestionLocative: FC = () => {
 
   const plans: Plan[] = [
     {
-      name: "Formule Essentielle",
-      price: "6%",
-      priceLabel: "HT des loyers encaissés",
-      tagline: "La base solide de la gestion locative",
+      name: 'Formule Essentielle',
+      price: '6%',
+      priceLabel: 'HT des loyers encaissés',
+      tagline: 'La base solide de la gestion locative',
       features: [
-        "Recherche et sélection des locataires",
-        "Rédaction du bail et état des lieux",
-        "Encaissement des loyers et quittances",
-        "Révision annuelle du loyer",
-        "Régularisation des charges",
-        "Assistance téléphonique dédiée",
-        "Espace propriétaire en ligne",
-        "Protection juridique incluse",
-        "Couverture des dégradations*",
-        "Garantie contre le squat",
+        'Recherche et sélection des locataires',
+        'Rédaction du bail et état des lieux',
+        'Encaissement des loyers et quittances',
+        'Révision annuelle du loyer',
+        'Régularisation des charges',
+        'Assistance téléphonique dédiée',
+        'Espace propriétaire en ligne',
+        'Protection juridique incluse',
+        'Couverture des dégradations*',
+        'Garantie contre le squat',
       ],
-      bgClass: "bg-white",
-      textClass: "text-body-color",
+      bgClass: 'bg-white',
+      textClass: 'text-body-color',
       icon: <UserCheck className="h-6 w-6 text-primary" />,
       iconButton: <UserCheck className="h-5 w-5" />,
       button: {
-        text: "Je choisis la simplicité",
+        text: 'Je choisis la simplicité',
         href: `/contact?service=${Activity.GestionLocative}&formule=${FormuleGestionLocative.Essentielle}`,
-        style: "bg-primary text-white hover:bg-opacity-90",
+        style: 'bg-primary text-white hover:bg-opacity-90',
       },
     },
     {
-      name: "Formule Sérénité",
-      price: "7,5%",
-      priceLabel: "HT des loyers encaissés",
-      tagline: "Pour ceux qui veulent dormir tranquille",
-      tag: "Formule recommandée",
-      inheritsFrom: "Formule Essentielle",
+      name: 'Formule Sérénité',
+      price: '7,5%',
+      priceLabel: 'HT des loyers encaissés',
+      tagline: 'Pour ceux qui veulent dormir tranquille',
+      tag: 'Formule recommandée',
+      inheritsFrom: 'Formule Essentielle',
       features: [
-        "✓ Inclut tous les avantages de la Formule Essentielle",
-        "Garantie loyers impayés à 100% (2.5% loyers + charges, sans carence)",
-        "Visites techniques annuelles",
+        '✓ Inclut tous les avantages de la Formule Essentielle',
+        'Garantie loyers impayés à 100% (2.5% loyers + charges, sans carence)',
+        'Visites techniques annuelles',
         "Gestion des interventions d'urgence 24h/24",
-        "Bilan de gestion annuel personnalisé",
-        "Option PNO : 75 € (franchise 300 €, plafond 1.5 M€)",
+        'Bilan de gestion annuel personnalisé',
+        'Option PNO : 75 € (franchise 300 €, plafond 1.5 M€)',
       ],
-      bgClass: "bg-primary/5",
-      textClass: "text-gray-800",
+      bgClass: 'bg-primary/5',
+      textClass: 'text-gray-800',
       icon: <ShieldCheck className="h-6 w-6 text-primary" />,
       iconButton: <ShieldCheck className="h-5 w-5" />,
       button: {
-        text: "Je choisis la tranquillité",
+        text: 'Je choisis la tranquillité',
         href: `/contact?service=${Activity.GestionLocative}&formule=${FormuleGestionLocative.Serenite}`,
-        style: "bg-primary text-white hover:bg-opacity-90",
+        style: 'bg-primary text-white hover:bg-opacity-90',
       },
     },
     {
-      name: "Formule Premium",
-      price: "9%",
-      priceLabel: "HT des loyers encaissés",
-      tagline: "L’expérience complète, clé en main",
-      inheritsFrom: "Formule Sérénité",
+      name: 'Formule Premium',
+      price: '9%',
+      priceLabel: 'HT des loyers encaissés',
+      tagline: 'L’expérience complète, clé en main',
+      inheritsFrom: 'Formule Sérénité',
       features: [
-        "✓ Inclut tous les avantages de la Formule Sérénité",
-        "Accompagnement sur votre fiscalité",
-        "Visite technique semestrielle",
-        "Conseiller dédié joignable 7j/7",
-        "Option PNO : 92 € (franchise 135 €, plafond 3 M€)",
-        "Vacance locative : à venir",
+        '✓ Inclut tous les avantages de la Formule Sérénité',
+        'Accompagnement sur votre fiscalité',
+        'Visite technique semestrielle',
+        'Conseiller dédié joignable 7j/7',
+        'Option PNO : 92 € (franchise 135 €, plafond 3 M€)',
+        'Vacance locative : à venir',
       ],
-      bgClass: "bg-white",
-      textClass: "text-body-color",
+      bgClass: 'bg-white',
+      textClass: 'text-body-color',
       icon: <Sparkles className="h-6 w-6 text-primary" />,
       iconButton: <Sparkles className="h-5 w-5" />,
       button: {
         text: "Je choisis l'excellence",
         href: `/contact?service=${Activity.GestionLocative}&formule=${FormuleGestionLocative.Premium}`,
-        style: "bg-primary text-white hover:bg-opacity-90",
+        style: 'bg-primary text-white hover:bg-opacity-90',
       },
     },
   ];
 
   const comparison = [
-    "Recherche et sélection des locataires",
-    "Rédaction du bail et état des lieux",
-    "Encaissement des loyers et quittances",
-    "Révision annuelle du loyer",
-    "Régularisation des charges",
-    "Assistance téléphonique dédiée",
-    "Espace propriétaire en ligne",
-    "Protection juridique incluse",
-    "Couverture des dégradations*",
-    "Garantie contre le squat",
-    "Garantie loyers impayés à 100% (2.5% loyers + charges, sans carence)",
-    "Visites techniques annuelles",
+    'Recherche et sélection des locataires',
+    'Rédaction du bail et état des lieux',
+    'Encaissement des loyers et quittances',
+    'Révision annuelle du loyer',
+    'Régularisation des charges',
+    'Assistance téléphonique dédiée',
+    'Espace propriétaire en ligne',
+    'Protection juridique incluse',
+    'Couverture des dégradations*',
+    'Garantie contre le squat',
+    'Garantie loyers impayés à 100% (2.5% loyers + charges, sans carence)',
+    'Visites techniques annuelles',
     "Gestion des interventions d'urgence 24h/24",
-    "Bilan de gestion annuel personnalisé",
-    "Option PNO : 75 € (franchise 300 €, plafond 1.5 M€)",
-    "Accompagnement sur votre fiscalité",
-    "Visite technique semestrielle",
-    "Conseiller dédié joignable 7j/7",
-    "Option PNO : 92 € (franchise 135 €, plafond 3 M€)",
-    "Vacance locative : à venir",
+    'Bilan de gestion annuel personnalisé',
+    'Option PNO : 75 € (franchise 300 €, plafond 1.5 M€)',
+    'Accompagnement sur votre fiscalité',
+    'Visite technique semestrielle',
+    'Conseiller dédié joignable 7j/7',
+    'Option PNO : 92 € (franchise 135 €, plafond 3 M€)',
+    'Vacance locative : à venir',
   ];
 
   const planHasFeature = (plan: Plan, feature: string) => {
-    if (plan.name === "Formule Sérénité" && plans[0].features.includes(feature))
-      return true;
+    if (plan.name === 'Formule Sérénité' && plans[0].features.includes(feature)) return true;
     if (
-      plan.name === "Formule Premium" &&
-      (plans[0].features.includes(feature) ||
-        plans[1].features.includes(feature))
+      plan.name === 'Formule Premium' &&
+      (plans[0].features.includes(feature) || plans[1].features.includes(feature))
     )
       return true;
     return plan.features.includes(feature);
   };
 
   return (
-    <section
-      className="bg-white py-20 lg:py-[120px]"
-      aria-label="Tarification Gestion Locative"
-    >
+    <section className="bg-white py-20 lg:py-[120px]" aria-label="Tarification Gestion Locative">
       <div className="container mx-auto px-4">
         <SectionTitle
           mainTitle="TARIFICATION"
@@ -192,18 +180,12 @@ const TarificationGestionLocative: FC = () => {
               )}
               <div>
                 <div className="mb-3 flex items-center gap-2">
-                  <div className="rounded-full bg-primary/10 p-2">
-                    {plan.icon}
-                  </div>
-                  <h3 className={`text-xl font-bold ${plan.textClass}`}>
-                    {plan.name}
-                  </h3>
+                  <div className="rounded-full bg-primary/10 p-2">{plan.icon}</div>
+                  <h3 className={`text-xl font-bold ${plan.textClass}`}>{plan.name}</h3>
                 </div>
 
                 {plan.tagline && (
-                  <p className="mb-4 text-sm italic text-gray-500">
-                    {plan.tagline}
-                  </p>
+                  <p className="mb-4 text-sm italic text-gray-500">{plan.tagline}</p>
                 )}
 
                 <div className="mb-6 flex items-baseline text-3xl font-bold text-primary">
@@ -234,11 +216,7 @@ const TarificationGestionLocative: FC = () => {
           ))}
         </div>
 
-        <Dialog
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
-          className="relative z-50"
-        >
+        <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
           <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <Dialog.Panel className="w-full max-w-4xl rounded-xl bg-white p-6 shadow-xl">
@@ -249,9 +227,7 @@ const TarificationGestionLocative: FC = () => {
                 <table className="w-full table-auto border-collapse text-left text-sm">
                   <thead>
                     <tr className="border-b text-gray-700">
-                      <th className="px-4 py-2 font-semibold">
-                        Fonctionnalités
-                      </th>
+                      <th className="px-4 py-2 font-semibold">Fonctionnalités</th>
                       <th className="px-4 py-2">Essentielle</th>
                       <th className="px-4 py-2">Sérénité</th>
                       <th className="px-4 py-2">Premium</th>
@@ -263,7 +239,7 @@ const TarificationGestionLocative: FC = () => {
                         <td className="px-4 py-2 text-gray-700">{feature}</td>
                         {plans.map((plan) => (
                           <td key={plan.name} className="px-4 py-2 text-center">
-                            {planHasFeature(plan, feature) ? "✓" : "-"}
+                            {planHasFeature(plan, feature) ? '✓' : '-'}
                           </td>
                         ))}
                       </tr>
@@ -286,16 +262,15 @@ const TarificationGestionLocative: FC = () => {
               </h4>
             </div>
             <p className="mb-6 text-sm text-gray-600">
-              Estimez vos revenus nets selon votre situation, le type de bien et
-              la formule choisie. Notre simulateur vous guide pour faire le bon
-              choix.
+              Estimez vos revenus nets selon votre situation, le type de bien et la formule choisie.
+              Notre simulateur vous guide pour faire le bon choix.
             </p>
             <CTAButtons
               primary={{
-                label: "Lancer le simulateur",
-                href: "/simulateur",
+                label: 'Lancer le simulateur',
+                href: '/simulateur',
                 icon: <Calculator className="h-5 w-5" />,
-                colorClass: "bg-primary text-white hover:bg-opacity-90",
+                colorClass: 'bg-primary text-white hover:bg-opacity-90',
               }}
             />
           </div>

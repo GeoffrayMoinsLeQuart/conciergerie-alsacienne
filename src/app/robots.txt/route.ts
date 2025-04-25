@@ -8,7 +8,7 @@ Sitemap: https://www.conciergerie-alsacienne.fr/sitemap.xml
 
   return new Response(content.trim(), {
     headers: {
-      "Content-Type": "text/plain",
+      'Content-Type': 'text/plain',
     },
   });
 }

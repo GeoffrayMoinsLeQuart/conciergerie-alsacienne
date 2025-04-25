@@ -1,5 +1,5 @@
-import PageTitle from "@/components/Common/PageTitle";
-import Reservations from "@/components/reservations";
+import PageTitle from '@/components/Common/PageTitle';
+import Reservations from '@/components/reservations';
 
 export default function ReservationsPage() {
   return (

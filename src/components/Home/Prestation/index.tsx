@@ -1,23 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import SectionTitle from "@/components/Common/SectionTitle";
-import {
-  prestationConciergerie,
-  prestationGestionLocative,
-} from "@/static-data/prestation";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import SectionTitle from '@/components/Common/SectionTitle';
+import { prestationConciergerie, prestationGestionLocative } from '@/static-data/prestation';
 
 export default function ServicesGrid() {
-  const [activeTab, setActiveTab] = useState<"conciergerie" | "gestion">(
-    "conciergerie",
-  );
+  const [activeTab, setActiveTab] = useState<'conciergerie' | 'gestion'>('conciergerie');
   const servicesToShow =
-    activeTab === "conciergerie"
-      ? prestationConciergerie
-      : prestationGestionLocative;
+    activeTab === 'conciergerie' ? prestationConciergerie : prestationGestionLocative;
 
   return (
     <section className="bg-white py-16">
@@ -41,21 +34,21 @@ export default function ServicesGrid() {
         >
           <div className="mb-12 flex justify-center gap-4">
             <button
-              onClick={() => setActiveTab("conciergerie")}
+              onClick={() => setActiveTab('conciergerie')}
               className={`rounded-full px-6 py-2 text-sm font-semibold transition ${
-                activeTab === "conciergerie"
-                  ? "bg-primary text-white shadow-md"
-                  : "border border-gray-300 bg-white text-gray-700 hover:text-primary"
+                activeTab === 'conciergerie'
+                  ? 'bg-primary text-white shadow-md'
+                  : 'border border-gray-300 bg-white text-gray-700 hover:text-primary'
               }`}
             >
               🛏 Conciergerie Premium
             </button>
             <button
-              onClick={() => setActiveTab("gestion")}
+              onClick={() => setActiveTab('gestion')}
               className={`rounded-full px-6 py-2 text-sm font-semibold transition ${
-                activeTab === "gestion"
-                  ? "bg-primary text-white shadow-md"
-                  : "border border-gray-300 bg-white text-gray-700 hover:text-primary"
+                activeTab === 'gestion'
+                  ? 'bg-primary text-white shadow-md'
+                  : 'border border-gray-300 bg-white text-gray-700 hover:text-primary'
               }`}
             >
               🏠 Gestion Locative
@@ -112,20 +105,16 @@ export default function ServicesGrid() {
                   />
                 </div>
 
-                <h3 className="mb-3 text-2xl font-semibold text-black">
-                  {prestation.title}
-                </h3>
+                <h3 className="mb-3 text-2xl font-semibold text-black">{prestation.title}</h3>
 
-                <p className="mb-6 line-clamp-2 text-gray-700">
-                  {prestation.description}
-                </p>
+                <p className="mb-6 line-clamp-2 text-gray-700">{prestation.description}</p>
               </div>
 
               <Link
                 href={
-                  activeTab === "conciergerie"
-                    ? "/conciergerie#prestations"
-                    : "/gestion-locative#prestations"
+                  activeTab === 'conciergerie'
+                    ? '/conciergerie#prestations'
+                    : '/gestion-locative#prestations'
                 }
                 className="mt-auto text-primary underline underline-offset-4 transition hover:text-primary/80"
               >

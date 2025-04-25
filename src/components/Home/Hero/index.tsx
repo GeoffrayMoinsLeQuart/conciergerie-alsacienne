@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Calculator, Mail } from "lucide-react";
-import CTAButtons from "@/components/Buttons/CTAButtons";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Calculator, Mail } from 'lucide-react';
+import CTAButtons from '@/components/Buttons/CTAButtons';
 
 export default function Hero() {
   return (
@@ -43,23 +43,21 @@ export default function Hero() {
             </h1>
 
             <p className="text-xl text-gray-600">
-              Votre partenaire 100% alsacien pour une gestion haut de gamme de
-              vos locations courte durée.
+              Votre partenaire 100% alsacien pour une gestion haut de gamme de vos locations courte
+              durée.
             </p>
-            <p className="mb-8 text-xl text-gray-600">
-              Proximité, exigence, sérénité.
-            </p>
+            <p className="mb-8 text-xl text-gray-600">Proximité, exigence, sérénité.</p>
 
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-center">
               <CTAButtons
                 primary={{
-                  label: "Estimer mes revenus",
-                  href: "/simulateur",
+                  label: 'Estimer mes revenus',
+                  href: '/simulateur',
                   icon: <Calculator className="h-5 w-5" />,
                 }}
                 secondary={{
-                  label: "Nous contacter",
-                  href: "/contact",
+                  label: 'Nous contacter',
+                  href: '/contact',
                   icon: <Mail className="h-5 w-5" />,
                 }}
               />

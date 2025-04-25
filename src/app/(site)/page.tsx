@@ -1,32 +1,44 @@
-import { Suspense } from "react";
-import HomeBlogSection from "@/components/Blog/HomeBlogSection";
-import ContactForm from "@/components/Contact";
-import About from "@/components/Home/About";
-import Hero from "@/components/Home/Hero";
-import Prestation from "@/components/Home/Prestation";
-import Testimonial from "@/components/Home/Testimonial";
-import Properties from "@/components/Property";
-import { Metadata } from "next";
-import { integrations } from "../../../integrations.config";
-import { fetchProperties } from "@/sanity/sanity-utils";
-import SeoSchemaInjector from "@/components/SEO/SeoSchemaInjector";
+import { Suspense } from 'react';
+import HomeBlogSection from '@/components/Blog/HomeBlogSection';
+import ContactForm from '@/components/Contact';
+import About from '@/components/Home/About';
+import Hero from '@/components/Home/Hero';
+import Prestation from '@/components/Home/Prestation';
+import Testimonial from '@/components/Home/Testimonial';
+import Properties from '@/components/Property';
+import { Metadata } from 'next';
+import { integrations } from '../../../integrations.config';
+import { fetchProperties } from '@/sanity/sanity-utils';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 
 const homeSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Conciergerie Alsacienne",
-  url: "https://www.conciergerie-alsacienne.fr",
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Conciergerie Alsacienne',
+  url: 'https://www.conciergerie-alsacienne.fr',
   potentialAction: {
-    "@type": "SearchAction",
-    target: "https://www.conciergerie-alsacienne.fr/faq?q={search_term_string}",
-    "query-input": "required name=search_term_string",
+    '@type': 'SearchAction',
+    target: 'https://www.conciergerie-alsacienne.fr/faq?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
   },
 };
 
 export const metadata: Metadata = {
-  title: "Conciergerie Alsacienne | Gestion locative premium en Alsace",
+  title: 'Conciergerie haut de gamme en Alsace | Conciergerie Alsacienne',
   description:
-    "Boostez vos revenus locatifs en Alsace avec la Conciergerie Alsacienne : conciergerie dédiée à la location courte durée, optimisation Airbnb, suivi 24/7 et prestation personnalisé.",
+    'Location courte et moyenne durée à Mulhouse, Colmar et alentours. Une conciergerie discrète, rentable, pensée pour les investisseurs exigeants.',
+  openGraph: {
+    title: 'Conciergerie haut de gamme en Alsace | Conciergerie Alsacienne',
+    description: 'Accompagnement sur mesure, logements optimisés, sérénité assurée.',
+    url: 'https://www.conciergerie-alsacienne.fr',
+    siteName: 'Conciergerie Alsacienne',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Conciergerie premium pour investisseurs en Alsace',
+    description: 'Des logements bien gérés, des revenus bien pensés.',
+  },
 };
 
 export default async function HomePage() {

@@ -1,4 +1,4 @@
-import { footerSocialLinks } from "@/static-data/footer";
+import { footerSocialLinks } from '@/static-data/footer';
 
 export default function FooterBottom() {
   return (
@@ -19,7 +19,8 @@ export default function FooterBottom() {
           ))}
         </div>
         <p className="text-center text-base font-medium text-body-color">
-        Conciergerie Alsacienne - Services de conciergerie et gestion locative - &copy; {new Date().getFullYear()}
+          Conciergerie Alsacienne - Services de conciergerie et gestion locative - &copy;{' '}
+          {new Date().getFullYear()}
         </p>
       </div>
     </>

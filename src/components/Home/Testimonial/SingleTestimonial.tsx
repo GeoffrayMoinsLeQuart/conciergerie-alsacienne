@@ -1,11 +1,7 @@
-import { Testimonial } from "@/types/testimonial";
-import Image from "next/image";
+import { Testimonial } from '@/types/testimonial';
+import Image from 'next/image';
 
-export default function SingleTestimonial({
-  testimonial,
-}: {
-  testimonial: Testimonial;
-}) {
+export default function SingleTestimonial({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div className="w-full px-4 lg:w-1/2">
       <div className="relative mb-10 overflow-hidden rounded-xl bg-white p-10 px-7 shadow-testimonial sm:px-10">
@@ -22,20 +18,11 @@ export default function SingleTestimonial({
         </p>
         <div className="flex items-center">
           <div className="mr-3 h-[60px] w-full max-w-[60px] overflow-hidden rounded-full">
-            <Image
-              src={testimonial?.image}
-              alt={testimonial?.name}
-              width={60}
-              height={60}
-            />
+            <Image src={testimonial?.image} alt={testimonial?.name} width={60} height={60} />
           </div>
           <div>
-            <h3 className="mb-1 text-base font-semibold text-black">
-              {testimonial?.name}
-            </h3>
-            <p className="text-sm text-body-color">
-              {testimonial?.designation}
-            </p>
+            <h3 className="mb-1 text-base font-semibold text-black">{testimonial?.name}</h3>
+            <p className="text-sm text-body-color">{testimonial?.designation}</p>
           </div>
         </div>
         <div className="absolute bottom-8 right-8">

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import FAQ, { FAQItem } from "@/components/FAQ";
+import FAQ, { FAQItem } from '@/components/FAQ';
 
 export default function FAQPageClient({ faqs }: { faqs: FAQItem[] }) {
   return (

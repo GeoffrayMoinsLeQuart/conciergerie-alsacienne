@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import Link from "next/link";
-import SectionTitle from "@/components/Common/SectionTitle";
-import CTAButtons from "@/components/Buttons/CTAButtons";
-import { Mail } from "lucide-react";
+import { FC } from 'react';
+import Link from 'next/link';
+import SectionTitle from '@/components/Common/SectionTitle';
+import CTAButtons from '@/components/Buttons/CTAButtons';
+import { Mail } from 'lucide-react';
 
 interface ExpertiseLevel {
   name: string;
@@ -16,28 +16,28 @@ interface ExpertiseLevel {
 
 const niveaux: ExpertiseLevel[] = [
   {
-    name: "Niveau Standard",
-    bgClass: "bg-white",
-    textClass: "text-body-color",
-    delay: "0.1s",
+    name: 'Niveau Standard',
+    bgClass: 'bg-white',
+    textClass: 'text-body-color',
+    delay: '0.1s',
     items: [
-      "Interventions ciblées pour atteindre nos critères de qualité",
-      "Optimisation des espaces existants",
+      'Interventions ciblées pour atteindre nos critères de qualité',
+      'Optimisation des espaces existants',
       "Sélection d'éléments décoratifs essentiels",
       "Conseils pour l'aménagement et la disposition",
-      "Idéal pour les biens nécessitant des améliorations ponctuelles",
+      'Idéal pour les biens nécessitant des améliorations ponctuelles',
     ],
   },
   {
-    name: "Niveau Luxe",
-    bgClass: "bg-primary",
-    textClass: "text-white text-opacity-90",
-    delay: "0.2s",
+    name: 'Niveau Luxe',
+    bgClass: 'bg-primary',
+    textClass: 'text-white text-opacity-90',
+    delay: '0.2s',
     items: [
-      "Transformation complète pour un positionnement ultra-premium",
+      'Transformation complète pour un positionnement ultra-premium',
       "Conception d'ambiance sur mesure",
-      "Mobilier et équipements haut de gamme",
-      "Éléments décoratifs exclusifs",
+      'Mobilier et équipements haut de gamme',
+      'Éléments décoratifs exclusifs',
       "Parfait pour les biens de caractère visant l'excellence",
     ],
   },
@@ -62,7 +62,7 @@ const NotreExpertise: FC = () => {
               data-wow-delay={niveau.delay}
             >
               <h3
-                className={`mb-4 text-2xl font-bold ${index === 0 ? "text-black" : "text-white"}`}
+                className={`mb-4 text-2xl font-bold ${index === 0 ? 'text-black' : 'text-white'}`}
               >
                 {niveau.name}
               </h3>
@@ -70,11 +70,7 @@ const NotreExpertise: FC = () => {
                 {niveau.items.map((item, idx) => (
                   <li key={idx} className="flex items-start">
                     <span className={`mr-2 ${niveau.textClass}`}>✓</span>
-                    <span
-                      className={`text-base font-medium ${niveau.textClass}`}
-                    >
-                      {item}
-                    </span>
+                    <span className={`text-base font-medium ${niveau.textClass}`}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -84,16 +80,16 @@ const NotreExpertise: FC = () => {
 
         <div className="mt-10 text-center">
           <p className="mb-6 text-base font-medium leading-relaxed text-body-color">
-            Les tarifs de ces services sont déterminés sur devis après
-            évaluation complète de votre bien et de vos objectifs.
+            Les tarifs de ces services sont déterminés sur devis après évaluation complète de votre
+            bien et de vos objectifs.
           </p>
           <CTAButtons
             primary={{
-              label: "Demander un devis personnalisé",
-              href: "/contact",
+              label: 'Demander un devis personnalisé',
+              href: '/contact',
               icon: <Mail className="h-5 w-5" />,
               colorClass:
-                "inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7",
+                'inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7',
             }}
           />
         </div>

@@ -1,29 +1,28 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { motion } from "framer-motion";
-import SectionTitle from "@/components/Common/SectionTitle";
+import { FC } from 'react';
+import { motion } from 'framer-motion';
+import SectionTitle from '@/components/Common/SectionTitle';
 
 const processSteps = [
   {
-    title: "Évaluation préliminaire",
+    title: 'Évaluation préliminaire',
     description:
-      "Visite de votre bien, diagnostic selon nos critères de qualité, et recommandations personnalisées.",
+      'Visite de votre bien, diagnostic selon nos critères de qualité, et recommandations personnalisées.',
   },
   {
-    title: "Préparation du bien",
+    title: 'Préparation du bien',
     description:
       "Création d'annonces, photos pros, décoration si nécessaire, mise en service du logement.",
   },
   {
-    title: "Gestion quotidienne",
-    description:
-      "Réservations, accueil, ménage, maintenance – nous gérons tout pour vous.",
+    title: 'Gestion quotidienne',
+    description: 'Réservations, accueil, ménage, maintenance – nous gérons tout pour vous.',
   },
   {
-    title: "Suivi & Optimisation",
+    title: 'Suivi & Optimisation',
     description:
-      "Rapports réguliers, ajustement des prix, conseil stratégique pour booster vos revenus.",
+      'Rapports réguliers, ajustement des prix, conseil stratégique pour booster vos revenus.',
   },
 ];
 
@@ -53,12 +52,8 @@ const TimelineProcessEnhanced: FC = () => {
                   {i + 1}
                 </div>
               </div>
-              <h3 className="mb-2 text-xl font-semibold text-black">
-                {step.title}
-              </h3>
-              <p className="mx-auto max-w-xs text-base text-body-color">
-                {step.description}
-              </p>
+              <h3 className="mb-2 text-xl font-semibold text-black">{step.title}</h3>
+              <p className="mx-auto max-w-xs text-base text-body-color">{step.description}</p>
 
               {/* Ligne de connexion (desktop only) */}
               {i < processSteps.length - 1 && (

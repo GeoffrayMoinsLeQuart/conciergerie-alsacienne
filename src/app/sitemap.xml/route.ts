@@ -1,19 +1,21 @@
-import { fetchProperties, getPosts } from "@/sanity/sanity-utils";
+import { fetchProperties, getPosts } from '@/sanity/sanity-utils';
 
 export async function GET() {
   const properties = await fetchProperties();
   const { posts: blogPosts } = await getPosts();
 
-  const baseUrl = "https://www.conciergerie-alsacienne.fr";
+  const baseUrl = 'https://www.conciergerie-alsacienne.fr';
 
   const staticRoutes = [
-    "/",
-    "/conciergerie",
-    "/gestion-locative",
-    "/simulateur",
-    "/faq",
-    "/nos-biens",
-    "/blog",
+    '/',
+    '/conciergerie',
+    '/gestion-locative',
+    '/simulateur',
+    '/faq',
+    '/nos-biens',
+    '/blog',
+    '/about', // ✅ AJOUT ICI
+    '/contact',
   ];
 
   const staticUrls = staticRoutes.map(
@@ -33,12 +35,12 @@ export async function GET() {
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${[...staticUrls, ...propertyUrls, ...blogUrls].join("")}
+  ${[...staticUrls, ...propertyUrls, ...blogUrls].join('')}
 </urlset>`;
 
   return new Response(sitemapXml, {
     headers: {
-      "Content-Type": "application/xml",
+      'Content-Type': 'application/xml',
     },
   });
 }

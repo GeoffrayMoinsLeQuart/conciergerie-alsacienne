@@ -10,18 +10,8 @@ export default function Graphic() {
           xmlns="http://www.w3.org/2000/svg"
           className="mx-auto"
         >
-          <circle
-            cx="409"
-            cy="409"
-            r="408.5"
-            stroke="url(#paint0_linear_0:1)"
-          />
-          <circle
-            cx="409"
-            cy="409"
-            r="349.5"
-            stroke="url(#paint1_linear_0:1)"
-          />
+          <circle cx="409" cy="409" r="408.5" stroke="url(#paint0_linear_0:1)" />
+          <circle cx="409" cy="409" r="349.5" stroke="url(#paint1_linear_0:1)" />
           <defs>
             <linearGradient
               id="paint0_linear_0:1"

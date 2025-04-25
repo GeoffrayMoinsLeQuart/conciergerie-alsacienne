@@ -1,21 +1,15 @@
-import Head from "next/head";
-import { FC } from "react";
+import Head from 'next/head';
+import { FC } from 'react';
 
 interface StructuredDataProps {
-  type:
-    | "WebSite"
-    | "Organization"
-    | "Service"
-    | "BlogPosting"
-    | "FAQPage"
-    | "BreadcrumbList";
+  type: 'WebSite' | 'Organization' | 'Service' | 'BlogPosting' | 'FAQPage' | 'BreadcrumbList';
   data: Record<string, any>;
 }
 
 const StructuredData: FC<StructuredDataProps> = ({ type, data }) => {
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": type,
+    '@context': 'https://schema.org',
+    '@type': type,
     ...data,
   };
 

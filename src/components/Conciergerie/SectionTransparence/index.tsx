@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import SectionTitle from "@/components/Common/SectionTitle";
+import { FC } from 'react';
+import SectionTitle from '@/components/Common/SectionTitle';
 
 const SectionTransparence: FC = () => {
   return (
@@ -18,9 +18,7 @@ const SectionTransparence: FC = () => {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {/* Colonne 1 : Frais de démarrage */}
             <div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Frais de démarrage
-              </h3>
+              <h3 className="mb-4 text-xl font-bold text-black">Frais de démarrage</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <span className="mr-2 text-primary">•</span>
@@ -46,22 +44,18 @@ const SectionTransparence: FC = () => {
 
             {/* Colonne 2 : Services optionnels */}
             <div>
-              <h3 className="mb-4 text-xl font-bold text-black">
-                Services optionnels
-              </h3>
+              <h3 className="mb-4 text-xl font-bold text-black">Services optionnels</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <span className="mr-2 text-primary">•</span>
                   <span className="text-base font-medium text-body-color">
-                    <strong>Décoration niveau Standard</strong> (sur devis
-                    personnalisé)
+                    <strong>Décoration niveau Standard</strong> (sur devis personnalisé)
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="mr-2 text-primary">•</span>
                   <span className="text-base font-medium text-body-color">
-                    <strong>Décoration niveau Luxe</strong> (sur devis
-                    personnalisé)
+                    <strong>Décoration niveau Luxe</strong> (sur devis personnalisé)
                   </span>
                 </li>
               </ul>
@@ -69,9 +63,8 @@ const SectionTransparence: FC = () => {
           </div>
 
           <p className="mt-6 text-center text-sm italic text-body-color">
-            Ces montants sont indicatifs et peuvent varier selon les
-            spécificités de votre bien. Une évaluation personnalisée vous sera
-            proposée lors de notre première rencontre.
+            Ces montants sont indicatifs et peuvent varier selon les spécificités de votre bien. Une
+            évaluation personnalisée vous sera proposée lors de notre première rencontre.
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 interface CategoryCount {
   title: string;
@@ -33,8 +33,8 @@ export default function BlogFilters({
           onClick={() => onToggleCat(title)}
           className={`rounded-full px-4 py-2 text-sm font-medium transition ${
             selectedCats.includes(title)
-              ? "bg-primary text-white"
-              : "bg-gray-100 text-body-color hover:bg-primary/10 hover:text-primary"
+              ? 'bg-primary text-white'
+              : 'bg-gray-100 text-body-color hover:bg-primary/10 hover:text-primary'
           }`}
         >
           {title} ({count})
@@ -46,9 +46,7 @@ export default function BlogFilters({
         type="text"
         placeholder="Rechercher un article…"
         value={searchTerm}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          onSearchTermChange(e.target.value)
-        }
+        onChange={(e: ChangeEvent<HTMLInputElement>) => onSearchTermChange(e.target.value)}
         className="ml-auto rounded border px-3 py-2 text-sm placeholder-gray-400 focus:border-primary focus:ring-primary"
       />
 

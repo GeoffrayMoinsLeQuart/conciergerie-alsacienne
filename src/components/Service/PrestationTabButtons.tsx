@@ -1,23 +1,21 @@
-"use client";
+'use client';
 
-import { Prestation } from "@/types/prestation";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Prestation } from '@/types/prestation';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function PrestationTabButtons({ prestationConciergerie }: any) {
   const pathname = usePathname();
 
   return (
     <div>
-      <h3 className="mb-[22px] text-[34px] font-bold text-black">
-        prestations
-      </h3>
+      <h3 className="mb-[22px] text-[34px] font-bold text-black">prestations</h3>
       <div className="rounded-sm border border-stroke">
         {prestationConciergerie.map((prestation: Prestation) => (
           <Link
             href={`/prestation/${prestation?.slug}`}
             key={prestation?.id}
-            className={`flex w-full items-center gap-3 border-b border-stroke px-5 py-4 text-lg font-medium duration-200 last-of-type:border-0 ${pathname === `/prestation/${prestation?.slug}` ? "text-primary" : "text-black hover:text-primary"}`}
+            className={`flex w-full items-center gap-3 border-b border-stroke px-5 py-4 text-lg font-medium duration-200 last-of-type:border-0 ${pathname === `/prestation/${prestation?.slug}` ? 'text-primary' : 'text-black hover:text-primary'}`}
           >
             <svg
               width="22"

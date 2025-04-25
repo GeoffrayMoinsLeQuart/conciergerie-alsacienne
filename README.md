@@ -2,7 +2,6 @@
 
 Installing boilerplate templates are different than ordinary templates, you have to follow the steps strictly without skipping any of them.
 
-
 1. [Installation](https://nextjstemplates.com/docs/boilerplate#installation)
 2. [Databases Setup](https://nextjstemplates.com/docs/database)
 3. [Authentication](https://nextjstemplates.com/docs/authentication)
@@ -16,10 +15,10 @@ Installing boilerplate templates are different than ordinary templates, you have
 ---
 
 ### Useful Links
+
 - [Discord Community](https://pimjo.com/community)
 - [Support](https://nextjstemplates.com/support)
 - [Twitter](https://x.com/nextjstemplate)
-
 
 ### Installation
 
@@ -53,9 +52,11 @@ Follow the steps below to complete the installation, if you get stuck feel free 
 ### Update Log
 
 November 26 2024
+
 - Upgraded to Next.js v15
 
 November 13 2024
+
 - Updated Sanity Integrations
 - Integrated Zod for Form validation
 - Added Stripe webhook

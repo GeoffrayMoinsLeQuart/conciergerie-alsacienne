@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 const InjectedScript = () => {
   const scriptContent = `
@@ -28,7 +28,6 @@ const InjectedScript = () => {
 };
 
 export default function Reservations() {
-
   // useEffect pour s'assurer que le script s'exécute après le rendu de l'iframe
   // useEffect(() => {
   //   // Créer et ajouter le script au document
@@ -61,28 +60,25 @@ export default function Reservations() {
   //   };
   // }, []);
 
-
-
-
   const iframeRef = useRef(null);
 
   useEffect(() => {
-    const webKey = "TziRKaU5fDux8BLLfljl4wB7V";
+    const webKey = 'TziRKaU5fDux8BLLfljl4wB7V';
     const url = new URL(window.location.href);
-    const appart = url.searchParams.get("appart");
-    const checkin = url.searchParams.get("checkin");
-    const checkout = url.searchParams.get("checkout");
-    const adults = url.searchParams.get("adults");
-    const children = url.searchParams.get("children");
-    const lang = url.searchParams.get("lang") || "fr";
+    const appart = url.searchParams.get('appart');
+    const checkin = url.searchParams.get('checkin');
+    const checkout = url.searchParams.get('checkout');
+    const adults = url.searchParams.get('adults');
+    const children = url.searchParams.get('children');
+    const lang = url.searchParams.get('lang') || 'fr';
 
     let iframeUrl;
 
     if (appart == null) {
       iframeUrl = `https://app.superhote.com/#/get-available-rentals/${webKey}?startDate=${checkin}&endDate=${checkout}&adultsNumber=${adults}&childrenNumber=${children}&lang=${lang}`;
 
-https://app.superhote.com/api/v2/web-site-groups/[TziRKaU5fDux8BLLfljl4wB7V]/falsehttps://app.superhote.com/api/v2/get-available-rentals/[TziRKaU5fDux8BLLfljl4wB7V]?&start_date=2025-05-19&end_date=2025-05-23%20%20&adult_count=1&child_count=0%20%20&group_names=
-      if (checkin == null) {
+      //app.superhote.com/api/v2/web-site-groups/[TziRKaU5fDux8BLLfljl4wB7V]/falsehttps://app.superhote.com/api/v2/get-available-rentals/[TziRKaU5fDux8BLLfljl4wB7V]?&start_date=2025-05-19&end_date=2025-05-23%20%20&adult_count=1&child_count=0%20%20&group_names=
+      https: if (checkin == null) {
         iframeUrl = `https://app.superhote.com/#/get-available-rentals/${webKey}?lang=${lang}`;
       }
     } else {
@@ -100,7 +96,7 @@ https://app.superhote.com/api/v2/web-site-groups/[TziRKaU5fDux8BLLfljl4wB7V]/fal
       <iframe
         id="bookingengine"
         ref={iframeRef}
-        style={{ display: "block" }}
+        style={{ display: 'block' }}
         width="100%"
         height="5500"
         frameBorder="0"

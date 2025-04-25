@@ -1,10 +1,10 @@
-"use client";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import z from "zod";
-import { integrations } from "../../../../integrations.config";
+'use client';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import z from 'zod';
+import { integrations } from '../../../../integrations.config';
 
 const resetPasswordSchema = z.object({
   password: z
@@ -18,7 +18,7 @@ const resetPasswordSchema = z.object({
         /[@$!%*?&]/.test(val), // At least one special character
       {
         message:
-          "Password must be at least 8 characters long and contain uppercase and lowercase letters, a number, and a special character.",
+          'Password must be at least 8 characters long and contain uppercase and lowercase letters, a number, and a special character.',
       },
     ),
   rePassword: z.string().min(8),
@@ -26,12 +26,12 @@ const resetPasswordSchema = z.object({
 
 const ResetPassword = ({ token }: { token: string }) => {
   const [data, setData] = useState({
-    password: "",
+    password: '',
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [verified, setVerified] = useState(false);
   const [user, setUser] = useState({
-    email: "",
+    email: '',
   });
 
   const router = useRouter();
@@ -51,7 +51,7 @@ const ResetPassword = ({ token }: { token: string }) => {
         }
       } catch (error: any) {
         toast.error(error.response.data);
-        router.push("/auth/forget-password");
+        router.push('/auth/forget-password');
       }
     };
 
@@ -63,8 +63,8 @@ const ResetPassword = ({ token }: { token: string }) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (data.password === "") {
-      toast.error("Please enter your password.");
+    if (data.password === '') {
+      toast.error('Please enter your password.');
       return;
     }
 
@@ -85,8 +85,8 @@ const ResetPassword = ({ token }: { token: string }) => {
       if (res.status === 200) {
         toast.success(res.data);
         setVerified(true);
-        setData({ password: "" });
-        router.push("/auth/signin");
+        setData({ password: '' });
+        router.push('/auth/signin');
       }
     } catch (error: any) {
       toast.error(error.response.data);
@@ -103,9 +103,7 @@ const ResetPassword = ({ token }: { token: string }) => {
                 Update Password
               </h1>
 
-              <p className="text-center text-body-color md:px-20">
-                Enter your new password
-              </p>
+              <p className="text-center text-body-color md:px-20">Enter your new password</p>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -115,9 +113,7 @@ const ResetPassword = ({ token }: { token: string }) => {
                   placeholder="Password"
                   name="password"
                   value={data.password}
-                  onChange={(e) =>
-                    setData({ ...data, password: e.target.value })
-                  }
+                  onChange={(e) => setData({ ...data, password: e.target.value })}
                   required
                   className="placeholder-dark-text w-full border-b bg-transparent py-5 text-base font-medium text-dark outline-none focus:border-primary"
                 />
@@ -125,9 +121,7 @@ const ResetPassword = ({ token }: { token: string }) => {
                 <button
                   aria-label="login with email and password"
                   className={`inline-flex items-center justify-center rounded bg-primary px-14 py-[14px] text-sm font-semibold text-white ${
-                    error.length > 0 || !data.password
-                      ? "bg-gray-600"
-                      : "bg-black  "
+                    error.length > 0 || !data.password ? 'bg-gray-600' : 'bg-black  '
                   }`}
                   type="submit"
                 >

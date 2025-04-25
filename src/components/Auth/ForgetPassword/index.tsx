@@ -1,9 +1,9 @@
-"use client";
-import axios from "axios";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { integrations, messages } from "../../../../integrations.config";
-import z from "zod";
+'use client';
+import axios from 'axios';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { integrations, messages } from '../../../../integrations.config';
+import z from 'zod';
 
 const forgetPasswordSchema = z.object({
   email: z.string().email(),
@@ -11,7 +11,7 @@ const forgetPasswordSchema = z.object({
 
 const ForgetPassword = () => {
   const [data, setData] = useState({
-    email: "",
+    email: '',
   });
 
   const handleSubmit = async (e: any) => {
@@ -31,19 +31,19 @@ const ForgetPassword = () => {
     }
 
     try {
-      const res = await axios.post("/api/forget-password/reset", data);
+      const res = await axios.post('/api/forget-password/reset', data);
 
       if (res.status === 404) {
-        toast.error("User not found.");
+        toast.error('User not found.');
         return;
       }
 
       if (res.status === 200) {
         toast.success(res.data);
-        setData({ email: "" });
+        setData({ email: '' });
       }
 
-      setData({ email: "" });
+      setData({ email: '' });
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data);
@@ -61,8 +61,8 @@ const ForgetPassword = () => {
               </h1>
 
               <p className="text-center text-body-color md:px-20">
-                Enter the email address associated with your account and
-                we&#39;ll send you a link to reset your password.
+                Enter the email address associated with your account and we&#39;ll send you a link
+                to reset your password.
               </p>
             </div>
 

@@ -1,20 +1,20 @@
 // src/components/Blog/HomeBlogSection.tsx
 
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { getPosts } from "@/sanity/sanity-utils";
-import { Blog } from "@/types/blog";
-import SingleBlog from "./SingleBlog";
-import Link from "next/link";
-import Masonry from "react-masonry-css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import CTAButtons from "../Buttons/CTAButtons";
-import { BookOpen } from "lucide-react";
+import { useEffect, useState } from 'react';
+import { getPosts } from '@/sanity/sanity-utils';
+import { Blog } from '@/types/blog';
+import SingleBlog from './SingleBlog';
+import Link from 'next/link';
+import Masonry from 'react-masonry-css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import CTAButtons from '../Buttons/CTAButtons';
+import { BookOpen } from 'lucide-react';
 
 export default function HomeBlogSection() {
   const [posts, setPosts] = useState<Blog[]>([]);
@@ -42,8 +42,8 @@ export default function HomeBlogSection() {
                 Nos derniers conseils et actualités
               </h2>
               <p className="text-lg font-medium text-body-color">
-                Optimisation, réglementation, bonnes pratiques : tout pour
-                booster vos revenus locatifs.
+                Optimisation, réglementation, bonnes pratiques : tout pour booster vos revenus
+                locatifs.
               </p>
             </div>
           </div>
@@ -65,8 +65,8 @@ export default function HomeBlogSection() {
             modules={[Pagination, Navigation]}
             pagination={{ clickable: true }}
             navigation={{
-              prevEl: ".swiper-button-prev-custom",
-              nextEl: ".swiper-button-next-custom",
+              prevEl: '.swiper-button-prev-custom',
+              nextEl: '.swiper-button-next-custom',
             }}
             className="pb-12"
           >
@@ -95,10 +95,10 @@ export default function HomeBlogSection() {
         <div className="mt-12 text-center">
           <CTAButtons
             primary={{
-              label: "Voir tous les articles",
-              href: "/blog",
+              label: 'Voir tous les articles',
+              href: '/blog',
               icon: <BookOpen className="h-5 w-5" />,
-              colorClass: "bg-primary text-white hover:bg-primary/90",
+              colorClass: 'bg-primary text-white hover:bg-primary/90',
             }}
           />
         </div>

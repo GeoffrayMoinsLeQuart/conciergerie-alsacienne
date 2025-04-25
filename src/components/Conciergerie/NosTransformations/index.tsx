@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import SectionTitle from "@/components/Common/SectionTitle";
+import { FC } from 'react';
+import SectionTitle from '@/components/Common/SectionTitle';
 // import TransformationSlider from "@/components/Transformations/Slider";
 
 const NosTransformations: FC = () => {
@@ -17,9 +17,9 @@ const NosTransformations: FC = () => {
         <div className="mt-10">
           {/* <TransformationSlider /> */}
           <div className="rounded-lg border border-dashed border-gray-300 p-10 text-center text-sm italic text-body-color">
-            [Cette section présentera bientôt notre galerie de transformations
-            avant/après, illustrant comment nous avons métamorphosé des biens
-            pour maximiser leur attractivité et leur rentabilité]
+            [Cette section présentera bientôt notre galerie de transformations avant/après,
+            illustrant comment nous avons métamorphosé des biens pour maximiser leur attractivité et
+            leur rentabilité]
           </div>
         </div>
       </div>

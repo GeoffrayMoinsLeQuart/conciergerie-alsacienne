@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 // Types pour les propriétés du composant
 interface AddressAutocompleteProps {
@@ -43,16 +43,15 @@ interface AddressFeature {
 const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
   onAddressSelect,
   placeholder = "Commencez à saisir l'adresse...",
-  label = "Adresse du bien",
+  label = 'Adresse du bien',
   required = true,
-  className = "",
+  className = '',
 }) => {
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>('');
   const [suggestions, setSuggestions] = useState<AddressFeature[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [selectedAddress, setSelectedAddress] =
-    useState<AddressComponents | null>(null);
+  const [selectedAddress, setSelectedAddress] = useState<AddressComponents | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLUListElement>(null);
 
@@ -68,9 +67,9 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -100,12 +99,12 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
     const coordinates = feature.geometry.coordinates;
 
     const addressComponents: AddressComponents = {
-      streetNumber: properties.housenumber || "",
-      street: properties.street || "",
-      city: properties.city || "",
-      postalCode: properties.postcode || "",
-      department: "", // 👈 Vide par défaut si non précisé
-      fullAddress: properties.label || "",
+      streetNumber: properties.housenumber || '',
+      street: properties.street || '',
+      city: properties.city || '',
+      postalCode: properties.postcode || '',
+      department: '', // 👈 Vide par défaut si non précisé
+      fullAddress: properties.label || '',
       location: {
         lat: coordinates[1],
         lng: coordinates[0],
@@ -134,7 +133,7 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
       if (suggestions.length > 0) {
         handleSelectAddress(suggestions[0]);
@@ -159,9 +158,7 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
         required={required}
       />
 
-      {loading && (
-        <div className="absolute right-3 top-10">{/* spinner inchangé */}</div>
-      )}
+      {loading && <div className="absolute right-3 top-10">{/* spinner inchangé */}</div>}
 
       {showSuggestions && suggestions.length > 0 && (
         <ul
@@ -183,16 +180,11 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
         </ul>
       )}
 
-      {showSuggestions &&
-        inputValue.length >= 3 &&
-        suggestions.length === 0 &&
-        !loading && (
-          <div className="absolute z-10 mt-1 w-full rounded-lg border border-gray-300 bg-white p-4 text-center shadow-lg">
-            <p className="text-gray-500">
-              Aucune adresse trouvée. Veuillez vérifier votre saisie.
-            </p>
-          </div>
-        )}
+      {showSuggestions && inputValue.length >= 3 && suggestions.length === 0 && !loading && (
+        <div className="absolute z-10 mt-1 w-full rounded-lg border border-gray-300 bg-white p-4 text-center shadow-lg">
+          <p className="text-gray-500">Aucune adresse trouvée. Veuillez vérifier votre saisie.</p>
+        </div>
+      )}
     </div>
   );
 };

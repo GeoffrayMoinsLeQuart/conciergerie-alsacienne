@@ -1,5 +1,5 @@
-import { Prestation } from "@/types/prestation";
-import Image from "next/image";
+import { Prestation } from '@/types/prestation';
+import Image from 'next/image';
 
 export default function PrestationTabContent({ prestation }: { prestation: Prestation }) {
   return (
@@ -13,7 +13,7 @@ export default function PrestationTabContent({ prestation }: { prestation: Prest
             className="w-full object-cover object-center"
           />
         ) : (
-          "no image found"
+          'no image found'
         )}
       </div>
       <h1 className="mb-7 text-2xl font-bold text-black sm:text-4xl lg:text-3xl">

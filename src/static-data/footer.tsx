@@ -1,29 +1,29 @@
-import { FooterLink, FooterSocial } from "@/types/footer";
-import { v4 as uuid } from "uuid";
+import { FooterLink, FooterSocial } from '@/types/footer';
+import { v4 as uuid } from 'uuid';
 
 export const footerLinks: FooterLink[] = [
   {
     id: uuid(),
-    title: "Conciergerie",
-    href: "/conciergerie",
+    title: 'Conciergerie',
+    href: '/conciergerie',
     external: false,
   },
   {
     id: uuid(),
-    title: "Gestion Locative",
-    href: "/gestion-locative",
+    title: 'Gestion Locative',
+    href: '/gestion-locative',
     external: false,
   },
   {
     id: uuid(),
-    title: "Nos Biens",
-    href: "/properties",
+    title: 'Nos Biens',
+    href: '/properties',
     external: false,
   },
   {
     id: uuid(),
-    title: "Nous Contacter",
-    href: "/contact",
+    title: 'Nous Contacter',
+    href: '/contact',
     external: false,
   },
 ];
@@ -31,26 +31,26 @@ export const footerLinks: FooterLink[] = [
 export const footerNewsData: FooterLink[] = [
   {
     id: uuid(),
-    title: "Conseils Propriétaires",
-    href: "/blog",
+    title: 'Conseils Propriétaires',
+    href: '/blog',
     external: false,
   },
   {
     id: uuid(),
-    title: "Actualités Airbnb",
-    href: "/blog",
+    title: 'Actualités Airbnb',
+    href: '/blog',
     external: false,
   },
   {
     id: uuid(),
-    title: "Tourisme en Alsace",
-    href: "/blog",
+    title: 'Tourisme en Alsace',
+    href: '/blog',
     external: false,
   },
   {
     id: uuid(),
-    title: "Témoignages",
-    href: "/#testimonial",
+    title: 'Témoignages',
+    href: '/#testimonial',
     external: false,
   },
 ];
@@ -58,26 +58,26 @@ export const footerNewsData: FooterLink[] = [
 export const footerQuickLinks: FooterLink[] = [
   {
     id: uuid(),
-    title: "Accueil",
-    href: "/",
+    title: 'Accueil',
+    href: '/',
     external: false,
   },
   {
     id: uuid(),
-    title: "Demander un Devis",
-    href: "/contact",
+    title: 'Demander un Devis',
+    href: '/contact',
     external: false,
   },
   {
     id: uuid(),
-    title: "À Propos",
-    href: "/#about",
+    title: 'À Propos',
+    href: '/#about',
     external: false,
   },
   {
     id: uuid(),
-    title: "Mentions Légales",
-    href: "/mentions-legales",
+    title: 'Mentions Légales',
+    href: '/mentions-legales',
     external: false,
   },
 ];
@@ -85,8 +85,8 @@ export const footerQuickLinks: FooterLink[] = [
 export const footerSocialLinks: FooterSocial[] = [
   {
     id: uuid(),
-    title: "Facebook",
-    href: "",
+    title: 'Facebook',
+    href: '',
     icon: (
       <svg
         width="20"
@@ -104,8 +104,8 @@ export const footerSocialLinks: FooterSocial[] = [
   },
   {
     id: uuid(),
-    title: "Twitter",
-    href: "",
+    title: 'Twitter',
+    href: '',
     icon: (
       <svg
         width="20"
@@ -125,8 +125,8 @@ export const footerSocialLinks: FooterSocial[] = [
   },
   {
     id: uuid(),
-    title: "Linkedin",
-    href: "",
+    title: 'Linkedin',
+    href: '',
     icon: (
       <svg
         width="20"

@@ -1,13 +1,41 @@
 // src/app/(site)/about/page.tsx
 
-import { Metadata } from "next";
-import PageTitle from "@/components/Common/PageTitle";
-import Image from "next/image";
+import { Metadata } from 'next';
+import PageTitle from '@/components/Common/PageTitle';
+import Image from 'next/image';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: "À Propos | Conciergerie Alsacienne",
+  title: 'Conciergerie Alsacienne – Notre histoire, notre mission',
   description:
-    "Découvrez qui nous sommes, notre mission, nos valeurs et nos chiffres clés. Conciergerie Alsacienne, votre partenaire local 100% Alsacien.",
+    'Une conciergerie 100% alsacienne, fondée par des professionnels passionnés. Découvrez notre mission, nos valeurs, notre exigence.',
+  openGraph: {
+    title: 'Conciergerie Alsacienne – Notre histoire, notre mission',
+    description:
+      'Depuis 10 ans, nous accompagnons les propriétaires avec rigueur, transparence et ancrage local. Faites connaissance avec notre équipe.',
+    url: 'https://www.conciergerie-alsacienne.fr/about',
+    siteName: 'Conciergerie Alsacienne',
+    images: [
+      {
+        url: 'https://www.conciergerie-alsacienne.fr/images/about-hero.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Maison traditionnelle alsacienne – Conciergerie Alsacienne',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'À propos de Conciergerie Alsacienne',
+    description:
+      'Gestion haut de gamme, approche humaine, ancrage local. Notre équipe se présente.',
+    images: ['https://www.conciergerie-alsacienne.fr/images/about-hero.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function AboutPage() {
@@ -15,37 +43,37 @@ export default function AboutPage() {
   const missionText = `Chez Conciergerie Alsacienne, nous allions passion du terroir et expertise hôtelière pour offrir 
   un service clé en main, local et personnalisé.`;
   const founder = {
-    name: "Jean Dupont",
-    role: "Fondateur & Expert Local",
-    photo: "/images/team/jean-dupont.jpg",
+    name: 'Jean Dupont',
+    role: 'Fondateur & Expert Local',
+    photo: '/images/team/jean-dupont.jpg',
     bio: `Après 10 ans dans la gestion hôtelière et Airbnb, Jean a créé la Conciergerie Alsacienne 
     pour proposer un accompagnement premium, à taille humaine.`,
   };
   const stats = [
-    { label: "Biens gérés", value: "120+" },
-    { label: "Clients satisfaits", value: "85 %" },
-    { label: "Années d'expérience", value: "10" },
+    { label: 'Biens gérés', value: '120+' },
+    { label: 'Clients satisfaits', value: '85 %' },
+    { label: "Années d'expérience", value: '10' },
   ];
   const whyUs = [
     {
-      title: "Expertise locale",
-      icon: "🏠",
-      desc: "Une connaissance pointue du marché alsacien.",
+      title: 'Expertise locale',
+      icon: '🏠',
+      desc: 'Une connaissance pointue du marché alsacien.',
     },
     {
-      title: "Service sur‑mesure",
-      icon: "🎯",
-      desc: "Des offres taillées pour vos besoins.",
+      title: 'Service sur‑mesure',
+      icon: '🎯',
+      desc: 'Des offres taillées pour vos besoins.',
     },
     {
-      title: "Réactivité",
-      icon: "⚡️",
-      desc: "Nous sommes disponibles 7j/7, 24h/24.",
+      title: 'Réactivité',
+      icon: '⚡️',
+      desc: 'Nous sommes disponibles 7j/7, 24h/24.',
     },
     {
-      title: "Transparence",
-      icon: "🔍",
-      desc: "Rapports clairs et bilans réguliers.",
+      title: 'Transparence',
+      icon: '🔍',
+      desc: 'Rapports clairs et bilans réguliers.',
     },
   ];
 
@@ -60,12 +88,9 @@ export default function AboutPage() {
       {/* 1. Hero */}
       <section className="relative bg-primary/10 py-20 text-center">
         <div className="container mx-auto px-4">
-          <h1 className="mb-4 text-4xl font-bold text-primary">
-            Conciergerie Alsacienne
-          </h1>
+          <h1 className="mb-4 text-4xl font-bold text-primary">Conciergerie Alsacienne</h1>
           <p className="mb-8 text-xl text-body-color">
-            Votre partenaire local, 100 % Alsacien, pour une gestion haut de
-            gamme
+            Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme
           </p>
           <Image
             src="/images/about-hero.jpg"
@@ -80,9 +105,7 @@ export default function AboutPage() {
       {/* 2. Notre Mission */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="mb-4 text-3xl font-semibold text-black">
-            Notre mission
-          </h2>
+          <h2 className="mb-4 text-3xl font-semibold text-black">Notre mission</h2>
           <p className="max-w-3xl text-base text-body-color">{missionText}</p>
         </div>
       </section>
@@ -100,12 +123,8 @@ export default function AboutPage() {
             />
           </div>
           <div className="w-full lg:w-7/12 lg:pl-12">
-            <h3 className="mb-2 text-2xl font-bold text-black">
-              {founder.name}
-            </h3>
-            <span className="text-sm italic text-body-color">
-              {founder.role}
-            </span>
+            <h3 className="mb-2 text-2xl font-bold text-black">{founder.name}</h3>
+            <span className="text-sm italic text-body-color">{founder.role}</span>
             <p className="mt-4 text-base text-body-color">{founder.bio}</p>
           </div>
         </div>
@@ -114,15 +133,11 @@ export default function AboutPage() {
       {/* 4. Nos chiffres clés */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-8 text-3xl font-semibold text-black">
-            Nos chiffres clés
-          </h2>
+          <h2 className="mb-8 text-3xl font-semibold text-black">Nos chiffres clés</h2>
           <div className="mx-[-16px] flex flex-wrap">
             {stats.map((stat) => (
               <div key={stat.label} className="mb-8 w-1/3 px-4 lg:mb-0">
-                <h4 className="text-4xl font-bold text-primary">
-                  {stat.value}
-                </h4>
+                <h4 className="text-4xl font-bold text-primary">{stat.value}</h4>
                 <p className="text-base text-body-color">{stat.label}</p>
               </div>
             ))}
@@ -154,12 +169,10 @@ export default function AboutPage() {
       {/* 6. Appel à l'action */}
       <section className="py-16 text-center">
         <div className="container mx-auto px-4">
-          <h2 className="mb-4 text-3xl font-semibold text-black">
-            Prêts à démarrer ?
-          </h2>
+          <h2 className="mb-4 text-3xl font-semibold text-black">Prêts à démarrer ?</h2>
           <p className="mb-6 text-base text-body-color">
-            Contactez‑nous pour un audit gratuit de votre bien et découvrez
-            comment maximiser vos revenus en toute sérénité.
+            Contactez‑nous pour un audit gratuit de votre bien et découvrez comment maximiser vos
+            revenus en toute sérénité.
           </p>
           <a
             href="/contact"
@@ -168,6 +181,45 @@ export default function AboutPage() {
             Nous contacter
           </a>
         </div>
+        <Script id="json-ld-breadcrumb-about" type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Accueil',
+                item: 'https://www.conciergerie-alsacienne.fr',
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'À propos',
+                item: 'https://www.conciergerie-alsacienne.fr/about',
+              },
+            ],
+          })}
+        </Script>
+        <Script id="json-ld-about" type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'AboutPage',
+            name: 'À propos | Conciergerie Alsacienne',
+            url: 'https://www.conciergerie-alsacienne.fr/about',
+            description:
+              'Une conciergerie 100% alsacienne, fondée par des professionnels passionnés. Découvrez notre mission, nos valeurs, notre exigence.',
+            publisher: {
+              '@type': 'Organization',
+              name: 'Conciergerie Alsacienne',
+              url: 'https://www.conciergerie-alsacienne.fr',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.conciergerie-alsacienne.fr/logo.svg',
+              },
+            },
+          })}
+        </Script>
       </section>
     </>
   );

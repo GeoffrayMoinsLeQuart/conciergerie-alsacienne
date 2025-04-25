@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     // Récupérer les données du formulaire
     const formData = await req.json();
-    
+
     // Configurer le transporteur d'email
     // Note: En production, utilisez des variables d'environnement pour ces informations
     const transporter = nodemailer.createTransport({
@@ -33,9 +33,13 @@ export async function POST(req: NextRequest) {
       
       <h3>Informations sur le service</h3>
       <p><strong>Type de service:</strong> ${
-        formData.serviceType === 'gestion' ? 'Gestion locative' :
-        formData.serviceType === 'conciergerie' ? 'Conciergerie' :
-        formData.serviceType === 'both' ? 'Gestion locative et Conciergerie' : 'Non spécifié'
+        formData.serviceType === 'gestion'
+          ? 'Gestion locative'
+          : formData.serviceType === 'conciergerie'
+            ? 'Conciergerie'
+            : formData.serviceType === 'both'
+              ? 'Gestion locative et Conciergerie'
+              : 'Non spécifié'
       }</p>
       
       <h3>Informations sur le bien</h3>
@@ -64,10 +68,10 @@ export async function POST(req: NextRequest) {
     // Répondre avec succès
     return NextResponse.json({ success: true, message: 'Email envoyé avec succès' });
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de l\'email:', error);
+    console.error("Erreur lors de l'envoi de l'email:", error);
     return NextResponse.json(
-      { success: false, message: 'Erreur lors de l\'envoi de l\'email' },
-      { status: 500 }
+      { success: false, message: "Erreur lors de l'envoi de l'email" },
+      { status: 500 },
     );
   }
 }

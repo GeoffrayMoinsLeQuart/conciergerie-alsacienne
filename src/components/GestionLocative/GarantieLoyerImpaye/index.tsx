@@ -1,17 +1,9 @@
-"use client";
+'use client';
 
-import SectionTitle from "../../Common/SectionTitle";
-import { FC } from "react";
-import {
-  ShieldCheck,
-  Gavel,
-  AlertTriangle,
-  Home,
-  Slash,
-  Timer,
-  CheckCircle,
-} from "lucide-react";
-import { motion } from "framer-motion";
+import SectionTitle from '../../Common/SectionTitle';
+import { FC } from 'react';
+import { ShieldCheck, Gavel, AlertTriangle, Home, Slash, Timer, CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const GarantiesLoyers: FC = () => {
   const garanties = [
@@ -23,31 +15,31 @@ const GarantiesLoyers: FC = () => {
     },
     {
       icon: Timer,
-      title: "Aucune carence, aucune franchise",
+      title: 'Aucune carence, aucune franchise',
       description:
         "Notre garantie prend effet dès le premier jour de retard de paiement, sans délai d'attente. Vous n'avez aucune franchise à supporter – chaque euro de loyer impayé est couvert, dès le premier impayé.",
     },
     {
       icon: Gavel,
-      title: "Tranquillité juridique incluse",
+      title: 'Tranquillité juridique incluse',
       description:
         "Vous profitez d'une protection juridique complète : tous les frais de contentieux, d'huissier, d'expulsion et de justice sont pris en charge. Nous gérons tout pour vous, sans frais supplémentaires.",
     },
     {
       icon: AlertTriangle,
-      title: "Dégradations du bien couvertes",
+      title: 'Dégradations du bien couvertes',
       description:
-        "Les détériorations causées par le locataire sont indemnisées au-delà du dépôt de garantie. Les réparations sont prises en charge*, préservant ainsi la valeur de votre bien.",
+        'Les détériorations causées par le locataire sont indemnisées au-delà du dépôt de garantie. Les réparations sont prises en charge*, préservant ainsi la valeur de votre bien.',
     },
     {
       icon: Slash,
-      title: "Protection contre le squat",
+      title: 'Protection contre le squat',
       description:
         "Les loyers perdus en cas d'occupation illégale sont couverts, et nous prenons en charge les frais de procédure pour évincer les squatteurs.",
     },
     {
       icon: Home,
-      title: "Vacance locative (optionnelle)",
+      title: 'Vacance locative (optionnelle)',
       description:
         "Entre deux locataires, nous pouvons compenser les loyers non perçus pour sécuriser votre trésorerie, même en période d'inoccupation.*",
     },
@@ -75,9 +67,8 @@ const GarantiesLoyers: FC = () => {
                   Garantie à 100% de vos loyers
                 </h3>
                 <p className="max-w-2xl text-gray-600">
-                  Même en cas d'impayés, vous recevez l'intégralité de vos
-                  loyers et charges à date fixe chaque mois, vous assurant des
-                  revenus stables et prévisibles.
+                  Même en cas d'impayés, vous recevez l'intégralité de vos loyers et charges à date
+                  fixe chaque mois, vous assurant des revenus stables et prévisibles.
                 </p>
               </div>
             </div>
@@ -90,7 +81,7 @@ const GarantiesLoyers: FC = () => {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
                   className="flex h-full flex-col rounded-lg bg-gray-50 p-6 shadow-sm transition duration-300 ease-in-out hover:shadow-md"
                 >
                   <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-800">
@@ -99,22 +90,19 @@ const GarantiesLoyers: FC = () => {
                     </span>
                     {title}
                   </h4>
-                  <p className="flex-grow text-sm leading-relaxed text-gray-600">
-                    {description}
-                  </p>
+                  <p className="flex-grow text-sm leading-relaxed text-gray-600">{description}</p>
                 </motion.div>
               ))}
             </div>
 
             {/* Mentions */}
             <p className="mt-10 text-sm text-gray-500">
-              *Conditions : Contrat assuré par GALIAN-SMABTP. Plafonds
-              d'indemnisation : 100 000 € pour les loyers impayés et frais de
-              procédure, 10 000 € pour les dégradations immobilières.
-              Détérioration : vétusté déduite, dépôt de garantie déduit. Option
-              vacance locative sous réserve de souscription spécifique. Garantie
-              valable pour les locations de résidence principale, sous réserve
-              de l'acceptation du dossier du locataire.
+              *Conditions : Contrat assuré par GALIAN-SMABTP. Plafonds d'indemnisation : 100 000 €
+              pour les loyers impayés et frais de procédure, 10 000 € pour les dégradations
+              immobilières. Détérioration : vétusté déduite, dépôt de garantie déduit. Option
+              vacance locative sous réserve de souscription spécifique. Garantie valable pour les
+              locations de résidence principale, sous réserve de l'acceptation du dossier du
+              locataire.
             </p>
           </div>
         </div>

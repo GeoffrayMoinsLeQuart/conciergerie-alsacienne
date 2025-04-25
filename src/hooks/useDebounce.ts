@@ -1,5 +1,5 @@
 // src/hooks/useDebounce.ts
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /**
  * Renvoie la valeur débouncée après `delay` ms

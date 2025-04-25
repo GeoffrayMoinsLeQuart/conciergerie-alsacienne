@@ -10,13 +10,7 @@ export default function Graphic() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle
-            cx="25"
-            cy="118"
-            r="101"
-            stroke="url(#paint0_linear_52:83)"
-            strokeWidth="34"
-          />
+          <circle cx="25" cy="118" r="101" stroke="url(#paint0_linear_52:83)" strokeWidth="34" />
           <defs>
             <linearGradient
               id="paint0_linear_52:83"

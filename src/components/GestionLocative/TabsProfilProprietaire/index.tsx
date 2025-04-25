@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { cn } from "@/utils/utils";
-import * as React from "react";
+import { cn } from '@/utils/utils';
+import * as React from 'react';
 
 // Tabs Context
 const TabsContext = React.createContext<{
@@ -15,19 +15,12 @@ interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export function Tabs({
-  defaultValue,
-  children,
-  className,
-  ...props
-}: TabsProps) {
+export function Tabs({ defaultValue, children, className, ...props }: TabsProps) {
   const [activeTab, setActiveTab] = React.useState(defaultValue);
 
   return (
-    <div className={cn("w-full", className)} {...props}>
-      <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-        {children}
-      </TabsContext.Provider>
+    <div className={cn('w-full', className)} {...props}>
+      <TabsContext.Provider value={{ activeTab, setActiveTab }}>{children}</TabsContext.Provider>
     </div>
   );
 }
@@ -40,10 +33,7 @@ interface TabsListProps extends React.HTMLAttributes<HTMLDivElement> {
 export function TabsList({ children, className, ...props }: TabsListProps) {
   return (
     <div
-      className={cn(
-        "flex flex-wrap justify-center gap-4 rounded-xl bg-gray-100 p-4",
-        className,
-      )}
+      className={cn('flex flex-wrap justify-center gap-4 rounded-xl bg-gray-100 p-4', className)}
       {...props}
     >
       {children}
@@ -52,20 +42,14 @@ export function TabsList({ children, className, ...props }: TabsListProps) {
 }
 
 // Tabs Trigger
-interface TabsTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface TabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
   children: React.ReactNode;
 }
 
-export function TabsTrigger({
-  value,
-  children,
-  className,
-  ...props
-}: TabsTriggerProps) {
+export function TabsTrigger({ value, children, className, ...props }: TabsTriggerProps) {
   const context = React.useContext(TabsContext);
-  if (!context) throw new Error("TabsTrigger must be used within Tabs");
+  if (!context) throw new Error('TabsTrigger must be used within Tabs');
   const { activeTab, setActiveTab } = context;
   const isActive = activeTab === value;
 
@@ -73,10 +57,10 @@ export function TabsTrigger({
     <button
       onClick={() => setActiveTab(value)}
       className={cn(
-        "rounded-full px-6 py-3 text-sm font-semibold shadow-md transition",
+        'rounded-full px-6 py-3 text-sm font-semibold shadow-md transition',
         isActive
-          ? "scale-[1.05] bg-primary text-white"
-          : "bg-white text-gray-600 hover:text-primary",
+          ? 'scale-[1.05] bg-primary text-white'
+          : 'bg-white text-gray-600 hover:text-primary',
         className,
       )}
       {...props}
@@ -92,19 +76,14 @@ interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export function TabsContent({
-  value,
-  children,
-  className,
-  ...props
-}: TabsContentProps) {
+export function TabsContent({ value, children, className, ...props }: TabsContentProps) {
   const context = React.useContext(TabsContext);
-  if (!context) throw new Error("TabsContent must be used within Tabs");
+  if (!context) throw new Error('TabsContent must be used within Tabs');
   const { activeTab } = context;
   if (activeTab !== value) return null;
 
   return (
-    <div className={cn("animate-fade-in-up mt-6", className)} {...props}>
+    <div className={cn('animate-fade-in-up mt-6', className)} {...props}>
       {children}
     </div>
   );
@@ -131,9 +110,7 @@ const TimelineProcessus: React.FC<{ steps: TimelineItem[] }> = ({ steps }) => {
             <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow">
               {index + 1}
             </div>
-            <h3 className="mb-2 text-lg font-semibold text-gray-800">
-              {step.title}
-            </h3>
+            <h3 className="mb-2 text-lg font-semibold text-gray-800">{step.title}</h3>
             <ul className="list-disc pl-5 text-gray-700">
               {step.points.map((point, idx) => (
                 <li key={idx} className="mb-1 text-sm">
@@ -181,81 +158,77 @@ export default TabsProfilProprietaire;
 
 const timelineInvestisseur = [
   {
-    title: "Optimisation de la rentabilité",
+    title: 'Optimisation de la rentabilité',
     points: [
-      "Évaluation précise du loyer de marché",
-      "Conseils fiscaux et patrimoniaux",
-      "Stratégie de valorisation long terme",
+      'Évaluation précise du loyer de marché',
+      'Conseils fiscaux et patrimoniaux',
+      'Stratégie de valorisation long terme',
     ],
   },
   {
-    title: "Gestion technique complète",
-    points: [
-      "Suivi des interventions",
-      "Maintenance préventive",
-      "Visites techniques régulières",
-    ],
+    title: 'Gestion technique complète',
+    points: ['Suivi des interventions', 'Maintenance préventive', 'Visites techniques régulières'],
   },
   {
-    title: "Reporting et transparence",
+    title: 'Reporting et transparence',
     points: [
-      "Tableau de bord mensuel",
-      "Analyse des rendements",
-      "Accompagnement pour arbitrage ou revente",
+      'Tableau de bord mensuel',
+      'Analyse des rendements',
+      'Accompagnement pour arbitrage ou revente',
     ],
   },
 ];
 
 const timelineExpatrie = [
   {
-    title: "Sérénité à distance",
+    title: 'Sérénité à distance',
     points: [
-      "Interlocuteur unique 7j/7",
-      "Réactivité face aux urgences",
-      "Aucune présence requise sur place",
+      'Interlocuteur unique 7j/7',
+      'Réactivité face aux urgences',
+      'Aucune présence requise sur place',
     ],
   },
   {
-    title: "Garantie totale",
+    title: 'Garantie totale',
     points: [
-      "Loyers garantis à date fixe",
-      "Protection juridique intégrée",
-      "Assurance dégradations locatives",
+      'Loyers garantis à date fixe',
+      'Protection juridique intégrée',
+      'Assurance dégradations locatives',
     ],
   },
   {
-    title: "Communication continue",
+    title: 'Communication continue',
     points: [
-      "Reporting clair et périodique",
-      "Contact WhatsApp & email réactif",
-      "Suivi personnalisé à distance",
+      'Reporting clair et périodique',
+      'Contact WhatsApp & email réactif',
+      'Suivi personnalisé à distance',
     ],
   },
 ];
 
 const timelinePrimo = [
   {
-    title: "Accompagnement de A à Z",
+    title: 'Accompagnement de A à Z',
     points: [
-      "Aide pour choisir le bon bail",
-      "Explication des démarches et obligations",
-      "Assistance pour première mise en location",
+      'Aide pour choisir le bon bail',
+      'Explication des démarches et obligations',
+      'Assistance pour première mise en location',
     ],
   },
   {
-    title: "Simplicité et pédagogie",
+    title: 'Simplicité et pédagogie',
     points: [
-      "Contrats clairs et simplifiés",
-      "Support permanent",
-      "Réponses à toutes les questions de débutant",
+      'Contrats clairs et simplifiés',
+      'Support permanent',
+      'Réponses à toutes les questions de débutant',
     ],
   },
   {
-    title: "Montée en compétence",
+    title: 'Montée en compétence',
     points: [
-      "Suivi personnalisé",
-      "Recommandations sur le long terme",
-      "Formations ou documentation en option",
+      'Suivi personnalisé',
+      'Recommandations sur le long terme',
+      'Formations ou documentation en option',
     ],
   },
 ];

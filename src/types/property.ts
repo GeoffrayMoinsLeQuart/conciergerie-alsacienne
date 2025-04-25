@@ -15,7 +15,7 @@ export interface Property {
   categories?: {
     value: string;
   }[];
-  modeGestion?: "Conciergerie" | "Gestion Locative";
+  modeGestion?: 'Conciergerie' | 'Gestion Locative';
   surface?: number;
   revenuMensuel?: number;
   occupation?: number;
@@ -26,5 +26,5 @@ export interface Property {
     lat: number;
     lng: number;
   };
-  createdAt: Date
+  createdAt: Date;
 }

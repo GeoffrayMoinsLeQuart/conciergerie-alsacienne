@@ -1,59 +1,59 @@
 // Nouveau composant Intro partagé pour Conciergerie et Gestion Locative
 
-"use client";
+'use client';
 
-import HeroImage from "@/components/Home/Hero/HeroImage";
-import Link from "next/link";
-import { FC } from "react";
-import { Calculator, Sparkles } from "lucide-react";
-import Image from "next/image";
-import CTAButtons from "../Buttons/CTAButtons";
+import HeroImage from '@/components/Home/Hero/HeroImage';
+import Link from 'next/link';
+import { FC } from 'react';
+import { Calculator, Sparkles } from 'lucide-react';
+import Image from 'next/image';
+import CTAButtons from '../Buttons/CTAButtons';
 
 interface IntroProps {
-  variant: "conciergerie" | "gestion";
+  variant: 'conciergerie' | 'gestion';
 }
 
 const IntroContent = {
   conciergerie: {
-    title: "Conciergerie haut de gamme et optimisation locative",
+    title: 'Conciergerie haut de gamme et optimisation locative',
     content: [
-      "Confiez-nous la gestion de votre bien en location courte durée en toute sérénité.",
-      "Notre équipe locale s’occupe de tout : préparation du logement, accueil voyageurs, ménage, suivi technique et ajustements tarifaires.",
-      "Offrez une expérience inoubliable à vos hôtes — et des revenus vraiment optimisés à votre patrimoine.",
+      'Confiez-nous la gestion de votre bien en location courte durée en toute sérénité.',
+      'Notre équipe locale s’occupe de tout : préparation du logement, accueil voyageurs, ménage, suivi technique et ajustements tarifaires.',
+      'Offrez une expérience inoubliable à vos hôtes — et des revenus vraiment optimisés à votre patrimoine.',
     ],
     image:
-      "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745434488/Conciergerie%20alsacienne/Icon%20landing/Conciergerie/ChatGPT_Image_Apr_23_2025_08_23_19_PM_1_nam8th.webp",
+      'https://res.cloudinary.com/dx96rdxwk/image/upload/v1745434488/Conciergerie%20alsacienne/Icon%20landing/Conciergerie/ChatGPT_Image_Apr_23_2025_08_23_19_PM_1_nam8th.webp',
     buttons: {
       primary: {
-        text: "Discuter de mon projet",
-        href: "/contact",
+        text: 'Discuter de mon projet',
+        href: '/contact',
         icon: <Sparkles className="h-5 w-5" />,
       },
       secondary: {
-        text: "Estimer mes revenus",
-        href: "/simulateur",
+        text: 'Estimer mes revenus',
+        href: '/simulateur',
         icon: <Calculator className="h-5 w-5" />,
       },
     },
   },
   gestion: {
-    title: "Gestion locative haut de gamme en Alsace",
+    title: 'Gestion locative haut de gamme en Alsace',
     content: [
-      "Libérez-vous des contraintes, confiez-nous votre bien.",
-      "Nous assurons une gestion rigoureuse et humaine : loyers garantis, relation locataire fluide, entretien maîtrisé.",
-      "Sérénité et rentabilité, sans compromis.",
+      'Libérez-vous des contraintes, confiez-nous votre bien.',
+      'Nous assurons une gestion rigoureuse et humaine : loyers garantis, relation locataire fluide, entretien maîtrisé.',
+      'Sérénité et rentabilité, sans compromis.',
     ],
     image:
-      "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745434488/Conciergerie%20alsacienne/Icon%20landing/Conciergerie/ChatGPT_Image_Apr_23_2025_08_23_19_PM_1_nam8th.webp",
+      'https://res.cloudinary.com/dx96rdxwk/image/upload/v1745434488/Conciergerie%20alsacienne/Icon%20landing/Conciergerie/ChatGPT_Image_Apr_23_2025_08_23_19_PM_1_nam8th.webp',
     buttons: {
       primary: {
-        text: "Estimer mes revenus",
-        href: "/simulateur",
+        text: 'Estimer mes revenus',
+        href: '/simulateur',
         icon: <Calculator className="h-5 w-5" />,
       },
       secondary: {
-        text: "Nous contacter",
-        href: "/contact",
+        text: 'Nous contacter',
+        href: '/contact',
         icon: <Sparkles className="h-5 w-5" />,
       },
     },
@@ -63,12 +63,8 @@ const IntroContent = {
 const Intro: FC<IntroProps> = ({ variant }) => {
   const { title, content, image } = IntroContent[variant];
 
-
   return (
-    <div
-      id="home"
-      className="relative bg-white pb-20 pt-[120px] lg:pb-[110px] lg:pt-[150px]"
-    >
+    <div id="home" className="relative bg-white pb-20 pt-[120px] lg:pb-[110px] lg:pt-[150px]">
       <div className="container">
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="m-auto w-full px-4 lg:w-6/12 xl:w-6/12">
@@ -86,13 +82,13 @@ const Intro: FC<IntroProps> = ({ variant }) => {
                 primary={{
                   label: IntroContent[variant].buttons.primary.text,
                   href: IntroContent[variant].buttons.primary.href,
-                  icon:IntroContent[variant].buttons.primary.icon,
-                  colorClass: "bg-primary text-white hover:bg-opacity-90",
+                  icon: IntroContent[variant].buttons.primary.icon,
+                  colorClass: 'bg-primary text-white hover:bg-opacity-90',
                 }}
                 secondary={{
                   label: IntroContent[variant].buttons.secondary.text,
                   href: IntroContent[variant].buttons.secondary.href,
-                  icon:IntroContent[variant].buttons.secondary.icon,
+                  icon: IntroContent[variant].buttons.secondary.icon,
                 }}
               />
             </div>

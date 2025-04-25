@@ -1,11 +1,11 @@
 // Nouveau composant CTA Gestion Locative avec amélioration UX et design
 
-"use client";
+'use client';
 
-import { FC } from "react";
-import CTAButtons from "@/components/Buttons/CTAButtons";
-import { Calculator, Mail } from "lucide-react";
-import { motion } from "framer-motion";
+import { FC } from 'react';
+import CTAButtons from '@/components/Buttons/CTAButtons';
+import { Calculator, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const CTAGestionLocative: FC = () => {
   return (
@@ -21,18 +21,18 @@ const CTAGestionLocative: FC = () => {
           Prêt à déléguer la gestion de votre bien ?
         </h2>
         <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-          Estimez votre rentabilité en quelques clics ou échangez directement
-          avec un conseiller de confiance.
+          Estimez votre rentabilité en quelques clics ou échangez directement avec un conseiller de
+          confiance.
         </p>
         <CTAButtons
           primary={{
-            label: "Estimer mes revenus",
-            href: "/simulateur",
+            label: 'Estimer mes revenus',
+            href: '/simulateur',
             icon: <Calculator className="h-5 w-5" />,
           }}
           secondary={{
-            label: "Nous contacter",
-            href: "/contact",
+            label: 'Nous contacter',
+            href: '/contact',
             icon: <Mail className="h-5 w-5" />,
           }}
         />
