@@ -63,6 +63,7 @@ const FAQ: React.FC<FAQProps> = ({
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
+  const [selectedType, setSelectedType] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const toggleFAQ = (index: number) => {
@@ -80,23 +81,49 @@ const FAQ: React.FC<FAQProps> = ({
 
   const filteredFaqs = useMemo(() => {
     return items.filter((item) => {
+      const itemTypes = Array.isArray(item.type) ? item.type : [item.type];
+      const matchesType = selectedType === 'all' || itemTypes.includes(selectedType);
       const matchesTopic = selectedTopic === 'all' || (item.topic || 'autres') === selectedTopic;
       const matchesSearch =
         searchTerm === '' ||
         item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.answer.toLowerCase().includes(searchTerm.toLowerCase());
-      return matchesTopic && matchesSearch;
+      return matchesType && matchesTopic && matchesSearch;
     });
-  }, [items, selectedTopic, searchTerm]);
+  }, [items, selectedType, selectedTopic, searchTerm]);
 
   return (
     <section className="bg-white py-16">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className={`${center ? 'text-center' : 'text-left'} mb-10`}>
-          {mainTitle && <h1 className="mb-4 text-4xl font-bold text-gray-800">{mainTitle}</h1>}
-          {title && <h2 className="mb-4 text-3xl font-bold text-primary">{title}</h2>}
-          {subtitle && <p className="mb-10 text-base text-gray-700">{subtitle}</p>}
-        </div>
+        {defaultType === 'all' && (
+          <div className={`${center ? 'text-center' : 'text-left'} mb-10`}>
+            {mainTitle && <h1 className="mb-4 text-4xl font-bold text-gray-800">{mainTitle}</h1>}
+            {title && <h2 className="mb-4 text-3xl font-bold text-primary">{title}</h2>}
+            {subtitle && <p className="mb-10 text-base text-gray-700">{subtitle}</p>}
+          </div>
+        )}
+
+        {defaultType === 'all' && (
+          <div className="mb-6 flex flex-wrap justify-center gap-2">
+            {[
+              { label: 'Toutes les questions', value: 'all' },
+              { label: 'Conciergerie', value: 'conciergerie' },
+              { label: 'Gestion locative', value: 'gestion-locative' },
+            ].map(({ label, value }) => (
+              <button
+                key={value}
+                onClick={() => setSelectedType(value)}
+                className={`rounded-md px-4 py-2 text-sm font-medium transition ${
+                  selectedType === value
+                    ? 'bg-primary/10 text-primary'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="relative mb-10">
           <input

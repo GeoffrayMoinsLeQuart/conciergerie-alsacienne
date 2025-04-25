@@ -28,7 +28,11 @@ const criteria = [
 
 const SelectionEtAccompagnement: FC = () => {
   return (
-    <section className="bg-[#f8f9ff] py-20">
+    <section
+      id="selection"
+      aria-labelledby="selection-heading"
+      className="bg-[#f8f9ff] py-20"
+    >
       <div className="container">
         <SectionTitle
           mainTitle="SÉLECTION & ACCOMPAGNEMENT"
@@ -39,17 +43,20 @@ const SelectionEtAccompagnement: FC = () => {
 
         <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {criteria.map((item, i) => (
-            <div key={i} className="text-center">
+            <article key={i} className="text-center" aria-labelledby={`criterion-${i}`}> 
               <div className="mx-auto mb-4 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-primary font-bold text-white">
                 {i + 1}
               </div>
-              <h3 className="mb-3 text-xl font-bold text-black">{item.title}</h3>
+              <h3 id={`criterion-${i}`} className="mb-3 text-xl font-bold text-black">{item.title}</h3>
               <p className="font-medium text-body-color">{item.description}</p>
-            </div>
+            </article>
           ))}
         </div>
 
-        <div className="mt-14 rounded-lg bg-white p-8 shadow-md">
+        <div
+          className="mt-14 rounded-lg bg-white p-8 shadow-md"
+          aria-label="Approche de sélection personnalisée"
+        >
           <h3 className="mb-4 text-center text-2xl font-bold text-black">
             Notre Approche de Sélection
           </h3>

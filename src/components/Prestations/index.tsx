@@ -21,10 +21,25 @@ const NosPrestations: FC = () => {
     : 'Nous proposons une gamme complète de services pour assurer une gestion optimale de votre bien et une expérience exceptionnelle pour vos voyageurs.';
 
   return (
-    <section id="prestations" className="bg-[#f8f9ff] py-20">
+    <section
+      id="prestations"
+      className="bg-[#f8f9ff] py-20"
+      aria-labelledby="nos-prestations-title"
+    >
       <div className="container">
-        <SectionTitle mainTitle="NOS PRESTATIONS" title={title} paragraph={paragraph} center />
-        <Prestations prestations={prestations} />
+        <header className="mb-12 text-center">
+          <SectionTitle
+            mainTitle="NOS PRESTATIONS"
+            title={title}
+            paragraph={paragraph}
+            center
+            id="nos-prestations-title"
+          />
+        </header>
+
+        <div role="list" aria-label="Liste des prestations proposées">
+          <Prestations prestations={prestations} />
+        </div>
       </div>
     </section>
   );

@@ -51,52 +51,33 @@ export const metadata: Metadata = {
 export default function ConciergeriePage() {
   return (
     <>
-      <StickyAnchorMenu />
-      <Intro variant="conciergerie" />
+      <main id="main" aria-label="Page conciergerie haut de gamme">
+        <StickyAnchorMenu />
 
-      <section id="selection">
+        <Intro variant="conciergerie" />
+
         <SelectionEtAccompagnement />
-      </section>
 
-      <section id="transformations">
         <NosTransformations />
-      </section>
 
-      <section id="prestations">
         <NosPrestations />
-      </section>
 
-      <section id="processus">
         <TimelineProcess />
-      </section>
 
-      <section id="expertise">
         <NotreExpertise />
-      </section>
 
-      <section id="transparence">
         <SectionTransparence />
-      </section>
 
-      <section id="resultats">
         <SectionResultatsConciergerie />
-      </section>
 
-      <section id="temoignages">
         <TemoignagesClients />
-      </section>
 
-      <section id="tarifs">
         <Tarification />
-      </section>
 
-      <section id="faq">
         <FaqConciergerie />
-      </section>
 
-      <section id="cta">
         <CTAConciergerie />
-      </section>
+      </main>
 
       <Script id="json-ld-conciergerie" type="application/ld+json">
         {JSON.stringify({

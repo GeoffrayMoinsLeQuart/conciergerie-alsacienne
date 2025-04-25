@@ -64,12 +64,19 @@ const Intro: FC<IntroProps> = ({ variant }) => {
   const { title, content, image } = IntroContent[variant];
 
   return (
-    <div id="home" className="relative bg-white pb-20 pt-[120px] lg:pb-[110px] lg:pt-[150px]">
+    <section
+      id="intro"
+      aria-labelledby="intro-heading"
+      className="relative bg-white pb-20 pt-[120px] lg:pb-[110px] lg:pt-[150px]"
+    >
       <div className="container">
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="m-auto w-full px-4 lg:w-6/12 xl:w-6/12">
             <div className="hero-content animate-fade-in-up grid gap-6 text-center lg:text-left">
-              <h1 className="mb-3 text-3xl font-bold leading-snug text-dark sm:text-5xl">
+              <h1
+                id="hero-title"
+                className="mb-3 text-3xl font-bold leading-snug text-dark sm:text-5xl"
+              >
                 {title}
               </h1>
               <div className="mx-auto mb-6 max-w-[480px] space-y-2 text-lg text-body-color lg:mx-0">
@@ -101,7 +108,11 @@ const Intro: FC<IntroProps> = ({ variant }) => {
               <div className="relative z-10 flex aspect-[491/515] w-full max-w-[491px] pt-11 lg:justify-end lg:pt-0">
                 <Image
                   src={image}
-                  alt="hero intro"
+                  alt={
+                    variant === 'conciergerie'
+                      ? 'Illustration conciergerie haut de gamme en Alsace'
+                      : 'Illustration gestion locative premium en Alsace'
+                  }
                   width={846}
                   height={563}
                   className="h-auto w-full rounded-2xl object-cover shadow-lg"
@@ -132,7 +143,7 @@ const Intro: FC<IntroProps> = ({ variant }) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

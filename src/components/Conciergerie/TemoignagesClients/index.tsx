@@ -1,5 +1,8 @@
+'use client';
+
 import SectionTitle from '@/components/Common/SectionTitle';
 import Image from 'next/image';
+import { FC } from 'react';
 
 const testimonials = [
   {
@@ -25,22 +28,30 @@ const testimonials = [
   },
 ];
 
-export default function TémoignagesClients() {
+const TémoignagesClients: FC = () => {
   return (
-    <section className="bg-white py-20">
+    <section
+      id="temoignages"
+      aria-labelledby="temoignages-heading"
+      className="bg-white py-20"
+    >
       <div className="container mx-auto px-4">
-        <SectionTitle
-          mainTitle="ILS NOUS FONT CONFIANCE"
-          title="Témoignages de nos propriétaires"
-          paragraph="Découvrez les retours authentiques de ceux qui nous ont confié la gestion de leur bien."
-          center
-        />
+        <header className="mb-12 text-center">
+          <SectionTitle
+            id="temoignages-heading"
+            mainTitle="ILS NOUS FONT CONFIANCE"
+            title="Témoignages de nos propriétaires"
+            paragraph="Découvrez les retours authentiques de ceux qui nous ont confié la gestion de leur bien."
+            center
+          />
+        </header>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <div
+            <article
               key={index}
               className="rounded-xl bg-white p-6 shadow-md transition hover:shadow-lg"
+              aria-label={`Témoignage de ${testimonial.name}`}
             >
               <div className="mb-4 flex items-center gap-4">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
@@ -56,11 +67,15 @@ export default function TémoignagesClients() {
                   <p className="text-sm text-gray-500">{testimonial.role}</p>
                 </div>
               </div>
-              <p className="italic text-body-color">"{testimonial.quote}"</p>
-            </div>
+              <blockquote className="italic text-body-color">
+                “{testimonial.quote}”
+              </blockquote>
+            </article>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default TémoignagesClients;

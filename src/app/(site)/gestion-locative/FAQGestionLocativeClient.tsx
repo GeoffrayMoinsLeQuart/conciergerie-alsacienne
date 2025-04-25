@@ -3,6 +3,32 @@
 import { useState, useEffect } from 'react';
 import { getFAQsByType } from '@/sanity/sanity-utils';
 import FAQ, { FAQItem } from '@/components/FAQ';
+import Script from 'next/script';
+
+interface Props {
+  items: FAQItem[];
+}
+
+function FAQSchema({ items }: Props) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
+  return (
+    <Script id="faq-schema" type="application/ld+json">
+      {JSON.stringify(jsonLd)}
+    </Script>
+  );
+}
 
 export default function FAQGestionLocativeClient() {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
@@ -33,14 +59,17 @@ export default function FAQGestionLocativeClient() {
             <p>Chargement des questions fréquentes...</p>
           </div>
         ) : (
-          <FAQ
-            items={faqItems}
-            defaultType="gestion-locative"
-            mainTitle=""
-            subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
-            showTopicFilter={true}
-            specificPage={true}
-          />
+          <>
+            <FAQ
+              items={faqItems}
+              defaultType="gestion-locative"
+              mainTitle=""
+              subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
+              showTopicFilter={true}
+              specificPage={true}
+            />
+            <FAQSchema items={faqItems} />
+          </>
         )}
       </div>
     </section>

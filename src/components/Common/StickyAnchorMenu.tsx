@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
-import clsx from 'clsx';
 
 const SECTIONS = [
   { id: 'selection', label: 'Sélection' },
+  { id: 'transformations', label: 'Transformations' },
   { id: 'prestations', label: 'Prestations' },
   { id: 'expertise', label: 'Expertise' },
   { id: 'processus', label: 'Processus' },

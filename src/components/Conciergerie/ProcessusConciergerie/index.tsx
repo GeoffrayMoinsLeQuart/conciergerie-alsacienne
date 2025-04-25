@@ -28,24 +28,32 @@ const processSteps = [
 
 const TimelineProcessEnhanced: FC = () => {
   return (
-    <section className="bg-white py-24">
+    <section
+      id="processus"
+      aria-labelledby="processus-heading"
+      className="bg-white py-24"
+    >
       <div className="container">
-        <SectionTitle
-          mainTitle="PROCESSUS"
-          title="Un parcours clair, maîtrisé, et évolutif"
-          paragraph="Notre approche étape par étape vous garantit sérénité et performance, dès la mise en service."
-          center
-        />
+        <header className="mb-10 text-center">
+          <SectionTitle
+            mainTitle="PROCESSUS"
+            title="Un parcours clair, maîtrisé, et évolutif"
+            paragraph="Notre approche étape par étape vous garantit sérénité et performance, dès la mise en service."
+            center
+            id="processus-heading"
+          />
+        </header>
 
-        <div className="relative mt-16 flex flex-col gap-10 lg:flex-row lg:justify-between">
+        <ol className="relative flex flex-col gap-10 lg:flex-row lg:justify-between" role="list">
           {processSteps.map((step, i) => (
-            <motion.div
+            <motion.li
               key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.3 }}
               viewport={{ once: true }}
               className="relative flex-1 text-center"
+              role="listitem"
             >
               <div className="mb-6 flex justify-center">
                 <div className="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg">
@@ -58,13 +66,13 @@ const TimelineProcessEnhanced: FC = () => {
               {/* Ligne de connexion (desktop only) */}
               {i < processSteps.length - 1 && (
                 <>
-                  <div className="absolute right-[-50%] top-[35px] z-[-1] hidden h-1 w-full bg-primary lg:block"></div>
+                  <div className="absolute right-[-50%] top-[35px] z-[-1] hidden h-1 w-full bg-primary lg:block" />
                   <div className="absolute right-[-7px] top-[29px] hidden h-0 w-0 border-b-[6px] border-l-[10px] border-t-[6px] border-b-transparent border-l-primary border-t-transparent lg:block" />
                 </>
               )}
-            </motion.div>
+            </motion.li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

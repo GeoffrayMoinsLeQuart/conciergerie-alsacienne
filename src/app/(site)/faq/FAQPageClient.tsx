@@ -10,7 +10,7 @@ export default function FAQPageClient({ faqs }: { faqs: FAQItem[] }) {
         showTopicFilter={true}
         mainTitle="Foire Aux Questions"
         subtitle="Retrouvez les réponses aux questions les plus courantes sur nos services."
-        specificPage={true}
+        specificPage={false}
       />
     </div>
   );

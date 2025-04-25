@@ -1,16 +1,17 @@
 'use client';
 
 import { FC } from 'react';
-import Link from 'next/link';
-import { Check, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Check, Mail } from 'lucide-react';
+import Link from 'next/link';
+import SectionTitle from '@/components/Common/SectionTitle';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Activity, FormuleConciergerie } from '@/types/form';
 
 const plans = [
   {
     name: 'Formule Standard',
-    price: 'A partir de 16% des revenus',
+    price: 'À partir de 16% des revenus',
     features: [
       'Création et optimisation des annonces',
       'Gestion des réservations',
@@ -26,8 +27,12 @@ const plans = [
   },
   {
     name: 'Formule Premium',
-    price: 'A partir de 21% des revenus',
-    features: ['Tous les services de la formule Standard', 'Ménage inclus', 'Support 24/7'],
+    price: 'À partir de 21% des revenus',
+    features: [
+      'Tous les services de la formule Standard',
+      'Ménage inclus',
+      'Support 24/7',
+    ],
     recommended: true,
     color: 'bg-gradient-to-br from-blue-500 to-indigo-600',
     text: 'text-white',
@@ -36,8 +41,11 @@ const plans = [
   },
   {
     name: 'Formule Exclusive',
-    price: 'A partir de 23% des revenus',
-    features: ['Tous les services de la formule Premium', 'Linge hôtelier premium'],
+    price: 'À partir de 23% des revenus',
+    features: [
+      'Tous les services de la formule Premium',
+      'Linge hôtelier premium',
+    ],
     recommended: false,
     color: 'bg-white',
     text: 'text-gray-900',
@@ -48,25 +56,32 @@ const plans = [
 
 const Tarification: FC = () => {
   return (
-    <section className="bg-[#f8f9ff] py-24">
+    <section
+      id="tarifs"
+      aria-labelledby="tarifs-heading"
+      className="bg-[#f8f9ff] py-24"
+    >
       <div className="container">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl font-bold text-dark">Nos Formules</h2>
-          <p className="mx-auto max-w-2xl text-lg text-body-color">
-            Choisissez l'accompagnement qui vous ressemble, pour une gestion sereine et sur-mesure
-            de votre bien.
-          </p>
-        </div>
+        <header className="mb-16 text-center">
+          <SectionTitle
+            id="tarifs-heading"
+            mainTitle="NOS FORMULES"
+            title="Tarifs de notre conciergerie"
+            paragraph="Choisissez l'accompagnement qui vous ressemble, pour une gestion sereine et sur‑mesure de votre bien."
+            center
+          />
+        </header>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {plans.map((plan, index) => (
-            <motion.div
+            <motion.article
               key={index}
               className={`relative flex flex-col justify-between rounded-2xl p-8 pt-10 shadow-pricing transition-transform duration-300 hover:scale-[1.02] ${plan.color}`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
+              aria-label={`Offre ${plan.name}`}
             >
               {plan.recommended && (
                 <span className="absolute right-4 top-2 rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-primary shadow-sm">
@@ -74,10 +89,10 @@ const Tarification: FC = () => {
                 </span>
               )}
 
-              <div className="mb-6">
+              <header className="mb-6">
                 <h3 className={`mb-2 text-2xl font-bold ${plan.text}`}>{plan.name}</h3>
                 <p className={`text-lg font-bold opacity-80 ${plan.text}`}>{plan.price}</p>
-              </div>
+              </header>
 
               <ul className="mb-6 space-y-3">
                 {plan.features.map((feature, idx) => (
@@ -98,11 +113,11 @@ const Tarification: FC = () => {
               >
                 Choisir cette formule
               </Link>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        <div className="mt-14 text-center">
+        <footer className="mt-14 text-center">
           <CTAButtons
             primary={{
               label: 'Demander un devis',
@@ -111,7 +126,7 @@ const Tarification: FC = () => {
               colorClass: 'bg-primary text-white hover:bg-opacity-90',
             }}
           />
-        </div>
+        </footer>
       </div>
     </section>
   );
