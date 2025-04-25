@@ -34,12 +34,15 @@ const SelectionEtAccompagnement: FC = () => {
       className="bg-[#f8f9ff] py-20"
     >
       <div className="container">
-        <SectionTitle
-          mainTitle="SÉLECTION & ACCOMPAGNEMENT"
-          title="Exigence & Transformation"
-          paragraph="Notre modèle repose sur deux piliers : une sélection rigoureuse des biens et un accompagnement sur-mesure pour révéler leur potentiel."
-          center
-        />
+        <header>
+          <SectionTitle
+            mainTitle="SÉLECTION & ACCOMPAGNEMENT"
+            title="Exigence & Transformation"
+            paragraph="Notre modèle repose sur deux piliers : une sélection rigoureuse des biens et un accompagnement sur-mesure pour révéler leur potentiel."
+            center
+            id="selection-heading"
+          />
+        </header>
 
         <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {criteria.map((item, i) => (

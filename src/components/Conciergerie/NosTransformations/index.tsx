@@ -14,11 +14,11 @@ const NosTransformations: FC = () => {
       <div className="container">
         <header className="text-center">
           <SectionTitle
+            id="transformations-heading"
             mainTitle="TRANSFORMATIONS RÉUSSIES"
             title="Avant / Après : le pouvoir de la valorisation"
             paragraph="Plongez dans nos projets de relooking et voyez par vous-même comment nous transformons chaque bien pour en révéler tout le potentiel locatif."
             center
-            id="transformations-heading"
           />
         </header>
 

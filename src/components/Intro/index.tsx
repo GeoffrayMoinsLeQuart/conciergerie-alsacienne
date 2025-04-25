@@ -1,5 +1,3 @@
-// Nouveau composant Intro partagé pour Conciergerie et Gestion Locative
-
 'use client';
 
 import HeroImage from '@/components/Home/Hero/HeroImage';
@@ -61,7 +59,7 @@ const IntroContent = {
 };
 
 const Intro: FC<IntroProps> = ({ variant }) => {
-  const { title, content, image } = IntroContent[variant];
+  const { title, content, image, buttons } = IntroContent[variant];
 
   return (
     <section
@@ -72,9 +70,9 @@ const Intro: FC<IntroProps> = ({ variant }) => {
       <div className="container">
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="m-auto w-full px-4 lg:w-6/12 xl:w-6/12">
-            <div className="hero-content animate-fade-in-up grid gap-6 text-center lg:text-left">
+            <header className="hero-content animate-fade-in-up grid gap-6 text-center lg:text-left">
               <h1
-                id="hero-title"
+                id="intro-heading"
                 className="mb-3 text-3xl font-bold leading-snug text-dark sm:text-5xl"
               >
                 {title}
@@ -87,24 +85,24 @@ const Intro: FC<IntroProps> = ({ variant }) => {
 
               <CTAButtons
                 primary={{
-                  label: IntroContent[variant].buttons.primary.text,
-                  href: IntroContent[variant].buttons.primary.href,
-                  icon: IntroContent[variant].buttons.primary.icon,
+                  label: buttons.primary.text,
+                  href: buttons.primary.href,
+                  icon: buttons.primary.icon,
                   colorClass: 'bg-primary text-white hover:bg-opacity-90',
                 }}
                 secondary={{
-                  label: IntroContent[variant].buttons.secondary.text,
-                  href: IntroContent[variant].buttons.secondary.href,
-                  icon: IntroContent[variant].buttons.secondary.icon,
+                  label: buttons.secondary.text,
+                  href: buttons.secondary.href,
+                  icon: buttons.secondary.icon,
                 }}
               />
-            </div>
+            </header>
           </div>
 
           <div className="animate-fade-in-right mt-10 w-full px-4 lg:mt-0 lg:w-6/12">
             <div className="relative flex w-full max-lg:mt-10 lg:justify-end">
-              <div className="absolute -left-6 -top-6 h-28 w-28 rounded-full bg-[#E0E7FF] opacity-30 blur-2xl"></div>
-              <div className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-primary opacity-20 blur-sm"></div>
+              <div className="absolute -left-6 -top-6 h-28 w-28 rounded-full bg-[#E0E7FF] opacity-30 blur-2xl" />
+              <div className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-primary opacity-20 blur-sm" />
               <div className="relative z-10 flex aspect-[491/515] w-full max-w-[491px] pt-11 lg:justify-end lg:pt-0">
                 <Image
                   src={image}
@@ -134,7 +132,7 @@ const Intro: FC<IntroProps> = ({ variant }) => {
                           r="2.5"
                           fill="#3056D3"
                         />
-                      )),
+                      ))
                     )}
                   </svg>
                 </span>

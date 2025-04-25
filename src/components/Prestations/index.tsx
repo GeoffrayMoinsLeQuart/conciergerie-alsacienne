@@ -9,14 +9,14 @@ import Prestations from '@/components/Prestations/Prestations';
 const NosPrestations: FC = () => {
   const pathname = usePathname() || '';
 
-  const prestations = pathname.includes('gestion-locative')
-    ? prestationGestionLocative
-    : prestationConciergerie;
+  const isGestion = pathname.includes('gestion-locative');
+  const prestations = isGestion ? prestationGestionLocative : prestationConciergerie;
 
-  const title: string = pathname.includes('gestion-locative')
+  const title = isGestion
     ? 'Une gestion complète et transparente'
     : 'Une conciergerie complète pour votre bien';
-  const paragraph: string = pathname.includes('gestion-locative')
+
+  const paragraph = isGestion
     ? "Nous prenons en charge tous les aspects de la gestion locative pour vous offrir une tranquillité d'esprit totale."
     : 'Nous proposons une gamme complète de services pour assurer une gestion optimale de votre bien et une expérience exceptionnelle pour vos voyageurs.';
 
@@ -29,11 +29,11 @@ const NosPrestations: FC = () => {
       <div className="container">
         <header className="mb-12 text-center">
           <SectionTitle
+            id="nos-prestations-title"
             mainTitle="NOS PRESTATIONS"
             title={title}
             paragraph={paragraph}
             center
-            id="nos-prestations-title"
           />
         </header>
 

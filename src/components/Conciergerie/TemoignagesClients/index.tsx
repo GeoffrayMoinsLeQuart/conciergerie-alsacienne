@@ -28,6 +28,10 @@ const testimonials = [
   },
 ];
 
+/**
+ * Affiche une section avec des témoignages clients.
+ * Cette section renforce la crédibilité sociale et met en avant la satisfaction des clients.
+ */
 const TémoignagesClients: FC = () => {
   return (
     <section
@@ -36,6 +40,7 @@ const TémoignagesClients: FC = () => {
       className="bg-white py-20"
     >
       <div className="container mx-auto px-4">
+        {/* Titre de section */}
         <header className="mb-12 text-center">
           <SectionTitle
             id="temoignages-heading"
@@ -46,6 +51,7 @@ const TémoignagesClients: FC = () => {
           />
         </header>
 
+        {/* Liste des témoignages */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <article

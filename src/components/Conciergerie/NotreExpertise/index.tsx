@@ -48,7 +48,7 @@ const NotreExpertise: FC = () => {
           />
         </header>
 
-        <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2">
+        <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2">
           {niveaux.map((niveau) => (
             <article
               key={niveau.level}
@@ -63,7 +63,7 @@ const NotreExpertise: FC = () => {
               >
                 {niveau.name}
               </h3>
-              <ul className="mb-6 space-y-4 list-inside list-disc">
+              <ul className="mb-6 space-y-4 list-disc list-inside">
                 {niveau.items.map((item, i) => (
                   <li key={i} className={`text-base font-medium ${niveau.textClass}`}>
                     {item}
