@@ -145,7 +145,7 @@ const TarificationGestionLocative: FC = () => {
   };
 
   return (
-    <section className="bg-white py-20 lg:py-[120px]" aria-label="Tarification Gestion Locative">
+    <section className="bg-white py-20 lg:py-[120px]" id='tarifs' aria-label="Tarification Gestion Locative">
       <div className="container mx-auto px-4">
         <SectionTitle
           mainTitle="TARIFICATION"

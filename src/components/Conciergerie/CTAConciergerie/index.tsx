@@ -9,6 +9,7 @@ const CTAConciergerie: FC = () => {
   return (
     <motion.section
       id="cta"
+      role="contentinfo"
       aria-labelledby="cta-heading"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -25,8 +26,8 @@ const CTAConciergerie: FC = () => {
             Votre bien mérite le meilleur.
           </h2>
           <p className="mb-6 text-white text-opacity-90">
-            Offrez à votre location courte durée un accompagnement premium. Nous transformons chaque
-            bien en une expérience remarquable — pour vos voyageurs et pour votre rentabilité.
+            Offrez à votre location courte durée un accompagnement premium. 
+            Nous transformons chaque bien en une expérience remarquable — pour vos voyageurs, et pour votre rentabilité.
           </p>
         </header>
 

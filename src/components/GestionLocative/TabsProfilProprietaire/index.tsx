@@ -19,7 +19,12 @@ export function Tabs({ defaultValue, children, className, ...props }: TabsProps)
   const [activeTab, setActiveTab] = React.useState(defaultValue);
 
   return (
-    <div className={cn('w-full', className)} {...props}>
+    <div
+      className={cn('w-full', className)}
+      {...props}
+      role="tablist"
+      aria-label="Profils de propriétaires"
+    >
       <TabsContext.Provider value={{ activeTab, setActiveTab }}>{children}</TabsContext.Provider>
     </div>
   );
@@ -35,6 +40,8 @@ export function TabsList({ children, className, ...props }: TabsListProps) {
     <div
       className={cn('flex flex-wrap justify-center gap-4 rounded-xl bg-gray-100 p-4', className)}
       {...props}
+      role="tablist"
+      aria-label="Choisissez votre profil de propriétaire"
     >
       {children}
     </div>
@@ -55,6 +62,10 @@ export function TabsTrigger({ value, children, className, ...props }: TabsTrigge
 
   return (
     <button
+      role="tab"
+      aria-selected={isActive}
+      aria-controls={`tabpanel-${value}`}
+      id={`tab-${value}`}
       onClick={() => setActiveTab(value)}
       className={cn(
         'rounded-full px-6 py-3 text-sm font-semibold shadow-md transition',
@@ -83,7 +94,13 @@ export function TabsContent({ value, children, className, ...props }: TabsConten
   if (activeTab !== value) return null;
 
   return (
-    <div className={cn('animate-fade-in-up mt-6', className)} {...props}>
+    <div
+      id={`tabpanel-${value}`}
+      role="tabpanel"
+      aria-labelledby={`tab-${value}`}
+      className={cn('animate-fade-in-up mt-6', className)}
+      {...props}
+    >
       {children}
     </div>
   );
@@ -97,38 +114,40 @@ interface TimelineItem {
 
 const TimelineProcessus: React.FC<{ steps: TimelineItem[] }> = ({ steps }) => {
   return (
-    <div className="relative flex flex-col gap-10 md:flex-row md:flex-wrap md:justify-between">
-      {steps &&
-        steps.map((step, index) => (
-          <div
-            key={index}
-            className="animate-slide-up relative flex-1 rounded-xl bg-white p-6 shadow-lg md:max-w-[32%]"
-          >
-            {index < steps.length - 1 && (
-              <div className="absolute right-0 top-1/2 hidden h-1 w-10 translate-x-full transform bg-primary md:block"></div>
-            )}
-            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow">
-              {index + 1}
-            </div>
-            <h3 className="mb-2 text-lg font-semibold text-gray-800">{step.title}</h3>
-            <ul className="list-disc pl-5 text-gray-700">
-              {step.points.map((point, idx) => (
-                <li key={idx} className="mb-1 text-sm">
-                  {point}
-                </li>
-              ))}
-            </ul>
+    <div
+      className="relative flex flex-col gap-10 md:flex-row md:flex-wrap md:justify-between"
+      aria-label="Étapes du parcours"
+    >
+      {steps.map((step, index) => (
+        <div
+          key={index}
+          className="animate-slide-up relative flex-1 rounded-xl bg-white p-6 shadow-lg md:max-w-[32%]"
+        >
+          {index < steps.length - 1 && (
+            <div className="absolute right-0 top-1/2 hidden h-1 w-10 translate-x-full transform bg-primary md:block" />
+          )}
+          <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow">
+            {index + 1}
           </div>
-        ))}
+          <h3 className="mb-2 text-lg font-semibold text-gray-800">{step.title}</h3>
+          <ul className="list-disc pl-5 text-gray-700">
+            {step.points.map((point, idx) => (
+              <li key={idx} className="mb-1 text-sm">
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
 
 const TabsProfilProprietaire: React.FC = () => {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-20" aria-labelledby="proprietaire-title" id="profils">
       <div className="container">
-        <h2 className="mb-10 text-center text-3xl font-bold">
+        <h2 id="proprietaire-title" className="mb-10 text-center text-3xl font-bold">
           Un parcours adapté à chaque propriétaire
         </h2>
 

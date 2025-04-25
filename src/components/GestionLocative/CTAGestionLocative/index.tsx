@@ -1,5 +1,3 @@
-// Nouveau composant CTA Gestion Locative avec amélioration UX et design
-
 'use client';
 
 import { FC } from 'react';
@@ -10,6 +8,9 @@ import { motion } from 'framer-motion';
 const CTAGestionLocative: FC = () => {
   return (
     <motion.section
+      id="cta-gestion"
+      role="contentinfo"
+      aria-labelledby="cta-gestion-title"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -17,7 +18,7 @@ const CTAGestionLocative: FC = () => {
       className="bg-primary/10 py-20"
     >
       <div className="container mx-auto max-w-3xl px-4 text-center">
-        <h2 className="mb-4 text-3xl font-bold text-gray-800 md:text-4xl">
+        <h2 id="cta-gestion-title" className="mb-4 text-3xl font-bold text-gray-800 md:text-4xl">
           Prêt à déléguer la gestion de votre bien ?
         </h2>
         <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
@@ -37,12 +38,13 @@ const CTAGestionLocative: FC = () => {
           }}
         />
         <p className="mt-8 text-sm text-gray-600">
-          Ou appelez-nous directement au
+          Ou appelez-nous directement au{' '}
           <a
-            href="tel:0033621471922"
+            href="tel:+33621471922"
+            aria-label="Appelez-nous au 06 21 47 19 22"
             className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
           >
-            06 21 47 19 22
+            06&nbsp;21&nbsp;47&nbsp;19&nbsp;22
           </a>
           pour discuter de votre projet.
         </p>

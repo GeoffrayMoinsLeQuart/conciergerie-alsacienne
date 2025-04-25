@@ -4,6 +4,7 @@ import SectionTitle from '../../Common/SectionTitle';
 import { FC } from 'react';
 import { ShieldCheck, Gavel, AlertTriangle, Home, Slash, Timer, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Script from 'next/script';
 
 const GarantiesLoyers: FC = () => {
   const garanties = [
@@ -46,9 +47,14 @@ const GarantiesLoyers: FC = () => {
   ];
 
   return (
-    <section className="bg-primary bg-opacity-5 py-20">
+    <section
+      id="garanties"
+      className="bg-primary bg-opacity-5 py-20"
+      aria-labelledby="garanties-title"
+    >
       <div className="container mx-auto px-4">
         <SectionTitle
+          id="garanties-title"
           mainTitle="GARANTIE LOYERS IMPAYÉS"
           title="Une protection financière à toute épreuve"
           paragraph="Notre garantie vous assure des revenus locatifs stables, quoi qu'il arrive."
@@ -57,10 +63,9 @@ const GarantiesLoyers: FC = () => {
 
         <div className="mx-auto mt-12 max-w-6xl">
           <div className="rounded-lg border-t-4 border-primary bg-white p-8 shadow-md">
-            {/* Bloc central haut visible */}
             <div className="mb-10 flex flex-col items-center justify-center gap-6 md:flex-row md:items-start">
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary bg-opacity-10">
-                <CheckCircle className="h-10 w-10 text-primary" />
+                <CheckCircle className="h-10 w-10 text-primary" aria-hidden="true" />
               </div>
               <div className="text-center md:text-left">
                 <h3 className="mb-2 text-2xl font-bold text-gray-800">
@@ -73,29 +78,28 @@ const GarantiesLoyers: FC = () => {
               </div>
             </div>
 
-            {/* Cartes garanties */}
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {garanties.map(({ title, description, icon: Icon }) => (
-                <motion.div
-                  key={title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                  className="flex h-full flex-col rounded-lg bg-gray-50 p-6 shadow-sm transition duration-300 ease-in-out hover:shadow-md"
-                >
-                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-800">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10">
-                      <Icon className="h-7 w-7 text-primary" />
-                    </span>
-                    {title}
-                  </h4>
-                  <p className="flex-grow text-sm leading-relaxed text-gray-600">{description}</p>
-                </motion.div>
+                <li key={title}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    className="flex h-full flex-col rounded-lg bg-gray-50 p-6 shadow-sm transition duration-300 ease-in-out hover:shadow-md"
+                  >
+                    <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-800">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10">
+                        <Icon className="h-7 w-7 text-primary" aria-hidden="true" />
+                      </span>
+                      {title}
+                    </h4>
+                    <p className="flex-grow text-sm leading-relaxed text-gray-600">{description}</p>
+                  </motion.div>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            {/* Mentions */}
             <p className="mt-10 text-sm text-gray-500">
               *Conditions : Contrat assuré par GALIAN-SMABTP. Plafonds d'indemnisation : 100 000 €
               pour les loyers impayés et frais de procédure, 10 000 € pour les dégradations
@@ -107,6 +111,34 @@ const GarantiesLoyers: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Schema.org JSON-LD pour SEO */}
+      <Script
+        id="schema-garanties"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'OfferCatalog',
+            name: 'Garanties loyers impayés',
+            description:
+              'Catalogue des protections offertes dans le cadre de notre gestion locative haut de gamme à Mulhouse & Colmar.',
+            url: 'https://www.conciergerie-alsacienne.fr/gestion-locative#garanties',
+            itemListElement: garanties.map((g, idx) => ({
+              '@type': 'Offer',
+              name: g.title,
+              description: g.description,
+              position: idx + 1,
+              itemOffered: {
+                '@type': 'Service',
+                name: g.title,
+                description: g.description,
+              },
+            })),
+          }),
+        }}
+      />
     </section>
   );
 };

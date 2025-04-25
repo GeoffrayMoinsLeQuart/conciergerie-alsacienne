@@ -25,7 +25,7 @@ const FraisInitiauxCard: FC = () => {
   ];
 
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-gray-50 py-16" aria-labelledby="frais-initiaux-title">
       <div className="container mx-auto px-4">
         <SectionTitle
           mainTitle="NOS FORMULES"
@@ -34,10 +34,16 @@ const FraisInitiauxCard: FC = () => {
           center
         />
 
-        <div className="mx-auto mt-10 max-w-5xl rounded-2xl border-l-4 border-primary bg-white p-8 shadow-md">
+        <div
+          className="mx-auto mt-10 max-w-5xl rounded-2xl border-l-4 border-primary bg-white p-8 shadow-md"
+          role="region"
+          aria-labelledby="frais-initiaux-title"
+        >
           <div className="mb-6 flex items-center gap-3 text-gray-800">
-            <CheckCircle className="h-6 w-6 text-primary" />
-            <h3 className="text-xl font-semibold">Frais initiaux de mise en location</h3>
+            <CheckCircle className="h-6 w-6 text-primary" aria-hidden="true" />
+            <h3 id="frais-initiaux-title" className="text-xl font-semibold">
+              Frais initiaux de mise en location
+            </h3>
           </div>
 
           <p className="mb-6 text-gray-600">
@@ -45,11 +51,14 @@ const FraisInitiauxCard: FC = () => {
             location initiale. Ces frais couvrent les éléments suivants :
           </p>
 
-          <ul className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+          <ul
+            className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2"
+            aria-label="Éléments inclus dans les frais initiaux"
+          >
             {items.map(({ icon: Icon, text }, i) => (
               <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                  <Icon className="h-4 w-4 text-primary" />
+                  <Icon className="h-4 w-4 text-primary" aria-hidden="true" />
                 </span>
                 <span className="leading-snug">{text}</span>
               </li>

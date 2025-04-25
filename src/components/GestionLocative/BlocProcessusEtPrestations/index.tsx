@@ -3,9 +3,9 @@
 import { FC } from 'react';
 import SectionTitle from '@/components/Common/SectionTitle';
 import Image from 'next/image';
-import Link from 'next/link';
-import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Calculator } from 'lucide-react';
+import CTAButtons from '@/components/Buttons/CTAButtons';
+import Script from 'next/script';
 
 const steps = [
   {
@@ -70,11 +70,12 @@ const steps = [
   },
 ];
 
-const AccompagnementEtapes: FC = () => {
+const BlocProcessusEtPrestations: FC = () => {
   return (
-    <section id="prestations" className="bg-[#f8f9ff] py-20">
+    <section id="processus" aria-labelledby="processus-title" className="bg-[#f8f9ff] py-20">
       <div className="container">
         <SectionTitle
+          id="processus-title"
           mainTitle="ACCOMPAGNEMENT & SERVICES"
           title="Notre méthode en 5 étapes claires et efficaces"
           paragraph="De la première estimation à la gestion quotidienne, nous orchestrons chaque étape avec précision pour vous garantir tranquillité et rentabilité."
@@ -83,30 +84,30 @@ const AccompagnementEtapes: FC = () => {
 
         <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => (
-            <div
+            <article
               key={step.number}
               className="animate-fade-in-up group relative rounded-xl bg-white p-6 shadow-service transition hover:shadow-lg"
+              aria-labelledby={`step-${step.number}`}
             >
               <div className="mb-4 flex items-center justify-center">
                 <Image
                   src={step.icon}
-                  alt={step.title}
-                  width={120} // 🔼 augmenté (au lieu de 64)
-                  height={120} // 🔼 augmenté (au lieu de 64)
-                  className=" object-contain"
-                  sizes="120px"
+                  alt={`Illustration pour l'étape ${step.number} : ${step.title}`}
+                  width={120}
+                  height={120}
+                  className="object-contain"
                 />
               </div>
-              <h3 className="mb-2 text-xl font-bold text-dark">
+              <h4 id={`step-${step.number}`} className="mb-2 text-xl font-bold text-dark">
                 {step.number}. {step.title}
-              </h3>
+              </h4>
               <p className="mb-4 text-sm font-medium text-body-color">{step.description}</p>
               <ul className="list-disc space-y-1 pl-4 text-sm text-gray-700">
                 {step.details.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
-            </div>
+            </article>
           ))}
         </div>
 
@@ -122,8 +123,30 @@ const AccompagnementEtapes: FC = () => {
           />
         </div>
       </div>
+
+      {/* ✅ JSON-LD HowTo pour SEO enrichi */}
+      <Script
+        id="howto-schema"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'HowTo',
+            name: 'Gestion locative : les 5 étapes de notre accompagnement',
+            description:
+              'Découvrez les 5 étapes de notre processus de gestion locative à Mulhouse & Colmar pour accompagner nos clients de A à Z.',
+            step: steps.map((step) => ({
+              '@type': 'HowToStep',
+              name: step.title,
+              text: step.details.join(', '),
+              url: `https://www.conciergerie-alsacienne.fr/gestion-locative#processus`,
+            })),
+          }),
+        }}
+      />
     </section>
   );
 };
 
-export default AccompagnementEtapes;
+export default BlocProcessusEtPrestations;

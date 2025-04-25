@@ -1,5 +1,3 @@
-// Témoignages améliorés avec animation et harmonisation visuelle
-
 'use client';
 
 import { FC } from 'react';
@@ -32,7 +30,11 @@ const testimonials: Testimonial[] = [
 
 const TemoinagesSection: FC = () => {
   return (
-    <section className="bg-white py-10 md:py-16">
+    <section
+      className="bg-white py-10 md:py-16"
+      aria-labelledby="temoignages-title"
+      id='temoignages'
+    >
       <div className="container mx-auto px-4">
         <SectionTitle
           mainTitle="TÉMOIGNAGES"
@@ -45,6 +47,8 @@ const TemoinagesSection: FC = () => {
           {testimonials.map(({ name, subtitle, text }, idx) => (
             <motion.article
               key={name}
+              role="group"
+              aria-label={`Témoignage de ${name}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -52,7 +56,10 @@ const TemoinagesSection: FC = () => {
               className="rounded-lg bg-gray-50 p-6 shadow-sm transition duration-300 hover:shadow-md"
             >
               <div className="mb-4 flex items-center">
-                <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">
+                <div
+                  className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary font-bold"
+                  aria-hidden="true"
+                >
                   {name.charAt(0)}
                 </div>
                 <div>
@@ -60,9 +67,11 @@ const TemoinagesSection: FC = () => {
                   <p className="text-sm text-gray-600">{subtitle}</p>
                 </div>
               </div>
-              <p className="italic text-gray-600">
-                "<span className="font-medium text-gray-700">{text}</span>"
-              </p>
+              <blockquote className="italic text-gray-600">
+                <span className="sr-only">Témoignage : </span>
+                “<span className="font-medium text-gray-700">{text}</span>”
+              </blockquote>
+              <cite className="sr-only">{name}</cite>
             </motion.article>
           ))}
         </div>

@@ -3,38 +3,13 @@
 import { useState, useEffect } from 'react';
 import { getFAQsByType } from '@/sanity/sanity-utils';
 import FAQ, { FAQItem } from '@/components/FAQ';
+import SectionTitle from '@/components/Common/SectionTitle';
 import Script from 'next/script';
-
-interface Props {
-  items: FAQItem[];
-}
-
-function FAQSchema({ items }: Props) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
-
-  return (
-    <Script id="faq-schema" type="application/ld+json">
-      {JSON.stringify(jsonLd)}
-    </Script>
-  );
-}
 
 export default function FAQGestionLocativeClient() {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Récupération asynchrone une seule fois au montage
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,7 +17,7 @@ export default function FAQGestionLocativeClient() {
         const data = await getFAQsByType('gestion-locative');
         setFaqItems(data);
       } catch (error) {
-        console.error('Erreur lors de la récupération des FAQs:', error);
+        console.error('Erreur lors de la récupération des FAQs :', error);
       } finally {
         setIsLoading(false);
       }
@@ -51,11 +26,72 @@ export default function FAQGestionLocativeClient() {
     fetchData();
   }, []);
 
+  // ✅ Groupement par thème (nécessaire pour le JSON-LD avancé)
+  const groupedByTopic = faqItems.reduce(
+    (acc, faq) => {
+      const topic = faq.topic || 'autres';
+      if (!acc[topic]) acc[topic] = [];
+      acc[topic].push(faq);
+      return acc;
+    },
+    {} as Record<string, { question: string; answer: string }[]>,
+  );
+
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: Object.entries(groupedByTopic).map(([topic, questions]) => ({
+      '@type': 'WebPageElement',
+      '@id': `https://www.conciergerie-alsacienne.fr/gestion-locative#${topic}`,
+      name: topic,
+      hasPart: questions.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer
+            .replace(/<[^>]*>/g, '')
+            .replaceAll('\n', ' ')
+            .trim(),
+        },
+      })),
+    })),
+  };
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Accueil',
+        item: 'https://www.conciergerie-alsacienne.fr',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Gestion locative',
+        item: 'https://www.conciergerie-alsacienne.fr/gestion-locative',
+      },
+    ],
+  };
+
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-8xl container mx-auto px-4">
+    <section id="faq" aria-labelledby="faq-gestion-heading" className="bg-white py-20">
+      <div className="container px-4 mx-auto">
+        <header className="mb-12 text-center">
+          <SectionTitle
+            id="faq-gestion-heading"
+            mainTitle="FAQ GESTION LOCATIVE"
+            title="Vos questions les plus fréquentes"
+            paragraph="Toutes les réponses aux interrogations les plus fréquentes sur notre service de gestion locative longue durée."
+            center
+          />
+        </header>
+
         {isLoading ? (
-          <div className="py-10 text-center">
+          <div className="text-center py-10">
             <p>Chargement des questions fréquentes...</p>
           </div>
         ) : (
@@ -64,11 +100,28 @@ export default function FAQGestionLocativeClient() {
               items={faqItems}
               defaultType="gestion-locative"
               mainTitle=""
-              subtitle="Retrouvez les réponses aux questions les plus courantes sur notre service de gestion locative."
+              subtitle="Nous avons réuni ici les questions les plus posées par les propriétaires."
               showTopicFilter={true}
               specificPage={true}
             />
-            <FAQSchema items={faqItems} />
+
+            {/* Données structurées SEO */}
+            <Script
+              id="faq-jsonld-gestion"
+              type="application/ld+json"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(faqStructuredData),
+              }}
+            />
+            <Script
+              id="breadcrumb-jsonld-gestion"
+              type="application/ld+json"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(breadcrumb),
+              }}
+            />
           </>
         )}
       </div>
