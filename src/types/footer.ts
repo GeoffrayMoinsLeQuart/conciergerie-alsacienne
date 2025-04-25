@@ -6,6 +6,7 @@ export type FooterLink = {
 };
 
 export type FooterSocial = {
+  label: string;
   id: string | number;
   title: string;
   href: string;
