@@ -164,9 +164,9 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
                     ) : (
                       <div className="mr-4 h-[40px] w-[40px] overflow-hidden rounded-full bg-gray-300" />
                     )}
-                    <h4 className="text-base font-medium text-body-color">
+                    <p className="text-base font-medium text-body-color">
                       Par {post.author?.name || "l'équipe"}
-                    </h4>
+                    </p>
                   </div>
                   {post.publishedAt && (
                     <div className="mb-2 flex items-center md:mb-0">

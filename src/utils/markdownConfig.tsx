@@ -21,10 +21,7 @@ export const markdownComponents: Components = {
     </h1>
   ),
   h2: ({ children, ...props }: MarkdownComponentProps) => (
-    <h2
-      {...props}
-      className="mb-6 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl"
-    >
+    <h2 {...props} className="mb-6 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
       {children}
     </h2>
   ),
@@ -83,9 +80,7 @@ export const markdownComponents: Components = {
       {children}
     </thead>
   ),
-  tbody: ({ children, ...props }: MarkdownComponentProps) => (
-    <tbody {...props}>{children}</tbody>
-  ),
+  tbody: ({ children, ...props }: MarkdownComponentProps) => <tbody {...props}>{children}</tbody>,
   tr: ({ children, ...props }: MarkdownComponentProps) => (
     <tr {...props} className="border-b border-gray-200">
       {children}
@@ -103,8 +98,8 @@ export const markdownComponents: Components = {
   ),
   img: ({ src, alt, width, height, ...rest }) => {
     // Coercion de width/height string vers number
-    const w = typeof width === 'string' ? parseInt(width, 10) : width ?? 800;
-    const h = typeof height === 'string' ? parseInt(height, 10) : height ?? 450;
+    const w = typeof width === 'string' ? parseInt(width, 10) : (width ?? 800);
+    const h = typeof height === 'string' ? parseInt(height, 10) : (height ?? 450);
 
     return (
       <Image
