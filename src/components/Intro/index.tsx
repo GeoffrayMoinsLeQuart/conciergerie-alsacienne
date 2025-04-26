@@ -1,9 +1,8 @@
-'use client';
-
+// src/components/Intro.tsx
 import { FC } from 'react';
 import { Calculator, Sparkles } from 'lucide-react';
 import Image from 'next/image';
-import CTAButtons from '../Buttons/CTAButtons';
+import CTAButtons from '@/components/Buttons/CTAButtons';
 
 interface IntroProps {
   variant: 'conciergerie' | 'gestion';
@@ -23,12 +22,12 @@ const IntroContent = {
       primary: {
         text: 'Discuter de mon projet',
         href: '/contact',
-        icon: <Sparkles className="h-5 w-5" />,
+        icon: <Sparkles className="h-5 w-5" aria-hidden="true" />,
       },
       secondary: {
         text: 'Estimer mes revenus',
         href: '/simulateur',
-        icon: <Calculator className="h-5 w-5" />,
+        icon: <Calculator className="h-5 w-5" aria-hidden="true" />,
       },
     },
   },
@@ -45,12 +44,12 @@ const IntroContent = {
       primary: {
         text: 'Estimer mes revenus',
         href: '/simulateur',
-        icon: <Calculator className="h-5 w-5" />,
+        icon: <Calculator className="h-5 w-5" aria-hidden="true" />,
       },
       secondary: {
         text: 'Nous contacter',
         href: '/contact',
-        icon: <Sparkles className="h-5 w-5" />,
+        icon: <Sparkles className="h-5 w-5" aria-hidden="true" />,
       },
     },
   },
@@ -65,10 +64,10 @@ const Intro: FC<IntroProps> = ({ variant }) => {
       aria-labelledby="intro-heading"
       className="relative bg-white pb-20 pt-[120px] lg:pb-[110px] lg:pt-[150px]"
     >
-      <div className="container">
-        <div className="-mx-4 flex flex-wrap items-center">
-          <div className="m-auto w-full px-4 lg:w-6/12 xl:w-6/12">
-            <header className="hero-content animate-fade-in-up grid gap-6 text-center lg:text-left">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap items-center -mx-4">
+          <div className="w-full px-4 lg:w-6/12 xl:w-6/12">
+            <header className="grid gap-6 text-center lg:text-left">
               <h1
                 id="intro-heading"
                 className="mb-3 text-3xl font-bold leading-snug text-dark sm:text-5xl"
@@ -86,7 +85,7 @@ const Intro: FC<IntroProps> = ({ variant }) => {
                   label: buttons.primary.text,
                   href: buttons.primary.href,
                   icon: buttons.primary.icon,
-                  colorClass: 'bg-primary text-white hover:bg-opacity-90',
+                  colorClass: 'bg-primary text-white hover:bg-opacity-90 focus:ring-2 focus:ring-primary',
                 }}
                 secondary={{
                   label: buttons.secondary.text,
@@ -97,11 +96,20 @@ const Intro: FC<IntroProps> = ({ variant }) => {
             </header>
           </div>
 
-          <div className="animate-fade-in-right mt-10 w-full px-4 lg:mt-0 lg:w-6/12">
-            <div className="relative flex w-full max-lg:mt-10 lg:justify-end">
-              <div className="absolute -left-6 -top-6 h-28 w-28 rounded-full bg-[#E0E7FF] opacity-30 blur-2xl" />
-              <div className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-primary opacity-20 blur-sm" />
-              <div className="relative z-10 flex aspect-[491/515] w-full max-w-[491px] pt-11 lg:justify-end lg:pt-0">
+          <div className="mt-10 w-full px-4 lg:mt-0 lg:w-6/12">
+            <div className="relative flex w-full lg:justify-end">
+              {/* Décorations abstraites */}
+              <div
+                aria-hidden="true"
+                className="absolute -left-6 -top-6 h-28 w-28 rounded-full bg-[#E0E7FF] opacity-30 blur-2xl"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-primary opacity-20 blur-sm"
+              />
+
+              {/* Image mise en cache et réservée */}
+              <div className="relative z-10 flex aspect-[491/515] w-full max-w-[491px]">
                 <Image
                   src={image}
                   alt={
@@ -111,9 +119,11 @@ const Intro: FC<IntroProps> = ({ variant }) => {
                   }
                   width={846}
                   height={563}
+                  priority
                   className="h-auto w-full rounded-2xl object-cover shadow-lg"
                 />
-                <span className="absolute -bottom-8 -left-8 z-[-1]">
+                {/* Motif décoratif SVG */}
+                <span aria-hidden="true" className="absolute -bottom-8 -left-8 z-[-1]">
                   <svg
                     width="93"
                     height="93"
@@ -121,7 +131,7 @@ const Intro: FC<IntroProps> = ({ variant }) => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    {[...Array(5)].map((_, row) =>
+                    {[...Array(5)].flatMap((_, row) =>
                       [...Array(5)].map((_, col) => (
                         <circle
                           key={`${row}-${col}`}
