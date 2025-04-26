@@ -5,15 +5,7 @@ import { Phone } from 'lucide-react';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import Graphic from './Graphic';
 import SocialLinks from './SocialLinks';
-import dynamic from 'next/dynamic';
-
-const MotionLi = dynamic(() => import('framer-motion').then((mod) => mod.motion.li), {
-  ssr: false,
-});
-
-const MotionUl = dynamic(() => import('framer-motion').then((mod) => mod.motion.ul), {
-  ssr: false,
-});
+import { motion, useReducedMotion } from 'framer-motion';
 
 const stats = [
   { label: 'Biens gérés', value: 120 },
@@ -23,13 +15,30 @@ const stats = [
 ];
 
 const About: FC = () => {
+  const reduce = useReducedMotion();
+
+  // Variantes (uniquement si on n'a pas demandé à réduire)
+  const listVariants = reduce
+    ? undefined
+    : {
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.2 } },
+      };
+
+  const itemVariants = reduce
+    ? undefined
+    : {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+      };
+
   return (
     <section
       id="about"
       aria-labelledby="about-title"
       className="relative z-10 bg-[#f8f9ff] py-16 sm:py-24"
     >
-      <div className="container">
+      <div className="container mx-auto px-4">
         <header className="mb-12 text-center">
           <h2 id="about-title" className="text-3xl font-bold text-gray-800 md:text-4xl">
             Une gestion sans souci, pensée pour votre rentabilité
@@ -40,11 +49,14 @@ const About: FC = () => {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
-          {/* ✅ Colonne de gauche : Promesses + CTA */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+          {/* Colonne gauche : Promesses + CTA */}
           <div>
             <h3 className="mb-4 text-xl font-semibold text-primary">Notre promesse</h3>
-            <ul className="mb-8 space-y-3 text-base text-gray-700">
+            <ul
+              className="mb-8 space-y-3 text-base text-gray-700"
+              aria-label="Liste de nos promesses"
+            >
               <li>✅ Connaissance approfondie du marché local</li>
               <li>✅ Service personnalisé avec interlocuteur unique</li>
               <li>✅ Transparence totale et reporting détaillé</li>
@@ -54,43 +66,39 @@ const About: FC = () => {
             <CTAButtons
               primary={{
                 label: 'Discutons de votre projet',
-                href: 'tel:0033621471922',
-                icon: <Phone className="h-5 w-5" />,
-                colorClass: 'bg-primary text-white hover:bg-primary/90',
+                href: 'tel:+333621471922',
+                icon: <Phone className="h-5 w-5" aria-hidden="true" />,
+                colorClass:
+                  'bg-primary text-white hover:bg-primary/90 focus:ring-2 focus:ring-primary',
               }}
             />
           </div>
 
-          {/* ✅ Colonne de droite : Statistiques animées */}
+          {/* Colonne droite : Statistiques animées (ou statiques sur mobile) */}
           <div>
-            <MotionUl
+            <motion.ul
               className="grid grid-cols-2 gap-6 text-center"
-              initial="hidden"
-              whileInView="visible"
+              initial={reduce ? undefined : 'hidden'}
+              whileInView={reduce ? undefined : 'visible'}
               viewport={{ once: true }}
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.2 } },
-              }}
+              variants={listVariants}
             >
               {stats.map((stat) => (
-                <MotionLi
+                <motion.li
                   key={stat.label}
                   className="flex flex-col items-center"
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
+                  variants={itemVariants}
                 >
                   <span className="mb-1 text-3xl font-bold text-primary">
-                    {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}
+                    {typeof stat.value === 'number'
+                      ? stat.value.toLocaleString('fr-FR')
+                      : stat.value}
                   </span>
                   <span className="text-sm text-gray-600">{stat.label}</span>
-                </MotionLi>
+                </motion.li>
               ))}
-            </MotionUl>
+            </motion.ul>
 
-            {/* Lien vers réseaux si activés */}
             <div className="mt-8">
               <SocialLinks />
             </div>
@@ -98,8 +106,8 @@ const About: FC = () => {
         </div>
       </div>
 
-      {/* ✅ Élément graphique animé */}
-      <Graphic />
+      {/* Graphique décoratif (non-animé pour CLS) */}
+      <Graphic aria-hidden="true" />
     </section>
   );
 };
