@@ -139,3 +139,159 @@ Faire un loader general
 Optimiser les scripts de tracking avec l'attribut strategy="afterInteractive".
 
 
+
+Avec n8n, fournir automatiquement des nouveaux articles et les publier dans sanity, un nouveau tous les 3 jours
+Pareil pour les faq
+
+
+
+Finaliser la paga about
+
+
+Corriger erreur hydratation
+
+
+Utiliser supertemplate pour la partie reservation
+
+
+
+1. Design & expérience utilisateur
+Page d’accueil
+
+Mettre à jour la photo principale
+
+Vérifier l’homogénéité des boutons CTA (styles, couleurs, libellés)
+
+Mettre à jour la section “promesse” (chiffres à jour, design du bouton, titres)
+
+Intégrer un design immersif (typo, visuels, mise en page)
+
+Ajouter un CTA dans le pied de page de l’accueil
+
+Mettre à jour le footer (liens, branding, mentions légales)
+
+Call-to-Action & interactions
+
+Loader global (mise en place via Suspense/React)
+
+Animations & effets de transition (hover, entrées/sorties de sections)
+
+Bouton CTA flottant en bas de page (desktop)
+
+Option B : sticky CTA mobile en bas de page (mobile only)
+
+Badges près du CTA conciergerie (“Réponse en 24 h garantie”, “Conseiller dédié”)
+
+Section Avant / Après sur la conciergerie
+
+Visuels & pages annexes
+
+Changer image d’accueil et image de gestion locative
+
+Créer les pages “Social” (réseaux, liens, icônes)
+
+Afficher, sur le blog, un lien clair vers la page principale (back to site)
+
+2. SEO & contenu technique
+Métadonnées & balisage
+
+Refaire une passe de toutes les metadata (title, description, Hn)
+
+Ajouter metadata sur pages de blog
+
+Optimisation SEO technique : Open Graph, balisage sémantique, balises <meta>
+
+Ajouter balises canonical, robots.txt et structured data (JSON-LD)
+
+SEO & maillage interne
+
+Optimiser le SEO des pages de propriétés (metadata, balises <meta>)
+
+Maillage interne : créer des liens entre pages pour guider l’utilisateur et répartir le PageRank
+
+Dans les articles de blog, ajouter des liens vers le simulateur
+
+Préparer l’intégration multilingue FR/EN (si prévue ultérieurement)
+
+3. Performance & technique
+Audit & monitoring
+
+Lancer un audit Lighthouse complet
+
+Vérifier que tout le site utilise ISR (Incremental Static Regeneration)
+
+Optimisations front-end
+
+Mettre en place lazy loading pour images et composants lourds
+
+Optimiser les scripts de tracking avec strategy="afterInteractive"
+
+Vérifier où sont envoyées les infos de formulaire pour éviter les blocages
+
+Diagnostiquer et corriger l’erreur d’hydratation (header/footer)
+
+4. Contenu & nouvelles pages
+Pages métiers & assets
+
+Ajouter une page “Cas pratique”
+
+Créer une page “Nos rénovations pour location”
+
+Générer un PDF imprimable auto-généré depuis Sanity
+
+Blog & FAQ
+
+Mettre en place avec n8n une recherche de questions fréquentes et création automatique de FAQ ou articles
+
+Intégrer les témoignages (Trustpilot et/ou Google Reviews locales)
+
+5. Fonctionnalités & interactivité
+Carte interactive (Google Maps ou Leaflet)
+
+Sur la page détail de bien
+
+Optionnel : en bas de page d’accueil ou pages clés
+
+Système de partage (“Partager ce bien”) via boutons natifs
+
+6. Analytics & tracking
+Intégrer Google Analytics & Google Tag Manager, couvrir tous les événements clés
+
+Mettre en place un suivi des clics (heatmap, events) pour analyser l’efficacité des CTA et profils utilisateurs
+
+7. Sécurité & stabilité
+S’assurer que Sanity CMS n’est pas accessible en production
+
+Identifier et corriger toutes les failles de sécurité
+
+Mettre à jour l’adresse de “nos-biens” partout (paramètres sensibles)
+
+8. Infrastructure & architecture
+Créer un sous-domaine dédié à la partie réservation
+
+9. Automatisation & intégrations avancées
+Connecter GPT + Zapier + Notion/Google Sheet pour automatiser :
+
+Suivis Airbnb
+
+Relance paiements
+
+FAQ auto
+
+Chat sur le site
+
+Utiliser Innovia pour booster la présentation des biens à rénover ou à faible demande
+
+10. Tests utilisateurs & accessibilité
+Réaliser des tests utilisateurs et audits d’accessibilité :
+
+Focus visible au clavier
+
+Lecture mobile
+
+Contraste des couleurs
+
+11. Branding & stratégie
+Trouver un nouveau nom pour la boîte
+
+Définir les prompts pour aider l’IA à générer un plan visant 10 000 € de bénéfice mensuel
