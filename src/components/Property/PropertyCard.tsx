@@ -50,9 +50,7 @@ export default function PropertyCard({ property }: { property: Property }) {
             <h3 id={`property-${_id}`} className="mb-2 text-lg font-semibold text-black">
               {name}
             </h3>
-            <p className="mb-4 text-sm text-gray-600 line-clamp-2">
-              {shortDescription}
-            </p>
+            <p className="mb-4 text-sm text-gray-600 line-clamp-2">{shortDescription}</p>
           </div>
 
           <dl className="grid grid-cols-2 gap-2 text-sm text-gray-700 mt-auto">
@@ -88,7 +86,7 @@ export default function PropertyCard({ property }: { property: Property }) {
             )}
             {modeGestion === 'Conciergerie' && occupation != null && (
               <React.Fragment key={`${_id}-occupation`}>
-                <dt className="sr-only">Taux d’occupation</dt>
+                <dt className="sr-only">Taux d'occupation</dt>
                 <dd>📊 {occupation}%</dd>
               </React.Fragment>
             )}

@@ -58,7 +58,7 @@ const ResetPassword = ({ token }: { token: string }) => {
     if (integrations?.isAuthEnabled) {
       verifyToken();
     }
-  }, [token]);
+  }, [token, router]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

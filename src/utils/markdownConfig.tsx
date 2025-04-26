@@ -1,9 +1,12 @@
-import React, { ReactNode } from 'react';
-import { Components } from 'react-markdown';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+'use client';
 
-// ✅ Définition correcte des props
+import React, { ReactNode } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { Components } from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import Image from 'next/image';
+
+// Définition des props pour les composants markdown
 type MarkdownComponentProps = {
   children?: ReactNode;
 };
@@ -18,7 +21,10 @@ export const markdownComponents: Components = {
     </h1>
   ),
   h2: ({ children, ...props }: MarkdownComponentProps) => (
-    <h2 {...props} className="mb-6 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
+    <h2
+      {...props}
+      className="mb-6 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl"
+    >
       {children}
     </h2>
   ),
@@ -62,7 +68,6 @@ export const markdownComponents: Components = {
       {children}
     </a>
   ),
-  // ✅ Table support
   table: ({ children, ...props }: MarkdownComponentProps) => (
     <div className="my-6 overflow-x-auto px-2">
       <table
@@ -78,7 +83,9 @@ export const markdownComponents: Components = {
       {children}
     </thead>
   ),
-  tbody: ({ children, ...props }: MarkdownComponentProps) => <tbody {...props}>{children}</tbody>,
+  tbody: ({ children, ...props }: MarkdownComponentProps) => (
+    <tbody {...props}>{children}</tbody>
+  ),
   tr: ({ children, ...props }: MarkdownComponentProps) => (
     <tr {...props} className="border-b border-gray-200">
       {children}
@@ -94,24 +101,30 @@ export const markdownComponents: Components = {
       {children}
     </td>
   ),
+  img: ({ src, alt, width, height, ...rest }) => {
+    // Coercion de width/height string vers number
+    const w = typeof width === 'string' ? parseInt(width, 10) : width ?? 800;
+    const h = typeof height === 'string' ? parseInt(height, 10) : height ?? 450;
 
-  img: ({ src, alt, ...props }) => (
-    <img
-      src={src || ''}
-      alt={alt || ''}
-      className="my-6 w-full rounded-lg shadow-md"
-      loading="lazy"
-      {...props}
-    />
-  ),
+    return (
+      <Image
+        src={src ?? ''}
+        alt={alt ?? ''}
+        width={w}
+        height={h}
+        quality={75}
+        loading="lazy"
+        className="my-6 w-full rounded-lg shadow-md"
+        {...rest}
+      />
+    );
+  },
 };
 
+// Composant principal de rendu Markdown
 const MarkdownRenderer = ({ markdownContent }: { markdownContent: string }) => {
   return (
-    <ReactMarkdown
-      components={markdownComponents}
-      remarkPlugins={[remarkGfm]} // ✅ ici
-    >
+    <ReactMarkdown components={markdownComponents} remarkPlugins={[remarkGfm]}>
       {markdownContent}
     </ReactMarkdown>
   );

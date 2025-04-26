@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production';
+// En prod, NEXT_PUBLIC_ASSET_PREFIX devra être quelque chose comme
+// 'https://cdn.votre-domaine.com' ou '/static', jamais vide ni sans slash.
 const cdnPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
 const nextConfig = {
@@ -14,8 +16,7 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 jours
   },
 
-  // En dev : undefined (pas de préfixe)
-  // En prod : URL de ton CDN (doit commencer par 'https://')
+  // Pas de prefix en dev (=> undefined). En prod, utilise ton CDN ou un /chemin.
   assetPrefix: isProd ? cdnPrefix : undefined,
 
   async headers() {
@@ -23,10 +24,7 @@ const nextConfig = {
       {
         source: '/images/:path*',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=604800, immutable',
-          },
+          { key: 'Cache-Control', value: 'public, max-age=604800, immutable' },
         ],
       },
     ];

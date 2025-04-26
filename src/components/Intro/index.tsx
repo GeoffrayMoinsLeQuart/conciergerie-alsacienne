@@ -14,7 +14,7 @@ const IntroContent = {
     title: 'Conciergerie haut de gamme et optimisation locative',
     content: [
       'Confiez-nous la gestion de votre bien en location courte durée en toute sérénité.',
-      'Notre équipe locale s’occupe de tout : préparation du logement, accueil voyageurs, ménage, suivi technique et ajustements tarifaires.',
+      "Notre équipe locale s'occupe de tout : préparation du logement, accueil voyageurs, ménage, suivi technique et ajustements tarifaires.",
       'Offrez une expérience inoubliable à vos hôtes — et des revenus vraiment optimisés à votre patrimoine.',
     ],
     image:

@@ -71,7 +71,7 @@ export const footerQuickLinks: FooterLink[] = [
   {
     id: uuid(),
     title: 'À Propos',
-    href: '/#about',
+    href: '/about',
     external: false,
   },
   {
@@ -85,8 +85,9 @@ export const footerQuickLinks: FooterLink[] = [
 export const footerSocialLinks: FooterSocial[] = [
   {
     id: uuid(),
+    label: 'Facebook',
     title: 'Facebook',
-    href: '',
+    href: 'https://facebook.com/conciergerie',
     icon: (
       <svg
         width="20"
@@ -94,6 +95,7 @@ export const footerSocialLinks: FooterSocial[] = [
         viewBox="0 0 22 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <path
           d="M12.1 10.494V7.42717C12.1 6.23996 13.085 5.27753 14.3 5.27753H16.5V2.05308L13.5135 1.84464C10.9664 1.66688 8.8 3.63794 8.8 6.13299V10.494H5.5V13.7184H8.8V20.1668H12.1V13.7184H15.4L16.5 10.494H12.1Z"
@@ -104,8 +106,9 @@ export const footerSocialLinks: FooterSocial[] = [
   },
   {
     id: uuid(),
+    label: 'Twitter',
     title: 'Twitter',
-    href: '',
+    href: 'https://twitter.com/conciergerie',
     icon: (
       <svg
         width="20"
@@ -113,6 +116,7 @@ export const footerSocialLinks: FooterSocial[] = [
         viewBox="0 0 22 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <path
           fillRule="evenodd"
@@ -125,8 +129,9 @@ export const footerSocialLinks: FooterSocial[] = [
   },
   {
     id: uuid(),
-    title: 'Linkedin',
-    href: '',
+    label: 'LinkedIn',
+    title: 'LinkedIn',
+    href: 'https://linkedin.com/company/conciergerie',
     icon: (
       <svg
         width="20"
@@ -134,18 +139,12 @@ export const footerSocialLinks: FooterSocial[] = [
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
-        <g clipPath="url(#clip0_1073_724)">
-          <path
-            d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z"
-            fill="currentColor"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_1073_724">
-            <rect width="24" height="24" fill="white" />
-          </clipPath>
-        </defs>
+        <path
+          d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z"
+          fill="currentColor"
+        />
       </svg>
     ),
   },

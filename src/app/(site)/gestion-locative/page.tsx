@@ -2,7 +2,7 @@ import React from 'react';
 import Intro from '@/components/Intro';
 import GarantiesLoyers from '@/components/GestionLocative/GarantieLoyerImpaye';
 import TemoinagesSection from '@/components/GestionLocative/Testimonial';
-import FAQGestionLocativeClient from './FAQGestionLocativeClient';
+import FAQGestionLocative from './FAQGestionLocative';
 import CTAGestionLocative from '@/components/GestionLocative/CTAGestionLocative';
 import BlocProcessusEtPrestations from '@/components/GestionLocative/BlocProcessusEtPrestations';
 import TabsProfilProprietaire from '@/components/GestionLocative/TabsProfilProprietaire';
@@ -59,7 +59,7 @@ export default function GestionLocativePage() {
         <TemoinagesSection />
         <FraisInitiauxCard />
         <TarificationGestionLocative />
-        <FAQGestionLocativeClient />
+        <FAQGestionLocative />
         <CTAGestionLocative />
       </main>
 

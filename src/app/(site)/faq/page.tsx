@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     'Transparence totale sur nos prestations, tarifs, garanties. Tout ce que vous devez savoir, sans jargon.',
   openGraph: {
     title: 'Foire aux questions',
-    description: 'Une conciergerie sérieuse, c’est aussi une réponse claire à chaque question.',
+    description: 'Une conciergerie sérieuse, c'est aussi une réponse claire à chaque question.',
     url: 'https://www.conciergerie-alsacienne.fr/faq',
     siteName: 'Conciergerie Alsacienne',
     type: 'website',

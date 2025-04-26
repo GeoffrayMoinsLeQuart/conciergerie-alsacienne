@@ -95,7 +95,7 @@ const TarificationGestionLocative: FC = () => {
       name: 'Formule Premium',
       price: '9%',
       priceLabel: 'HT des loyers encaissés',
-      tagline: 'L’expérience complète, clé en main',
+      tagline: 'L'expérience complète, clé en main',
       inheritsFrom: 'Formule Sérénité',
       features: [
         '✓ Inclut tous les avantages de la Formule Sérénité',
