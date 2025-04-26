@@ -10,11 +10,9 @@ import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Activity, FormuleGestionLocative } from '@/types/form';
 import dynamic from 'next/dynamic';
 
-const MotionArticle = dynamic(
-  () => import('framer-motion').then((mod) => mod.motion.article),
-  { ssr: false }
-);
-
+const MotionArticle = dynamic(() => import('framer-motion').then((mod) => mod.motion.article), {
+  ssr: false,
+});
 
 interface Plan {
   name: string;
@@ -95,7 +93,7 @@ const TarificationGestionLocative: FC = () => {
       name: 'Formule Premium',
       price: '9%',
       priceLabel: 'HT des loyers encaissés',
-      tagline: 'L'expérience complète, clé en main',
+      tagline: "L'expérience complète, clé en main",
       inheritsFrom: 'Formule Sérénité',
       features: [
         '✓ Inclut tous les avantages de la Formule Sérénité',
@@ -151,7 +149,11 @@ const TarificationGestionLocative: FC = () => {
   };
 
   return (
-    <section className="bg-white py-20 lg:py-[120px]" id='tarifs' aria-label="Tarification Gestion Locative">
+    <section
+      className="bg-white py-20 lg:py-[120px]"
+      id="tarifs"
+      aria-label="Tarification Gestion Locative"
+    >
       <div className="container mx-auto px-4">
         <SectionTitle
           mainTitle="TARIFICATION"

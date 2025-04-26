@@ -1,28 +1,14 @@
 import type { Config } from 'tailwindcss';
 
-const isProd = process.env.NODE_ENV === 'production';
-
 const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  // Option purge legacy pour Tailwind v2, activé en production
-  // Si vous utilisez Tailwind v3+, cette option est ignorée
-  purge: isProd
-    ? {
-        enabled: true,
-        content: [
-          './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-          './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-          './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-        ],
-        options: {
-          safelist: [],
-        },
-      }
-    : false,
+  content: {
+    files: [
+      './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
+    // Si tu as besoin de conserver certaines classes même non détectées
+  },
   theme: {
     container: {
       center: true,

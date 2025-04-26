@@ -11,7 +11,7 @@ const siteName = process.env.SITE_NAME;
 export const metadata: Metadata = {
   title: 'Nous contacter | Conciergerie Alsacienne',
   description:
-    'Besoin d'un conseil ou d'une estimation ? Échangeons sans engagement. Notre équipe vous répond rapidement.',
+    "Besoin d'un conseil ou d'une estimation ? Échangeons sans engagement. Notre équipe vous répond rapidement.",
   openGraph: {
     title: 'Contactez notre équipe',
     description: 'Une prise de contact simple, directe, sans pression.',
