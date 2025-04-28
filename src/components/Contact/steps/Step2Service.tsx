@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Field, ErrorMessage, useFormikContext } from 'formik';
 import {
   Activity,
@@ -14,56 +14,76 @@ import {
  * based on the selected service type.
  */
 const FormuleSelector: React.FC = () => {
-  const { values, setFieldValue, errors, touched } = useFormikContext<ContactFormValues>();
+  const { values, setFieldValue } = useFormikContext<ContactFormValues>();
+  const { serviceType, formule } = values;
 
-  const options =
-    values.serviceType === Activity.GestionLocative
-      ? [
-          { label: 'Formule Essentielle (15%)', value: FormuleGestionLocative.Essentielle },
-          { label: 'Formule Premium (20%)', value: FormuleGestionLocative.Serenite },
-          { label: 'Formule All-Inclusive (25%)', value: FormuleGestionLocative.Premium },
-        ]
-      : values.serviceType === Activity.Conciergerie
-        ? [
-            { label: 'Formule Essentielle (15%)', value: FormuleConciergerie.Standard },
-            { label: 'Formule Premium (20%)', value: FormuleConciergerie.Premium },
-            { label: 'Formule All-Inclusive (25%)', value: FormuleConciergerie.Exclusive },
-          ]
-        : [];
+  // Memoize the options array to prevent unnecessary re-renders and fix exhaustive-deps warning
+  const options = useMemo(() => {
+    if (serviceType === Activity.GestionLocative) {
+      return [
+        {
+          label: 'Formule Essentielle',
+          value: FormuleGestionLocative.Essentielle,
+        },
+        {
+          label: 'Formule Serenite',
+          value: FormuleGestionLocative.Serenite,
+        },
+        {
+          label: 'Formule Premium',
+          value: FormuleGestionLocative.Premium,
+        },
+      ];
+    } else if (serviceType === Activity.Conciergerie) {
+      return [
+        {
+          label: 'Formule Standard',
+          value: FormuleConciergerie.Standard,
+        },
+        {
+          label: 'Formule Premium',
+          value: FormuleConciergerie.Premium,
+        },
+        {
+          label: 'Formule Exclusive',
+          value: FormuleConciergerie.Exclusive,
+        },
+      ];
+    } else {
+      return [];
+    }
+  }, [serviceType]);
 
-  // Always show the formule section if service type is GestionLocative or Conciergerie
-  if (
-    values.serviceType !== Activity.GestionLocative &&
-    values.serviceType !== Activity.Conciergerie
-  ) {
-    // Clear formule if service type changes to one that doesn't need it
-    React.useEffect(() => {
-      if (values.formule) {
-        setFieldValue('formule', '');
-      }
-    }, [values.serviceType, values.formule, setFieldValue]);
-    return null;
-  }
+  // Effect to clear formule when serviceType changes to one that doesn't need it
+  useEffect(() => {
+    if (
+      serviceType !== Activity.GestionLocative &&
+      serviceType !== Activity.Conciergerie &&
+      formule // Only clear if a formula was previously selected
+    ) {
+      setFieldValue('formule', '');
+    }
+  }, [serviceType, formule, setFieldValue]);
 
-  // Always ensure a formula is selected for GestionLocative and Conciergerie
-  React.useEffect(() => {
+  // Effect to auto-select a formula if required and none is selected
+  useEffect(() => {
     // For Conciergerie, always ensure a formula is selected regardless of URL parameters
-    if (values.serviceType === Activity.Conciergerie && options.length > 0) {
-      // If no formula or formula doesn't match available options, select first option
-      const isValidFormula = options.some((opt) => opt.value === values.formule);
-      if (!values.formule || !isValidFormula) {
+    if (serviceType === Activity.Conciergerie && options.length > 0) {
+      const isValidFormula = options.some((opt) => opt.value === formule);
+      if (!formule || !isValidFormula) {
         setFieldValue('formule', options[0].value);
       }
     }
     // For GestionLocative, select first option if none selected
-    else if (
-      values.serviceType === Activity.GestionLocative &&
-      !values.formule &&
-      options.length > 0
-    ) {
+    else if (serviceType === Activity.GestionLocative && !formule && options.length > 0) {
       setFieldValue('formule', options[0].value);
     }
-  }, [values.serviceType, values.formule, options, setFieldValue]);
+  }, [serviceType, formule, options, setFieldValue]);
+
+  // Do not render the selector if the service type doesn't require it
+  if (serviceType !== Activity.GestionLocative && serviceType !== Activity.Conciergerie) {
+    return null;
+  }
 
   return (
     <div className="mt-6">
