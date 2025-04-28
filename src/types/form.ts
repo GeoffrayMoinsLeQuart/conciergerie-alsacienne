@@ -1,12 +1,7 @@
 export enum Activity {
   GestionLocative = 'gestion-locative',
   Conciergerie = 'conciergerie',
-}
-
-export enum FormuleConciergerie {
-  Standard = 'standard',
-  Premium = 'premium',
-  Exclusive = 'exclusive',
+  Transformation = 'transformation',
 }
 
 export enum FormuleGestionLocative {
@@ -15,13 +10,19 @@ export enum FormuleGestionLocative {
   Premium = 'premium',
 }
 
+export enum FormuleConciergerie {
+  Standard = 'standard',
+  Premium = 'premium',
+  Exclusive = 'exclusive',
+}
+
 export interface ContactFormValues {
   name: string;
   email: string;
   phone: string;
   availability: string;
   serviceType: Activity;
-  formule?: FormuleConciergerie | FormuleGestionLocative;
+  formule?: FormuleConciergerie | FormuleGestionLocative | string;
   address: string;
   city: string;
   postalCode: string;
@@ -30,4 +31,8 @@ export interface ContactFormValues {
   budget: string;
   message: string;
   consent: boolean;
+  // Anti-spam field (hidden from users)
+  honeypot?: string;
+  // Timestamp for submission tracking
+  submissionTime?: string;
 }

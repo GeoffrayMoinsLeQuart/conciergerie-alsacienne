@@ -85,7 +85,8 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
         `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`,
       );
       const data = await response.json();
-      setSuggestions(data.features); // 👈 Plus aucun filtre ici
+      // Ensure suggestions is always an array
+      setSuggestions(Array.isArray(data.features) ? data.features : []);
     } catch (error) {
       console.error("Erreur lors de la recherche d'adresses:", error);
       setSuggestions([]);

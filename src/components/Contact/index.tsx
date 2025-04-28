@@ -1,288 +1,249 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import { Formik, Form, Field, FormikHelpers, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
-import AddressAutocomplete, { AddressComponents } from '@/components/AddressAutocomplete';
 import SectionTitle from '../Common/SectionTitle';
-import { Activity, ContactFormValues, FormuleConciergerie, FormuleGestionLocative } from '@/types/form';
+import FormProgress from './FormProgress';
+import Step1Info from './steps/Step1Info';
+import Step2Service from './steps/Step2Service';
+import Step3Property from './steps/Step3Property';
+import Step4Message from './steps/Step4Message';
+import { Activity, ContactFormValues } from '@/types/form';
 
+// Step titles for the progress indicator
+const STEP_TITLES = [
+  'Vos informations',
+  'Service & formule',
+  'Détails du bien',
+  'Message & consentement',
+];
+
+// Validation schemas for each step
+const validationSchemas = [
+  // Step 1: Personal Information
+  Yup.object({
+    name: Yup.string().required('Votre nom est obligatoire'),
+    email: Yup.string().email('Format d\'email invalide').required('Votre email est obligatoire'),
+    phone: Yup.string().required('Votre téléphone est obligatoire'),
+    honeypot: Yup.string().test(
+      'is-empty',
+      'Bot detected',
+      (value) => !value // Should be empty for real users
+    ),
+  }),
+  
+  // Step 2: Service & Formula
+  Yup.object({
+    serviceType: Yup.mixed<Activity>()
+      .oneOf(Object.values(Activity), 'Choisissez un service')
+      .required('Choisissez un service'),
+    formule: Yup.string().when(
+      "serviceType",
+      ([serviceType], schema) => {
+        if (
+          serviceType === Activity.GestionLocative ||
+          serviceType === Activity.Conciergerie
+        ) {
+          return schema.required("Choisissez une formule");
+        }
+        return schema.notRequired();
+      }
+    ),
+  }),
+  
+  // Step 3: Property Details
+  Yup.object({
+    address: Yup.string().required('L\'adresse est obligatoire'),
+  }),
+  
+  // Step 4: Message & Consent
+  Yup.object({
+    consent: Yup.boolean().oneOf([true], 'Vous devez accepter la politique de confidentialité'),
+  }),
+];
+
+/**
+ * ContactForm component is the main wizard controller that integrates
+ * all step components into a functioning multi-step form.
+ */
 const ContactForm: React.FC = () => {
   const router = useRouter();
   const params = useSearchParams();
-
+  const [step, setStep] = useState(0);
+  const [highestStepReached, setHighestStepReached] = useState(0);
+  const totalSteps = STEP_TITLES.length;
+  
+  // Get initial values from URL parameters if available
   const initialService = (params.get('service') || '') as Activity;
-  const initialFormule = (params.get('formule') || '') as FormuleConciergerie | FormuleGestionLocative;
-
-  const validationSchema = Yup.object({
-    name: Yup.string().required('Obligatoire'),
-    email: Yup.string().email('Email invalide').required('Obligatoire'),
-    phone: Yup.string().required('Obligatoire'),
-    serviceType: Yup.string().required('Choisissez un service'),
-    consent: Yup.boolean().oneOf([true], 'Accepter la politique est requis'),
-  });
-
-  const FormuleSelector = () => {
-    const { values } = useFormikContext<ContactFormValues>();
-
-    const options =
-      values.serviceType === Activity.GestionLocative
-        ? [
-            { label: 'Formule Essentielle', value: 'essentielle' },
-            { label: 'Formule Serenite', value: 'serenite' },
-            { label: 'Formule Premium', value: 'premium' },
-          ]
-        : values.serviceType === Activity.Conciergerie
-        ? [
-            { label: 'Formule Standard', value: 'standard' },
-            { label: 'Formule Premium', value: 'premium' },
-            { label: 'Formule Exclusive', value: 'exclusive' },
-          ]
-        : [];
-
-    if (!options.length) return null;
-
-    return (
-      <div>
-        <fieldset aria-labelledby="formule-group">
-          <legend id="formule-group" className="block font-medium">
-            Formule <span className="text-red-500">*</span>
-          </legend>
-          <div className="space-y-2">
-            {options.map((opt) => (
-              <label key={opt.value} className="flex items-center">
-                <Field
-                  type="radio"
-                  name="formule"
-                  value={opt.value}
-                  className="h-5 w-5 text-primary"
-                />
-                <span className="ml-2 text-gray-700">{opt.label}</span>
-              </label>
-            ))}
-          </div>
-          <ErrorMessage name="formule" component="div" className="text-sm text-red-500" />
-        </fieldset>
-      </div>
-    );
+  const initialFormule = params.get('formule') || '';
+  
+  // Initial form values
+  const initialValues: ContactFormValues = {
+    name: '',
+    email: '',
+    phone: '',
+    availability: '',
+    serviceType: initialService,
+    formule: initialFormule,
+    address: '',
+    city: '',
+    postalCode: '',
+    propertyType: '',
+    surface: '',
+    budget: '',
+    message: '',
+    consent: false,
+    honeypot: '', // Anti-spam field
+    submissionTime: '', // Will be set on submit
   };
-
+  
+  // Handle form submission
+  const handleSubmit = async (
+    values: ContactFormValues,
+    { setSubmitting }: FormikHelpers<ContactFormValues>
+  ) => {
+    try {
+      // Add submission timestamp
+      values.submissionTime = new Date().toISOString();
+      
+      // Anti-spam check
+      if (values.honeypot) {
+        console.error('Bot submission detected');
+        toast.error('Erreur de validation');
+        return;
+      }
+      
+      // Log form data to console (as requested)
+      console.log('Form submitted with data:', values);
+      
+      // In a real implementation, you would send the data to an API
+      // const res = await fetch('/api/contact', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(values),
+      // });
+      // if (!res.ok) throw new Error('Erreur API');
+      
+      toast.success('Demande envoyée avec succès !');
+      router.push('/merci#confirmation');
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error("Échec de l'envoi, veuillez réessayer.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  
+  // Navigation functions
+  const nextStep = async (validateForm: () => Promise<any>, setTouched: (fields: { [field: string]: boolean }) => void, errors: any, values: ContactFormValues) => {
+    // Touch all fields to trigger validation messages
+    const currentFields = Object.keys(validationSchemas[step].fields);
+    const touchedFields = currentFields.reduce((acc, field) => {
+      acc[field] = true;
+      return acc;
+    }, {} as { [field: string]: boolean });
+    
+    setTouched(touchedFields);
+    
+    // Validate form
+    const validationErrors = await validateForm();
+    
+    if (Object.keys(validationErrors).length === 0) {
+      const nextStepIndex = Math.min(step + 1, totalSteps - 1);
+      setStep(nextStepIndex);
+      setHighestStepReached(Math.max(highestStepReached, nextStepIndex)); // Update highest step reached
+      // Scroll to top of form
+      document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  
+  const prevStep = () => {
+    setStep((s) => Math.max(s - 1, 0));
+    // Scroll to top of form
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
   return (
-    <section id="contact-formulaire-projet-immobilier" className="bg-white py-[120px]">
-      <div className="container">
-        <h1 className="sr-only">Contactez-nous pour votre projet immobilier</h1>
+    <section id="contact-form" className="bg-white py-[120px]">
+      <div className="container mx-auto max-w-4xl px-4">
+        <h1 className="sr-only">
+          Contactez-nous pour votre projet immobilier
+        </h1>
         <SectionTitle
           title="Un projet immobilier en tête ?"
-          paragraph="Contactez-nous pour discuter de votre bien et découvrir comment notre service de conciergerie peut maximiser vos revenus locatifs en Alsace."
+          paragraph="Contactez-nous pour discuter de votre bien et découvrir comment notre service peut maximiser vos revenus locatifs en Alsace."
           center
         />
-        <div className="container mx-auto max-w-4xl px-4">
+        
+        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mt-8">
           <Formik
-            initialValues={{
-              name: '',
-              email: '',
-              phone: '',
-              availability: '',
-              serviceType: initialService || '',
-              formule: initialFormule || '',
-              address: '',
-              city: '',
-              postalCode: '',
-              propertyType: '',
-              surface: '',
-              budget: '',
-              message: '',
-              consent: false,
-            }}
-            enableReinitialize
-            validationSchema={validationSchema}
-            onSubmit={async (values, { setSubmitting }) => {
-              try {
-                const res = await fetch('/api/contact', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(values),
-                });
-                if (!res.ok) throw new Error('Erreur API');
-                toast.success('Demande envoyée !');
-                router.push('/merci#confirmation');
-              } catch {
-                toast.error("Échec de l'envoi, réessayez.");
-              } finally {
-                setSubmitting(false);
-              }
-            }}
+            initialValues={initialValues}
+            validationSchema={validationSchemas[step]}
+            onSubmit={handleSubmit}
+            validateOnMount={false}
+            validateOnChange={true}
+            validateOnBlur={true}
           >
-            {({ isSubmitting, setFieldValue }) => (
-              <Form className="space-y-6" aria-live="polite">
-                <fieldset>
-                  <legend className="text-xl font-semibold text-gray-800">Vos informations</legend>
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <div>
-                      <label htmlFor="name" className="block font-medium text-gray-700">
-                        Nom & Prénom <span className="text-red-500">*</span>
-                      </label>
-                      <Field
-                        name="name"
-                        id="name"
-                        aria-required="true"
-                        autoComplete="name"
-                        className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                      <ErrorMessage name="name" component="div" className="text-sm text-red-500" />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block font-medium text-gray-700">
-                        Email <span className="text-red-500">*</span>
-                      </label>
-                      <Field
-                        name="email"
-                        id="email"
-                        type="email"
-                        autoComplete="email"
-                        aria-required="true"
-                        className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                      <ErrorMessage name="email" component="div" className="text-sm text-red-500" />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block font-medium text-gray-700">
-                        Téléphone <span className="text-red-500">*</span>
-                      </label>
-                      <Field
-                        name="phone"
-                        id="phone"
-                        autoComplete="tel"
-                        aria-required="true"
-                        className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                      <ErrorMessage name="phone" component="div" className="text-sm text-red-500" />
-                    </div>
-                  </div>
-                </fieldset>
-
-                <fieldset>
-                  <legend className="text-xl font-semibold text-gray-800">Service souhaité</legend>
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <div>
-                      <fieldset role="group" aria-labelledby="serviceType-group">
-                        <legend id="serviceType-group" className="mb-4 block font-medium">
-                          Type de service <span className="text-red-500">*</span>
-                        </legend>
-                        <div className="space-y-2">
-                          {['gestion-locative', 'conciergerie', 'transformation'].map((opt) => (
-                            <label key={opt} className="flex items-center">
-                              <Field
-                                type="radio"
-                                name="serviceType"
-                                value={opt}
-                                aria-required="true"
-                                className="h-5 w-5 text-primary"
-                              />
-                              <span className="ml-2 text-gray-700">
-                                {opt === 'transformation' ? 'Transformation du design' : opt === 'gestion-locative' ? 'Gestion locative' : 'Conciergerie'}
-                              </span>
-                            </label>
-                          ))}
-                        </div>
-                        <ErrorMessage name="serviceType" component="div" className="text-sm text-red-500" />
-                      </fieldset>
-                    </div>
-                    <FormuleSelector />
-                  </div>
-                </fieldset>
-
-                <fieldset>
-                  <legend className="text-xl font-semibold text-gray-800">Détails du bien</legend>
-                  <div>
-                    <AddressAutocomplete
-                      onAddressSelect={(c: AddressComponents) => {
-                        setFieldValue('address', c.fullAddress);
-                        setFieldValue('city', c.city);
-                        setFieldValue('postalCode', c.postalCode);
-                      }}
-                      placeholder="Saisissez votre adresse"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <div>
-                      <label htmlFor="propertyType" className="block font-medium text-gray-700">
-                        Type de bien
-                      </label>
-                      <Field
-                        as="select"
-                        name="propertyType"
-                        id="propertyType"
-                        className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        <option value="">Sélectionnez</option>
-                        <option value="studio">Studio</option>
-                        <option value="t1">T1</option>
-                        <option value="t2">T2</option>
-                        <option value="t3">T3</option>
-                        <option value="t4+">T4+</option>
-                        <option value="maison">Maison</option>
-                      </Field>
-                    </div>
-                    <div>
-                      <label htmlFor="surface" className="block font-medium text-gray-700">
-                        Surface (m²)
-                      </label>
-                      <Field
-                        name="surface"
-                        type="number"
-                        id="surface"
-                        className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-                  </div>
-                </fieldset>
-
-                <fieldset>
-                  <legend className="sr-only">Message complémentaire</legend>
-                  <div>
-                    <label htmlFor="message" className="block font-medium text-gray-700">
-                      Message / Commentaires
-                    </label>
-                    <Field
-                      as="textarea"
-                      name="message"
-                      id="message"
-                      rows={4}
-                      className="w-full resize-none rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                </fieldset>
-
-                <fieldset>
-                  <legend className="sr-only">Consentement</legend>
-                  <div>
-                    <label className="flex items-start">
-                      <Field
-                        type="checkbox"
-                        name="consent"
-                        aria-required="true"
-                        className="h-5 w-5 text-primary"
-                      />
-                      <span className="ml-2 text-sm text-gray-700">
-                        J'accepte la politique de confidentialité <span className="text-red-500">*</span>
-                      </span>
-                    </label>
-                    <ErrorMessage name="consent" component="div" className="text-sm text-red-500" />
-                  </div>
-                </fieldset>
-
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="inline-flex items-center justify-center rounded-full bg-primary px-9 py-4 font-semibold text-white shadow-md transition hover:bg-opacity-90"
-                    aria-busy={isSubmitting}
-                  >
-                    {isSubmitting ? 'Envoi en cours…' : 'Envoyer ma demande'}
-                  </button>
+            {({ isSubmitting, validateForm, setTouched, errors, values }) => (
+              <Form aria-live="polite" noValidate>
+                {/* Progress indicator */}
+                <FormProgress 
+                  currentStep={step} 
+                  steps={STEP_TITLES} 
+                  onStepClick={(stepIndex) => {
+                    // Only allow navigation to steps that have been reached
+                    if (stepIndex <= highestStepReached) {
+                      setStep(stepIndex);
+                      document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                />
+                
+                {/* Form steps */}
+                <div className="min-h-[400px]">
+                  {step === 0 && <Step1Info />}
+                  {step === 1 && <Step2Service />}
+                  {step === 2 && <Step3Property />}
+                  {step === 3 && <Step4Message />}
+                </div>
+                
+                {/* Navigation buttons */}
+                <div className="mt-8 flex flex-col-reverse gap-4 sm:flex-row sm:justify-between">
+                  {step > 0 ? (
+                    <button
+                      type="button"
+                      onClick={prevStep}
+                      className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gray-200 hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
+                      aria-label="Retour à l'étape précédente"
+                    >
+                      ← Retour
+                    </button>
+                  ) : (
+                    <div></div> // Empty div to maintain flex spacing on larger screens
+                  )}
+                  
+                  {step < totalSteps - 1 ? (
+                    <button
+                      type="button"
+                      onClick={() => nextStep(validateForm, setTouched, errors, values)}
+                      className="w-full sm:w-auto px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+                      aria-label={`Passer à l'étape ${step + 2}: ${STEP_TITLES[step + 1]}`}
+                    >
+                      Suivant →
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-70"
+                      aria-busy={isSubmitting}
+                    >
+                      {isSubmitting ? 'Envoi en cours...' : 'Envoyer ma demande'}
+                    </button>
+                  )}
                 </div>
               </Form>
             )}
