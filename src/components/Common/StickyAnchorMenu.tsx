@@ -9,10 +9,10 @@ const SECTION_CONFIG: Record<string, { id: string; label: string }[]> = {
     { id: 'selection', label: 'Sélection' },
     { id: 'transformations', label: 'Transformations' },
     { id: 'prestations', label: 'Prestations' },
-    { id: 'expertise', label: 'Expertise' },
     { id: 'processus', label: 'Processus' },
+    { id: 'expertise', label: 'Expertise' },
     { id: 'tarifs', label: 'Tarifs' },
-    { id: 'faq', label: 'FAQ' },
+    { id: 'faq-conciergerie', label: 'FAQ' },
   ],
   '/gestion-locative': [
     { id: 'processus', label: 'Prestations' },
@@ -20,12 +20,14 @@ const SECTION_CONFIG: Record<string, { id: string; label: string }[]> = {
     { id: 'garanties', label: 'Garanties' },
     { id: 'temoignages', label: 'Témoignages' },
     { id: 'tarifs', label: 'Tarifs' },
-    { id: 'faq', label: 'FAQ' },
+    { id: 'faq-gestion', label: 'FAQ' },
   ],
 };
 
 export default function StickyAnchorMenu() {
   const pathname = usePathname();
+  console.log('CURRENT PATH:', usePathname());
+
   const sections = SECTION_CONFIG[pathname] || [];
   const [isVisible, setIsVisible] = useState(false);
   const [isOpenMobile, setIsOpenMobile] = useState(false);
@@ -53,7 +55,7 @@ export default function StickyAnchorMenu() {
     <>
       {/* Desktop */}
       <nav
-        className="sticky top-[64px] z-40 hidden w-full bg-white shadow-sm lg:block"
+        className="sticky top-[100px] z-40 hidden w-full bg-white shadow-sm lg:block"
         role="navigation"
         aria-label="Navigation par sections"
       >
