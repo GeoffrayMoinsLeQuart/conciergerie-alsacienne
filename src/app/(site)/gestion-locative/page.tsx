@@ -10,42 +10,12 @@ import FraisInitiauxCard from '@/components/GestionLocative/FraisInitiauxCard';
 import TarificationGestionLocative from '@/components/GestionLocative/TarificationGestion';
 import StickyAnchorMenu from '@/components/Common/StickyAnchorMenu';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
-import { Metadata } from 'next';
+import { getMetadata } from '@/app/config/pageMetadata';
 
 const siteURL = 'https://www.conciergerie-alsacienne.fr';
 const siteName = 'Conciergerie Alsacienne';
 
-export const metadata: Metadata = {
-  title: 'Gestion locative à Mulhouse & Colmar | Conciergerie Alsacienne',
-  description:
-    'Déléguez la gestion de votre bien immobilier à une équipe locale fiable. Loyers garantis, fiscalité optimisée, zéro stress. Location nue ou meublée.',
-  alternates: {
-    canonical: `${siteURL}/gestion-locative`,
-  },
-  openGraph: {
-    title: 'Service de gestion locative à Mulhouse & Colmar',
-    description:
-      'Gestion complète et transparente de votre bien : recherche de locataires, loyers garantis, suivi technique et fiscal.',
-    url: `${siteURL}/gestion-locative`,
-    siteName,
-    type: 'website',
-    images: [
-      {
-        url: `${siteURL}/opengraph/gestion-locative.jpg`,
-        width: 1200,
-        height: 630,
-        alt: 'Gestion locative Mulhouse et Colmar',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Gestion locative clé en main à Mulhouse et Colmar',
-    description: 'Un bien loué, suivi et sécurisé — sans y penser.',
-    images: [`${siteURL}/opengraph/gestion-locative.jpg`],
-  },
-  robots: { index: true, follow: true },
-};
+export const metadata = getMetadata('gestion-locative');
 
 export default function GestionLocativePage() {
   return (

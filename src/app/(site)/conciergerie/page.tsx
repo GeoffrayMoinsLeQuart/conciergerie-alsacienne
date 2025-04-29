@@ -1,7 +1,6 @@
 // 🔁 Fichier mis à jour : /conciergerie/page.tsx
 
 import Tarification from '@/components/Conciergerie/TarificationConciergerie';
-import { Metadata } from 'next';
 import Intro from '@/components/Intro';
 import SelectionEtAccompagnement from '@/components/Conciergerie/SelectionEtAccompagnement';
 import NotreExpertise from '@/components/Conciergerie/NotreExpertise';
@@ -15,38 +14,12 @@ import TemoignagesClients from '@/components/Conciergerie/TemoignagesClients';
 import SectionResultatsConciergerie from '@/components/Conciergerie/SectionResultatsConciergerie';
 import Script from 'next/script';
 import StickyAnchorMenu from '@/components/Common/StickyAnchorMenu';
+import { getMetadata } from '@/app/config/pageMetadata';
 
 const siteURL = 'https://www.conciergerie-alsacienne.fr';
 const siteName = 'Conciergerie Alsacienne';
 
-export const metadata: Metadata = {
-  title: 'Conciergerie Airbnb à Mulhouse & Colmar | Conciergerie Alsacienne',
-  description:
-    'Un service de conciergerie haut de gamme pour la location courte durée. Pensé pour vous, géré comme pour nous, en Alsace.',
-  openGraph: {
-    title: 'Conciergerie haut de gamme en courte durée',
-    description:
-      "Location courte durée, optimisation des revenus, tranquillité d'esprit. Service de conciergerie clé en main à Mulhouse, Colmar et alentours.",
-    url: `${siteURL}/conciergerie`,
-    siteName,
-    images: [
-      {
-        url: `${siteURL}/opengraph/conciergerie.jpg`,
-        width: 1200,
-        height: 630,
-        alt: 'Conciergerie Airbnb Alsace',
-      },
-    ],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Conciergerie haut de gamme en courte durée',
-    description: 'Des logements parfaitement tenus, des propriétaires sereins.',
-    images: [`${siteURL}/opengraph/conciergerie.jpg`],
-  },
-  robots: { index: true, follow: true },
-};
+export const metadata = getMetadata('conciergerie');
 
 export default function ConciergeriePage() {
   return (

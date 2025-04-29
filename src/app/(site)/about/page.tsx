@@ -2,39 +2,9 @@ import { Metadata } from 'next';
 import PageTitle from '@/components/Common/PageTitle';
 import Image from 'next/image';
 import Script from 'next/script';
+import { getMetadata } from '@/app/config/pageMetadata';
 
-export const metadata: Metadata = {
-  title: 'Conciergerie Alsacienne – Notre histoire, notre mission',
-  description:
-    'Une conciergerie 100% alsacienne, fondée par des professionnels passionnés. Découvrez notre mission, nos valeurs, notre exigence.',
-  openGraph: {
-    title: 'Conciergerie Alsacienne – Notre histoire, notre mission',
-    description:
-      'Depuis 10 ans, nous accompagnons les propriétaires avec rigueur, transparence et ancrage local. Faites connaissance avec notre équipe.',
-    url: 'https://www.conciergerie-alsacienne.fr/about',
-    siteName: 'Conciergerie Alsacienne',
-    images: [
-      {
-        url: 'https://www.conciergerie-alsacienne.fr/images/about-hero.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Maison traditionnelle alsacienne – Conciergerie Alsacienne',
-      },
-    ],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'À propos de Conciergerie Alsacienne',
-    description:
-      'Gestion haut de gamme, approche humaine, ancrage local. Notre équipe se présente.',
-    images: ['https://www.conciergerie-alsacienne.fr/images/about-hero.jpg'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export const metadata: Metadata = getMetadata('about');
 
 export default function AboutPage() {
   const missionText = `Chez Conciergerie Alsacienne, nous allions passion du terroir et expertise hôtelière pour offrir un service clé en main, local et personnalisé.`;

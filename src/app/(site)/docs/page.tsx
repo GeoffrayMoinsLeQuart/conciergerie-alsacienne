@@ -1,14 +1,8 @@
+import { getMetadata } from '@/app/config/pageMetadata';
 import { getAllPosts } from '@/app/libs/markdown';
 import SidebarLink from '@/components/Docs/SidebarLink';
-import { Metadata } from 'next';
 
-const siteName = process.env.SITE_NAME;
-
-export const metadata: Metadata = {
-  title: `Docs Page | ${siteName}`,
-  description: 'This is Docs page',
-  // other metadata
-};
+export const metadata = getMetadata('docs');
 
 export default function DocsPage() {
   const posts = getAllPosts(['title', 'date', 'excerpt', 'coverImage', 'slug']);

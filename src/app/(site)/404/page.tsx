@@ -1,13 +1,8 @@
+import { getMetadata } from '@/app/config/pageMetadata';
 import CommonCard from '@/components/Common/CommonCard';
-import { Metadata } from 'next';
 import Link from 'next/link';
 
-const siteName = process.env.SITE_NAME;
-
-export const metadata: Metadata = {
-  title: `Error | ${siteName}`,
-  description: 'This is Error page description',
-};
+export const metadata = getMetadata('error');
 
 export default function ErrorPage() {
   return (
