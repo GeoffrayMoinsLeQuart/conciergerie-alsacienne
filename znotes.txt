@@ -401,3 +401,4 @@ NEXT_PUBLIC_ASSET_PREFIX=https://cdn.sanity.io'
 
 
 Mettre en place le cdn cloudify pour proposer les bonnes images en fonction de la size de l'ecran
+uiliser usememo
