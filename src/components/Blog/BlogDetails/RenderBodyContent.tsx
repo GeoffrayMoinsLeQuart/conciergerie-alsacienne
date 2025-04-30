@@ -1,7 +1,6 @@
 import CodeWithCopy from '@/components/Common/CodeWithCopy';
 import config from '@/sanity/config/client-config';
 import MarkdownRenderer from '@/utils/markdownConfig';
-import { PortableText } from '@portabletext/react';
 import { getImageDimensions } from '@sanity/asset-utils';
 import urlBuilder from '@sanity/image-url';
 import Image from 'next/image';

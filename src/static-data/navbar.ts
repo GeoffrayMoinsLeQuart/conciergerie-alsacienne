@@ -98,3 +98,24 @@ export const navbarData: NavbarItem[] = [
   //   ],
   // },
 ];
+
+// src/config/sectionConfig.ts
+export const SECTION_CONFIG: Record<string, { id: string; label: string }[]> = {
+  '/conciergerie': [
+    { id: 'selection', label: 'Sélection' },
+    { id: 'transformations', label: 'Transformations' },
+    { id: 'prestations', label: 'Prestations' },
+    { id: 'expertise', label: 'Expertise' },
+    { id: 'processus', label: 'Processus' },
+    { id: 'tarifs', label: 'Tarifs' },
+    { id: 'faq', label: 'FAQ' },
+  ],
+  '/gestion-locative': [
+    { id: 'processus', label: 'Prestations' },
+    { id: 'profils', label: 'Profils' },
+    { id: 'garanties', label: 'Garanties' },
+    { id: 'temoignages', label: 'Témoignages' },
+    { id: 'tarifs', label: 'Tarifs' },
+    { id: 'faq', label: 'FAQ' },
+  ],
+};
