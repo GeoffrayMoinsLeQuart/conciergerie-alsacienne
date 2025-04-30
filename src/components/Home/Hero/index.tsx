@@ -6,11 +6,9 @@ import Image from 'next/image';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import dynamic from 'next/dynamic';
 
-const MotionDiv = dynamic(
-  () => import('framer-motion').then((mod) => mod.motion.div),
-  { ssr: false }
-);
-
+const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
+  ssr: false,
+});
 
 export default function Hero() {
   return (
@@ -32,6 +30,13 @@ export default function Hero() {
                 alt="Location meublée premium en Alsace"
                 fill
                 className="object-cover"
+                sizes="
+          (max-width: 640px) 100vw,
+          (max-width: 768px) 640px,
+          (max-width: 1024px) 768px,
+          (max-width: 1280px) 1024px,
+          1280px
+        "
                 priority
               />
             </div>
@@ -46,6 +51,13 @@ export default function Hero() {
                 alt="Location meublée premium en Alsace"
                 fill
                 className="object-cover"
+                sizes="
+          (max-width: 640px) 100vw,
+          (max-width: 768px) 640px,
+          (max-width: 1024px) 768px,
+          (max-width: 1280px) 1024px,
+          1280px
+        "
                 priority
               />
             </div>
@@ -60,6 +72,13 @@ export default function Hero() {
                 alt="Location meublée premium en Alsace"
                 fill
                 className="object-cover"
+                sizes="
+          (max-width: 640px) 100vw,
+          (max-width: 768px) 640px,
+          (max-width: 1024px) 768px,
+          (max-width: 1280px) 1024px,
+          1280px
+        "
                 priority
               />
             </div>

@@ -30,7 +30,7 @@ export default function Properties({
     return properties.filter((p) => p.modeGestion === activeTag);
   })();
 
-  const displayedItems = homePage ? filteredItems.slice(0, 3) : filteredItems;
+  const displayedItems = homePage ? filteredItems.slice(0, 3) : filteredItems.slice(0, 3);
 
   return (
     <section

@@ -15,13 +15,13 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
   return (
     <div className="mb-10 w-full">
       <div className="group flex h-full flex-col overflow-hidden rounded-xl bg-white pt-6 shadow-blog">
-        <Link href={`/blog/${slug?.current}`} className="relative block aspect-video">
+        <Link href={`/blog/${slug?.current}`} className="relative block aspect-video mx-4">
           {mainImage && imageBuilder(mainImage).url() ? (
             <Image
               src={imageBuilder(mainImage).url()}
               alt={title}
               fill
-              sizes="100vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="w-full rounded-xl object-cover duration-300 group-hover:scale-105"
             />
           ) : (
