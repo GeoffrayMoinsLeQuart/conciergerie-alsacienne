@@ -403,3 +403,8 @@ NEXT_PUBLIC_ASSET_PREFIX=https://cdn.sanity.io'
 Mettre en place le cdn cloudify pour proposer les bonnes images en fonction de la size de l'ecran
 uiliser usememo
 Mention legales
+
+
+https://calibreapp.com/teams/dsfdsfsd/dfdf/snapshots/3/performance?profile=cb6e3f78-eb7b-40b3-97a4-45e0a4ffafdd
+
+utiliser innovia pour faire des propositions de design
