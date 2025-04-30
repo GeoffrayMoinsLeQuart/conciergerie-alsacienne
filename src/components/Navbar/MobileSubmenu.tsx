@@ -71,12 +71,16 @@ export default function MobileMenu({ menuOpen, setMenuOpen }: MobileMenuProps) {
                 {submenu.length > 0 && (
                   <button
                     aria-label={`${isOpen ? 'Fermer' : 'Ouvrir'} sous-menu ${item.title}`}
-                    onClick={() => setOpenItemId((prev) => (prev === item.id ? null : item.id))}
+                    onClick={() =>
+                      setOpenItemId((prev) =>
+                        prev === item.id.toString() ? null : item.id.toString(),
+                      )
+                    }
                     className="p-2 focus:outline-none"
                   >
                     <ChevronDown
                       className={`h-4 w-4 transform transition-transform duration-150 ${
-                        isOpen ? 'rotate-180' : 'rotate-0'
+                        openItemId === item.id.toString() ? 'rotate-180' : ''
                       }`}
                     />
                   </button>
