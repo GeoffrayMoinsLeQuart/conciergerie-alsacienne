@@ -25,7 +25,7 @@ export async function GET() {
 
   const propertyUrls = properties.map(
     (property) =>
-      `<url><loc>${baseUrl}/property/${property.slug.current}</loc><lastmod>${property.createdAt || new Date().toISOString()}</lastmod></url>`,
+      `<url><loc>${baseUrl}/nos-biens/${property.slug.current}</loc><lastmod>${property.createdAt || new Date().toISOString()}</lastmod></url>`,
   );
 
   const blogUrls = blogPosts.map(

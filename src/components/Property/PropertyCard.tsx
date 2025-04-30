@@ -23,7 +23,7 @@ export default function PropertyCard({ property }: { property: Property }) {
   } = property;
 
   const imageSrc = imagePrincipale ? imageBuilder(imagePrincipale).url() : '/default-property.jpg';
-  const url = slug?.current ? `/property/${slug.current}` : '#';
+  const url = slug?.current ? `/nos-biens/${slug.current}` : '#';
 
   return (
     <article className="h-full rounded-md shadow-service transition hover:shadow-xl">

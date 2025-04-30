@@ -54,7 +54,7 @@ export async function generateMetadata({
     openGraph: {
       title: fullTitle,
       description,
-      url: `${siteURL}/property/${property.slug.current}`,
+      url: `${siteURL}/nos-biens/${property.slug.current}`,
       siteName,
       images: [
         {
@@ -214,11 +214,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               {/* NAVIGATION ENTRE BIENS */}
               <div className="mt-16 flex justify-between text-sm text-primary">
                 {prev ? (
-                  <Link href={`/property/${prev.slug.current}`}>← Propriété précédente</Link>
+                  <Link href={`/nos-biens/${prev.slug.current}`}>← Propriété précédente</Link>
                 ) : (
                   <span />
                 )}
-                {next && <Link href={`/property/${next.slug.current}`}>Propriété suivante →</Link>}
+                {next && <Link href={`/nos-biens/${next.slug.current}`}>Propriété suivante →</Link>}
               </div>
             </div>
 
@@ -307,7 +307,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               priceCurrency: 'EUR',
               price: modeGestion === 'Conciergerie' ? revenuMensuel || '0' : loyer || '0',
               availability: 'https://schema.org/InStock',
-              url: `${process.env.SITE_URL}/property/${slug}`,
+              url: `${process.env.SITE_URL}/nos-biens/${slug}`,
             },
             additionalProperty: [
               {
@@ -349,7 +349,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               },
               {
                 name: name,
-                url: `https://www.conciergerie-alsacienne.fr/property/${slug}`,
+                url: `https://www.conciergerie-alsacienne.fr/nos-biens/${slug}`,
               },
             ]),
           )}
