@@ -249,6 +249,35 @@ export const pageMetadata: Record<string, Metadata> = {
       description: 'Répondez en quelques clics, nous faisons le calcul pour vous.',
     },
   },
+  merci: {
+    title: `Merci ! | ${siteName}`,
+    description:
+      'Votre demande a bien été envoyée. Nous revenons vers vous sous 24 h pour vous accompagner.',
+    openGraph: {
+      title: `Merci pour votre demande !`,
+      description:
+        'Vous êtes entre de bonnes mains : votre demande est bien arrivée chez Conciergerie Alsacienne.',
+      url: `${siteURL}/merci`,
+      siteName,
+      type: 'website',
+      images: [
+        {
+          url: `${siteURL}/opengraph/merci.jpg`, // adapte si tu as une image dédiée
+          width: 1200,
+          height: 630,
+          alt: 'Merci ! Conciergerie Alsacienne',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Merci ! | ${siteName}`,
+      description: 'Nous avons bien reçu votre demande et revenons vers vous très vite.',
+      images: [`${siteURL}/opengraph/merci.jpg`],
+    },
+    robots: { index: false, follow: false }, // on peut empêcher l’indexation si on veut
+    alternates: { canonical: `${siteURL}/merci` },
+  },
 };
 
 /**
