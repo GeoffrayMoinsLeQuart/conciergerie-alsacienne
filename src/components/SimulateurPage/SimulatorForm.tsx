@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormData, SimulatorTab, FormErrors, Step } from '@/hooks/useSimulator'; // Adjust path as needed
+import { FormData, SimulatorTab, SimulatorFormErrors, Step } from '@/hooks/useSimulator'; // Corrected import
 import { AddressComponents } from '@/components/AddressAutocomplete'; // Adjust path as needed
 import AddressSection from './AddressSection';
 import CommonPropertyFields from './CommonPropertyFields';
@@ -18,7 +18,7 @@ interface SimulatorFormProps {
   activeTab: SimulatorTab;
   formData: FormData;
   addressData: AddressComponents | null;
-  errors: FormErrors;
+  errors: SimulatorFormErrors; // Use corrected type
   currentStep: number;
   maxCompletedStep: number; // <-- Add maxCompletedStep prop
   steps: Step[]; // Add steps definition
@@ -86,7 +86,7 @@ export default function SimulatorForm({
             formData={formData}
             onInputChange={onInputChange}
             onCheckboxChange={onCheckboxChange}
-            errors={errors}
+            errors={errors} // Pass the whole errors object
           />
         )}
 
@@ -94,7 +94,7 @@ export default function SimulatorForm({
         {currentStep === STEP_EXPENSES && (
           <ExpensesFormFields
             formData={formData}
-            errors={errors}
+            errors={errors} // Pass the whole errors object
             onInputChange={onInputChange}
             onCheckboxChange={onCheckboxChange}
             activeTab={activeTab}

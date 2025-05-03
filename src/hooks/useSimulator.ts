@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation'; // Import useRouter for navigation
+// Removed useRouter as redirection is no longer needed
 import { AddressComponents } from '@/components/AddressAutocomplete'; // Assuming this path is correct
 import * as C from '@/constants/simulatorConstants'; // Import all constants
 import { formatCurrency } from '@/utils/formatting'; // Import formatting
@@ -39,8 +39,8 @@ export interface EstimationResults {
 
 export type SimulatorTab = typeof C.TAB_GESTION | typeof C.TAB_CONCIERGERIE;
 
-// Validation Errors Type
-export interface FormErrors {
+// Validation Errors Type for Simulator Steps
+export interface SimulatorFormErrors {
   address?: string;
   propertyType?: string;
   surface?: string;
@@ -52,6 +52,23 @@ export interface FormErrors {
 export interface Step {
   id: number;
   label: string;
+}
+
+// NEW: Contact Form Data Type
+export interface ContactFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+// NEW: Contact Form Errors Type
+export interface ContactFormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
 }
 
 // Initial States using Constants
@@ -86,7 +103,19 @@ const initialEstimationResults: EstimationResults = {
   profitability: '0%',
 };
 
-const initialErrors: FormErrors = {};
+const initialSimulatorErrors: SimulatorFormErrors = {};
+
+// NEW: Initial State for Contact Form
+const initialContactFormData: ContactFormData = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  message: '',
+};
+
+// NEW: Initial State for Contact Form Errors
+const initialContactFormErrors: ContactFormErrors = {};
 
 // Define Steps Constants
 const STEP_ADDRESS = 1;
@@ -95,15 +124,24 @@ const STEP_EXPENSES = 3;
 const STEP_CONCIERGERIE_DETAILS = 4;
 
 export function useSimulator() {
-  const router = useRouter(); // Initialize router
+  // Removed router initialization
   const [activeTab, setActiveTab] = useState<SimulatorTab>(C.TAB_GESTION);
   const [addressData, setAddressData] = useState<AddressComponents | null>(null);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [showResults, setShowResults] = useState(false);
-  const [estimationResults, setEstimationResults] = useState<EstimationResults>(initialEstimationResults);
-  const [errors, setErrors] = useState<FormErrors>(initialErrors);
+  const [estimationResults, setEstimationResults] =
+    useState<EstimationResults>(initialEstimationResults);
+  const [simulatorErrors, setSimulatorErrors] =
+    useState<SimulatorFormErrors>(initialSimulatorErrors);
   const [currentStep, setCurrentStep] = useState<number>(STEP_ADDRESS);
-  const [maxCompletedStep, setMaxCompletedStep] = useState<number>(STEP_ADDRESS); // Track highest completed step
+  const [maxCompletedStep, setMaxCompletedStep] = useState<number>(STEP_ADDRESS);
+
+  // NEW: State for Integrated Contact Form
+  const [contactFormData, setContactFormData] = useState<ContactFormData>(initialContactFormData);
+  const [contactFormErrors, setContactFormErrors] =
+    useState<ContactFormErrors>(initialContactFormErrors);
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
+  const [contactSubmitStatus, setContactSubmitStatus] = useState<'success' | 'error' | null>(null);
 
   // Define Step Labels and Structure
   const stepsDefinition: Step[] = [
@@ -113,92 +151,118 @@ export function useSimulator() {
   ];
 
   if (activeTab === C.TAB_CONCIERGERIE) {
-    stepsDefinition.push({ id: STEP_CONCIERGERIE_DETAILS, label: C.STEP_LABEL_CONCIERGERIE_DETAILS });
+    stepsDefinition.push({
+      id: STEP_CONCIERGERIE_DETAILS,
+      label: C.STEP_LABEL_CONCIERGERIE_DETAILS,
+    });
   }
 
   const totalSteps = stepsDefinition.length;
 
-  // --- Estimation Logic ---
+  // --- Estimation Logic (Unchanged) ---
   const calculateEstimation = useCallback(() => {
-    // ... (calculation logic remains the same)
     if (!addressData || !formData.propertyType || !formData.surface) {
-        console.error("Attempted calculation with invalid data");
-        return;
+      console.error('Attempted calculation with invalid data');
+      return;
     }
-
     let basePrice = C.BASE_PRICE_DEFAULT;
     const surfaceNum = parseInt(formData.surface);
-
     switch (formData.propertyType) {
-      case 'studio': basePrice = C.BASE_PRICE_STUDIO; break;
-      case 't1': basePrice = C.BASE_PRICE_T1; break;
-      case 't2': basePrice = C.BASE_PRICE_T2; break;
-      case 't3': basePrice = C.BASE_PRICE_T3; break;
-      case 't4+': basePrice = C.BASE_PRICE_T4_PLUS; break;
-      case 'maison': basePrice = C.BASE_PRICE_MAISON; break;
+      case 'studio':
+        basePrice = C.BASE_PRICE_STUDIO;
+        break;
+      case 't1':
+        basePrice = C.BASE_PRICE_T1;
+        break;
+      case 't2':
+        basePrice = C.BASE_PRICE_T2;
+        break;
+      case 't3':
+        basePrice = C.BASE_PRICE_T3;
+        break;
+      case 't4+':
+        basePrice = C.BASE_PRICE_T4_PLUS;
+        break;
+      case 'maison':
+        basePrice = C.BASE_PRICE_MAISON;
+        break;
     }
-
     const surfaceFactor = surfaceNum / C.SURFACE_NORMALIZATION_M2;
     const parkingBonus = formData.hasParking ? C.BONUS_PARKING : 0;
     const furnishedBonus = formData.isFurnished ? C.BONUS_FURNISHED : 0;
     const finishingBonus =
-      formData.finishingLevel === 'premium' ? C.BONUS_FINISHING_PREMIUM
-      : formData.finishingLevel === 'luxe' ? C.BONUS_FINISHING_LUXE
-      : 0;
-
-    let monthlyMin = 0, monthlyMax = 0;
+      formData.finishingLevel === 'premium'
+        ? C.BONUS_FINISHING_PREMIUM
+        : formData.finishingLevel === 'luxe'
+          ? C.BONUS_FINISHING_LUXE
+          : 0;
+    let monthlyMin = 0,
+      monthlyMax = 0;
     let occupancyRate = C.OCCUPANCY_RATE_GESTION;
     let profitability = C.PROFITABILITY_RATE_GESTION;
-
     if (activeTab === C.TAB_GESTION) {
       monthlyMin = Math.round(
         (basePrice * surfaceFactor + parkingBonus + furnishedBonus + finishingBonus) *
-        C.ESTIMATION_RANGE_LOW_MULTIPLIER
+          C.ESTIMATION_RANGE_LOW_MULTIPLIER,
       );
       monthlyMax = Math.round(
         (basePrice * surfaceFactor + parkingBonus + furnishedBonus + finishingBonus) *
-        C.ESTIMATION_RANGE_HIGH_MULTIPLIER
+          C.ESTIMATION_RANGE_HIGH_MULTIPLIER,
       );
       profitability = C.PROFITABILITY_RATE_GESTION;
       occupancyRate = C.OCCUPANCY_RATE_GESTION;
-    } else { // Conciergerie
+    } else {
+      // Conciergerie
       const ambianceBonus =
         formData.ambiance === 'design' || formData.ambiance === 'moderne'
           ? C.BONUS_AMBIANCE_MODERNE_DESIGN
           : 0;
       const qualityBonus =
-        formData.furnitureQuality === 'premium' ? C.BONUS_FURNITURE_PREMIUM
-        : formData.furnitureQuality === 'luxe' ? C.BONUS_FURNITURE_LUXE
-        : 0;
-
+        formData.furnitureQuality === 'premium'
+          ? C.BONUS_FURNITURE_PREMIUM
+          : formData.furnitureQuality === 'luxe'
+            ? C.BONUS_FURNITURE_LUXE
+            : 0;
       let servicesBonus = 0;
-      C.ADDITIONAL_SERVICES_OPTIONS.forEach(service => {
+      C.ADDITIONAL_SERVICES_OPTIONS.forEach((service) => {
         if (formData.additionalServices[service.name]) {
-            switch(service.name) {
-                case 'airConditioning': servicesBonus += C.BONUS_SERVICE_AC; break;
-                case 'balcony': servicesBonus += C.BONUS_SERVICE_BALCONY; break;
-                case 'highEndEquipment': servicesBonus += C.BONUS_SERVICE_HIGH_END; break;
-                case 'exceptionalView': servicesBonus += C.BONUS_SERVICE_VIEW; break;
-                case 'elevator': servicesBonus += C.BONUS_SERVICE_ELEVATOR; break;
-                case 'accessibleEntrance': servicesBonus += C.BONUS_SERVICE_ACCESSIBLE; break;
-            }
+          switch (service.name) {
+            case 'airConditioning':
+              servicesBonus += C.BONUS_SERVICE_AC;
+              break;
+            case 'balcony':
+              servicesBonus += C.BONUS_SERVICE_BALCONY;
+              break;
+            case 'highEndEquipment':
+              servicesBonus += C.BONUS_SERVICE_HIGH_END;
+              break;
+            case 'exceptionalView':
+              servicesBonus += C.BONUS_SERVICE_VIEW;
+              break;
+            case 'elevator':
+              servicesBonus += C.BONUS_SERVICE_ELEVATOR;
+              break;
+            case 'accessibleEntrance':
+              servicesBonus += C.BONUS_SERVICE_ACCESSIBLE;
+              break;
+          }
         }
       });
-
-      const grossMonthlyEstimate = basePrice * surfaceFactor * C.CONCIERGERIE_SURFACE_FACTOR_MULTIPLIER +
-                                 parkingBonus + furnishedBonus + finishingBonus +
-                                 ambianceBonus + qualityBonus + servicesBonus;
-
+      const grossMonthlyEstimate =
+        basePrice * surfaceFactor * C.CONCIERGERIE_SURFACE_FACTOR_MULTIPLIER +
+        parkingBonus +
+        furnishedBonus +
+        finishingBonus +
+        ambianceBonus +
+        qualityBonus +
+        servicesBonus;
       monthlyMin = Math.round(grossMonthlyEstimate * C.ESTIMATION_RANGE_LOW_MULTIPLIER);
       monthlyMax = Math.round(grossMonthlyEstimate * C.ESTIMATION_RANGE_HIGH_MULTIPLIER);
-
       profitability = C.PROFITABILITY_RATE_CONCIERGERIE;
       occupancyRate = C.OCCUPANCY_RATE_CONCIERGERIE;
     }
-
     const annualMin = monthlyMin * 12;
     const annualMax = monthlyMax * 12;
-
     setEstimationResults({
       monthlyRevenueMin: monthlyMin,
       monthlyRevenueMax: monthlyMax,
@@ -210,60 +274,59 @@ export function useSimulator() {
     setShowResults(true);
   }, [formData, activeTab, addressData]);
 
-  // --- Validation Logic (Per Step) ---
-  const validateStep = useCallback((step: number): boolean => {
-    const newErrors: FormErrors = {};
-    let isValid = true;
-
-    switch (step) {
-      case STEP_ADDRESS:
-        if (!addressData) {
-          newErrors.address = C.ERROR_ADDRESS_REQUIRED;
-          isValid = false;
-        }
-        break;
-      case STEP_COMMON_DETAILS:
-        if (!formData.propertyType) {
-          newErrors.propertyType = C.ERROR_REQUIRED_FIELD;
-          isValid = false;
-        }
-        if (!formData.surface) {
-          newErrors.surface = C.ERROR_REQUIRED_FIELD;
-          isValid = false;
-        } else if (parseInt(formData.surface) <= 0) {
-          newErrors.surface = C.ERROR_POSITIVE_NUMBER;
-          isValid = false;
-        }
-        break;
-      case STEP_EXPENSES:
-        if (formData.propertyTax && parseFloat(formData.propertyTax) < 0) {
+  // --- Validation Logic (Per Step - Unchanged) ---
+  const validateStep = useCallback(
+    (step: number): boolean => {
+      const newErrors: SimulatorFormErrors = {};
+      let isValid = true;
+      switch (step) {
+        case STEP_ADDRESS:
+          if (!addressData) {
+            newErrors.address = C.ERROR_ADDRESS_REQUIRED;
+            isValid = false;
+          }
+          break;
+        case STEP_COMMON_DETAILS:
+          if (!formData.propertyType) {
+            newErrors.propertyType = C.ERROR_REQUIRED_FIELD;
+            isValid = false;
+          }
+          if (!formData.surface) {
+            newErrors.surface = C.ERROR_REQUIRED_FIELD;
+            isValid = false;
+          } else if (parseInt(formData.surface) <= 0) {
+            newErrors.surface = C.ERROR_POSITIVE_NUMBER;
+            isValid = false;
+          }
+          break;
+        case STEP_EXPENSES:
+          if (formData.propertyTax && parseFloat(formData.propertyTax) < 0) {
             newErrors.propertyTax = C.ERROR_POSITIVE_NUMBER;
             isValid = false;
-        }
-        if (formData.fixedCharges && parseFloat(formData.fixedCharges) < 0) {
+          }
+          if (formData.fixedCharges && parseFloat(formData.fixedCharges) < 0) {
             newErrors.fixedCharges = C.ERROR_POSITIVE_NUMBER;
             isValid = false;
-        }
-        break;
-      case STEP_CONCIERGERIE_DETAILS:
-        // Add validation for conciergerie specific fields if needed
-        break;
-    }
+          }
+          break;
+        case STEP_CONCIERGERIE_DETAILS:
+          break;
+      }
+      setSimulatorErrors(newErrors);
+      return isValid;
+    },
+    [addressData, formData],
+  );
 
-    setErrors(newErrors);
-    return isValid;
-  }, [addressData, formData]);
-
-  // --- Step Navigation ---
+  // --- Step Navigation (Unchanged) ---
   const handleNextStep = useCallback(() => {
     if (validateStep(currentStep)) {
       const nextStep = currentStep + 1;
       if (nextStep <= totalSteps) {
         setCurrentStep(nextStep);
-        setMaxCompletedStep(prevMax => Math.max(prevMax, nextStep)); // Update max completed step
-        setErrors(initialErrors);
+        setMaxCompletedStep((prevMax) => Math.max(prevMax, nextStep));
+        setSimulatorErrors(initialSimulatorErrors);
       } else {
-        // If already on the last step, calculate results
         calculateEstimation();
       }
     }
@@ -271,63 +334,65 @@ export function useSimulator() {
 
   const handlePrevStep = useCallback(() => {
     if (currentStep > STEP_ADDRESS) {
-      setCurrentStep(step => step - 1);
-      setErrors(initialErrors);
+      setCurrentStep((step) => step - 1);
+      setSimulatorErrors(initialSimulatorErrors);
     }
   }, [currentStep]);
 
-  // New handler for clicking on step indicators
-  const handleStepClick = useCallback((targetStep: number) => {
-    // Allow navigation only to steps that have been completed or are the current step
-    if (targetStep <= maxCompletedStep) {
-      setCurrentStep(targetStep);
-      setErrors(initialErrors); // Clear errors when navigating via step click
-    }
-    // Do nothing if the target step hasn't been reached/validated yet
-  }, [maxCompletedStep]);
+  const handleStepClick = useCallback(
+    (targetStep: number) => {
+      if (targetStep <= maxCompletedStep) {
+        setCurrentStep(targetStep);
+        setSimulatorErrors(initialSimulatorErrors);
+      }
+    },
+    [maxCompletedStep],
+  );
 
-  // --- Event Handlers ---
+  // --- Event Handlers (Simulator Form - Unchanged) ---
   const handleTabChange = useCallback((tab: SimulatorTab) => {
     setActiveTab(tab);
     setShowResults(false);
-    setErrors(initialErrors);
+    setSimulatorErrors(initialSimulatorErrors);
     setCurrentStep(STEP_ADDRESS);
-    setMaxCompletedStep(STEP_ADDRESS); // Reset max completed step on tab change
+    setMaxCompletedStep(STEP_ADDRESS);
+    setContactFormData(initialContactFormData); // Reset contact form too
+    setContactFormErrors(initialContactFormErrors);
+    setContactSubmitStatus(null);
   }, []);
 
-  const handleAddressSelect = useCallback((components: AddressComponents | null) => {
-    setAddressData(components);
-    if (components && errors.address) {
-      setErrors((prev) => ({ ...prev, address: undefined }));
-    }
-    // Automatically advance if address is selected and valid (optional)
-    // if (components) {
-    //   handleNextStep(); // Or maybe just enable the next button
-    // }
-  }, [errors.address]);
+  const handleAddressSelect = useCallback(
+    (components: AddressComponents | null) => {
+      setAddressData(components);
+      if (components && simulatorErrors.address) {
+        setSimulatorErrors((prev) => ({ ...prev, address: undefined }));
+      }
+    },
+    [simulatorErrors.address],
+  );
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    // Basic handling for number inputs to prevent non-numeric values
-    if (type === 'number') {
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const { name, value, type } = e.target;
+      if (type === 'number') {
         if (value === '' || !isNaN(Number(value))) {
-            setFormData((prev) => ({ ...prev, [name]: value }));
+          setFormData((prev) => ({ ...prev, [name]: value }));
         }
-    } else {
+      } else {
         setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-    // Clear error for the field being changed
-    if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
-  }, [errors]);
+      }
+      if (simulatorErrors[name as keyof SimulatorFormErrors]) {
+        setSimulatorErrors((prev) => ({ ...prev, [name]: undefined }));
+      }
+    },
+    [simulatorErrors],
+  );
 
   const handleCheckboxChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     if (name === 'hasParking' || name === 'isFurnished' || name === 'estimateUtilities') {
       setFormData((prev) => ({ ...prev, [name]: checked }));
     } else {
-      // Handle additionalServices checkboxes
       setFormData((prev) => ({
         ...prev,
         additionalServices: { ...prev.additionalServices, [name]: checked },
@@ -335,47 +400,114 @@ export function useSimulator() {
     }
   }, []);
 
-  // --- Reset ---
+  // --- Reset (Updated to reset contact form too) ---
   const handleReset = useCallback(() => {
     setShowResults(false);
-    setErrors(initialErrors);
+    setSimulatorErrors(initialSimulatorErrors);
     setCurrentStep(STEP_ADDRESS);
-    setMaxCompletedStep(STEP_ADDRESS); // Reset max completed step
-    setAddressData(null); // Reset address data
-    setFormData(initialFormData); // Reset form data
-    // Optionally reset input field value in AddressAutocomplete via a prop/ref
+    setMaxCompletedStep(STEP_ADDRESS);
+    setAddressData(null);
+    setFormData(initialFormData);
+    setContactFormData(initialContactFormData); // Reset contact form
+    setContactFormErrors(initialContactFormErrors);
+    setContactSubmitStatus(null);
   }, []);
 
-  // --- Contact Redirection (Updated Path) ---
-  const handleContactRedirect = useCallback(() => {
-    const params = new URLSearchParams();
-    params.set('service', activeTab);
-    if (addressData) {
-      params.set('address', addressData.fullAddress || '');
-      params.set('city', addressData.city || '');
-      params.set('postalCode', addressData.postalCode || '');
-      params.set('department', addressData.department || ''); // Include department
+  // --- NEW: Integrated Contact Form Handlers ---
+  const handleContactInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setContactFormData((prev) => ({ ...prev, [name]: value }));
+      if (contactFormErrors[name as keyof ContactFormErrors]) {
+        setContactFormErrors((prev) => ({ ...prev, [name]: undefined }));
+      }
+    },
+    [contactFormErrors],
+  );
+
+  const validateContactForm = useCallback((): boolean => {
+    const newErrors: ContactFormErrors = {};
+    let isValid = true;
+    if (!contactFormData.firstName.trim()) {
+      newErrors.firstName = 'Le prénom est requis.';
+      isValid = false;
     }
-    const monthlyRevenueStr = `${formatCurrency(estimationResults.monthlyRevenueMin)} - ${formatCurrency(estimationResults.monthlyRevenueMax)}`;
-    params.set('estimatedRevenue', monthlyRevenueStr);
-    params.set('propertyType', formData.propertyType || '');
-    params.set('surface', formData.surface || '');
-    // Add other relevant formData fields if needed
+    if (!contactFormData.lastName.trim()) {
+      newErrors.lastName = 'Le nom est requis.';
+      isValid = false;
+    }
+    if (!contactFormData.email.trim()) {
+      newErrors.email = "L'email est requis.";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(contactFormData.email)) {
+      newErrors.email = "L'adresse email est invalide.";
+      isValid = false;
+    }
+    if (!contactFormData.phone.trim()) {
+      newErrors.phone = 'Le numéro de téléphone est requis.';
+      isValid = false;
+    }
+    setContactFormErrors(newErrors);
+    return isValid;
+  }, [contactFormData]);
 
-    const contactUrl = `/demande-estimation?${params.toString()}`; // <-- Updated path
-    router.push(contactUrl);
-  }, [activeTab, addressData, estimationResults, formData, router]);
+  const handleContactSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!validateContactForm()) {
+        return;
+      }
 
-  // --- Return Values ---
+      setIsSubmittingContact(true);
+      setContactSubmitStatus(null);
+
+      // Combine simulator data and contact data for submission
+      const submissionData = {
+        // Contact Info
+        ...contactFormData,
+        // Simulator Context
+        service: activeTab,
+        address: addressData?.fullAddress || '',
+        city: addressData?.city || '',
+        postalCode: addressData?.postalCode || '',
+        department: addressData?.department || '',
+        estimatedRevenue: `${formatCurrency(estimationResults.monthlyRevenueMin)} - ${formatCurrency(estimationResults.monthlyRevenueMax)}`,
+        // Include all relevant formData fields
+        ...formData,
+      };
+
+      console.log('Combined Data to Submit:', submissionData);
+      try {
+        // Replace with your actual backend endpoint call or email service integration
+        // Example: await fetch("/api/contact-simulation", { method: "POST", body: JSON.stringify(submissionData) });
+
+        await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate delay
+        setContactSubmitStatus('success');
+        // Optionally clear contact form fields after success
+        // setContactFormData(initialContactFormData);
+      } catch (error) {
+        console.error('Contact form submission error:', error);
+        setContactSubmitStatus('error');
+      } finally {
+        setIsSubmittingContact(false);
+      }
+    },
+    [validateContactForm, contactFormData, activeTab, addressData, estimationResults, formData],
+  );
+
+  // --- REMOVED handleContactRedirect ---
+
+  // --- Return Values (Updated) ---
   return {
+    // Simulator State & Handlers
     activeTab,
     addressData,
     formData,
     showResults,
     estimationResults,
-    errors,
+    simulatorErrors, // Renamed from errors
     currentStep,
-    maxCompletedStep, // <-- Return max completed step
+    maxCompletedStep,
     steps: stepsDefinition,
     totalSteps,
     handleTabChange,
@@ -385,8 +517,13 @@ export function useSimulator() {
     handleReset,
     handleNextStep,
     handlePrevStep,
-    handleStepClick, // <-- Return new step click handler
-    handleContactRedirect,
+    handleStepClick,
+    // Integrated Contact Form State & Handlers
+    contactFormData,
+    contactFormErrors,
+    isSubmittingContact,
+    contactSubmitStatus,
+    handleContactInputChange,
+    handleContactSubmit,
   };
 }
-

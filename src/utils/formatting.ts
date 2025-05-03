@@ -10,26 +10,26 @@
  */
 export function formatCurrency(
   value: number | null | undefined,
-  options?: Intl.NumberFormatOptions
+  options?: Intl.NumberFormatOptions,
 ): string {
   if (value == null || isNaN(value)) {
-    return "0,00 €"; // Or return an empty string or placeholder
+    return '0,00 €'; // Or return an empty string or placeholder
   }
 
   const defaultOptions: Intl.NumberFormatOptions = {
-    style: "currency",
-    currency: "EUR",
+    style: 'currency',
+    currency: 'EUR',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
     ...options, // Allow overriding defaults
   };
 
   try {
-    return new Intl.NumberFormat("fr-FR", defaultOptions).format(value);
+    return new Intl.NumberFormat('fr-FR', defaultOptions).format(value);
   } catch (error) {
-    console.error("Error formatting currency:", error);
+    console.error('Error formatting currency:', error);
     // Fallback formatting in case of error
-    return `${value.toFixed(2).replace(".", ",")} €`;
+    return `${value.toFixed(2).replace('.', ',')} €`;
   }
 }
 
@@ -43,10 +43,10 @@ export function formatCurrency(
  */
 export function formatNumber(
   value: number | null | undefined,
-  options?: Intl.NumberFormatOptions
+  options?: Intl.NumberFormatOptions,
 ): string {
   if (value == null || isNaN(value)) {
-    return "0"; // Or return an empty string or placeholder
+    return '0'; // Or return an empty string or placeholder
   }
 
   const defaultOptions: Intl.NumberFormatOptions = {
@@ -56,11 +56,11 @@ export function formatNumber(
   };
 
   try {
-    return new Intl.NumberFormat("fr-FR", defaultOptions).format(value);
+    return new Intl.NumberFormat('fr-FR', defaultOptions).format(value);
   } catch (error) {
-    console.error("Error formatting number:", error);
+    console.error('Error formatting number:', error);
     // Fallback formatting in case of error
-    return String(value).replace(".", ",");
+    return String(value).replace('.', ',');
   }
 }
 
@@ -72,6 +72,5 @@ export function formatNumber(
  * @returns The formatted percentage string.
  */
 export function formatPercentage(value: string | null | undefined): string {
-    return value || "0%";
+  return value || '0%';
 }
-

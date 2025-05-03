@@ -1,9 +1,9 @@
 import React from 'react';
-import { FormData, FormErrors } from '@/hooks/useSimulator'; // Adjust path as needed
+import { FormData, SimulatorFormErrors } from '@/hooks/useSimulator'; // Corrected import
 import * as C from '@/constants/simulatorConstants'; // Import constants
 
 // Define the specific error keys this component handles
-type ExpensesFieldsErrors = Pick<FormErrors, 'propertyTax' | 'fixedCharges'>;
+type ExpensesFieldsErrors = Pick<SimulatorFormErrors, 'propertyTax' | 'fixedCharges'>;
 
 interface ExpensesFormFieldsProps {
   formData: Pick<FormData, 'propertyTax' | 'fixedCharges' | 'estimateUtilities'>;

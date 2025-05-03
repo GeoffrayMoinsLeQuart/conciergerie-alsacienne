@@ -1,3 +1,5 @@
+// Assuming this is app/simulateur/page.tsx (merged)
+
 'use client';
 
 import React from 'react';
@@ -8,6 +10,9 @@ import SimulatorForm from '@/components/SimulateurPage/SimulatorForm'; // Adjust
 import EstimationResultsDisplay from '@/components/SimulateurPage/EstimationResultsDisplay'; // Adjust path as needed
 import * as C from '@/constants/simulatorConstants'; // Import constants
 
+// Metadata export (should work in client components in App Router)
+// export const metadata = getMetadata('simulateur'); // Commenting out as getMetadata might be server-only
+
 export default function SimulateurPage() {
   const {
     activeTab,
@@ -15,11 +20,15 @@ export default function SimulateurPage() {
     formData,
     showResults,
     estimationResults,
-    errors,
+    simulatorErrors,
     currentStep,
-    maxCompletedStep, // <-- Destructure maxCompletedStep
-    steps, // <-- Destructure steps definition
+    maxCompletedStep,
+    steps,
     totalSteps,
+    contactFormData,
+    contactFormErrors,
+    isSubmittingContact,
+    contactSubmitStatus,
     handleTabChange,
     handleAddressSelect,
     handleInputChange,
@@ -27,8 +36,9 @@ export default function SimulateurPage() {
     handleReset,
     handleNextStep,
     handlePrevStep,
-    handleStepClick, // <-- Destructure handleStepClick
-    handleContactRedirect, // <-- Destructure contact redirect handler
+    handleStepClick,
+    handleContactInputChange,
+    handleContactSubmit,
   } = useSimulator();
 
   return (
@@ -44,25 +54,31 @@ export default function SimulateurPage() {
       {showResults ? (
         <EstimationResultsDisplay
           results={estimationResults}
+          addressData={addressData} // Pass addressData for summary
+          contactFormData={contactFormData}
+          contactFormErrors={contactFormErrors}
+          isSubmittingContact={isSubmittingContact}
+          contactSubmitStatus={contactSubmitStatus}
           onReset={handleReset}
-          onContactRedirect={handleContactRedirect} // <-- Pass contact redirect handler
+          onContactInputChange={handleContactInputChange}
+          onContactSubmit={handleContactSubmit}
         />
       ) : (
         <SimulatorForm
           activeTab={activeTab}
           formData={formData}
           addressData={addressData}
-          errors={errors}
+          errors={simulatorErrors}
           currentStep={currentStep}
-          maxCompletedStep={maxCompletedStep} // <-- Pass maxCompletedStep
-          steps={steps} // <-- Pass steps definition
+          maxCompletedStep={maxCompletedStep}
+          steps={steps}
           totalSteps={totalSteps}
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}
           onAddressSelect={handleAddressSelect}
           onNextStep={handleNextStep}
           onPrevStep={handlePrevStep}
-          onStepClick={handleStepClick} // <-- Pass handleStepClick
+          onStepClick={handleStepClick}
         />
       )}
     </div>

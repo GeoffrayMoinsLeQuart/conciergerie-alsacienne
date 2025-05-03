@@ -1,19 +1,19 @@
 import React from 'react';
-import { FormData, FormErrors } from '@/hooks/useSimulator'; // Adjust path as needed
+import { FormData, SimulatorFormErrors } from '@/hooks/useSimulator'; // Corrected import
 import * as C from '@/constants/simulatorConstants'; // Import constants
 
 // TODO: Implement RadioButtonGroup component for Finishing Level
 // import RadioButtonGroup from '@/components/ui/RadioButtonGroup';
 
-// Define the specific error keys this component handles
-type CommonFieldsErrors = Pick<FormErrors, 'propertyType' | 'surface'>;
+// Define the specific error keys this component handles (optional, can use full type)
+// type CommonFieldsErrors = Pick<SimulatorFormErrors, 'propertyType' | 'surface'>;
 
 interface CommonPropertyFieldsProps {
   formData: Pick<
     FormData,
     'propertyType' | 'surface' | 'floor' | 'finishingLevel' | 'hasParking' | 'isFurnished'
   >;
-  errors: CommonFieldsErrors; // Use the specific error type
+  errors: SimulatorFormErrors; // Use the full SimulatorFormErrors type
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   onCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -27,7 +27,7 @@ export default function CommonPropertyFields({
 
   // Helper function to get input class with error styling
   // Explicitly type fieldName to match the keys of the errors prop
-  const getInputClassName = (fieldName: keyof CommonFieldsErrors) => {
+  const getInputClassName = (fieldName: keyof Pick<SimulatorFormErrors, 'propertyType' | 'surface'>) => {
     // Check if the fieldName exists in the errors object before accessing
     const hasError = fieldName in errors && errors[fieldName];
     return `w-full rounded-lg border ${hasError ? 'border-red-500' : 'border-gray-300'} px-4 py-2 focus:outline-none focus:ring-2 ${hasError ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`;
