@@ -26,7 +26,7 @@ const IntroContent = {
       },
       secondary: {
         text: 'Estimer mes revenus',
-        href: '/simulateur',
+        href: '/estimation',
         icon: <Calculator className="h-5 w-5" aria-hidden="true" />,
       },
     },
@@ -43,7 +43,7 @@ const IntroContent = {
     buttons: {
       primary: {
         text: 'Estimer mes revenus',
-        href: '/simulateur',
+        href: '/estimation',
         icon: <Calculator className="h-5 w-5" aria-hidden="true" />,
       },
       secondary: {
@@ -85,7 +85,8 @@ const Intro: FC<IntroProps> = ({ variant }) => {
                   label: buttons.primary.text,
                   href: buttons.primary.href,
                   icon: buttons.primary.icon,
-                  colorClass: 'bg-primary text-white hover:bg-opacity-90 focus:ring-2 focus:ring-primary',
+                  colorClass:
+                    'bg-primary text-white hover:bg-opacity-90 focus:ring-2 focus:ring-primary',
                 }}
                 secondary={{
                   label: buttons.secondary.text,
@@ -140,7 +141,7 @@ const Intro: FC<IntroProps> = ({ variant }) => {
                           r="2.5"
                           fill="#3056D3"
                         />
-                      ))
+                      )),
                     )}
                   </svg>
                 </span>

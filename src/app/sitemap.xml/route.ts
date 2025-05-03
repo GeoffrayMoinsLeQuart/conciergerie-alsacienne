@@ -10,7 +10,7 @@ export async function GET() {
     '/',
     '/conciergerie',
     '/gestion-locative',
-    '/simulateur',
+    '/estimation',
     '/faq',
     '/nos-biens',
     '/blog',

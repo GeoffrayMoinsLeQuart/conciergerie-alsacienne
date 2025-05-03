@@ -231,15 +231,15 @@ export const pageMetadata: Record<string, Metadata> = {
     },
   },
 
-  // Simulateur page "/simulateur"
-  simulateur: {
-    title: 'Simulateur de rentabilité locative | Conciergerie Alsacienne',
+  // estimation page "/estimation"
+  estimation: {
+    title: 'estimation de rentabilité locative | Conciergerie Alsacienne',
     description:
       'Estimez gratuitement le potentiel de votre logement en courte durée. Projection fiable, conseils personnalisés, sans engagement.',
     openGraph: {
       title: 'Estimez vos revenus Airbnb à Mulhouse et Colmar',
       description: 'Testez notre outil simple pour savoir combien pourrait rapporter votre bien.',
-      url: `${siteURL}/simulateur`,
+      url: `${siteURL}/estimation`,
       siteName,
       type: 'website',
     },

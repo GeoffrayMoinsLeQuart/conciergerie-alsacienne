@@ -204,7 +204,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                   Nous pouvons estimer son potentiel et le prendre en gestion.
                 </p>
                 <Link
-                  href="/simulateur"
+                  href="/estimation"
                   className="inline-block rounded bg-primary px-6 py-3 text-white hover:bg-primary/90"
                 >
                   Estimer la rentabilité
@@ -280,7 +280,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                   Nous pouvons estimer son potentiel et le prendre en gestion.
                 </p>
                 <Link
-                  href="/simulateur"
+                  href="/estimation"
                   className="inline-block rounded bg-primary px-6 py-3 text-white hover:bg-primary/90"
                 >
                   Estimer la rentabilité

@@ -17,7 +17,7 @@ CTA pied de page accueil
 metadata sur les pages de blog
 
 
-Dans les articles de blog, ajouter des liens vers le simulateur
+Dans les articles de blog, ajouter des liens vers le estimation
 
 Regarder où sont envoyés les information du forumlaire
 
@@ -209,7 +209,7 @@ Optimiser le SEO des pages de propriétés (metadata, balises <meta>)
 
 Maillage interne : créer des liens entre pages pour guider l’utilisateur et répartir le PageRank
 
-Dans les articles de blog, ajouter des liens vers le simulateur
+Dans les articles de blog, ajouter des liens vers le estimation
 
 Préparer l’intégration multilingue FR/EN (si prévue ultérieurement)
 

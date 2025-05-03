@@ -115,7 +115,7 @@ const BlocProcessusEtPrestations: FC = () => {
           <CTAButtons
             primary={{
               label: 'Estimer mes revenus',
-              href: '/simulateur',
+              href: '/estimation',
               icon: <Calculator className="h-5 w-5" />,
               colorClass:
                 'inline-flex items-center justify-center rounded-2xl bg-primary px-8 py-4 font-medium text-white transition hover:bg-opacity-90',

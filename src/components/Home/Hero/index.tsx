@@ -109,7 +109,7 @@ export default function Hero() {
               <CTAButtons
                 primary={{
                   label: 'Estimer mes revenus',
-                  href: '/simulateur',
+                  href: '/estimation',
                   icon: <Calculator className="h-5 w-5" />,
                 }}
                 secondary={{

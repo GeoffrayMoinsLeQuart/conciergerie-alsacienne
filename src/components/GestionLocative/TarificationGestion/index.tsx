@@ -276,7 +276,7 @@ const TarificationGestionLocative: FC = () => {
             <CTAButtons
               primary={{
                 label: 'Lancer le simulateur',
-                href: '/simulateur',
+                href: '/estimation',
                 icon: <Calculator className="h-5 w-5" />,
                 colorClass: 'bg-primary text-white hover:bg-opacity-90',
               }}

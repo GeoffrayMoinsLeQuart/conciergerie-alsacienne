@@ -5,11 +5,9 @@ import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Calculator, Mail } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-const MotionSection = dynamic(
-  () => import('framer-motion').then((mod) => mod.motion.section),
-  { ssr: false }
-);
-
+const MotionSection = dynamic(() => import('framer-motion').then((mod) => mod.motion.section), {
+  ssr: false,
+});
 
 const CTAGestionLocative: FC = () => {
   return (
@@ -34,7 +32,7 @@ const CTAGestionLocative: FC = () => {
         <CTAButtons
           primary={{
             label: 'Estimer mes revenus',
-            href: '/simulateur',
+            href: '/estimation',
             icon: <Calculator className="h-5 w-5" />,
           }}
           secondary={{

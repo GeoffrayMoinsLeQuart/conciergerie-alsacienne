@@ -15,7 +15,7 @@ export interface AddressComponents {
   street: string;
   city: string;
   postalCode: string;
-  department: string;
+  department: string; // Department name
   fullAddress: string;
   location: {
     lat: number;
@@ -23,7 +23,7 @@ export interface AddressComponents {
   };
 }
 
-// Interface pour les propriétés d'une suggestion d'adresse
+// Interface pour les propriétés d'une suggestion d'adresse (incluant context)
 interface AddressFeature {
   properties: {
     label: string;
@@ -31,6 +31,7 @@ interface AddressFeature {
     street?: string;
     city: string;
     postcode: string;
+    context?: string; // e.g., "67, Bas-Rhin, Grand Est"
   };
   geometry: {
     coordinates: [number, number]; // [longitude, latitude]
@@ -38,8 +39,6 @@ interface AddressFeature {
 }
 
 // Composant d'auto-complétion d'adresse réutilisable utilisant l'API Adresse (BAN)
-// ...imports et interfaces inchangés...
-
 const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
   onAddressSelect,
   placeholder = "Commencez à saisir l'adresse...",
@@ -81,11 +80,11 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
 
     setLoading(true);
     try {
+      // Include context=true in the API call to get department info
       const response = await fetch(
-        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`,
+        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5&autocomplete=1` // Added autocomplete=1 for better suggestions
       );
       const data = await response.json();
-      // Ensure suggestions is always an array
       setSuggestions(Array.isArray(data.features) ? data.features : []);
     } catch (error) {
       console.error("Erreur lors de la recherche d'adresses:", error);
@@ -99,12 +98,22 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
     const properties = feature.properties;
     const coordinates = feature.geometry.coordinates;
 
+    // Extract department name from context
+    let departmentName = '';
+    if (properties.context) {
+      const contextParts = properties.context.split(',').map(part => part.trim());
+      // Department name is usually the second part (index 1)
+      if (contextParts.length >= 2) {
+        departmentName = contextParts[1];
+      }
+    }
+
     const addressComponents: AddressComponents = {
       streetNumber: properties.housenumber || '',
       street: properties.street || '',
       city: properties.city || '',
       postalCode: properties.postcode || '',
-      department: '', // 👈 Vide par défaut si non précisé
+      department: departmentName, // <-- Use extracted department name
       fullAddress: properties.label || '',
       location: {
         lat: coordinates[1],
@@ -157,9 +166,17 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
         placeholder={placeholder}
         className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         required={required}
+        autoComplete="off" // Disable browser autocomplete
       />
 
-      {loading && <div className="absolute right-3 top-10">{/* spinner inchangé */}</div>}
+      {loading && (
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+              <svg className="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+          </div>
+      )}
 
       {showSuggestions && suggestions.length > 0 && (
         <ul
@@ -175,6 +192,8 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
               <div className="font-medium">{feature.properties.label}</div>
               <div className="text-sm text-gray-500">
                 {feature.properties.postcode} {feature.properties.city}
+                {/* Optionally display context if available */}
+                {/* {feature.properties.context && ` (${feature.properties.context})`} */}
               </div>
             </li>
           ))}
@@ -191,3 +210,4 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
 };
 
 export default AddressAutocomplete;
+
