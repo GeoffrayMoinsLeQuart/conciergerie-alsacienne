@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch';
+// import algoliasearch from 'algoliasearch';
 import { load } from 'cheerio';
 
 const APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_PROJECT_ID ?? '';
@@ -24,22 +24,22 @@ export const structuredAlgoliaHtmlData = async ({
       updatedAt: new Date().toISOString(),
     };
 
-    await addToAlgolia(data);
+    // await addToAlgolia(data);
     return data;
   } catch (error) {
     console.log('error in structuredAlgoliaHtmlData', error);
   }
 };
 
-async function addToAlgolia(record: any) {
-  try {
-    const client = algoliasearch(APP_ID, API_KEY);
-    const index = client.initIndex(INDEX);
+// async function addToAlgolia(record: any) {
+//   try {
+//     const client = algoliasearch(APP_ID, API_KEY);
+//     const index = client.initIndex(INDEX);
 
-    await index.saveObject(record, {
-      autoGenerateObjectIDIfNotExist: true,
-    });
-  } catch (error) {
-    console.log('error in addToAlgolia', error);
-  }
-}
+//     await index.saveObject(record, {
+//       autoGenerateObjectIDIfNotExist: true,
+//     });
+//   } catch (error) {
+//     console.log('error in addToAlgolia', error);
+//   }
+// }
