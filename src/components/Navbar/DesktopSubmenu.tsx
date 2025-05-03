@@ -60,7 +60,7 @@ export default function DesktopMenu({ scrollToSection }: DesktopMenuProps) {
                   aria-label={`Sous-menu ${item.title}`}
                 >
                   {submenu.map(({ id, label }) => (
-                    <li key={id}>
+                    <li key={id} role="presentation">
                       <Link
                         href={`${path}#${id}`}
                         scroll={false}
