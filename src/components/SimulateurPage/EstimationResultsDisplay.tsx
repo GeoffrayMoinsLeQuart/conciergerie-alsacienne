@@ -37,8 +37,7 @@ export default function EstimationResultsDisplay({
         <div className="rounded-lg border border-blue-200 bg-blue-50 p-6 text-center shadow-sm">
           <h3 className="mb-2 text-lg font-semibold text-blue-800">{C.RESULTS_MONTHLY_REVENUE}</h3>
           <p className="text-3xl font-bold text-blue-700">
-            {formatCurrency(results.monthlyRevenueMin)} -
-            {formatCurrency(results.monthlyRevenueMax)}
+            {formatCurrency(results.monthlyRevenueMin)} -{formatCurrency(results.monthlyRevenueMax)}
           </p>
         </div>
 
@@ -209,6 +208,32 @@ export default function EstimationResultsDisplay({
                   {C.FIELD_LABEL_CANAL_PREFERENCE} <span className="text-red-500">*</span>
                 </label>
                 <div role="radiogroup" aria-labelledby="preferredChannel" className="flex gap-4">
+                  <label htmlFor="preferredChannelCall" className="flex items-center">
+                    <input
+                      type="radio"
+                      id="preferredChannelCall"
+                      name="preferredChannel"
+                      value="call"
+                      checked={contactFormData.preferredChannel === 'call'}
+                      onChange={onContactInputChange}
+                      className={`h-4 w-4 border ${contactFormErrors.preferredChannel ? 'border-red-500' : 'border-gray-300'} focus:ring-2 ${contactFormErrors.preferredChannel ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
+                    />
+                    <span className="ml-2 text-sm text-gray-700">Appel</span>
+                  </label>
+
+                  <label htmlFor="preferredChannelWhatsApp" className="flex items-center">
+                    <input
+                      type="radio"
+                      id="preferredChannelWhatsApp"
+                      name="preferredChannel"
+                      value="whatsapp"
+                      checked={contactFormData.preferredChannel === 'whatsapp'}
+                      onChange={onContactInputChange}
+                      className={`h-4 w-4 border ${contactFormErrors.preferredChannel ? 'border-red-500' : 'border-gray-300'} focus:ring-2 ${contactFormErrors.preferredChannel ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
+                    />
+                    <span className="ml-2 text-sm text-gray-700">WhatsApp</span>
+                  </label>
+
                   <label htmlFor="preferredChannelEmail" className="flex items-center">
                     <input
                       type="radio"
@@ -223,19 +248,6 @@ export default function EstimationResultsDisplay({
                       }
                     />
                     <span className="ml-2 text-sm text-gray-700">Email</span>
-                  </label>
-
-                  <label htmlFor="preferredChannelWhatsApp" className="flex items-center">
-                    <input
-                      type="radio"
-                      id="preferredChannelWhatsApp"
-                      name="preferredChannel"
-                      value="whatsapp"
-                      checked={contactFormData.preferredChannel === 'whatsapp'}
-                      onChange={onContactInputChange}
-                      className={`h-4 w-4 border ${contactFormErrors.preferredChannel ? 'border-red-500' : 'border-gray-300'} focus:ring-2 ${contactFormErrors.preferredChannel ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
-                    />
-                    <span className="ml-2 text-sm text-gray-700">WhatsApp</span>
                   </label>
                 </div>
 

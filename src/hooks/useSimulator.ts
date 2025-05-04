@@ -120,7 +120,7 @@ const initialContactFormData: ContactFormData = {
   phone: '',
   message: '',
   honeypot: '',
-  preferredChannel: '',
+  preferredChannel: 'call',
 };
 
 // NEW: Initial State for Contact Form Errors

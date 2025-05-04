@@ -35,12 +35,16 @@ const Step4Message: React.FC = () => {
         </label>
         <div role="group" aria-labelledby="preferred-channel-group" className="flex gap-4">
           <label className="flex items-center">
-            <Field type="radio" name="preferredChannel" value="email" className="mr-2" />
-            Email
+            <Field type="radio" name="preferredChannel" value="call" className="mr-2" />
+            Appel
           </label>
           <label className="flex items-center">
             <Field type="radio" name="preferredChannel" value="whatsapp" className="mr-2" />
             WhatsApp
+          </label>
+          <label className="flex items-center">
+            <Field type="radio" name="preferredChannel" value="email" className="mr-2" />
+            Email
           </label>
         </div>
         {errors.preferredChannel && (
@@ -73,7 +77,7 @@ const Step4Message: React.FC = () => {
         <p>
           En soumettant ce formulaire, vous acceptez que les informations saisies soient utilisées
           pour vous recontacter dans le cadre de votre demande. Pour connaître et exercer vos
-          droits, consultez notre{' '}
+          droits, consultez notre
           <a href="/politique-confidentialite" className="text-primary hover:underline">
             politique de confidentialité
           </a>

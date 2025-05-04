@@ -6,10 +6,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FAQProps } from '@/types/faq';
 import dynamic from 'next/dynamic';
 
-const MotionDiv = dynamic(
-  () => import('framer-motion').then((mod) => mod.motion.div),
-  { ssr: false }
-);
+const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
+  ssr: false,
+});
 
 const categoryLabels: Record<string, string> = {
   fiscalite: 'Fiscalité',
@@ -217,7 +216,7 @@ const FAQ: React.FC<FAQProps> = ({
                       <div className="mt-3 flex flex-wrap gap-2">
                         {item.topic && (
                           <span className="inline-flex items-center rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700">
-                            {categoryIcons[item.topic] || '📌'}{' '}
+                            {categoryIcons[item.topic] || '📌'}
                             {categoryLabels[item.topic] || item.topic}
                           </span>
                         )}

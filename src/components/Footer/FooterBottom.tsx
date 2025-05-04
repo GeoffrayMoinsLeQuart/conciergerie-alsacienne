@@ -19,7 +19,7 @@ export default function FooterBottom() {
           ))}
         </div>
         <p className="text-center text-base font-medium text-body-color">
-          Conciergerie Alsacienne - Services de conciergerie et gestion locative - &copy;{' '}
+          Conciergerie Alsacienne - Services de conciergerie et gestion locative - &copy;
           {new Date().getFullYear()}
         </p>
       </div>

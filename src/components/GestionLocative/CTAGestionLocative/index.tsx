@@ -42,7 +42,7 @@ const CTAGestionLocative: FC = () => {
           }}
         />
         <p className="mt-8 text-sm text-gray-600">
-          Ou appelez-nous directement au{' '}
+          Ou appelez-nous directement au
           <a
             href="tel:+33621471922"
             aria-label="Appelez-nous au 06 21 47 19 22"

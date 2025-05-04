@@ -60,7 +60,7 @@ const validationSchemas = [
   Yup.object({
     consent: Yup.boolean().oneOf([true], 'Vous devez accepter la politique de confidentialité'),
     preferredChannel: Yup.string()
-      .oneOf(['email', 'whatsapp'], 'Choisissez un canal')
+      .oneOf(['appel', 'email', 'whatsapp'], 'Choisissez un canal')
       .required('Sélectionnez un canal'),
   }),
 ];
@@ -97,7 +97,7 @@ const ContactForm: React.FC = () => {
     consent: false,
     honeypot: '', // Anti-spam field
     submissionTime: '', // Will be set on submit
-    preferredChannel: 'email', // valeur par défaut
+    preferredChannel: 'call', // valeur par défaut
   };
 
   // Handle form submission
