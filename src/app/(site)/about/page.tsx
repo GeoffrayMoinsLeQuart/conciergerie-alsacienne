@@ -24,7 +24,7 @@ export default function AboutPage() {
     { title: 'Service sur ‑ mesure', icon: '🎯', desc: 'Des offres taillées pour vos besoins.' },
     { title: 'Réactivité', icon: '⚡️', desc: 'Nous sommes disponibles 7j/7, 24h/24.' },
     { title: 'Transparence', icon: '🔍', desc: 'Rapports clairs et bilans réguliers.' },
-  ];
+  ];  
 
   return (
     <>

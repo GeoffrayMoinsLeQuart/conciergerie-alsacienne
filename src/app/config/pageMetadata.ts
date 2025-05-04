@@ -278,6 +278,28 @@ export const pageMetadata: Record<string, Metadata> = {
     robots: { index: false, follow: false }, // on peut empêcher l’indexation si on veut
     alternates: { canonical: `${siteURL}/merci` },
   },
+  // Mentions légales page "/mentions-legales"
+  'mentions-legales': {
+    title: 'Mentions légales | Conciergerie Alsacienne',
+    description:
+      'Mentions légales de la Conciergerie Alsacienne : éditeur, hébergeur, propriété intellectuelle, données personnelles, responsabilité, cookies et conditions d’utilisation.',
+    openGraph: {
+      title: 'Mentions légales | Conciergerie Alsacienne',
+      description:
+        'Consultez toutes les informations légales de la Conciergerie Alsacienne : identité de l’éditeur, hébergeur, droits d’auteur, protection des données et cookies.',
+      url: `${siteURL}/mentions-legales`,
+      siteName,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Mentions légales | Conciergerie Alsacienne',
+      description:
+        'Mentions légales de la Conciergerie Alsacienne : éditeur, hébergeur, propriété intellectuelle, données personnelles, responsabilité, cookies et conditions d’utilisation.',
+    },
+    robots: { index: true, follow: true },
+    alternates: { canonical: `${siteURL}/mentions-legales` },
+  },
 };
 
 /**

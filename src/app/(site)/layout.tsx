@@ -11,6 +11,7 @@ import ToasterContext from '../context/ToastContext';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { GTMScript } from '@/components/Pixels/GTM';
 import { GTMNoScript } from '@/components/Pixels/GTMNoScript';
+import FloatingCallButton from '@/components/FloatingCallButton';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Contenu principal */}
             <main id="main-content" role="main" aria-label="Contenu principal">
               {children}
+              <FloatingCallButton />
             </main>
 
             {/* Pied de page */}
