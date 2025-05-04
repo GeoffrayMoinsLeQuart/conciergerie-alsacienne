@@ -63,6 +63,8 @@ export interface ContactFormData {
   email: string;
   phone: string;
   message: string;
+  honeypot: string;
+  preferredChannel: string;
 }
 
 // NEW: Contact Form Errors Type
@@ -71,6 +73,9 @@ export interface ContactFormErrors {
   lastName?: string;
   email?: string;
   phone?: string;
+  message?: string;
+  honeypot?: string;
+  preferredChannel?: string;
 }
 
 // Initial States using Constants
@@ -114,6 +119,8 @@ const initialContactFormData: ContactFormData = {
   email: '',
   phone: '',
   message: '',
+  honeypot: '',
+  preferredChannel: '',
 };
 
 // NEW: Initial State for Contact Form Errors

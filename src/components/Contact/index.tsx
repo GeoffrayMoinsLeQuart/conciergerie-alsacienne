@@ -59,6 +59,9 @@ const validationSchemas = [
   // Step 4: Message & Consent
   Yup.object({
     consent: Yup.boolean().oneOf([true], 'Vous devez accepter la politique de confidentialité'),
+    preferredChannel: Yup.string()
+      .oneOf(['email', 'whatsapp'], 'Choisissez un canal')
+      .required('Sélectionnez un canal'),
   }),
 ];
 
@@ -94,6 +97,7 @@ const ContactForm: React.FC = () => {
     consent: false,
     honeypot: '', // Anti-spam field
     submissionTime: '', // Will be set on submit
+    preferredChannel: 'email', // valeur par défaut
   };
 
   // Handle form submission
@@ -119,7 +123,7 @@ const ContactForm: React.FC = () => {
         // e.g. une version formatée du budget ou du type de bien
       };
 
-      console.log(payload)
+      console.log(payload);
 
       // 2️⃣ Envoi vers n8n
       const response = await fetch(WEBHOOK_URL, {

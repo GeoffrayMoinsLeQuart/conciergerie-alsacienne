@@ -37,7 +37,8 @@ export default function EstimationResultsDisplay({
         <div className="rounded-lg border border-blue-200 bg-blue-50 p-6 text-center shadow-sm">
           <h3 className="mb-2 text-lg font-semibold text-blue-800">{C.RESULTS_MONTHLY_REVENUE}</h3>
           <p className="text-3xl font-bold text-blue-700">
-            {formatCurrency(results.monthlyRevenueMin)} - {formatCurrency(results.monthlyRevenueMax)}
+            {formatCurrency(results.monthlyRevenueMin)} -
+            {formatCurrency(results.monthlyRevenueMax)}
           </p>
         </div>
 
@@ -67,9 +68,7 @@ export default function EstimationResultsDisplay({
         </div>
       </div>
 
-      <p className="mt-8 text-center text-sm text-gray-500">
-        {C.RESULTS_DISCLAIMER}
-      </p>
+      <p className="mt-8 text-center text-sm text-gray-500">{C.RESULTS_DISCLAIMER}</p>
 
       {/* --- Integrated Contact Form --- */}
       <div className="mt-10 border-t border-gray-200 pt-8">
@@ -77,11 +76,14 @@ export default function EstimationResultsDisplay({
         {addressData && (
           <p className="mb-4 text-center text-gray-600">
             {C.CONTACT_FORM_SUMMARY_PREFIX}
-            {addressData.fullAddress}, {addressData.postalCode} {addressData.city} ({addressData.department})
+            {addressData.fullAddress}, {addressData.postalCode} {addressData.city} (
+            {addressData.department})
           </p>
         )}
 
-        <h3 className="mb-6 text-center text-2xl font-semibold text-gray-800">{C.CONTACT_FORM_TITLE}</h3>
+        <h3 className="mb-6 text-center text-2xl font-semibold text-gray-800">
+          {C.CONTACT_FORM_TITLE}
+        </h3>
 
         <form onSubmit={onContactSubmit} className="mx-auto max-w-lg">
           {contactSubmitStatus === 'success' && (
@@ -100,7 +102,12 @@ export default function EstimationResultsDisplay({
             <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
               {/* First Name */}
               <div>
-                <label htmlFor="contactFirstName" className="mb-1 block text-sm font-medium text-gray-700">{C.FIELD_LABEL_FIRST_NAME} <span className="text-red-500">*</span></label>
+                <label
+                  htmlFor="contactFirstName"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  {C.FIELD_LABEL_FIRST_NAME} <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   id="contactFirstName"
@@ -109,14 +116,24 @@ export default function EstimationResultsDisplay({
                   onChange={onContactInputChange}
                   required
                   className={`w-full rounded-lg border ${contactFormErrors.firstName ? 'border-red-500' : 'border-gray-300'} px-4 py-2 focus:outline-none focus:ring-2 ${contactFormErrors.firstName ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
-                  aria-describedby={contactFormErrors.firstName ? 'contactFirstName-error' : undefined}
+                  aria-describedby={
+                    contactFormErrors.firstName ? 'contactFirstName-error' : undefined
+                  }
                 />
-                {contactFormErrors.firstName && <p className="mt-1 text-sm text-red-600" id="contactFirstName-error">{contactFormErrors.firstName}</p>}
+                {contactFormErrors.firstName && (
+                  <p className="mt-1 text-sm text-red-600" id="contactFirstName-error">
+                    {contactFormErrors.firstName}
+                  </p>
+                )}
               </div>
-
               {/* Last Name */}
               <div>
-                <label htmlFor="contactLastName" className="mb-1 block text-sm font-medium text-gray-700">{C.FIELD_LABEL_LAST_NAME} <span className="text-red-500">*</span></label>
+                <label
+                  htmlFor="contactLastName"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  {C.FIELD_LABEL_LAST_NAME} <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   id="contactLastName"
@@ -125,14 +142,24 @@ export default function EstimationResultsDisplay({
                   onChange={onContactInputChange}
                   required
                   className={`w-full rounded-lg border ${contactFormErrors.lastName ? 'border-red-500' : 'border-gray-300'} px-4 py-2 focus:outline-none focus:ring-2 ${contactFormErrors.lastName ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
-                  aria-describedby={contactFormErrors.lastName ? 'contactLastName-error' : undefined}
+                  aria-describedby={
+                    contactFormErrors.lastName ? 'contactLastName-error' : undefined
+                  }
                 />
-                {contactFormErrors.lastName && <p className="mt-1 text-sm text-red-600" id="contactLastName-error">{contactFormErrors.lastName}</p>}
+                {contactFormErrors.lastName && (
+                  <p className="mt-1 text-sm text-red-600" id="contactLastName-error">
+                    {contactFormErrors.lastName}
+                  </p>
+                )}
               </div>
-
               {/* Email */}
               <div className="sm:col-span-2">
-                <label htmlFor="contactEmail" className="mb-1 block text-sm font-medium text-gray-700">{C.FIELD_LABEL_EMAIL} <span className="text-red-500">*</span></label>
+                <label
+                  htmlFor="contactEmail"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  {C.FIELD_LABEL_EMAIL} <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="email"
                   id="contactEmail"
@@ -143,12 +170,20 @@ export default function EstimationResultsDisplay({
                   className={`w-full rounded-lg border ${contactFormErrors.email ? 'border-red-500' : 'border-gray-300'} px-4 py-2 focus:outline-none focus:ring-2 ${contactFormErrors.email ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
                   aria-describedby={contactFormErrors.email ? 'contactEmail-error' : undefined}
                 />
-                {contactFormErrors.email && <p className="mt-1 text-sm text-red-600" id="contactEmail-error">{contactFormErrors.email}</p>}
+                {contactFormErrors.email && (
+                  <p className="mt-1 text-sm text-red-600" id="contactEmail-error">
+                    {contactFormErrors.email}
+                  </p>
+                )}
               </div>
-
               {/* Phone */}
               <div className="sm:col-span-2">
-                <label htmlFor="contactPhone" className="mb-1 block text-sm font-medium text-gray-700">{C.FIELD_LABEL_PHONE} <span className="text-red-500">*</span></label>
+                <label
+                  htmlFor="contactPhone"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  {C.FIELD_LABEL_PHONE} <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="tel"
                   id="contactPhone"
@@ -159,12 +194,65 @@ export default function EstimationResultsDisplay({
                   className={`w-full rounded-lg border ${contactFormErrors.phone ? 'border-red-500' : 'border-gray-300'} px-4 py-2 focus:outline-none focus:ring-2 ${contactFormErrors.phone ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
                   aria-describedby={contactFormErrors.phone ? 'contactPhone-error' : undefined}
                 />
-                {contactFormErrors.phone && <p className="mt-1 text-sm text-red-600" id="contactPhone-error">{contactFormErrors.phone}</p>}
+                {contactFormErrors.phone && (
+                  <p className="mt-1 text-sm text-red-600" id="contactPhone-error">
+                    {contactFormErrors.phone}
+                  </p>
+                )}
               </div>
+              {/* Converted "Preferred Channel" block to match the other form inputs */}
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="preferredChannel"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  {C.FIELD_LABEL_CANAL_PREFERENCE} <span className="text-red-500">*</span>
+                </label>
+                <div role="radiogroup" aria-labelledby="preferredChannel" className="flex gap-4">
+                  <label htmlFor="preferredChannelEmail" className="flex items-center">
+                    <input
+                      type="radio"
+                      id="preferredChannelEmail"
+                      name="preferredChannel"
+                      value="email"
+                      checked={contactFormData.preferredChannel === 'email'}
+                      onChange={onContactInputChange}
+                      className={`h-4 w-4 border ${contactFormErrors.preferredChannel ? 'border-red-500' : 'border-gray-300'} focus:ring-2 ${contactFormErrors.preferredChannel ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
+                      aria-describedby={
+                        contactFormErrors.preferredChannel ? 'preferredChannel-error' : undefined
+                      }
+                    />
+                    <span className="ml-2 text-sm text-gray-700">Email</span>
+                  </label>
 
+                  <label htmlFor="preferredChannelWhatsApp" className="flex items-center">
+                    <input
+                      type="radio"
+                      id="preferredChannelWhatsApp"
+                      name="preferredChannel"
+                      value="whatsapp"
+                      checked={contactFormData.preferredChannel === 'whatsapp'}
+                      onChange={onContactInputChange}
+                      className={`h-4 w-4 border ${contactFormErrors.preferredChannel ? 'border-red-500' : 'border-gray-300'} focus:ring-2 ${contactFormErrors.preferredChannel ? 'focus:ring-red-500' : 'focus:ring-blue-500'}`}
+                    />
+                    <span className="ml-2 text-sm text-gray-700">WhatsApp</span>
+                  </label>
+                </div>
+
+                {contactFormErrors.preferredChannel && (
+                  <p className="mt-1 text-sm text-red-600" id="preferredChannel-error">
+                    {contactFormErrors.preferredChannel}
+                  </p>
+                )}
+              </div>
               {/* Message */}
               <div className="sm:col-span-2">
-                <label htmlFor="contactMessage" className="mb-1 block text-sm font-medium text-gray-700">{C.FIELD_LABEL_MESSAGE}</label>
+                <label
+                  htmlFor="contactMessage"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  {C.FIELD_LABEL_MESSAGE}
+                </label>
                 <textarea
                   id="contactMessage"
                   name="message" // Matches ContactFormData key
@@ -174,7 +262,11 @@ export default function EstimationResultsDisplay({
                   className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-
+              {/* Honeypot field for anti-spam - hidden from users but visible to bots */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="honeypot">Ne pas remplir ce champ</label>
+                <input type="text" name="honeypot" id="honeypot" />
+              </div>
               {/* Submit Button */}
               <div className="mt-4 text-center sm:col-span-2">
                 <button
@@ -202,4 +294,3 @@ export default function EstimationResultsDisplay({
     </div>
   );
 }
-

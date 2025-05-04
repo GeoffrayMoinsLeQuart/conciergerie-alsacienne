@@ -169,6 +169,7 @@ export const FIELD_LABEL_FIRST_NAME = 'Prénom';
 export const FIELD_LABEL_LAST_NAME = 'Nom';
 export const FIELD_LABEL_EMAIL = 'Email';
 export const FIELD_LABEL_PHONE = 'Téléphone';
+export const FIELD_LABEL_CANAL_PREFERENCE = 'Je préfère être contacté par *';
 export const FIELD_LABEL_MESSAGE = 'Votre Message (Optionnel)';
 export const BUTTON_SUBMIT_CONTACT = 'Envoyer ma demande';
 export const BUTTON_SUBMITTING = 'Envoi en cours...';

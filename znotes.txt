@@ -321,3 +321,14 @@ Mention legales
 https://calibreapp.com/teams/dsfdsfsd/dfdf/snapshots/3/performance?profile=cb6e3f78-eb7b-40b3-97a4-45e0a4ffafdd
 
 utiliser innovia pour faire des propositions de design
+
+
+
+      // Spam protection : si le champ honeypot est rempli, on n’envoie pas le formulaire
+      if (contactFormData.honeypot !== '') {
+        console.warn('Honeypot rempli - soumission annulée.');
+        return;
+      }
+
+
+      

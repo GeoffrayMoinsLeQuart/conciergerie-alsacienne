@@ -34,4 +34,5 @@ export interface ContactFormValues {
   honeypot?: string;
   // Timestamp for submission tracking
   submissionTime?: string;
+  preferredChannel: 'email' | 'whatsapp';
 }
