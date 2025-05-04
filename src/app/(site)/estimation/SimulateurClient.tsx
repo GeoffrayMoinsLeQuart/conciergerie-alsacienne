@@ -3,15 +3,11 @@
 'use client';
 
 import React from 'react';
-// import { getMetadata } from '@/app/config/pageMetadata'; // Adjust path as needed
 import { useSimulator } from '@/hooks/useSimulator'; // Adjust path as needed
 import SimulatorTabs from '@/components/SimulateurPage/SimulatorTabs'; // Adjust path as needed
 import SimulatorForm from '@/components/SimulateurPage/SimulatorForm'; // Adjust path as needed
 import EstimationResultsDisplay from '@/components/SimulateurPage/EstimationResultsDisplay'; // Adjust path as needed
 import * as C from '@/constants/simulatorConstants'; // Import constants
-
-// Metadata export (should work in client components in App Router)
-// export const metadata = getMetadata('simulateur'); // Commenting out as getMetadata might be server-only
 
 export default function SimulateurPage() {
   const {

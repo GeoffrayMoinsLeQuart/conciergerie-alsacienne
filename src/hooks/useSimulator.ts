@@ -4,6 +4,8 @@ import { AddressComponents } from '@/components/AddressAutocomplete'; // Assumin
 import * as C from '@/constants/simulatorConstants'; // Import all constants
 import { formatCurrency } from '@/utils/formatting'; // Import formatting
 
+const WEBHOOK_URL = 'https://n8n.conciergerie-alsacienne.fr/webhook/lead-capture'; // ← ajuste si besoin
+
 // Types
 export interface FormData {
   propertyType: string;
@@ -477,13 +479,25 @@ export function useSimulator() {
       };
 
       console.log('Combined Data to Submit:', submissionData);
-      try {
-        // Replace with your actual backend endpoint call or email service integration
-        // Example: await fetch("/api/contact-simulation", { method: "POST", body: JSON.stringify(submissionData) });
 
-        await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate delay
+      try {
+        // ▶️ Envoi vers n8n
+        const response = await fetch(
+          WEBHOOK_URL, // ← Remplace par ton URL Production
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(submissionData),
+          },
+        );
+
+        if (!response.ok) {
+          // si n8n renvoie une erreur HTTP
+          throw new Error(`Webhook failed: ${response.status} ${response.statusText}`);
+        }
+
         setContactSubmitStatus('success');
-        // Optionally clear contact form fields after success
+        // Optionnel : réinitialiser le formulaire de contact
         // setContactFormData(initialContactFormData);
       } catch (error) {
         console.error('Contact form submission error:', error);

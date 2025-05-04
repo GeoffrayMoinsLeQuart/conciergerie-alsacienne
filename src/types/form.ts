@@ -17,10 +17,10 @@ export enum FormuleConciergerie {
 }
 
 export interface ContactFormValues {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
-  availability: string;
   serviceType: Activity;
   formule?: FormuleConciergerie | FormuleGestionLocative | string;
   address: string;
@@ -28,7 +28,6 @@ export interface ContactFormValues {
   postalCode: string;
   propertyType: string;
   surface: string;
-  budget: string;
   message: string;
   consent: boolean;
   // Anti-spam field (hidden from users)
