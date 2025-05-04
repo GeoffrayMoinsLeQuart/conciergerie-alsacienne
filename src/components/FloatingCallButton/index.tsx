@@ -35,8 +35,6 @@ export default function FloatingCallButton() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname]);
 
-  // Analytics on click
-
   // Do not render on excluded paths
   if (excluded.includes(pathname)) return null;
 
@@ -45,10 +43,14 @@ export default function FloatingCallButton() {
       href="tel:0033XXXXXXXXX"
       aria-label="Appeler Conciergerie Alsacienne"
       title="Appelez-nous"
-      className={`fixed bottom-4 right-4 w-14 h-14 rounded-full flex items-center justify-center
+      className={`
+        fixed bottom-4 right-4 w-14 h-14 rounded-full flex items-center justify-center
         bg-primary text-white shadow-lg z-50 transition-transform duration-300 ease-in-out
         sm:hidden
-        ${hidden ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
+        active:bg-[#C8102E]
+        focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400
+        ${hidden ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}
+      `}
     >
       <Phone className="w-6 h-6" aria-hidden="true" />
     </a>
