@@ -339,4 +339,11 @@ utiliser innovia pour faire des propositions de design
 gerer erreur api avec context
 
 usememo
+
+
+
+
+      Enrichis ta page Contact avec un balisage LocalBusiness et telephone ; Google pourra présenter directement ton numéro dans les résultats et sur Google Maps.
+
+      Mettre en place internationalisation
       
