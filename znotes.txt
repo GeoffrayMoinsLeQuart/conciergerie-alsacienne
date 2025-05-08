@@ -332,4 +332,11 @@ utiliser innovia pour faire des propositions de design
 
 
       Faire les cookies
+
+
+
+
+gerer erreur api avec context
+
+usememo
       
