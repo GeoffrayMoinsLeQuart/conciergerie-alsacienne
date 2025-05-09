@@ -350,3 +350,8 @@ usememo
 
 
       Mettre tableau qr code dans l'appartement
+
+
+
+      Verifier que cela soit de partout
+      export const revalidate = 60; // Regénère au plus toutes les 60 sec.
