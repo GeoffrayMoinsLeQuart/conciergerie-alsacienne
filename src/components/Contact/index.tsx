@@ -60,7 +60,7 @@ const validationSchemas = [
   Yup.object({
     consent: Yup.boolean().oneOf([true], 'Vous devez accepter la politique de confidentialité'),
     preferredChannel: Yup.string()
-      .oneOf(['appel', 'email', 'whatsapp'], 'Choisissez un canal')
+      .oneOf(['call', 'email', 'whatsapp'], 'Choisissez un canal')
       .required('Sélectionnez un canal'),
   }),
 ];

@@ -346,4 +346,7 @@ usememo
       Enrichis ta page Contact avec un balisage LocalBusiness et telephone ; Google pourra présenter directement ton numéro dans les résultats et sur Google Maps.
 
       Mettre en place internationalisation
-      
+
+
+
+      Mettre tableau qr code dans l'appartement
