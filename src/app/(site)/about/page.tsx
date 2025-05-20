@@ -1,82 +1,100 @@
+// src/app/about/page.tsx
 import { Metadata } from 'next';
 import PageTitle from '@/components/Common/PageTitle';
 import Image from 'next/image';
 import Script from 'next/script';
 import { getMetadata } from '@/app/config/pageMetadata';
-import aboutTexts from '@/static-data/text-content/fr/about.json';
+import { t } from '@/app/libs/content';
 import { aboutSchema } from '@/app/config/pageSchema';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 
 export const metadata: Metadata = getMetadata('about');
 
+const pageKey = 'about';
+
 export default function AboutPage() {
-  const missionText = `Chez Conciergerie Alsacienne, nous allions passion du terroir et expertise hôtelière pour offrir un service clé en main, local et personnalisé.`;
-  const founder = {
-    name: 'Jean Dupont',
-    role: 'Fondateur & Expert Local',
-    photo: '/images/team/jean-dupont.jpg',
-    bio: `Après 10 ans dans la gestion hôtelière et Airbnb, Jean a créé la Conciergerie Alsacienne pour proposer un accompagnement premium, à taille humaine.`,
-  };
-  const stats = [
-    { label: 'Biens gérés', value: '120+' },
-    { label: 'Clients satisfaits', value: '85 %' },
-    { label: "Années d'expérience", value: '10' },
-  ];
-  const whyUs = [
-    { title: 'Expertise locale', icon: '🏠', desc: 'Une connaissance pointue du marché alsacien.' },
-    { title: 'Service sur mesure', icon: '🎯', desc: 'Des offres taillées pour vos besoins.' },
-    { title: 'Réactivité', icon: '⚡️', desc: 'Nous sommes disponibles 7j/7, 24h/24.' },
-    { title: 'Transparence', icon: '🔍', desc: 'Rapports clairs et bilans réguliers.' },
-  ];
+  // SEO & Page title
+  const pageTitle = t(pageKey, 'About.pageTitle') as string;
+  const pageDescription = t(pageKey, 'About.pageDescription') as string;
+
+  // Hero section
+  const heroTitle = t(pageKey, 'About.Hero.title') as string;
+  const heroSubtitle = t(pageKey, 'About.Hero.subtitle') as string;
+  const heroImageAlt = t(pageKey, 'About.Hero.imageAlt') as string;
+
+  // Mission section
+  const missionHeading = t(pageKey, 'About.Mission.heading') as string;
+  const missionText = t(pageKey, 'About.Mission.text') as string;
+
+  // Founder section
+  const founderName = t(pageKey, 'About.Founder.name') as string;
+  const founderRole = t(pageKey, 'About.Founder.role') as string;
+  const founderBio = t(pageKey, 'About.Founder.bio') as string;
+  const founderPhoto = '/images/team/jean-dupont.jpg';
+  const founderPhotoAlt = t(pageKey, 'About.Founder.photoAlt') as string;
+
+  // Stats section
+  const stats = t(pageKey, 'About.Stats') as Array<{ label: string; value: string }>;
+
+  // Why Us section
+  const whyUs = t(pageKey, 'About.WhyUs') as Array<{
+    icon: string;
+    title: string;
+    desc: string;
+  }>;
+
+  // Final CTA
+  const ctaHeading = t(pageKey, 'About.CTA.heading') as string;
+  const ctaText = t(pageKey, 'About.CTA.text') as string;
+  const ctaButtonLabel = t(pageKey, 'About.CTA.buttonLabel') as string;
+  const ctaButtonLink = t(pageKey, 'About.CTA.buttonLink') as string;
 
   return (
     <>
-      {/* Injection unique du JSON-LD */}
+      {/* Inject SEO schema */}
       <SeoSchemaInjector schema={aboutSchema} />
 
-      <PageTitle
-        pageTitle="À Propos"
-        pageDescription="Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme"
-        showMenu
-      />
+      {/* Page Title */}
+      <PageTitle pageTitle={pageTitle} pageDescription={pageDescription} showMenu />
 
       <main role="main">
+        {/* Hero */}
         <section className="relative bg-primary/10 py-20 text-center" aria-labelledby="titre-hero">
           <div className="container mx-auto px-4">
             <h1 id="titre-hero" className="mb-4 text-4xl font-bold text-primary">
-              Conciergerie Alsacienne
+              {heroTitle}
             </h1>
-            <p className="mb-8 text-xl text-body-color">
-              Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme
-            </p>
+            <p className="mb-8 text-xl text-body-color">{heroSubtitle}</p>
             <figure>
               <Image
                 src="/images/about-hero.jpg"
-                alt="Maison traditionnelle alsacienne"
+                alt={heroImageAlt}
                 width={900}
                 height={450}
                 className="mx-auto rounded-lg object-cover shadow-lg"
               />
-              <figcaption className="sr-only">Vue d'une maison traditionnelle en Alsace</figcaption>
+              <figcaption className="sr-only">{heroImageAlt}</figcaption>
             </figure>
           </div>
         </section>
 
+        {/* Mission */}
         <section className="py-16" aria-labelledby="notre-mission">
           <div className="container mx-auto px-4">
             <h2 id="notre-mission" className="mb-4 text-3xl font-semibold text-black">
-              Notre mission
+              {missionHeading}
             </h2>
             <p className="max-w-3xl text-base text-body-color">{missionText}</p>
           </div>
         </section>
 
+        {/* Founder */}
         <section className="bg-[#f8f9ff] py-16" aria-labelledby="qui-sommes-nous">
           <div className="container mx-auto flex flex-wrap items-center px-4">
             <div className="mb-8 w-full lg:mb-0 lg:w-5/12">
               <Image
-                src={founder.photo}
-                alt={`Portrait de ${founder.name}`}
+                src={founderPhoto}
+                alt={founderPhotoAlt}
                 width={400}
                 height={400}
                 className="rounded-full object-cover shadow-md"
@@ -84,14 +102,15 @@ export default function AboutPage() {
             </div>
             <div className="w-full lg:w-7/12 lg:pl-12">
               <h2 id="qui-sommes-nous" className="mb-2 text-2xl font-bold text-black">
-                {founder.name}
+                {founderName}
               </h2>
-              <span className="text-sm italic text-body-color">{founder.role}</span>
-              <p className="mt-4 text-base text-body-color">{founder.bio}</p>
+              <span className="text-sm italic text-body-color">{founderRole}</span>
+              <p className="mt-4 text-base text-body-color">{founderBio}</p>
             </div>
           </div>
         </section>
 
+        {/* Stats */}
         <section className="py-16" aria-labelledby="stats">
           <div className="container mx-auto px-4 text-center">
             <h2 id="stats" className="mb-8 text-3xl font-semibold text-black">
@@ -108,6 +127,7 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Why Us */}
         <section className="bg-[#f8f9ff] py-16" aria-labelledby="pourquoi-nous">
           <div className="container mx-auto px-4">
             <h2 id="pourquoi-nous" className="mb-8 text-center text-3xl font-semibold text-black">
@@ -130,65 +150,22 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* CTA */}
         <section className="py-16 text-center" aria-labelledby="cta-contact">
           <div className="container mx-auto px-4">
             <h2 id="cta-contact" className="mb-4 text-3xl font-semibold text-black">
-              Prêts à démarrer ?
+              {ctaHeading}
             </h2>
-            <p className="mb-6 text-base text-body-color">
-              Contactez ‑ nous pour un audit gratuit de votre bien et découvrez comment maximiser
-              vos revenus en toute sérénité.
-            </p>
+            <p className="mb-6 text-base text-body-color">{ctaText}</p>
             <a
-              href="/contact"
+              href={ctaButtonLink}
               className="hover:bg-primary-dark inline-block rounded-full bg-primary px-8 py-4 font-medium text-white transition"
             >
-              Nous contacter
+              {ctaButtonLabel}
             </a>
           </div>
         </section>
       </main>
-
-      <Script id="json-ld-breadcrumb-about" type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'Accueil',
-              item: 'https://www.conciergerie-alsacienne.fr',
-            },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'À propos',
-              item: 'https://www.conciergerie-alsacienne.fr/about',
-            },
-          ],
-        })}
-      </Script>
-
-      <Script id="json-ld-about" type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'AboutPage',
-          name: 'À propos | Conciergerie Alsacienne',
-          url: 'https://www.conciergerie-alsacienne.fr/about',
-          description:
-            'Une conciergerie 100% alsacienne, fondée par des professionnels passionnés. Découvrez notre mission, nos valeurs, notre exigence.',
-          publisher: {
-            '@type': 'Organization',
-            name: 'Conciergerie Alsacienne',
-            url: 'https://www.conciergerie-alsacienne.fr',
-            logo: {
-              '@type': 'ImageObject',
-              url: 'https://www.conciergerie-alsacienne.fr/logo.svg',
-            },
-          },
-        })}
-      </Script>
     </>
   );
 }

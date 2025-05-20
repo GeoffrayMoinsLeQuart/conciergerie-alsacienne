@@ -2,48 +2,34 @@
 
 import { FC } from 'react';
 import SectionTitle from '@/components/Common/SectionTitle';
-import CTAButtons from '@/components/Buttons/CTAButtons';
 import { Mail } from 'lucide-react';
+import { t } from '@/app/libs/content';
 
-const niveaux = [
-  {
-    name: 'Niveau Standard',
-    level: 'standard',
-    bgClass: 'bg-white',
-    textClass: 'text-body-color',
-    items: [
-      'Interventions ciblées pour atteindre nos critères de qualité',
-      'Optimisation des espaces existants',
-      "Sélection d'éléments décoratifs essentiels",
-      "Conseils pour l'aménagement et la disposition",
-      'Idéal pour les biens nécessitant des améliorations ponctuelles',
-    ],
-  },
-  {
-    name: 'Niveau Luxe',
-    level: 'luxe',
-    bgClass: 'bg-primary',
-    textClass: 'text-white text-opacity-90',
-    items: [
-      'Transformation complète pour un positionnement ultra-premium',
-      "Conception d'ambiance sur mesure",
-      'Mobilier et équipements haut de gamme',
-      'Éléments décoratifs exclusifs',
-      "Parfait pour les biens de caractère visant l'excellence",
-    ],
-  },
-];
+const pageKey = 'conciergerie';
+const baseKey = 'Conciergerie.NotreExpertise';
 
 const NotreExpertise: FC = () => {
+  const mainTitle   = t(pageKey, `${baseKey}.mainTitle`)   as string;
+  const title       = t(pageKey, `${baseKey}.title`)       as string;
+  const paragraph   = t(pageKey, `${baseKey}.paragraph`)   as string;
+  const niveaux     = t(pageKey, `${baseKey}.niveaux`)     as Array<{ name: string; level: string; items: string[] }>;
+  const footerText  = t(pageKey, `${baseKey}.footerText`)  as string;
+  const ctaLabel    = t(pageKey, `${baseKey}.cta.label`)   as string;
+  const ctaHref     = t(pageKey, `${baseKey}.cta.href`)    as string;
+
   return (
-    <section id="expertise" aria-labelledby="expertise-heading" className="bg-[#f8f9ff] py-20">
-      <div className="container">
+    <section
+      id="expertise"
+      aria-labelledby="expertise-heading"
+      className="bg-[#f8f9ff] py-20"
+    >
+      <div className="container mx-auto px-4">
         <header className="mb-10 text-center">
           <SectionTitle
             id="expertise-heading"
-            mainTitle="NOTRE EXPERTISE"
-            title="Sublimez Votre Bien Immobilier"
-            paragraph="Notre expertise ne se limite pas à la gestion locative. Nous proposons également un service d'accompagnement pour la décoration et l'aménagement de votre bien, vous permettant ainsi de maximiser son potentiel et son attractivité."
+            mainTitle={mainTitle}
+            title={title}
+            paragraph={paragraph}
             center
           />
         </header>
@@ -53,19 +39,19 @@ const NotreExpertise: FC = () => {
             <article
               key={niveau.level}
               aria-labelledby={`expertise-${niveau.level}`}
-              className={`rounded-lg p-8 shadow-md ${niveau.bgClass}`}
+              className={`rounded-lg p-8 shadow-md ${
+                niveau.level === 'luxe' ? 'bg-primary text-white' : 'bg-white text-black'
+              }`}
             >
               <h3
                 id={`expertise-${niveau.level}`}
-                className={`mb-4 text-2xl font-bold ${
-                  niveau.level === 'luxe' ? 'text-white' : 'text-black'
-                }`}
+                className="mb-4 text-2xl font-bold"
               >
                 {niveau.name}
               </h3>
               <ul className="mb-6 space-y-4 list-disc list-inside">
                 {niveau.items.map((item, i) => (
-                  <li key={i} className={`text-base font-medium ${niveau.textClass}`}>
+                  <li key={i} className="text-base font-medium">
                     {item}
                   </li>
                 ))}
@@ -75,19 +61,17 @@ const NotreExpertise: FC = () => {
         </div>
 
         <footer className="mt-10 text-center">
-          <p className="mb-6 text-base font-medium leading-relaxed text-body-color">
-            Les tarifs de ces services sont déterminés sur devis après évaluation complète de votre
-            bien et de vos objectifs.
+          <p className="mb-6 text-base font-medium text-body-color">
+            {footerText}
           </p>
-          <CTAButtons
-            primary={{
-              label: 'Demander un devis personnalisé',
-              href: '/contact',
-              icon: <Mail className="h-5 w-5" />,
-              colorClass:
-                'inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-opacity-90 lg:px-7',
-            }}
-          />
+          <a
+            href={ctaHref}
+            className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-white hover:bg-opacity-90"
+            aria-label={ctaLabel}
+          >
+            <Mail className="h-5 w-5 mr-2" />
+            {ctaLabel}
+          </a>
         </footer>
       </div>
     </section>

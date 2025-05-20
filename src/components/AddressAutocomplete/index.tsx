@@ -1,29 +1,18 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 
-// Types pour les propriétés du composant
-interface AddressAutocompleteProps {
-  onAddressSelect: (addressComponents: AddressComponents) => void;
-  placeholder?: string;
-  label?: string;
-  required?: boolean;
-  className?: string;
-}
-
-// Types pour les composants d'adresse
+// Types pour l’auto-complétion
 export interface AddressComponents {
   streetNumber: string;
   street: string;
   city: string;
   postalCode: string;
-  department: string; // Department name
+  department: string;
   fullAddress: string;
-  location: {
-    lat: number;
-    lng: number;
-  };
+  location: { lat: number; lng: number };
 }
 
-// Interface pour les propriétés d'une suggestion d'adresse (incluant context)
 interface AddressFeature {
   properties: {
     label: string;
@@ -31,123 +20,113 @@ interface AddressFeature {
     street?: string;
     city: string;
     postcode: string;
-    context?: string; // e.g., "67, Bas-Rhin, Grand Est"
+    context?: string;
   };
-  geometry: {
-    coordinates: [number, number]; // [longitude, latitude]
-  };
+  geometry: { coordinates: [number, number] };
 }
 
-// Composant d'auto-complétion d'adresse réutilisable utilisant l'API Adresse (BAN)
+interface AddressAutocompleteProps {
+  value?: string; // valeur contrôlée par Formik
+  onAddressSelect: (addressComponents: AddressComponents) => void;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  className?: string;
+}
+
 const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
+  value,
   onAddressSelect,
   placeholder = "Commencez à saisir l'adresse...",
   label = 'Adresse du bien',
   required = true,
   className = '',
 }) => {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(value || '');
   const [suggestions, setSuggestions] = useState<AddressFeature[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [selectedAddress, setSelectedAddress] = useState<AddressComponents | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLUListElement>(null);
 
+  // 1️⃣ Resynchronisation si Formik change `value`
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    if (value !== undefined && value !== inputValue) {
+      setInputValue(value);
+    }
+  }, [value]);
+
+  // 2️⃣ Ferme la dropdown au clic hors champ
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (
         suggestionsRef.current &&
-        !suggestionsRef.current.contains(event.target as Node) &&
+        !suggestionsRef.current.contains(e.target as Node) &&
         inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
+        !inputRef.current.contains(e.target as Node)
       ) {
         setShowSuggestions(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const searchAddresses = async (query: string) => {
-    if (!query || query.length < 3) {
+  const searchAddresses = async (q: string) => {
+    if (q.length < 3) {
       setSuggestions([]);
       return;
     }
-
     setLoading(true);
     try {
-      // Include context=true in the API call to get department info
-      const response = await fetch(
-        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5&autocomplete=1`, // Added autocomplete=1 for better suggestions
+      const res = await fetch(
+        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(
+          q
+        )}&limit=5&autocomplete=1`
       );
-      const data = await response.json();
+      const data = await res.json();
       setSuggestions(Array.isArray(data.features) ? data.features : []);
-    } catch (error) {
-      console.error("Erreur lors de la recherche d'adresses:", error);
+    } catch {
       setSuggestions([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSelectAddress = (feature: AddressFeature) => {
-    const properties = feature.properties;
-    const coordinates = feature.geometry.coordinates;
-
-    // Extract department name from context
-    let departmentName = '';
-    if (properties.context) {
-      const contextParts = properties.context.split(',').map((part) => part.trim());
-      // Department name is usually the second part (index 1)
-      if (contextParts.length >= 2) {
-        departmentName = contextParts[1];
-      }
+  const handleSelect = (feat: AddressFeature) => {
+    const p = feat.properties;
+    const coords = feat.geometry.coordinates;
+    let dept = '';
+    if (p.context) {
+      const parts = p.context.split(',').map((s) => s.trim());
+      if (parts[1]) dept = parts[1];
     }
-
-    const addressComponents: AddressComponents = {
-      streetNumber: properties.housenumber || '',
-      street: properties.street || '',
-      city: properties.city || '',
-      postalCode: properties.postcode || '',
-      department: departmentName, // <-- Use extracted department name
-      fullAddress: properties.label || '',
-      location: {
-        lat: coordinates[1],
-        lng: coordinates[0],
-      },
+    const comp: AddressComponents = {
+      streetNumber: p.housenumber || '',
+      street: p.street || '',
+      city: p.city,
+      postalCode: p.postcode,
+      department: dept,
+      fullAddress: p.label,
+      location: { lat: coords[1], lng: coords[0] },
     };
-
-    setInputValue(properties.label);
-    setSelectedAddress(addressComponents);
+    setInputValue(p.label);
     setShowSuggestions(false);
-
-    if (onAddressSelect) {
-      onAddressSelect(addressComponents);
-    }
+    onAddressSelect(comp);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
-
-    if (selectedAddress && selectedAddress.fullAddress !== value) {
-      setSelectedAddress(null);
-    }
-
-    searchAddresses(value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value;
+    setInputValue(v);
+    // l’utilisateur modifie manuellement => on peut éventuellement réinitialiser la sélection
+    searchAddresses(v);
     setShowSuggestions(true);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (suggestions.length > 0) {
-        handleSelectAddress(suggestions[0]);
-      }
+      if (suggestions.length) handleSelect(suggestions[0]);
     }
   };
 
@@ -157,16 +136,15 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <input
-        aria-required="true"
+        aria-required={required}
         ref={inputRef}
         type="text"
         value={inputValue}
-        onChange={handleInputChange}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
+        autoComplete="off"
         className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required={required}
-        autoComplete="off" // Disable browser autocomplete
       />
 
       {loading && (
@@ -184,12 +162,15 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
               r="10"
               stroke="currentColor"
               strokeWidth="4"
-            ></circle>
+            />
             <path
               className="opacity-75"
               fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
+              d="M4 12a8 8 0 018-8V0C5.373 0 0
+                 5.373 0 12h4zm2 5.291A7.962
+                 7.962 0 014 12H0c0 3.042
+                 1.135 5.824 3 7.938l3-2.647z"
+            />
           </svg>
         </div>
       )}
@@ -199,28 +180,31 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
           ref={suggestionsRef}
           className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-gray-300 bg-white shadow-lg"
         >
-          {suggestions.map((feature, index) => (
+          {suggestions.map((f, i) => (
             <li
-              key={index}
+              key={i}
               className="cursor-pointer border-b border-gray-100 px-4 py-2 last:border-b-0 hover:bg-blue-50"
-              onClick={() => handleSelectAddress(feature)}
+              onClick={() => handleSelect(f)}
             >
-              <div className="font-medium">{feature.properties.label}</div>
+              <div className="font-medium">{f.properties.label}</div>
               <div className="text-sm text-gray-500">
-                {feature.properties.postcode} {feature.properties.city}
-                {/* Optionally display context if available */}
-                {/* {feature.properties.context && ` (${feature.properties.context})`} */}
+                {f.properties.postcode} {f.properties.city}
               </div>
             </li>
           ))}
         </ul>
       )}
 
-      {showSuggestions && inputValue.length >= 3 && suggestions.length === 0 && !loading && (
-        <div className="absolute z-10 mt-1 w-full rounded-lg border border-gray-300 bg-white p-4 text-center shadow-lg">
-          <p className="text-gray-500">Aucune adresse trouvée. Veuillez vérifier votre saisie.</p>
-        </div>
-      )}
+      {showSuggestions &&
+        inputValue.length >= 3 &&
+        !loading &&
+        suggestions.length === 0 && (
+          <div className="absolute z-10 mt-1 w-full rounded-lg border border-gray-300 bg-white p-4 text-center shadow-lg">
+            <p className="text-gray-500">
+              Aucune adresse trouvée. Veuillez vérifier votre saisie.
+            </p>
+          </div>
+        )}
     </div>
   );
 };

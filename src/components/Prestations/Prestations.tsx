@@ -1,4 +1,3 @@
-// src/components/Prestations/Prestations.tsx
 'use client';
 
 import { FC } from 'react';
@@ -32,20 +31,13 @@ const Prestations: FC<PrestationsProps> = ({ prestations }) => (
 
           <div className="flex-1 flex flex-col justify-between">
             <div>
-              <h3
-                id={`prestation-title-${index}`}
-                className="mb-3 text-xl font-bold text-black"
-              >
+              <h3 id={`prestation-title-${index}`} className="mb-3 text-xl font-bold text-black">
                 {prestation.title}
               </h3>
-              <p className="mb-4 text-lg font-medium text-gray-700">
-                {prestation.description}
-              </p>
+              <p className="mb-4 text-lg font-medium text-gray-700">{prestation.description}</p>
             </div>
 
-            <p className="text-base leading-relaxed text-body-color">
-              {prestation.details}
-            </p>
+            <p className="text-base leading-relaxed text-body-color">{prestation.details}</p>
           </div>
         </article>
       </li>

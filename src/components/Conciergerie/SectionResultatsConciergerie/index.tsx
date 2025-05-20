@@ -2,52 +2,48 @@
 
 import { FC } from 'react';
 import SectionTitle from '@/components/Common/SectionTitle';
-import dynamic from 'next/dynamic';
+import { t } from '@/app/libs/content';
 
-const MotionArticle = dynamic(() => import('framer-motion').then((mod) => mod.motion.article), {
-  ssr: false,
-});
+const pageKey = 'conciergerie';
+const baseKey = 'Conciergerie.SectionResultatsConciergerie';
 
-const stats = [
-  { value: '+35%', label: 'de revenus en moyenne' },
-  { value: '100%', label: 'automatisé & délégué' },
-  { value: '0€', label: 'de frais fixes (formule au % seulement)' },
-  { value: '4.6⭐', label: 'moyenne des avis voyageurs' },
-];
+interface Stat {
+  value: string;
+  label: string;
+}
 
-const SectionResultatsConciergerie: FC = () => {
+export default function SectionResultatsConciergerie() {
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`) as string;
+  const title = t(pageKey, `${baseKey}.title`) as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`) as string;
+  const stats = t(pageKey, `${baseKey}.stats`) as Stat[];
+
   return (
     <section id="resultats" aria-labelledby="resultats-heading" className="bg-[#f8f9ff] py-20">
-      <div className="container">
+      <div className="container mx-auto px-4">
         <header className="mb-12 text-center">
           <SectionTitle
             id="resultats-heading"
-            mainTitle="RÉSULTATS CONCRETS"
-            title="Ce que nos clients obtiennent réellement"
-            paragraph="Notre modèle repose sur une stratégie de valorisation et une optimisation constante de vos performances locatives."
+            mainTitle={mainTitle}
+            title={title}
+            paragraph={paragraph}
             center
           />
         </header>
 
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, index) => (
-            <MotionArticle
+            <article
               key={index}
               className="rounded-lg bg-white p-6 text-center shadow-md"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              viewport={{ once: true }}
               aria-label={`${stat.value} ${stat.label}`}
             >
               <p className="text-4xl font-bold text-primary">{stat.value}</p>
               <p className="mt-2 text-base font-medium text-body-color">{stat.label}</p>
-            </MotionArticle>
+            </article>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default SectionResultatsConciergerie;
+}

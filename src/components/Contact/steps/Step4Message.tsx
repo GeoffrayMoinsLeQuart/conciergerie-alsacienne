@@ -1,23 +1,34 @@
+// src/components/Contact/steps/Step4Message.tsx
 'use client';
 
 import React from 'react';
 import { Field, ErrorMessage, useFormikContext } from 'formik';
 import { ContactFormValues } from '@/types/form';
+import { t } from '@/app/libs/content';
 
-/**
- * Step4Message component handles the final step of the form wizard
- * collecting additional message and consent for privacy policy.
- */
-const Step4Message: React.FC = () => {
+const pageKey = 'contact';
+
+export default function Step4Message() {
   const { errors, submitCount } = useFormikContext<ContactFormValues>();
+
+  const legend = t(pageKey, 'Contact.Step4Message.legend') as string;
+  const messageLabel = t(pageKey, 'Contact.Step4Message.messageLabel') as string;
+  const messagePlaceholder = t(pageKey, 'Contact.Step4Message.messagePlaceholder') as string;
+  const preferredContactLabel = t(pageKey, 'Contact.Step4Message.preferredContactLabel') as string;
+  const preferredOptions = t(pageKey, 'Contact.Step4Message.preferredOptions') as Record<
+    string,
+    string
+  >;
+  const consentLabel = t(pageKey, 'Contact.Step4Message.consentLabel') as string;
+  const privacyLinkText = t(pageKey, 'Contact.Step4Message.privacyLinkText') as string;
 
   return (
     <fieldset className="animate-fadeIn">
-      <legend className="text-xl font-semibold text-gray-800 mb-4">Message & Consentement</legend>
+      <legend className="text-xl font-semibold text-gray-800 mb-4">{legend}</legend>
 
       <div className="mb-6">
-        <label htmlFor="message" className="block font-medium text-gray-700">
-          Message / Commentaires
+        <label htmlFor="message" className="block font-medium text-gray-700 mb-2">
+          {messageLabel}
         </label>
         <Field
           as="textarea"
@@ -25,27 +36,21 @@ const Step4Message: React.FC = () => {
           id="message"
           rows={4}
           className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow resize-none"
-          placeholder="Précisez votre projet, vos questions ou vos besoins spécifiques..."
+          placeholder={messagePlaceholder}
         />
       </div>
 
       <div className="sm:col-span-2 mb-6">
         <label className="mb-1 block text-sm font-medium text-gray-700">
-          Je préfère être contacté par <span className="text-red-500">*</span>
+          {preferredContactLabel} <span className="text-red-500">*</span>
         </label>
         <div role="group" aria-labelledby="preferred-channel-group" className="flex gap-4">
-          <label className="flex items-center">
-            <Field type="radio" name="preferredChannel" value="call" className="mr-2" />
-            Appel
-          </label>
-          <label className="flex items-center">
-            <Field type="radio" name="preferredChannel" value="whatsapp" className="mr-2" />
-            WhatsApp
-          </label>
-          <label className="flex items-center">
-            <Field type="radio" name="preferredChannel" value="email" className="mr-2" />
-            Email
-          </label>
+          {Object.entries(preferredOptions).map(([value, label]) => (
+            <label key={value} className="flex items-center">
+              <Field type="radio" name="preferredChannel" value={value} className="mr-2" />
+              {label}
+            </label>
+          ))}
         </div>
         {errors.preferredChannel && (
           <p className="mt-1 text-sm text-red-600">{errors.preferredChannel}</p>
@@ -62,12 +67,10 @@ const Step4Message: React.FC = () => {
             className="h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded mt-1 mr-2"
           />
           <label htmlFor="consent" className="text-gray-700">
-            J'accepte la politique de confidentialité et le traitement de mes données personnelles
-            pour être contacté(e) par Conciergerie Alsacienne.
+            {consentLabel}
             <span className="text-red-500">*</span>
           </label>
         </div>
-        {/* Only show consent error after submission attempt */}
         {submitCount > 0 && errors.consent && (
           <ErrorMessage name="consent" component="div" className="text-sm text-red-500 mt-1" />
         )}
@@ -75,17 +78,13 @@ const Step4Message: React.FC = () => {
 
       <div className="text-sm text-gray-500 mt-6">
         <p>
-          En soumettant ce formulaire, vous acceptez que les informations saisies soient utilisées
-          pour vous recontacter dans le cadre de votre demande. Pour connaître et exercer vos
-          droits, consultez notre
+          {t(pageKey, 'Contact.Step4Message.footer')}
           <a href="/politique-confidentialite" className="text-primary hover:underline">
-            politique de confidentialité
+            {privacyLinkText}
           </a>
           .
         </p>
       </div>
     </fieldset>
   );
-};
-
-export default Step4Message;
+}

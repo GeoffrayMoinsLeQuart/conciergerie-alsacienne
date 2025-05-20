@@ -13,10 +13,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import CTAButtons from '../Buttons/CTAButtons';
 import { BookOpen } from 'lucide-react';
-import Script from 'next/script';
+import { t } from '@/app/libs/content';
 
 export default function HomeBlogSection() {
   const [posts, setPosts] = useState<Blog[]>([]);
+  const pageKey = 'home';
 
   useEffect(() => {
     async function fetchData() {
@@ -27,19 +28,12 @@ export default function HomeBlogSection() {
     fetchData();
   }, []);
 
-  const blogSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Blog',
-    name: 'Blog de la Conciergerie Alsacienne',
-    url: 'https://www.conciergerie-alsacienne.fr/blog',
-    blogPost: posts.slice(0, 6).map((post) => ({
-      '@type': 'BlogPosting',
-      headline: post.title,
-      description: post.metadata || '',
-      url: `https://www.conciergerie-alsacienne.fr/blog/${post.slug}`,
-      datePublished: post.publishedAt,
-    })),
-  };
+  // Texte externes
+  const sectionLabel = t(pageKey, 'BlogSection.label');
+  const title = t(pageKey, 'BlogSection.title');
+  const description = t(pageKey, 'BlogSection.description');
+  const carouselAria = t(pageKey, 'BlogSection.carouselAriaDescription');
+  const ctaLabel = t(pageKey, 'BlogSection.ctaLabel');
 
   return (
     <section
@@ -52,19 +46,14 @@ export default function HomeBlogSection() {
         <header className="mx-[-16px] flex flex-wrap text-center">
           <div className="w-full px-4">
             <div className="mx-auto mb-[50px] max-w-[600px]">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Blog de la Conciergerie
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">{sectionLabel}</span>
               <h2
                 id="blog-section-title"
                 className="mb-5 text-3xl font-bold text-black sm:text-4xl md:text-[45px]"
               >
-                Nos derniers conseils et actualités
+                {title}
               </h2>
-              <p className="text-lg font-medium text-body-color">
-                Optimisation, réglementation, bonnes pratiques : tout pour booster vos revenus
-                locatifs.
-              </p>
+              <p className="text-lg font-medium text-body-color">{description}</p>
             </div>
           </div>
         </header>
@@ -73,9 +62,8 @@ export default function HomeBlogSection() {
         <div
           className="relative mb-10 block lg:hidden"
           aria-roledescription="carousel"
-          aria-label="Articles récents du blog"
+          aria-label={carouselAria}
         >
-          {/* Flèches customisées */}
           <div className="swiper-button-prev-custom absolute -left-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90">
             ←
           </div>
@@ -102,7 +90,7 @@ export default function HomeBlogSection() {
           </Swiper>
         </div>
 
-        {/* Masonry desktop (sans role ARIA) */}
+        {/* Masonry desktop */}
         <div className="hidden flex-1 lg:block">
           <Masonry
             breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
@@ -115,11 +103,11 @@ export default function HomeBlogSection() {
           </Masonry>
         </div>
 
-        {/* CTA toujours centré en bas */}
+        {/* CTA */}
         <div className="mt-12 text-center">
           <CTAButtons
             primary={{
-              label: 'Voir tous les articles',
+              label: ctaLabel,
               href: '/blog',
               icon: <BookOpen className="h-5 w-5" />,
               colorClass: 'bg-primary text-white hover:bg-primary/90',
@@ -127,16 +115,6 @@ export default function HomeBlogSection() {
           />
         </div>
       </div>
-
-      {/* Schema.org injecté dynamiquement */}
-      {posts.length > 0 && (
-        <Script
-          id="blog-schema"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
-        />
-      )}
     </section>
   );
 }

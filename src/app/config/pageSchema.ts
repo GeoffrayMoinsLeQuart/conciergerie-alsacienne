@@ -6,18 +6,73 @@ import { generateBreadcrumbList } from '@/utils/BreadcrumbGenerator';
 
 const siteURL = 'https://www.conciergerie-alsacienne.fr';
 const siteName = 'Conciergerie Alsacienne';
+const homeURL = siteURL + '/';
 
-export const homeSchema = {
-  '@context': 'https://schema.org',
+/**
+ * Node “WebSite” (votre homeSchema existant)
+ */
+export const homeWebsiteSchema = {
   '@type': 'WebSite',
   name: 'Conciergerie Alsacienne',
-  url: 'https://www.conciergerie-alsacienne.fr',
+  url: siteURL,
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://www.conciergerie-alsacienne.fr/faq?q={search_term_string}',
+    target: `${siteURL}/faq?q={search_term_string}`,
     'query-input': 'required name=search_term_string',
   },
 };
+
+/**
+ * Node “WebPage” pour la page d'accueil
+ * avec action de contact intégrée
+ */
+export const homeWebPageSchema = {
+  '@type': 'WebPage',
+  name: 'Accueil | Conciergerie Alsacienne',
+  url: homeURL,
+  potentialAction: [
+    {
+      '@type': 'ContactAction',
+      target: `${siteURL}/contact`,
+      name: 'Envoyer une demande de contact',
+    },
+  ],
+};
+
+/**
+ * Génère le schema complet @graph pour la homepage
+ */
+export function makeHomePageSchema(posts: Blog[], properties: Property[]) {
+  // Blog + derniers articles
+  const blogNode = {
+    '@type': 'Blog',
+    name: 'Blog de la Conciergerie Alsacienne',
+    url: `${siteURL}/blog`,
+    blogPost: posts.slice(0, 6).map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.metadata || '',
+      url: `${siteURL}/blog/${post.slug}`,
+      datePublished: post.publishedAt,
+    })),
+  };
+
+  // Liste des biens (3 premiers)
+  const propertiesNode = {
+    '@type': 'ItemList',
+    itemListElement: properties.slice(0, 3).map((prop, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: prop.slug?.current || prop._id,
+      url: `${siteURL}/nos-biens/${prop.slug?.current}`,
+    })),
+  };
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [homeWebsiteSchema, homeWebPageSchema, blogNode, propertiesNode],
+  };
+}
 
 export const errorSchema = {
   '@context': 'https://schema.org',

@@ -1,8 +1,23 @@
+'use client';
+
 import FAQ from '@/components/FAQ';
 import SectionTitle from '@/components/Common/SectionTitle';
+import { t } from '@/app/libs/content';
 import type { FAQItem } from '@/types/faq';
 
-export default function FaqConciergerie({ items }: { items: FAQItem[] }) {
+interface Props {
+  items: FAQItem[];
+}
+
+export default function FaqConciergerie({ items }: Props) {
+  const pageKey = 'conciergerie';
+  const baseKey = 'Conciergerie.FaqConciergerie';
+
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`) as string;
+  const title = t(pageKey, `${baseKey}.title`) as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`) as string;
+  const subtitle = t(pageKey, `${baseKey}.subtitle`) as string;
+
   return (
     <section
       id="faq-conciergerie"
@@ -13,9 +28,9 @@ export default function FaqConciergerie({ items }: { items: FAQItem[] }) {
         <header className="mb-12 text-center">
           <SectionTitle
             id="faq-conciergerie-heading"
-            mainTitle="FAQ CONCIERGERIE"
-            title="Vos questions les plus fréquentes"
-            paragraph="Retrouvez toutes les réponses concernant nos services de conciergerie haut de gamme."
+            mainTitle={mainTitle}
+            title={title}
+            paragraph={paragraph}
             center
           />
         </header>
@@ -25,7 +40,7 @@ export default function FaqConciergerie({ items }: { items: FAQItem[] }) {
           defaultType="conciergerie"
           showTopicFilter
           specificPage
-          subtitle="Tout ce que vous devez savoir pour faire le bon choix."
+          subtitle={subtitle}
         />
       </div>
     </section>

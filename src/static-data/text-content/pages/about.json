@@ -1,0 +1,46 @@
+{
+  "About": {
+    "pageTitle": "À Propos",
+    "pageDescription": "Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme",
+    "Hero": {
+      "title": "Conciergerie Alsacienne",
+      "subtitle": "Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme",
+      "imageAlt": "Maison traditionnelle alsacienne"
+    },
+    "Mission": {
+      "heading": "Notre mission",
+      "text": "Nous allions passion du terroir et expertise hôtelière pour offrir un service clé en main, local et personnalisé."
+    },
+    "Founder": {
+      "name": "Jean Dupont",
+      "role": "Fondateur & Expert Local",
+      "bio": "Après 10 ans dans la gestion hôtelière et Airbnb, Jean a créé la Conciergerie Alsacienne pour proposer un accompagnement premium, à taille humaine.",
+      "photoAlt": "Portrait de Jean Dupont"
+    },
+    "Stats": [
+      { "label": "Biens gérés", "value": "120+" },
+      { "label": "Clients satisfaits", "value": "85 %" },
+      { "label": "Années d'expérience", "value": "10" }
+    ],
+    "WhyUs": [
+      {
+        "icon": "🏠",
+        "title": "Expertise locale",
+        "desc": "Une connaissance pointue du marché alsacien."
+      },
+      {
+        "icon": "🎯",
+        "title": "Service sur mesure",
+        "desc": "Des offres taillées pour vos besoins."
+      },
+      { "icon": "⚡️", "title": "Réactivité", "desc": "Nous sommes disponibles 7j/7, 24h/24." },
+      { "icon": "🔍", "title": "Transparence", "desc": "Rapports clairs et bilans réguliers." }
+    ],
+    "CTA": {
+      "heading": "Prêts à démarrer ?",
+      "text": "Contactez - nous pour un audit gratuit de votre bien et découvrez comment maximiser vos revenus en toute sérénité.",
+      "buttonLabel": "Nous contacter",
+      "buttonLink": "/contact"
+    }
+  }
+}

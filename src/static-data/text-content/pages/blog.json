@@ -1,0 +1,26 @@
+{
+  "Blog": {
+    "pageTitle": "Notre Blog",
+    "pageDescription": "Découvrez nos articles sur les services de conciergerie en Alsace et les meilleures adresses de la région.",
+    "aria": {
+      "mainLabel": "Contenu principal du blog"
+    },
+    "Section": {
+      "ariaLabel": "Articles du blog",
+      "loading": "Chargement du blog..."
+    },
+    "BlogClient": {
+      "filtersLabel": "Filtres du blog",
+      "noResultsTitle": "Aucun article trouvé",
+      "noResultsText": "Essayez d'ajuster vos filtres ou votre recherche.",
+      "resultsAriaLabel": "Résultats des articles filtrés"
+    }
+  },
+  "BlogSlug": {
+    "backLinkLabel": "← Retour aux articles",
+    "mainImageAltFallback": "Image de l'article",
+    "authorAltFallback": "Auteur",
+    "byAuthorPrefix": "Par ",
+    "categoriesHeading": "Catégories:"
+  }
+}

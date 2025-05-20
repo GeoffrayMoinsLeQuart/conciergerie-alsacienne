@@ -2,23 +2,23 @@
 'use client';
 
 import { FC } from 'react';
-import SectionTitle from '@/components/Common/SectionTitle';
-import { prestationConciergerie, prestationGestionLocative } from '@/static-data/prestation';
 import { usePathname } from 'next/navigation';
+import SectionTitle from '@/components/Common/SectionTitle';
 import Prestations from '@/components/Prestations/Prestations';
+import { prestationConciergerie } from '@/static-data/prestation';
+import { t } from '@/app/libs/content';
 
 const NosPrestations: FC = () => {
+  const pageKey = 'conciergerie'; // JSON file name
+  const baseKey = 'Conciergerie.NosPrestations';
+
+  // Externalized constants
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`) as string;
+  const title = t(pageKey, `${baseKey}.titleConciergerie`) as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraphConciergerie`) as string;
+
+  // Logic remain unchanged
   const pathname = usePathname() || '';
-  const isGestion = pathname.includes('gestion-locative');
-  const prestations = isGestion ? prestationGestionLocative : prestationConciergerie;
-
-  const title = isGestion
-    ? 'Une gestion complète et transparente'
-    : 'Une conciergerie complète pour votre bien';
-
-  const paragraph = isGestion
-    ? "Nous prenons en charge tous les aspects de la gestion locative pour vous offrir une tranquillité d'esprit totale."
-    : 'Nous proposons une gamme complète de services pour assurer une gestion optimale de votre bien et une expérience exceptionnelle pour vos voyageurs.';
 
   return (
     <section
@@ -30,7 +30,7 @@ const NosPrestations: FC = () => {
         <header className="mb-12 text-center">
           <SectionTitle
             id="nos-prestations-title"
-            mainTitle="NOS PRESTATIONS"
+            mainTitle={mainTitle}
             title={title}
             paragraph={paragraph}
             center
@@ -38,7 +38,7 @@ const NosPrestations: FC = () => {
         </header>
 
         {/* Semantic list for accessibility/mobile */}
-        <Prestations prestations={prestations} />
+        <Prestations prestations={prestationConciergerie} />
       </div>
     </section>
   );

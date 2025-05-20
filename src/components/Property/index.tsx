@@ -1,19 +1,13 @@
-// src/components/Properties.tsx
 'use client';
 
 import { useState } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import SectionTitle from '../Common/SectionTitle';
-import { Property } from '@/types/property';
 import PropertyCard from './PropertyCard';
 import CTAButtons from '../Buttons/CTAButtons';
 import { Home } from 'lucide-react';
-
-const propertyTags = [
-  { label: 'Tous', value: 'All', icon: '✨' },
-  { label: 'Conciergerie', value: 'Conciergerie', icon: '🛏' },
-  { label: 'Gestion Locative', value: 'Gestion Locative', icon: '🏠' },
-];
+import { t } from '@/app/libs/content';
+import { Property } from '@/types/property';
 
 export default function Properties({
   properties,
@@ -23,13 +17,29 @@ export default function Properties({
   homePage?: boolean;
 }) {
   const [activeTag, setActiveTag] = useState('All');
+  const pageKey = 'home';
 
-  const filteredItems = (() => {
-    if (!Array.isArray(properties)) return [];
-    if (activeTag === 'All') return properties;
-    return properties.filter((p) => p.modeGestion === activeTag);
-  })();
+  // Texte externes
+  const { mainTitle, title, paragraph } = t(pageKey, 'Properties.SectionTitle') as {
+    mainTitle: string;
+    title: string;
+    paragraph: string;
+  };
+  const ariaFilter = t(pageKey, 'Properties.aria.filterListLabel') as string;
+  const tags = t(pageKey, 'Properties.tags') as Array<{
+    label: string;
+    value: string;
+    icon: string;
+  }>;
+  const noResultsText = t(pageKey, 'Properties.noResultsText') as string;
+  const ctaLabel = t(pageKey, 'Properties.ctaLabel') as string;
 
+  // Filtrage
+  const filteredItems = Array.isArray(properties)
+    ? activeTag === 'All'
+      ? properties
+      : properties.filter((p) => p.modeGestion === activeTag)
+    : [];
   const displayedItems = homePage ? filteredItems.slice(0, 3) : filteredItems.slice(0, 3);
 
   return (
@@ -42,16 +52,20 @@ export default function Properties({
         <header className="mb-12 text-center">
           <SectionTitle
             id="section-properties-title"
-            mainTitle="NOS BIENS EN GESTION"
-            title="Des logements soigneusement sélectionnés"
-            paragraph="Appartements, studios ou maisons — chaque bien que nous gérons est optimisé pour la rentabilité et pensé pour offrir une expérience exceptionnelle."
+            mainTitle={mainTitle}
+            title={title}
+            paragraph={paragraph}
             center
           />
         </header>
 
         {/* Filtres */}
-        <div className="mb-10 flex flex-wrap items-center justify-center gap-4">
-          {propertyTags.map((tag) => (
+        <div
+          className="mb-10 flex flex-wrap items-center justify-center gap-4"
+          role="group"
+          aria-label={ariaFilter}
+        >
+          {tags.map((tag) => (
             <button
               key={tag.value}
               onClick={() => setActiveTag(tag.value)}
@@ -61,7 +75,6 @@ export default function Properties({
                   : 'border border-gray-300 bg-white text-gray-700 hover:text-primary'
               }`}
               aria-pressed={activeTag === tag.value}
-              aria-label={`Filtrer les biens par ${tag.label}`}
             >
               <span>{tag.icon}</span>
               {tag.label}
@@ -87,7 +100,7 @@ export default function Properties({
               </ResponsiveMasonry>
             ) : (
               <p className="text-center text-gray-500" role="status" aria-live="polite">
-                Aucun bien trouvé pour ce filtre.
+                {noResultsText}
               </p>
             )}
 
@@ -96,10 +109,9 @@ export default function Properties({
               <div className="mt-10 text-center">
                 <CTAButtons
                   primary={{
-                    label: 'Voir tous nos biens',
+                    label: ctaLabel,
                     href: '/nos-biens',
                     icon: <Home className="h-5 w-5" />,
-                    colorClass: 'bg-primary text-white hover:bg-primary/90',
                   }}
                 />
               </div>

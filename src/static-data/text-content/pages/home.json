@@ -1,0 +1,76 @@
+{
+  "AriaLabelHome": "Page d'accueil des Clés d'Alsace",
+  "Hero": {
+    "title": "Conciergerie & Gestion Locative à Mulhouse",
+    "subtitle": "Une expertise locale pour une gestion rentable et sereine.",
+    "tagline": "Proximité, exigence, sérénité.",
+    "primaryLabel": "Estimer mes revenus",
+    "secondaryLabel": "Nous contacter",
+    "imageAlt": "Location meublée premium en Alsace"
+  },
+  "About": {
+    "aria": {
+      "titleId": "about-title",
+      "promiseListLabel": "Liste de nos promesses",
+      "statsListLabel": "Statistiques clés"
+    },
+    "title": "Une gestion sans souci, pensée pour votre rentabilité",
+    "description": "Une équipe locale, expérimentée et exigeante — pour une gestion réellement optimisée, centrée sur vos objectifs.",
+    "promiseHeading": "Notre promesse",
+    "promises": [
+      "Connaissance approfondie du marché local",
+      "Service personnalisé avec interlocuteur unique",
+      "Transparence totale et reporting détaillé",
+      "Optimisation continue de vos revenus"
+    ],
+    "ctaLabel": "Discutons de votre projet",
+    "stats": [
+      { "label": "Biens gérés", "value": "120" },
+      { "label": "Voyageurs accueillis", "value": "3500" },
+      { "label": "Années d'expérience", "value": "8" },
+      { "label": "Taux d'occupation moyen", "value": "85%" }
+    ]
+  },
+  "Prestation": {
+    "aria": {
+      "titleId": "prestation-heading"
+    },
+    "mainTitle": "🏆 NOS PRESTATIONS",
+    "title": "Un service complet, taillé pour vos besoins",
+    "paragraph": "Que vous soyez en location courte durée ou en gestion locative classique, nos prestations sont pensées pour maximiser votre rentabilité.",
+    "tabs": {
+      "conciergerie": "🛏 Conciergerie Premium",
+      "gestion": "🏠 Gestion Locative"
+    },
+    "linkLabel": "En savoir plus"
+  },
+  "Properties": {
+    "SectionTitle": {
+      "mainTitle": "NOS BIENS EN GESTION",
+      "title": "Des logements soigneusement sélectionnés",
+      "paragraph": "Appartements, studios ou maisons — chaque bien que nous gérons est optimisé pour la rentabilité et pensé pour offrir une expérience exceptionnelle."
+    },
+    "aria": {
+      "filterListLabel": "Filtrer les biens par"
+    },
+    "tags": [
+      { "label": "Tous", "value": "All", "icon": "✨" },
+      { "label": "Conciergerie", "value": "Conciergerie", "icon": "🛏" },
+      { "label": "Gestion Locative", "value": "Gestion Locative", "icon": "🏠" }
+    ],
+    "noResultsText": "Aucun bien trouvé pour ce filtre.",
+    "ctaLabel": "Voir tous nos biens"
+  },
+  "Testimonial": {
+    "label": "TÉMOIGNAGES",
+    "title": "Ce que disent nos clients",
+    "description": "Découvrez les expériences de nos propriétaires qui nous font confiance pour la gestion de leurs biens en Alsace."
+  },
+  "BlogSection": {
+    "label": "Blog de la Conciergerie",
+    "title": "Nos derniers conseils et actualités",
+    "description": "Optimisation, réglementation, bonnes pratiques : tout pour booster vos revenus locatifs.",
+    "carouselAriaDescription": "Articles récents du blog",
+    "ctaLabel": "Voir tous les articles"
+  }
+}

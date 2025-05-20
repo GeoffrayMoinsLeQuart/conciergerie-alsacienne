@@ -1,0 +1,252 @@
+{
+  "Conciergerie": {
+    "pageAriaLabel": "Page conciergerie haut de gamme",
+    "StickyAnchorMenu": {
+      "navAriaLabel": "Navigation par sections",
+      "mobileButtonAriaLabel": "Menu de navigation mobile",
+      "mobileMenuAriaLabel": "Menu sections",
+      "sections": {
+        "/conciergerie": [
+          { "id": "selection", "label": "Sélection" },
+          { "id": "transformations", "label": "Transformations" },
+          { "id": "prestations", "label": "Prestations" },
+          { "id": "processus", "label": "Processus" },
+          { "id": "expertise", "label": "Expertise" },
+          { "id": "tarifs", "label": "Tarifs" },
+          { "id": "faq-conciergerie", "label": "FAQ" }
+        ],
+        "/gestion-locative": [
+          { "id": "processus", "label": "Prestations" },
+          { "id": "profils", "label": "Profils" },
+          { "id": "garanties", "label": "Garanties" },
+          { "id": "temoignages", "label": "Témoignages" },
+          { "id": "tarifs", "label": "Tarifs" },
+          { "id": "faq-gestion", "label": "FAQ" }
+        ]
+      }
+    },
+    "Intro": {
+      "title": "Conciergerie haut de gamme et optimisation locative",
+      "content": [
+        "Confiez-nous la gestion de votre bien en location courte durée en toute sérénité.",
+        "Notre équipe locale s'occupe de tout : préparation du logement, accueil voyageurs, ménage, suivi technique et ajustements tarifaires.",
+        "Offrez une expérience inoubliable à vos hôtes — et des revenus vraiment optimisés à votre patrimoine."
+      ],
+      "image": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745434488/Conciergerie%20alsacienne/Icon%20landing/Conciergerie/ChatGPT_Image_Apr_23_2025_08_23_19_PM_1_nam8th.webp",
+      "imageAlt": "Illustration conciergerie haut de gamme en Alsace",
+      "buttons": {
+        "primary": { "label": "Discuter de mon projet", "href": "/contact" },
+        "secondary": { "label": "Estimer mes revenus", "href": "/estimation" }
+      }
+    },
+    "SelectionEtAccompagnement": {
+      "mainTitle": "SÉLECTION & ACCOMPAGNEMENT",
+      "title": "Exigence & Transformation",
+      "paragraph": "Notre modèle repose sur deux piliers : une sélection rigoureuse des biens et un accompagnement sur-mesure pour révéler leur potentiel.",
+      "criteria": [
+        {
+          "title": "Design soigné et ambiance unique",
+          "description": "Nous privilégions les biens au caractère unique et à l'esthétique soignée, offrant une expérience mémorable à vos voyageurs."
+        },
+        {
+          "title": "Mobilier harmonieux et de qualité",
+          "description": "Un mobilier de qualité et harmonieux est essentiel pour garantir le confort et la satisfaction de vos hôtes."
+        },
+        {
+          "title": "Équipements modernes et fonctionnels",
+          "description": "Des équipements modernes et fonctionnels pour un confort optimal et une expérience sans faille pour vos voyageurs."
+        },
+        {
+          "title": "Emplacement et attractivité locative",
+          "description": "L'emplacement et les caractéristiques du bien doivent permettre une valorisation premium et des revenus optimisés."
+        }
+      ],
+      "approachTitle": "Notre Approche de Sélection",
+      "approachParagraphs": [
+        "Nous considérons chaque bien comme unique, avec son propre potentiel. Notre processus d'évaluation n'est pas simplement un filtre, mais une opportunité de valorisation.",
+        "Lorsqu'un bien ne répond pas encore à tous nos critères, nous ne le refusons pas définitivement – nous vous proposons plutôt un parcours d'amélioration personnalisé grâce à notre service d'accompagnement pour la décoration et l'aménagement, disponible en formules Standard et Luxe."
+      ]
+    },
+    "NosTransformations": {
+      "mainTitle": "TRANSFORMATIONS RÉUSSIES",
+      "title": "Avant / Après : le pouvoir de la valorisation",
+      "paragraph": "Plongez dans nos projets de relooking et voyez par vous-même comment nous transformons chaque bien pour en révéler tout le potentiel locatif.",
+      "comingSoonText": "[Notre galerie arrive bientôt : vous découvrirez les transformations concrètes que nous avons réalisées pour sublimer nos biens sous gestion.]"
+    },
+    "NosPrestations": {
+      "mainTitle": "NOS PRESTATIONS",
+      "titleConciergerie": "Une conciergerie complète pour votre bien",
+      "paragraphConciergerie": "Nous proposons une gamme complète de services pour assurer une gestion optimale de votre bien et une expérience exceptionnelle pour vos voyageurs."
+    },
+    "TimelineProcess": {
+      "mainTitle": "PROCESSUS",
+      "title": "Un parcours clair, maîtrisé, et évolutif",
+      "paragraph": "Notre approche étape par étape vous garantit sérénité et performance, dès la mise en service.",
+      "steps": [
+        {
+          "title": "Évaluation préliminaire",
+          "description": "Visite de votre bien, diagnostic selon nos critères de qualité, et recommandations personnalisées."
+        },
+        {
+          "title": "Préparation du bien",
+          "description": "Création d'annonces, photos pros, décoration si nécessaire, mise en service du logement."
+        },
+        {
+          "title": "Gestion quotidienne",
+          "description": "Réservations, accueil, ménage, maintenance – nous gérons tout pour vous."
+        },
+        {
+          "title": "Suivi & Optimisation",
+          "description": "Rapports réguliers, ajustement des prix, conseil stratégique pour booster vos revenus."
+        }
+      ]
+    },
+    "NotreExpertise": {
+      "mainTitle": "Sublimez Votre Bien Immobilier",
+      "title": "Sublimez Votre Bien Immobilier",
+      "paragraph": "Notre expertise ne se limite pas à la gestion locative. Nous proposons également un service d'accompagnement pour la décoration et l'aménagement de votre bien, vous permettant ainsi de maximiser son potentiel et son attractivité.",
+      "niveaux": [
+        {
+          "name": "Niveau Standard",
+          "level": "standard",
+          "items": [
+            "Interventions ciblées pour atteindre nos critères de qualité",
+            "Optimisation des espaces existants",
+            "Sélection d'éléments décoratifs essentiels",
+            "Conseils pour l'aménagement et la disposition",
+            "Idéal pour les biens nécessitant des améliorations ponctuelles"
+          ]
+        },
+        {
+          "name": "Niveau Luxe",
+          "level": "luxe",
+          "items": [
+            "Transformation complète pour un positionnement ultra-premium",
+            "Conception d'ambiance sur mesure",
+            "Mobilier et équipements haut de gamme",
+            "Éléments décoratifs exclusifs",
+            "Parfait pour les biens de caractère visant l'excellence"
+          ]
+        }
+      ],
+      "footerText": "Les tarifs de ces services sont déterminés sur devis après évaluation complète de votre bien et de vos objectifs.",
+      "cta": {
+        "label": "Demander un devis personnalisé",
+        "href": "/contact"
+      }
+    },
+    "SectionTransparence": {
+      "mainTitle": "TRANSPARENCE",
+      "title": "Des coûts clairs et prévisibles",
+      "paragraph": "La mise en place de votre bien dans notre portefeuille implique certains frais de démarrage évalués au cas par cas.",
+      "blocks": [
+        {
+          "heading": "Frais de démarrage",
+          "items": [
+            "<strong>État des lieux</strong> détaillé de votre bien",
+            "<strong>Création d'annonces</strong> & <strong>photos professionnelles</strong>",
+            "350 € – 500 € selon la taille du logement"
+          ]
+        },
+        {
+          "heading": "Services optionnels",
+          "items": [
+            "<strong>Décoration niveau Standard</strong> (sur devis personnalisé)",
+            "<strong>Décoration niveau Luxe</strong> (sur devis personnalisé)"
+          ]
+        }
+      ],
+      "footer": "Ces montants sont donnés à titre indicatif et peuvent varier selon les spécificités de votre bien. Une évaluation personnalisée vous sera proposée lors de notre première rencontre."
+    },
+    "SectionResultatsConciergerie": {
+      "mainTitle": "RÉSULTATS CONCRETS",
+      "title": "Ce que nos clients obtiennent réellement",
+      "paragraph": "Notre modèle repose sur une stratégie de valorisation et une optimisation constante de vos performances locatives.",
+      "stats": [
+        { "value": "+35%", "label": "de revenus en moyenne" },
+        { "value": "100%", "label": "automatisé & délégué" },
+        { "value": "0€", "label": "de frais fixes (formule au % seulement)" },
+        { "value": "4.6⭐", "label": "moyenne des avis voyageurs" }
+      ]
+    },
+    "TemoignagesClients": {
+      "mainTitle": "ILS NOUS FONT CONFIANCE",
+      "title": "Témoignages de nos propriétaires",
+      "paragraph": "Découvrez les retours authentiques de ceux qui nous ont confié la gestion de leur bien.",
+      "items": [
+        {
+          "name": "Claire R.",
+          "role": "Propriétaire à Colmar",
+          "quote": "Grâce à La Conciergerie Alsacienne…",
+          "image": "/avatars/avatar1.jpg",
+          "imageAlt": "Photo de Claire R."
+        },
+        {
+          "name": "Julien M.",
+          "role": "Investisseur Mulhousien",
+          "quote": "Une équipe réactive…",
+          "image": "/avatars/avatar2.jpg",
+          "imageAlt": "Photo de Julien M."
+        },
+        {
+          "name": "Sophie L.",
+          "role": "Propriétaire débutante",
+          "quote": "Ils m'ont accompagnée…",
+          "image": "/avatars/avatar3.jpg",
+          "imageAlt": "Photo de Sophie L."
+        }
+      ]
+    },
+    "Tarification": {
+      "mainTitle": "NOS FORMULES",
+      "title": "Tarifs de notre conciergerie",
+      "paragraph": "Choisissez l'accompagnement qui vous ressemble, pour une gestion sereine et sur-mesure de votre bien.",
+      "plans": [
+        {
+          "name": "Formule Standard",
+          "price": "À partir de 16% des revenus",
+          "features": [
+            "Création et optimisation des annonces",
+            "Gestion des réservations",
+            "Accueil des voyageurs",
+            "Optimisation des tarifs",
+            "Reporting mensuel"
+          ],
+          "recommended": false,
+          "badge": null,
+          "href": "/contact?service=conciergerie&formule=standard"
+        },
+        {
+          "name": "Formule Premium",
+          "price": "À partir de 21% des revenus",
+          "features": ["Tous les services de la formule Standard", "Ménage inclus", "Support 24/7"],
+          "recommended": true,
+          "badge": "Recommandée",
+          "href": "/contact?service=conciergerie&formule=premium"
+        },
+        {
+          "name": "Formule Exclusive",
+          "price": "À partir de 23% des revenus",
+          "features": ["Tous les services de la formule Premium", "Linge hôtelier premium"],
+          "recommended": false,
+          "badge": null,
+          "href": "/contact?service=conciergerie&formule=exclusive"
+        }
+      ],
+      "choiceFormule": "Choisir cette formule",
+      "ctaLabel": "Demander un devis"
+    },
+    "FaqConciergerie": {
+      "mainTitle": "FAQ CONCIERGERIE",
+      "title": "Vos questions les plus fréquentes",
+      "paragraph": "Retrouvez toutes les réponses concernant nos services de conciergerie haut de gamme.",
+      "subtitle": "Tout ce que vous devez savoir pour faire le bon choix."
+    },
+    "CTAConciergerie": {
+      "heading": "Votre bien mérite le meilleur.",
+      "paragraph": "Offrez à votre location courte durée un accompagnement premium. Nous transformons chaque bien en une expérience remarquable — pour vos voyageurs, et pour votre rentabilité.",
+      "secondaryLabel": "Parler de mon projet",
+      "secondaryHref": "/contact"
+    }
+  }
+}

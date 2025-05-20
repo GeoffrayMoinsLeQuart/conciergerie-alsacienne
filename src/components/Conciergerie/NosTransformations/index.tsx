@@ -1,23 +1,32 @@
+// src/components/Conciergerie/NosTransformations.tsx
 'use client';
 
 import { FC } from 'react';
 import SectionTitle from '@/components/Common/SectionTitle';
-// import TransformationSlider from '@/components/Transformations/Slider'; // à activer dès que prêt
+import { t } from '@/app/libs/content';
 
 const NosTransformations: FC = () => {
+  const pageKey = 'conciergerie';
+  const baseKey = 'Conciergerie.NosTransformations';
+
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`) as string;
+  const title = t(pageKey, `${baseKey}.title`) as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`) as string;
+  const comingSoonText = t(pageKey, `${baseKey}.comingSoonText`) as string;
+
   return (
     <section
       id="transformations"
       aria-labelledby="transformations-heading"
       className="bg-white py-20"
     >
-      <div className="container">
+      <div className="container mx-auto px-4">
         <header className="text-center">
           <SectionTitle
             id="transformations-heading"
-            mainTitle="TRANSFORMATIONS RÉUSSIES"
-            title="Avant / Après : le pouvoir de la valorisation"
-            paragraph="Plongez dans nos projets de relooking et voyez par vous-même comment nous transformons chaque bien pour en révéler tout le potentiel locatif."
+            mainTitle={mainTitle}
+            title={title}
+            paragraph={paragraph}
             center
           />
         </header>
@@ -25,14 +34,11 @@ const NosTransformations: FC = () => {
         <div
           className="mt-10"
           role="region"
-          aria-label="Galerie avant/après : transformations immobilières"
+          aria-label={title}
         >
-          {/* À activer dès que le composant est prêt */}
-          {/* <TransformationSlider /> */}
-
+          {/* Galerie à venir */}
           <div className="rounded-lg border border-dashed border-gray-300 p-10 text-center text-sm italic text-body-color">
-            [Notre galerie arrive bientôt : vous découvrirez les transformations concrètes que nous
-            avons réalisées pour sublimer nos biens sous gestion.]
+            {comingSoonText}
           </div>
         </div>
       </div>

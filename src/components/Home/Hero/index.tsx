@@ -5,10 +5,12 @@ import { Calculator, Mail } from 'lucide-react';
 import Image from 'next/image';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import dynamic from 'next/dynamic';
+import { t } from '@/app/libs/content';
 
-const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
-  ssr: false,
-});
+const MotionDiv = dynamic(
+  () => import('framer-motion').then((mod) => mod.motion.div),
+  { ssr: false }
+);
 
 export default function Hero() {
   return (
@@ -27,7 +29,7 @@ export default function Hero() {
             >
               <Image
                 src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-desktop_nddksd.webp"
-                alt="Location meublée premium en Alsace"
+                alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
                 sizes="
@@ -48,7 +50,7 @@ export default function Hero() {
             >
               <Image
                 src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
-                alt="Location meublée premium en Alsace"
+                alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
                 sizes="
@@ -69,7 +71,7 @@ export default function Hero() {
             >
               <Image
                 src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
-                alt="Location meublée premium en Alsace"
+                alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
                 sizes="
@@ -96,24 +98,26 @@ export default function Hero() {
               id="hero-title"
               className="mb-4 text-2xl font-bold text-black md:text-3xl lg:text-4xl"
             >
-              Conciergerie & Gestion Locative à Mulhouse
+              {t('home', 'Hero.title')}
             </h1>
 
             <p className="text-lg text-gray-600 md:text-xl">
-              Une expertise locale pour une gestion rentable et sereine.
+              {t('home', 'Hero.subtitle')}
             </p>
-            <p className="mb-8 text-lg text-gray-600 md:text-xl">Proximité, exigence, sérénité.</p>
+            <p className="mb-8 text-lg text-gray-600 md:text-xl">
+              {t('home', 'Hero.tagline')}
+            </p>
 
             {/* Boutons centrés en mobile et desktop */}
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <CTAButtons
                 primary={{
-                  label: 'Estimer mes revenus',
+                  label: t('home', 'Hero.primaryLabel'),
                   href: '/estimation',
                   icon: <Calculator className="h-5 w-5" />,
                 }}
                 secondary={{
-                  label: 'Nous contacter',
+                  label: t('home', 'Hero.secondaryLabel'),
                   href: '/contact',
                   icon: <Mail className="h-5 w-5" />,
                 }}

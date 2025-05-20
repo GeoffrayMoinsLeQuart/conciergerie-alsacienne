@@ -1,45 +1,40 @@
+// src/components/Conciergerie/TimelineProcess.tsx
 'use client';
 
 import { FC } from 'react';
-import SectionTitle from '@/components/Common/SectionTitle';
 import dynamic from 'next/dynamic';
+import SectionTitle from '@/components/Common/SectionTitle';
+import { t } from '@/app/libs/content';
 
 const MotionLi = dynamic(() => import('framer-motion').then((mod) => mod.motion.li), {
   ssr: false,
 });
 
-const processSteps = [
-  {
-    title: 'Évaluation préliminaire',
-    description:
-      'Visite de votre bien, diagnostic selon nos critères de qualité, et recommandations personnalisées.',
-  },
-  {
-    title: 'Préparation du bien',
-    description:
-      "Création d'annonces, photos pros, décoration si nécessaire, mise en service du logement.",
-  },
-  {
-    title: 'Gestion quotidienne',
-    description: 'Réservations, accueil, ménage, maintenance – nous gérons tout pour vous.',
-  },
-  {
-    title: 'Suivi & Optimisation',
-    description:
-      'Rapports réguliers, ajustement des prix, conseil stratégique pour booster vos revenus.',
-  },
-];
+interface Step {
+  title: string;
+  description: string;
+}
 
 const TimelineProcess: FC = () => {
+  const pageKey = 'conciergerie';
+  const baseKey = 'Conciergerie.TimelineProcess';
+
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`) as string;
+  const title = t(pageKey, `${baseKey}.title`) as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`) as string;
+
+  const stepsRaw = t(pageKey, `${baseKey}.steps`);
+  const steps: Step[] = Array.isArray(stepsRaw) ? (stepsRaw as Step[]) : [];
+
   return (
     <section id="processus" aria-labelledby="processus-heading" className="bg-white py-24">
-      <div className="container">
+      <div className="container mx-auto px-4">
         <header className="mb-10 text-center">
           <SectionTitle
             id="processus-heading"
-            mainTitle="PROCESSUS"
-            title="Un parcours clair, maîtrisé, et évolutif"
-            paragraph="Notre approche étape par étape vous garantit sérénité et performance, dès la mise en service."
+            mainTitle={mainTitle}
+            title={title}
+            paragraph={paragraph}
             center
           />
         </header>
@@ -47,9 +42,9 @@ const TimelineProcess: FC = () => {
         <ol
           className="relative flex flex-col gap-10 lg:flex-row lg:justify-between"
           role="list"
-          aria-label="Étapes du processus de gestion locative"
+          aria-label={title}
         >
-          {processSteps.map((step, i) => (
+          {steps.map((step, i) => (
             <MotionLi
               key={i}
               initial={{ opacity: 0, y: 40 }}
@@ -73,8 +68,8 @@ const TimelineProcess: FC = () => {
               </h3>
               <p className="mx-auto max-w-xs text-base text-body-color">{step.description}</p>
 
-              {/* Ligne de liaison (desktop uniquement) */}
-              {i < processSteps.length - 1 && (
+              {/* Ligne de liaison (desktop only) */}
+              {i < steps.length - 1 && (
                 <>
                   <div className="absolute right-[-50%] top-[35px] z-[-1] hidden h-1 w-full bg-primary lg:block" />
                   <div className="absolute right-[-7px] top-[29px] hidden h-0 w-0 border-b-[6px] border-l-[10px] border-t-[6px] border-b-transparent border-l-primary border-t-transparent lg:block" />

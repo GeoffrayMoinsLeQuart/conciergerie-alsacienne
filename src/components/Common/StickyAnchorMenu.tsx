@@ -1,34 +1,37 @@
+// src/components/Common/StickyAnchorMenu.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
+import { t } from '@/app/libs/content';
 
-const SECTION_CONFIG: Record<string, { id: string; label: string }[]> = {
-  '/conciergerie': [
-    { id: 'selection', label: 'Sélection' },
-    { id: 'transformations', label: 'Transformations' },
-    { id: 'prestations', label: 'Prestations' },
-    { id: 'processus', label: 'Processus' },
-    { id: 'expertise', label: 'Expertise' },
-    { id: 'tarifs', label: 'Tarifs' },
-    { id: 'faq-conciergerie', label: 'FAQ' },
-  ],
-  '/gestion-locative': [
-    { id: 'processus', label: 'Prestations' },
-    { id: 'profils', label: 'Profils' },
-    { id: 'garanties', label: 'Garanties' },
-    { id: 'temoignages', label: 'Témoignages' },
-    { id: 'tarifs', label: 'Tarifs' },
-    { id: 'faq-gestion', label: 'FAQ' },
-  ],
-};
+const pageKey = 'conciergerie';
+
+type Section = { id: string; label: string };
 
 export default function StickyAnchorMenu() {
-  const pathname = usePathname();
-  console.log('CURRENT PATH:', usePathname());
+  const pathname = usePathname() || '';
+  const allSections = t(
+    pageKey,
+    'Conciergerie.StickyAnchorMenu.sections'
+  ) as Record<string, Section[]>;
+  const sections: Section[] = allSections[pathname] || [];
 
-  const sections = SECTION_CONFIG[pathname] || [];
+  // Aria labels from JSON
+  const navAriaLabel = t(
+    pageKey,
+    'Conciergerie.StickyAnchorMenu.navAriaLabel'
+  ) as string;
+  const mobileButtonAriaLabel = t(
+    pageKey,
+    'Conciergerie.StickyAnchorMenu.mobileButtonAriaLabel'
+  ) as string;
+  const mobileMenuAriaLabel = t(
+    pageKey,
+    'Conciergerie.StickyAnchorMenu.mobileMenuAriaLabel'
+  ) as string;
+
   const [isVisible, setIsVisible] = useState(false);
   const [isOpenMobile, setIsOpenMobile] = useState(false);
 
@@ -57,7 +60,7 @@ export default function StickyAnchorMenu() {
       <nav
         className="sticky top-[100px] z-40 hidden w-full bg-white shadow-sm lg:block"
         role="navigation"
-        aria-label="Navigation par sections"
+        aria-label={navAriaLabel}
       >
         <div className="container mx-auto flex justify-center gap-6 py-3 text-sm font-medium text-gray-700">
           {sections.map(({ id, label }) => (
@@ -77,7 +80,7 @@ export default function StickyAnchorMenu() {
         <button
           onClick={() => setIsOpenMobile((prev) => !prev)}
           className="rounded-full bg-primary p-3 text-white shadow-lg"
-          aria-label="Menu de navigation mobile"
+          aria-label={mobileButtonAriaLabel}
         >
           <Menu className="h-5 w-5" />
         </button>
@@ -85,7 +88,7 @@ export default function StickyAnchorMenu() {
           <div
             className="mt-2 w-48 rounded-lg bg-white p-3 shadow-lg"
             role="menu"
-            aria-label="Menu sections"
+            aria-label={mobileMenuAriaLabel}
           >
             {sections.map(({ id, label }) => (
               <button
