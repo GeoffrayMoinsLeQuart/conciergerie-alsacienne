@@ -1,18 +1,33 @@
 // src/app/gestion-locative/FAQGestionLocative.tsx
+'use client';
+
 import SectionTitle from '@/components/Common/SectionTitle';
 import FAQ from '@/components/FAQ';
+import { t } from '@/app/libs/content';
 import type { FAQItem } from '@/types/faq';
 
 export default function FAQGestionLocative({ items }: { items: FAQItem[] }) {
+  const pageKey = 'gestionLocative';
+  const baseKey = 'GestionLocative.FAQGestionLocative';
+
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`) as string;
+  const title     = t(pageKey, `${baseKey}.title`)     as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`) as string;
+  const subtitle  = t(pageKey, `${baseKey}.subtitle`)  as string;
+
   return (
-    <section id="faq-gestion" aria-labelledby="faq-gestion-heading" className="bg-white py-20">
+    <section
+      id="faq-gestion"
+      aria-labelledby="faq-gestion-heading"
+      className="bg-white py-20"
+    >
       <div className="container mx-auto px-4">
         <header className="mb-12 text-center">
           <SectionTitle
             id="faq-gestion-heading"
-            mainTitle="FAQ GESTION LOCATIVE"
-            title="Vos questions les plus fréquentes"
-            paragraph="Toutes les réponses aux interrogations courantes sur notre service de gestion locative."
+            mainTitle={mainTitle}
+            title={title}
+            paragraph={paragraph}
             center
           />
         </header>
@@ -22,7 +37,7 @@ export default function FAQGestionLocative({ items }: { items: FAQItem[] }) {
           defaultType="gestion-locative"
           showTopicFilter
           specificPage
-          subtitle="Nous avons réuni ici les questions les plus posées par les propriétaires."
+          subtitle={subtitle}
         />
       </div>
     </section>

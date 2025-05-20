@@ -254,6 +254,166 @@
           "text": "Après avoir testé plusieurs agences, j'ai enfin trouvé un gestionnaire qui comprend mes objectifs de rentabilité. Leur formule Premium me permet de développer mon patrimoine sereinement, avec un ROI optimisé."
         }
       ]
+    },
+    "FraisInitiaux": {
+      "mainTitle": "NOS FORMULES",
+      "title": "Des solutions adaptées à vos besoins",
+      "paragraph": "Choisissez la formule la plus alignée avec vos besoins et votre patrimoine.",
+      "introTitle": "Frais initiaux de mise en location",
+      "introDescription": "Des frais équivalents à un mois de loyer hors charges sont appliqués lors de la mise en location initiale. Ces frais couvrent les éléments suivants :",
+      "items": [
+        {
+          "icon": "FileText",
+          "text": "Établissement du bail conforme à la législation"
+        },
+        {
+          "icon": "Camera",
+          "text": "État des lieux d'entrée détaillé avec photos"
+        },
+        {
+          "icon": "BadgeCheck",
+          "text": "Vérification complète des dossiers locataires"
+        },
+        {
+          "icon": "Shield",
+          "text": "Constitution des dossiers d'assurance"
+        }
+      ]
+    },
+    "TarificationGestionLocative": {
+      "mainTitle": "TARIFICATION",
+      "title": "Des tarifs clairs et adaptés à vos besoins",
+      "paragraph": "Choisissez la formule qui vous correspond, avec ou sans ménage, pour maximiser vos revenus.",
+      "modalButtonLabel": "📊 Comparer les formules",
+      "plans": [
+        {
+          "name": "Formule Essentielle",
+          "price": "6%",
+          "priceLabel": "HT des loyers encaissés",
+          "tagline": "La base solide de la gestion locative",
+          "features": [
+            "Recherche et sélection des locataires",
+            "Rédaction du bail et état des lieux",
+            "Encaissement des loyers et quittances",
+            "Révision annuelle du loyer",
+            "Régularisation des charges",
+            "Assistance téléphonique dédiée",
+            "Espace propriétaire en ligne",
+            "Protection juridique incluse",
+            "Couverture des dégradations*",
+            "Garantie contre le squat"
+          ],
+          "bgClass": "bg-white",
+          "textClass": "text-body-color",
+          "tag": null,
+          "inheritsFrom": null,
+          "button": {
+            "text": "Je choisis la simplicité",
+            "href": "/contact?service=gestion-locative&formule=essentielle",
+            "style": "bg-primary text-white hover:bg-opacity-90"
+          },
+          "icon": "UserCheck",
+          "iconButton": "UserCheck"
+        },
+        {
+          "name": "Formule Sérénité",
+          "price": "7,5%",
+          "priceLabel": "HT des loyers encaissés",
+          "tagline": "Pour ceux qui veulent dormir tranquille",
+          "tag": "Formule recommandée",
+          "inheritsFrom": "Formule Essentielle",
+          "features": [
+            "✓ Inclut tous les avantages de la Formule Essentielle",
+            "Garantie loyers impayés à 100% (2.5% loyers + charges, sans carence)",
+            "Visites techniques annuelles",
+            "Gestion des interventions d'urgence 24h/24",
+            "Bilan de gestion annuel personnalisé",
+            "Option PNO : 75 € (franchise 300 €, plafond 1.5 M€)"
+          ],
+          "bgClass": "bg-primary/5",
+          "textClass": "text-gray-800",
+          "button": {
+            "text": "Je choisis la tranquillité",
+            "href": "/contact?service=gestion-locative&formule=serenite",
+            "style": "bg-primary text-white hover:bg-opacity-90"
+          },
+          "icon": "ShieldCheck",
+          "iconButton": "ShieldCheck"
+        },
+        {
+          "name": "Formule Premium",
+          "price": "9%",
+          "priceLabel": "HT des loyers encaissés",
+          "tagline": "L'expérience complète, clé en main",
+          "inheritsFrom": "Formule Sérénité",
+          "features": [
+            "✓ Inclut tous les avantages de la Formule Sérénité",
+            "Accompagnement sur votre fiscalité",
+            "Visite technique semestrielle",
+            "Conseiller dédié joignable 7j/7",
+            "Option PNO : 92 € (franchise 135 €, plafond 3 M€)",
+            "Vacance locative : à venir"
+          ],
+          "bgClass": "bg-white",
+          "textClass": "text-body-color",
+          "button": {
+            "text": "Je choisis l'excellence",
+            "href": "/contact?service=gestion-locative&formule=premium",
+            "style": "bg-primary text-white hover:bg-opacity-90"
+          },
+          "icon": "Sparkles",
+          "iconButton": "Sparkles"
+        }
+      ],
+      "comparison": [
+        "Recherche et sélection des locataires",
+        "Rédaction du bail et état des lieux",
+        "Encaissement des loyers et quittances",
+        "Révision annuelle du loyer",
+        "Régularisation des charges",
+        "Assistance téléphonique dédiée",
+        "Espace propriétaire en ligne",
+        "Protection juridique incluse",
+        "Couverture des dégradations*",
+        "Garantie contre le squat",
+        "Garantie loyers impayés à 100% (2.5% loyers + charges, sans carence)",
+        "Visites techniques annuelles",
+        "Gestion des interventions d'urgence 24h/24",
+        "Bilan de gestion annuel personnalisé",
+        "Option PNO : 75 € (franchise 300 €, plafond 1.5 M€)",
+        "Accompagnement sur votre fiscalité",
+        "Visite technique semestrielle",
+        "Conseiller dédié joignable 7j/7",
+        "Option PNO : 92 € (franchise 135 €, plafond 3 M€)",
+        "Vacance locative : à venir"
+      ],
+      "simulator": {
+        "heading": "Vous hésitez encore entre nos formules ?",
+        "paragraph": "Estimez vos revenus nets selon votre situation, le type de bien et la formule choisie. Notre simulateur vous guide pour faire le bon choix.",
+        "buttonLabel": "Lancer le simulateur",
+        "buttonHref": "/estimation"
+      }
+    },
+    "FAQGestionLocative": {
+      "mainTitle": "FAQ GESTION LOCATIVE",
+      "title": "Vos questions les plus fréquentes",
+      "paragraph": "Toutes les réponses aux interrogations courantes sur notre service de gestion locative.",
+      "subtitle": "Nous avons réuni ici les questions les plus posées par les propriétaires."
+    },
+    "CTAGestionLocative": {
+      "heading": "Prêt à déléguer la gestion de votre bien ?",
+      "paragraph": "Estimez votre rentabilité en quelques clics ou échangez directement avec un conseiller de confiance.",
+      "primary": {
+        "label": "Estimer mes revenus",
+        "href": "/estimation"
+      },
+      "secondary": {
+        "label": "Nous contacter",
+        "href": "/contact"
+      },
+      "contactPrompt": "Ou appelez-nous directement au",
+      "phoneNumber": "06 21 47 19 22",
+      "phoneHref": "tel:+33621471922"
     }
   }
 }

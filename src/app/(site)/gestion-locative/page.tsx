@@ -28,16 +28,22 @@ export default async function GestionLocativePage() {
       <SeoSchemaInjector schema={schema} />
 
       <main id="main" aria-label="Page gestion locative haut de gamme">
-        {/* <StickyAnchorMenu />
-        <Intro variant="gestion-locative" /> 
+        <StickyAnchorMenu />
+
+        <Intro variant="gestion-locative" />
+        
         <BlocProcessusEtPrestations />
+        
         <TabsProfilProprietaire />
+        
         <GarantiesLoyers />
-        <TemoinagesSection />*/}
+        
+        <TemoinagesSection />
+        
         <FraisInitiauxCard />
+        
         <TarificationGestionLocative />
 
-        {/* Affichage de la FAQ sans Scripts */}
         <FAQGestionLocative items={faqs} />
 
         <CTAGestionLocative />
