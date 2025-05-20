@@ -1,8 +1,11 @@
 // src/config/pageMetadata.ts
 import { Metadata } from 'next';
+import { imageBuilder } from '@/sanity/sanity-utils';
+import type { Blog } from '@/types/blog';
 
-const siteURL = 'https://www.conciergerie-alsacienne.fr';
-const siteName = 'Conciergerie Alsacienne';
+const siteURL = process.env.SITE_URL || 'https://www.conciergerie-alsacienne.fr';
+const siteName = process.env.SITE_NAME || 'Conciergerie Alsacienne';
+const authorName = process.env.AUTHOR_NAME || 'Conciergerie Alsacienne';
 
 export const defaultMetadata: Metadata = {
   title: siteName,
@@ -309,4 +312,70 @@ export const pageMetadata: Record<string, Metadata> = {
  */
 export function getMetadata(pageKey: string): Metadata {
   return pageMetadata[pageKey] ?? defaultMetadata;
+}
+
+/**
+ * Génère dynamiquement la metadata pour un article de blog
+ * Utilisée par generateMetadata() dans BlogSlugPage
+ */
+export async function makeBlogMetadata(post: Blog): Promise<Metadata> {
+  if (!post) {
+    return {
+      title: `Article non trouvé | ${siteName}`,
+      description: "L'article que vous recherchez n'existe pas ou a été déplacé.",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const slug = post.slug.current;
+  const postUrl = `${siteURL}/blog/${slug}`;
+  const defaultOg = `${siteURL}/default-og.jpg`;
+  const imageUrl = post.mainImage ? imageBuilder(post.mainImage).url() : defaultOg;
+
+  const description = post.metadata
+    ? `${post.metadata.slice(0, 155)}…`
+    : `Article sur ${post.title}`;
+
+  return {
+    title: `${post.title} | ${siteName}`,
+    description,
+    alternates: { canonical: postUrl },
+    authors: [{ name: authorName }],
+    robots: {
+      index: true,
+      follow: true,
+      nocache: true,
+      googleBot: {
+        index: true,
+        follow: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    openGraph: {
+      title: `${post.title} | ${siteName}`,
+      description,
+      url: postUrl,
+      siteName,
+      images: [
+        {
+          url: imageUrl,
+          width: 1800,
+          height: 1600,
+          alt: post.title,
+        },
+      ],
+      locale: 'fr_FR',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post.title} | ${siteName}`,
+      description,
+      creator: `@${authorName}`,
+      site: `@${siteName}`,
+      images: [imageUrl],
+    },
+  };
 }

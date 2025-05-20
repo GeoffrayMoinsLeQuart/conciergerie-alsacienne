@@ -3,6 +3,9 @@ import PageTitle from '@/components/Common/PageTitle';
 import Image from 'next/image';
 import Script from 'next/script';
 import { getMetadata } from '@/app/config/pageMetadata';
+import aboutTexts from '@/static-data/text-content/fr/about.json';
+import { aboutSchema } from '@/app/config/pageSchema';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 
 export const metadata: Metadata = getMetadata('about');
 
@@ -21,13 +24,16 @@ export default function AboutPage() {
   ];
   const whyUs = [
     { title: 'Expertise locale', icon: '🏠', desc: 'Une connaissance pointue du marché alsacien.' },
-    { title: 'Service sur ‑ mesure', icon: '🎯', desc: 'Des offres taillées pour vos besoins.' },
+    { title: 'Service sur mesure', icon: '🎯', desc: 'Des offres taillées pour vos besoins.' },
     { title: 'Réactivité', icon: '⚡️', desc: 'Nous sommes disponibles 7j/7, 24h/24.' },
     { title: 'Transparence', icon: '🔍', desc: 'Rapports clairs et bilans réguliers.' },
-  ];  
+  ];
 
   return (
     <>
+      {/* Injection unique du JSON-LD */}
+      <SeoSchemaInjector schema={aboutSchema} />
+
       <PageTitle
         pageTitle="À Propos"
         pageDescription="Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme"

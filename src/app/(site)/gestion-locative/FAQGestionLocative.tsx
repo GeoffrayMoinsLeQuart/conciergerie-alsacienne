@@ -1,67 +1,12 @@
-// aucun 'use client' : c'est un Server Component
-import { getFAQsByType } from '@/sanity/sanity-utils';
+// src/app/gestion-locative/FAQGestionLocative.tsx
 import SectionTitle from '@/components/Common/SectionTitle';
 import FAQ from '@/components/FAQ';
-import Script from 'next/script';
-import { FAQItem } from '@/types/faq';
+import type { FAQItem } from '@/types/faq';
 
-export default async function FAQGestionLocative() {
-  const faqs: FAQItem[] = await getFAQsByType('gestion-locative');
-
-  // groupement par thème pour le JSON-LD
-  const grouped = faqs.reduce(
-    (acc, faq) => {
-      const topic = faq.topic || 'autres';
-      (acc[topic] ??= []).push(faq);
-      return acc;
-    },
-    {} as Record<string, FAQItem[]>,
-  );
-
-  // données structurées
-  const jsonLdFAQ = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: Object.entries(grouped).map(([topic, items]) => ({
-      '@type': 'WebPageElement',
-      '@id': `https://www.conciergerie-alsacienne.fr/gestion-locative#${topic}`,
-      name: topic,
-      hasPart: items.map((faq) => ({
-        '@type': 'Question',
-        name: faq.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: faq.answer
-            .replace(/<[^>]*>/g, '')
-            .replaceAll('\n', ' ')
-            .trim(),
-        },
-      })),
-    })),
-  };
-
-  const jsonLdBreadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Accueil',
-        item: 'https://www.conciergerie-alsacienne.fr',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Gestion locative',
-        item: 'https://www.conciergerie-alsacienne.fr/gestion-locative',
-      },
-    ],
-  };
-
+export default function FAQGestionLocative({ items }: { items: FAQItem[] }) {
   return (
     <section id="faq-gestion" aria-labelledby="faq-gestion-heading" className="bg-white py-20">
-      <div className="container px-4 mx-auto">
+      <div className="container mx-auto px-4">
         <header className="mb-12 text-center">
           <SectionTitle
             id="faq-gestion-heading"
@@ -73,27 +18,13 @@ export default async function FAQGestionLocative() {
         </header>
 
         <FAQ
-          items={faqs}
+          items={items}
           defaultType="gestion-locative"
           showTopicFilter
           specificPage
           subtitle="Nous avons réuni ici les questions les plus posées par les propriétaires."
         />
       </div>
-
-      {/* JSON-LD injected afterInteractive pour ne pas bloquer */}
-      <Script
-        id="faq-jsonld-gestion"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQ) }}
-      />
-      <Script
-        id="breadcrumb-jsonld-gestion"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
-      />
     </section>
   );
 }

@@ -355,3 +355,8 @@ usememo
 
       Verifier que cela soit de partout
       export const revalidate = 60; // Regénère au plus toutes les 60 sec.
+
+
+
+Faire les metadata et schema pour la page : src/app/(site)/blog/BlogClient.tsx et pour la page slug de properties
+Et pour toutes les pages auth et dashboard qd réalisée et schema

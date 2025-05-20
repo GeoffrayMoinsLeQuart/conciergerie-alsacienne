@@ -12,18 +12,24 @@ import NosTransformations from '@/components/Conciergerie/NosTransformations';
 import CTAConciergerie from '@/components/Conciergerie/CTAConciergerie';
 import TemoignagesClients from '@/components/Conciergerie/TemoignagesClients';
 import SectionResultatsConciergerie from '@/components/Conciergerie/SectionResultatsConciergerie';
-import Script from 'next/script';
 import StickyAnchorMenu from '@/components/Common/StickyAnchorMenu';
 import { getMetadata } from '@/app/config/pageMetadata';
-
-const siteURL = 'https://www.conciergerie-alsacienne.fr';
-const siteName = 'Conciergerie Alsacienne';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
+import { makeConciergerieSchema } from '@/app/config/pageSchema';
+import { getFAQsByType } from '@/sanity/sanity-utils';
+import { FAQItem } from '@/types/faq';
 
 export const metadata = getMetadata('conciergerie');
 
-export default function ConciergeriePage() {
+export default async function ConciergeriePage() {
+  const faqs: FAQItem[] = await getFAQsByType('conciergerie');
+
+  const schema = makeConciergerieSchema(faqs);
+
   return (
     <>
+      {/* Injection unique du JSON-LD */}
+      <SeoSchemaInjector schema={schema} />
       <main id="main" aria-label="Page conciergerie haut de gamme">
         <StickyAnchorMenu />
 
@@ -47,54 +53,10 @@ export default function ConciergeriePage() {
 
         <Tarification />
 
-        <FaqConciergerie />
+        <FaqConciergerie items={faqs} />
 
         <CTAConciergerie />
       </main>
-
-      <Script id="json-ld-conciergerie" type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'Service',
-          serviceType: 'Conciergerie haut de gamme en location courte durée',
-          provider: {
-            '@type': 'Organization',
-            name: siteName,
-            url: siteURL,
-            logo: {
-              '@type': 'ImageObject',
-              url: `${siteURL}/logo.svg`,
-            },
-          },
-          areaServed: {
-            '@type': 'Place',
-            name: 'Alsace',
-          },
-          description:
-            'Conciergerie spécialisée en location courte et moyenne durée à Mulhouse, Colmar et environs. Optimisation des revenus, gestion complète, accompagnement premium.',
-        })}
-      </Script>
-
-      <Script id="json-ld-breadcrumb-conciergerie" type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'Accueil',
-              item: `${siteURL}`,
-            },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'Conciergerie',
-              item: `${siteURL}/conciergerie`,
-            },
-          ],
-        })}
-      </Script>
     </>
   );
 }

@@ -1,3 +1,4 @@
+// src/app/nos-biens/[slug]/page.tsx
 import PageTitle from '@/components/Common/PageTitle';
 import { fetchProperties, getPropertyBySlug, imageBuilder } from '@/sanity/sanity-utils';
 import { notFound } from 'next/navigation';
@@ -5,8 +6,10 @@ import MarkdownRenderer from '@/utils/markdownConfig';
 import Link from 'next/link';
 import ProjectDetailsGallery from '@/components/Gallery/property-gallery';
 import { Metadata } from 'next';
-import Script from 'next/script';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { generateBreadcrumbList } from '@/utils/BreadcrumbGenerator';
+import { makePropertyPageSchema } from '@/app/config/pageSchema';
+import Script from 'next/script';
 
 export const revalidate = 600;
 
@@ -14,9 +17,7 @@ export async function generateStaticParams() {
   const properties = await fetchProperties();
   return properties
     .filter((p) => !!p.slug?.current)
-    .map((property) => ({
-      slug: property.slug.current,
-    }));
+    .map((property) => ({ slug: property.slug.current }));
 }
 
 export async function generateMetadata({
@@ -25,7 +26,6 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-
   const property = await getPropertyBySlug(slug);
   const siteURL = process.env.SITE_URL || 'https://www.conciergerie-alsacienne.fr';
   const siteName = 'Conciergerie Alsacienne';
@@ -43,10 +43,7 @@ export async function generateMetadata({
     : `${siteURL}/default-property.jpg`;
 
   const fullTitle = `${property.name} | ${siteName}`;
-
-  const description =
-    property.shortDescription?.slice(0, 155) ||
-    `Découvrez ce bien pris en charge par notre conciergerie, entre rigueur et performance.`;
+  const description = property.shortDescription || property.longDescription?.slice(0, 155) || '';
 
   return {
     title: fullTitle,
@@ -56,14 +53,7 @@ export async function generateMetadata({
       description,
       url: `${siteURL}/nos-biens/${property.slug.current}`,
       siteName,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: property.name,
-        },
-      ],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: property.name }],
       type: 'article',
     },
     twitter: {
@@ -72,20 +62,17 @@ export async function generateMetadata({
       description,
       images: [imageUrl],
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: { index: true, follow: true },
   };
 }
 
-// ✅ NE PAS utiliser "await params"
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-
-  const property = await getPropertyBySlug(slug); // ✅ Plus efficace que fetchAll puis .find()
-
+  const property = await getPropertyBySlug(slug);
   if (!property) return notFound();
+
+  // Génération du JSON-LD pour la propriété
+  const schema = makePropertyPageSchema(property);
 
   const {
     name,
@@ -102,32 +89,29 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     galleryImage,
   } = property;
 
+  // Construction des slides
   const slides = [];
-
-  if (imagePrincipale) {
+  if (imagePrincipale)
     slides.push({
       src: imageBuilder(imagePrincipale).url(),
       alt: shortDescription || 'Image principale',
     });
-  }
+  if (galleryImage)
+    galleryImage.forEach((img) =>
+      slides.push({ src: imageBuilder(img).url(), alt: img.caption || 'Image additionnelle' }),
+    );
 
-  if (galleryImage?.length > 0) {
-    galleryImage.forEach((img) => {
-      slides.push({
-        src: imageBuilder(img).url(),
-        alt: img.caption || 'Image additionnelle',
-      });
-    });
-  }
-
-  // Optional: navigation entre propriétés (si tu veux vraiment garder ça avec ISR)
-  const allProperties = await fetchProperties();
-  const currentIndex = allProperties.findIndex((p) => p.slug?.current === slug);
-  const prev = allProperties[currentIndex - 1];
-  const next = allProperties[currentIndex + 1];
+  // Navigation prev/next
+  const allProps = await fetchProperties();
+  const idx = allProps.findIndex((p) => p.slug?.current === slug);
+  const prev = allProps[idx - 1];
+  const next = allProps[idx + 1];
 
   return (
     <>
+      {/* Injection unique du JSON-LD */}
+      <SeoSchemaInjector schema={schema} />
+
       <PageTitle pageTitle={name} pageDescription={shortDescription || ''} />
 
       <section className="bg-white pb-20 pt-[90px]">

@@ -1,12 +1,17 @@
 import { getMetadata } from '@/app/config/pageMetadata';
 import CommonCard from '@/components/Common/CommonCard';
 import Link from 'next/link';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
+import { errorSchema } from '@/app/config/pageSchema';
 
 export const metadata = getMetadata('error');
 
 export default function ErrorPage() {
   return (
     <section className="py-[120px] lg:pt-[200px]">
+      {/* Injection du schéma JSON-LD */}
+      <SeoSchemaInjector schema={errorSchema} />
+
       <div className="px-4 xl:container">
         <CommonCard>
           <div className="relative pt-6 text-center md:pt-8">
@@ -16,7 +21,7 @@ export default function ErrorPage() {
             </h1>
           </div>
           <p className="mb-6 text-center text-body-color">
-            This page can&#39;t found. Thank you for being us. Please back to home page.
+            This page&nbsp;can&#39;t found. Thank you for being us. Please back to home page.
           </p>
           <div className="flex justify-center">
             <Link

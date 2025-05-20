@@ -1,13 +1,17 @@
 import { Metadata } from 'next';
 import PageTitle from '@/components/Common/PageTitle';
-import Script from 'next/script';
 import { getMetadata } from '@/app/config/pageMetadata';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
+import { mentionsLegalesSchema } from '@/app/config/pageSchema';
 
 export const metadata: Metadata = getMetadata('mentions-legales');
 
 export default function MentionsLegalesPage() {
   return (
     <>
+      {/* Injection unique du JSON-LD */}
+      <SeoSchemaInjector schema={mentionsLegalesSchema} />
+
       <PageTitle
         pageTitle="Mentions légales"
         pageDescription="Mentions légales de la Conciergerie Alsacienne : éditeur, hébergeur, droits d'auteur, protection des données et cookies"
@@ -133,36 +137,6 @@ export default function MentionsLegalesPage() {
           </p>
         </section>
       </main>
-
-      <Script id="json-ld-breadcrumb-mentions" type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'Accueil',
-              item: 'https://www.conciergerie-alsacienne.fr',
-            },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'Mentions légales',
-              item: 'https://www.conciergerie-alsacienne.fr/mentions-legales',
-            },
-          ],
-        })}
-      </Script>
-
-      <Script id="json-ld-mentions" type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'WebPage',
-          name: 'Mentions légales | Conciergerie Alsacienne',
-          url: 'https://www.conciergerie-alsacienne.fr/mentions-legales',
-        })}
-      </Script>
     </>
   );
 }

@@ -1,35 +1,26 @@
+// src/app/faq/page.tsx
 import { getFAQs } from '@/sanity/sanity-utils';
 import FAQPageClient from './FAQPageClient';
 import { getMetadata } from '@/app/config/pageMetadata';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
+import { makeFAQPageSchema } from '@/app/config/pageSchema';
+import type { FAQItem } from '@/types/faq';
 
 export const metadata = getMetadata('faq');
 
 export default async function FAQPage() {
-  const faqs = await getFAQs();
+  const faqs: FAQItem[] = await getFAQs();
+  const schema = makeFAQPageSchema(faqs);
 
   return (
-    <section className="bg-white py-16">
-      {/* ✅ On passe les FAQs au composant client */}
-      <FAQPageClient faqs={faqs} />
+    <>
+      {/* Injection unique du JSON-LD pour la FAQ */}
+      <SeoSchemaInjector schema={schema} />
 
-      {/* ✅ Données structurées SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: faqs.map((faq) => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer,
-              },
-            })),
-          }),
-        }}
-      />
-    </section>
+      <section className="bg-white py-16">
+        {/* UI FAQ côté client */}
+        <FAQPageClient faqs={faqs} />
+      </section>
+    </>
   );
 }

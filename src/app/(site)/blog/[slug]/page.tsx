@@ -7,84 +7,27 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
+import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
+import { makeBlogPostSchema } from '@/app/config/pageSchema';
+import { makeBlogMetadata } from '@/app/config/pageMetadata';
 
 type Params = {
   slug: string;
 };
 
-// Revalidation ISR
+// 1. ISR : génère la liste des slugs au build + revalide toutes les 10 minutes
 export const revalidate = 600;
-
 export async function generateStaticParams() {
-  // Récupère toutes les slugs pour la pré-génération ISR des pages de blog
-  const { posts } = await getPosts({ limit: 100 }); // Limite le nombre d'articles à pré-générer
-  return posts.map((post) => ({
-    slug: post.slug?.current,
-  }));
+  const { posts } = await getPosts({ limit: 100 });
+  return posts.map((post) => ({ slug: post.slug.current }));
 }
 
+// 2. Metadata Next.js → délègue au helper central
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
+  const { slug } = await params;
   const post: Blog = await getPostBySlug(slug);
-
-  const siteURL = process.env.SITE_URL || 'https://conciergerie-alsacienne.fr';
-  const siteName = process.env.SITE_NAME || 'Conciergerie Alsacienne';
-  const authorName = process.env.AUTHOR_NAME || 'Conciergerie Alsacienne';
-
-  if (!post) {
-    return {
-      title: 'Article non trouvé | ' + siteName,
-      description: "L'article que vous recherchez n'existe pas ou a été déplacé.",
-    };
-  }
-
-  const defaultOg = `${siteURL}/default-og.jpg`;
-  const imageUrl = post?.mainImage ? imageBuilder(post.mainImage).url() : defaultOg;
-
-  return {
-    title: `${post.title} | ${siteName}`,
-    description: post.metadata ? `${post.metadata.slice(0, 155)}...` : `Article sur ${post.title}`,
-    authors: [{ name: authorName }],
-    robots: {
-      index: true,
-      follow: true,
-      nocache: true,
-      googleBot: {
-        index: true,
-        follow: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    openGraph: {
-      title: `${post.title} | ${siteName}`,
-      description: post.metadata || `Article sur ${post.title}`,
-      url: `${siteURL}/blog/${post.slug?.current}`,
-      siteName,
-      images: [
-        {
-          url: imageUrl,
-          width: 1800,
-          height: 1600,
-          alt: post.title,
-        },
-      ],
-      locale: 'fr_FR',
-      type: 'article',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${post.title} | ${siteName}`,
-      description: post.metadata
-        ? `${post.metadata.slice(0, 155)}...`
-        : `Article sur ${post.title}`,
-      creator: `@${authorName}`,
-      site: `@${siteName}`,
-      images: [imageUrl],
-    },
-  };
+  if (!post) return makeBlogMetadata(null as any);
+  return makeBlogMetadata(post);
 }
 
 const BlogSlugPage = async (props: { params: Promise<Params> }) => {
@@ -102,6 +45,9 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
   const mainImageUrl = post.mainImage ? imageBuilder(post.mainImage).url() : defaultImage;
   const authorImageUrl = post.author?.image ? imageBuilder(post.author.image).url() : defaultAvatar;
 
+  const siteUrl = process.env.SITE_URL!;
+  const schema = makeBlogPostSchema(post, siteUrl);
+
   try {
     await structuredAlgoliaHtmlData({
       type: 'blog',
@@ -116,6 +62,8 @@ const BlogSlugPage = async (props: { params: Promise<Params> }) => {
 
   return (
     <section className="bg-white pt-[150px]">
+      <SeoSchemaInjector schema={schema} />
+
       <div className="container">
         <div className="border-b border-[#E9ECF8] pb-[120px]">
           <div className="mx-[-16px] flex flex-wrap justify-center">

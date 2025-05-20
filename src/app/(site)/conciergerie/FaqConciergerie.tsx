@@ -1,53 +1,8 @@
-import { getFAQsByType } from '@/sanity/sanity-utils';
 import FAQ from '@/components/FAQ';
 import SectionTitle from '@/components/Common/SectionTitle';
-import Script from 'next/script';
-import { FAQItem } from '@/types/faq';
+import type { FAQItem } from '@/types/faq';
 
-const siteURL = 'https://www.conciergerie-alsacienne.fr';
-
-export default async function FaqConciergerieClient() {
-  // Récupération des FAQs côté serveur
-  const faqs: FAQItem[] = await getFAQsByType('conciergerie');
-
-  // Groupement par topic pour JSON-LD
-  const groupedByTopic = faqs.reduce((acc, faq) => {
-    const topic = faq.topic?.trim() || 'autres';
-    if (!acc[topic]) acc[topic] = [];
-    acc[topic].push(faq);
-    return acc;
-  }, {} as Record<string, FAQItem[]>);
-
-  // Données structurées FAQ
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: Object.entries(groupedByTopic).map(([topic, items]) => ({
-      '@type': 'WebPageElement',
-      '@id': `${siteURL}/conciergerie#${encodeURIComponent(topic)}`,
-      name: topic,
-      hasPart: items.map(({ question, answer }) => ({
-        '@type': 'Question',
-        name: question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: answer.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim(),
-        },
-      })),
-    })),
-  };
-
-  // Données structurées Breadcrumb
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteURL },
-      { '@type': 'ListItem', position: 2, name: 'Conciergerie', item: `${siteURL}/conciergerie` },
-      { '@type': 'ListItem', position: 3, name: 'FAQ', item: `${siteURL}/conciergerie#faq` },
-    ],
-  };
-
+export default function FaqConciergerie({ items }: { items: FAQItem[] }) {
   return (
     <section
       id="faq-conciergerie"
@@ -66,27 +21,13 @@ export default async function FaqConciergerieClient() {
         </header>
 
         <FAQ
-          items={faqs}
+          items={items}
           defaultType="conciergerie"
           showTopicFilter
           specificPage
           subtitle="Tout ce que vous devez savoir pour faire le bon choix."
         />
       </div>
-
-      {/* JSON-LD pour SEO, injecté après l'interactivité */}
-      <Script
-        id="faq-jsonld-conciergerie"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <Script
-        id="breadcrumb-jsonld-conciergerie"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
     </section>
   );
 }
