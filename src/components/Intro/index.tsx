@@ -13,8 +13,8 @@ interface IntroProps {
 
 export const Intro: FC<IntroProps> = ({ variant }) => {
   // Page key always matches JSON filename
-  const pageKey = 'conciergerie';
-  const sectionKey = 'Conciergerie';
+  const pageKey = variant === 'gestion-locative' ? 'gestionLocative' : 'conciergerie';
+  const sectionKey = variant === 'gestion-locative' ? 'GestionLocative' : 'Conciergerie';
 
   // Externalized texts from JSON
   const title = t(pageKey, `${sectionKey}.Intro.title`) as string;

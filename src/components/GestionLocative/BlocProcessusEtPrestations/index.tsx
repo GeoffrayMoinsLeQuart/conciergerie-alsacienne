@@ -5,80 +5,34 @@ import SectionTitle from '@/components/Common/SectionTitle';
 import Image from 'next/image';
 import { Calculator } from 'lucide-react';
 import CTAButtons from '@/components/Buttons/CTAButtons';
-import Script from 'next/script';
+import { t } from '@/app/libs/content';
 
-const steps = [
-  {
-    number: 1,
-    title: 'Évaluation initiale',
-    description: 'Estimation du loyer, conseils et signature du mandat',
-    icon: 'https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318491/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/mise-en-location-icon_acpygo.webp',
-    details: [
-      'Estimation précise du loyer de marché',
-      'Visite détaillée de votre bien',
-      'Conseils personnalisés pour optimiser votre rentabilité',
-      'Signature du mandat de gestion',
-    ],
-  },
-  {
-    number: 2,
-    title: 'Mise en location',
-    description: 'Photos, annonces, visites et sélection des locataires',
-    icon: 'https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318492/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/selection-locataires-icon_quo6gg.webp',
-    details: [
-      'Reportage photos professionnel',
-      "Diffusion d'annonces sur les plateformes immobilières majeures",
-      'Organisation et conduite des visites',
-      'Sélection rigoureuse des candidats locataires',
-    ],
-  },
-  {
-    number: 3,
-    title: 'Installation du locataire',
-    description: 'Bail, état des lieux, assurances et remise des clés',
-    icon: 'https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318491/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/gestion-administrative-icon_dmvlr6.webp',
-    details: [
-      'Rédaction du bail et des annexes obligatoires',
-      "État des lieux d'entrée détaillé avec photos",
-      "Souscription des contrats d'assurance",
-      'Remise des clés et accompagnement du locataire',
-    ],
-  },
-  {
-    number: 4,
-    title: 'Gestion quotidienne',
-    description: 'Loyers, demandes, maintenance et suivi régulier',
-    icon: 'https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318491/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/entretien-maintenance-icon_famjet.webp',
-    details: [
-      'Encaissement mensuel des loyers',
-      'Suivi administratif, technique et financier',
-      "Gestion des demandes d'intervention",
-      'Visites techniques annuelles',
-    ],
-  },
-  {
-    number: 5,
-    title: 'Relocation ou renouvellement',
-    description: 'Sortie, remise en location ou prolongation du bail',
-    icon: 'https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318492/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/relations-locataires-icon_crx21j.webp',
-    details: [
-      'Gestion des fins de bail (congés, renouvellements)',
-      'État des lieux de sortie',
-      'Restitution du dépôt de garantie',
-      'Remise en location rapide en cas de départ',
-    ],
-  },
-];
+interface Step {
+  number: number;
+  title: string;
+  description: string;
+  icon: string;
+  details: string[];
+}
 
 const BlocProcessusEtPrestations: FC = () => {
+  const pageKey = 'gestionLocative';
+  const baseKey = 'GestionLocative.ProcessusPrestations';
+
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`)   as string;
+  const title     = t(pageKey, `${baseKey}.title`)       as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`)   as string;
+  const steps     = t(pageKey, `${baseKey}.steps`)       as Step[];
+  const ctaLabel  = t(pageKey, `${baseKey}.ctaLabel`)    as string;
+
   return (
     <section id="processus" aria-labelledby="processus-title" className="bg-[#f8f9ff] py-20">
       <div className="container">
         <SectionTitle
           id="processus-title"
-          mainTitle="ACCOMPAGNEMENT & SERVICES"
-          title="Notre méthode en 5 étapes claires et efficaces"
-          paragraph="De la première estimation à la gestion quotidienne, nous orchestrons chaque étape avec précision pour vous garantir tranquillité et rentabilité."
+          mainTitle={mainTitle}
+          title={title}
+          paragraph={paragraph}
           center
         />
 
@@ -92,7 +46,7 @@ const BlocProcessusEtPrestations: FC = () => {
               <div className="mb-4 flex items-center justify-center">
                 <Image
                   src={step.icon}
-                  alt={`Illustration pour l'étape ${step.number} : ${step.title}`}
+                  alt={`Illustration étape ${step.number}: ${step.title}`}
                   width={120}
                   height={120}
                   className="object-contain"
@@ -101,7 +55,9 @@ const BlocProcessusEtPrestations: FC = () => {
               <h3 id={`step-${step.number}`} className="mb-2 text-xl font-bold text-dark">
                 {step.number}. {step.title}
               </h3>
-              <p className="mb-4 text-sm font-medium text-body-color">{step.description}</p>
+              <p className="mb-4 text-sm font-medium text-body-color">
+                {step.description}
+              </p>
               <ul className="list-disc space-y-1 pl-4 text-sm text-gray-700">
                 {step.details.map((item, idx) => (
                   <li key={idx}>{item}</li>
@@ -114,7 +70,7 @@ const BlocProcessusEtPrestations: FC = () => {
         <div className="mt-12 text-center">
           <CTAButtons
             primary={{
-              label: 'Estimer mes revenus',
+              label: ctaLabel,
               href: '/estimation',
               icon: <Calculator className="h-5 w-5" />,
               colorClass:
@@ -123,28 +79,6 @@ const BlocProcessusEtPrestations: FC = () => {
           />
         </div>
       </div>
-
-      {/* ✅ JSON-LD HowTo pour SEO enrichi */}
-      <Script
-        id="howto-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'HowTo',
-            name: 'Gestion locative : les 5 étapes de notre accompagnement',
-            description:
-              'Découvrez les 5 étapes de notre processus de gestion locative à Mulhouse & Colmar pour accompagner nos clients de A à Z.',
-            step: steps.map((step) => ({
-              '@type': 'HowToStep',
-              name: step.title,
-              text: step.details.join(', '),
-              url: `https://www.conciergerie-alsacienne.fr/gestion-locative#processus`,
-            })),
-          }),
-        }}
-      />
     </section>
   );
 };

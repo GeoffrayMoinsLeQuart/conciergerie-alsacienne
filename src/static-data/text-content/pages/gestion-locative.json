@@ -1,0 +1,259 @@
+{
+  "GestionLocative": {
+    "pageAriaLabel": "Page conciergerie haut de gamme",
+    "StickyAnchorMenu": {
+      "navAriaLabel": "Navigation par sections",
+      "mobileButtonAriaLabel": "Menu de navigation mobile",
+      "mobileMenuAriaLabel": "Menu sections",
+      "sections": {
+        "/conciergerie": [
+          { "id": "selection", "label": "Sélection" },
+          { "id": "transformations", "label": "Transformations" },
+          { "id": "prestations", "label": "Prestations" },
+          { "id": "processus", "label": "Processus" },
+          { "id": "expertise", "label": "Expertise" },
+          { "id": "tarifs", "label": "Tarifs" },
+          { "id": "faq-conciergerie", "label": "FAQ" }
+        ],
+        "/gestion-locative": [
+          { "id": "processus", "label": "Prestations" },
+          { "id": "profils", "label": "Profils" },
+          { "id": "garanties", "label": "Garanties" },
+          { "id": "temoignages", "label": "Témoignages" },
+          { "id": "tarifs", "label": "Tarifs" },
+          { "id": "faq-gestion", "label": "FAQ" }
+        ]
+      }
+    },
+    "Intro": {
+      "title": "Gestion locative haut de gamme en Alsace",
+      "content": [
+        "Libérez-vous des contraintes, confiez-nous votre bien.",
+        "Nous assurons une gestion rigoureuse et humaine : loyers garantis, relation locataire fluide, entretien maîtrisé.",
+        "Sérénité et rentabilité, sans compromis."
+      ],
+      "image": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745434488/Conciergerie%20alsacienne/Icon%20landing/Conciergerie/ChatGPT_Image_Apr_23_2025_08_23_19_PM_1_nam8th.webp",
+      "imageAlt": "Illustration conciergerie haut de gamme en Alsace",
+      "buttons": {
+        "primary": { "label": "Nous contacter", "href": "/contact" },
+        "secondary": { "label": "Estimer mes revenus", "href": "/estimation" }
+      }
+    },
+    "ProcessusPrestations": {
+      "mainTitle": "ACCOMPAGNEMENT & SERVICES",
+      "title": "Notre méthode en 5 étapes claires et efficaces",
+      "paragraph": "De la première estimation à la gestion quotidienne, nous orchestrons chaque étape avec précision pour vous garantir tranquillité et rentabilité.",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Évaluation initiale",
+          "description": "Estimation du loyer, conseils et signature du mandat",
+          "icon": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318491/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/mise-en-location-icon_acpygo.webp",
+          "details": [
+            "Estimation précise du loyer de marché",
+            "Visite détaillée de votre bien",
+            "Conseils personnalisés pour optimiser votre rentabilité",
+            "Signature du mandat de gestion"
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Mise en location",
+          "description": "Photos, annonces, visites et sélection des locataires",
+          "icon": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318492/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/selection-locataires-icon_quo6gg.webp",
+          "details": [
+            "Reportage photos professionnel",
+            "Diffusion d'annonces sur les plateformes immobilières majeures",
+            "Organisation et conduite des visites",
+            "Sélection rigoureuse des candidats locataires"
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Installation du locataire",
+          "description": "Bail, état des lieux, assurances et remise des clés",
+          "icon": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318491/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/gestion-administrative-icon_dmvlr6.webp",
+          "details": [
+            "Rédaction du bail et des annexes obligatoires",
+            "État des lieux d'entrée détaillé avec photos",
+            "Souscription des contrats d'assurance",
+            "Remise des clés et accompagnement du locataire"
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Gestion quotidienne",
+          "description": "Loyers, demandes, maintenance et suivi régulier",
+          "icon": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318491/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/entretien-maintenance-icon_famjet.webp",
+          "details": [
+            "Encaissement mensuel des loyers",
+            "Suivi administratif, technique et financier",
+            "Gestion des demandes d'intervention",
+            "Visites techniques annuelles"
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Relocation ou renouvellement",
+          "description": "Sortie, remise en location ou prolongation du bail",
+          "icon": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745318492/Conciergerie%20alsacienne/Icon%20landing/Gestion%20locative/relations-locataires-icon_crx21j.webp",
+          "details": [
+            "Gestion des fins de bail (congés, renouvellements)",
+            "État des lieux de sortie",
+            "Restitution du dépôt de garantie",
+            "Remise en location rapide en cas de départ"
+          ]
+        }
+      ],
+      "ctaLabel": "Estimer mes revenus"
+    },
+    "TabsProfilProprietaire": {
+      "mainTitle": "Un parcours adapté à chaque propriétaire",
+      "sectionId": "profils",
+      "headingId": "proprietaire-title",
+      "tabs": [
+        { "value": "investisseur", "label": "📊 Investisseur" },
+        { "value": "expatrie", "label": "✈️ Expatrié" },
+        { "value": "primo", "label": "🧭 Primo-bailleur" }
+      ],
+      "timelines": {
+        "investisseur": [
+          {
+            "title": "Optimisation de la rentabilité",
+            "points": [
+              "Évaluation précise du loyer de marché",
+              "Conseils fiscaux et patrimoniaux",
+              "Stratégie de valorisation long terme"
+            ]
+          },
+          {
+            "title": "Gestion technique complète",
+            "points": [
+              "Suivi des interventions",
+              "Maintenance préventive",
+              "Visites techniques régulières"
+            ]
+          },
+          {
+            "title": "Reporting et transparence",
+            "points": [
+              "Tableau de bord mensuel",
+              "Analyse des rendements",
+              "Accompagnement pour arbitrage ou revente"
+            ]
+          }
+        ],
+        "expatrie": [
+          {
+            "title": "Sérénité à distance",
+            "points": [
+              "Interlocuteur unique 7j/7",
+              "Réactivité face aux urgences",
+              "Aucune présence requise sur place"
+            ]
+          },
+          {
+            "title": "Garantie totale",
+            "points": [
+              "Loyers garantis à date fixe",
+              "Protection juridique intégrée",
+              "Assurance dégradations locatives"
+            ]
+          },
+          {
+            "title": "Communication continue",
+            "points": [
+              "Reporting clair et périodique",
+              "Contact WhatsApp & email réactif",
+              "Suivi personnalisé à distance"
+            ]
+          }
+        ],
+        "primo": [
+          {
+            "title": "Accompagnement de A à Z",
+            "points": [
+              "Aide pour choisir le bon bail",
+              "Explication des démarches et obligations",
+              "Assistance pour première mise en location"
+            ]
+          },
+          {
+            "title": "Simplicité et pédagogie",
+            "points": [
+              "Contrats clairs et simplifiés",
+              "Support permanent",
+              "Réponses à toutes les questions de débutant"
+            ]
+          },
+          {
+            "title": "Montée en compétence",
+            "points": [
+              "Suivi personnalisé",
+              "Recommandations sur le long terme",
+              "Formations ou documentation en option"
+            ]
+          }
+        ]
+      }
+    },
+    "GarantiesLoyers": {
+      "mainTitle": "GARANTIE LOYERS IMPAYÉS",
+      "title": "Une protection financière à toute épreuve",
+      "paragraph": "Notre garantie vous assure des revenus locatifs stables, quoi qu'il arrive.",
+      "highlight": {
+        "title": "Garantie à 100% de vos loyers",
+        "description": "Même en cas d'impayés, vous recevez l'intégralité de vos loyers et charges à date fixe chaque mois, vous assurant des revenus stables et prévisibles."
+      },
+      "features": [
+        {
+          "title": "Vos loyers versés quoi qu'il arrive",
+          "description": "Même en cas d'impayé, nous vous versons 100 % de votre loyer (loyer + charges) à la date convenue chaque mois. Vos revenus locatifs restent ainsi stables et prévisibles, sans interruption*."
+        },
+        {
+          "title": "Aucune carence, aucune franchise",
+          "description": "Notre garantie prend effet dès le premier jour de retard de paiement, sans délai d'attente. Vous n'avez aucune franchise à supporter – chaque euro de loyer impayé est couvert, dès le premier impayé."
+        },
+        {
+          "title": "Tranquillité juridique incluse",
+          "description": "Vous profitez d'une protection juridique complète : tous les frais de contentieux, d'huissier, d'expulsion et de justice sont pris en charge. Nous gérons tout pour vous, sans frais supplémentaires."
+        },
+        {
+          "title": "Dégradations du bien couvertes",
+          "description": "Les détériorations causées par le locataire sont indemnisées au-delà du dépôt de garantie. Les réparations sont prises en charge*, préservant ainsi la valeur de votre bien."
+        },
+        {
+          "title": "Protection contre le squat",
+          "description": "Les loyers perdus en cas d'occupation illégale sont couverts, et nous prenons en charge les frais de procédure pour évincer les squatteurs."
+        },
+        {
+          "title": "Vacance locative (optionnelle)",
+          "description": "Entre deux locataires, nous pouvons compenser les loyers non perçus pour sécuriser votre trésorerie, même en période d'inoccupation.*"
+        }
+      ],
+      "footerText": "*Conditions : Contrat assuré par GALIAN-SMABTP. Plafonds d'indemnisation : 100 000 € pour les loyers impayés et frais de procédure, 10 000 € pour les dégradations immobilières. Détérioration : vétusté déduite, dépôt de garantie déduit. Option vacance locative sous réserve de souscription spécifique. Garantie valable pour les locations de résidence principale, sous réserve de l'acceptation du dossier du locataire."
+    },
+    "Temoignages": {
+      "mainTitle": "TÉMOIGNAGES",
+      "title": "Ils nous font confiance",
+      "paragraph": "Découvrez ce que nos clients disent de notre service de gestion locative.",
+      "items": [
+        {
+          "name": "Marie L.",
+          "subtitle": "Propriétaire d'un T3 à Mulhouse",
+          "text": "Depuis que j'ai confié mon appartement à la Conciergerie Alsacienne, je n'ai plus à me soucier des appels de locataires ou des problèmes de plomberie. Mes loyers sont versés à date fixe et leur garantie loyers impayés m'assure une tranquillité totale."
+        },
+        {
+          "name": "Pierre et Sophie D.",
+          "subtitle": "Propriétaires de deux studios à Strasbourg",
+          "text": "En tant qu'expatriés, nous avions besoin d'une gestion à distance fiable. L'équipe de la Conciergerie Alsacienne gère nos biens comme si c'étaient les leurs. Leur réactivité et leur professionnalisme sont remarquables."
+        },
+        {
+          "name": "Jean-Marc B.",
+          "subtitle": "Investisseur immobilier",
+          "text": "Après avoir testé plusieurs agences, j'ai enfin trouvé un gestionnaire qui comprend mes objectifs de rentabilité. Leur formule Premium me permet de développer mon patrimoine sereinement, avec un ROI optimisé."
+        }
+      ]
+    }
+  }
+}
