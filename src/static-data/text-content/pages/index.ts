@@ -5,6 +5,9 @@ import about from './about.json';
 import blog from './blog.json';
 import conciergerie from './conciergerie.json';
 import gestionLocative from './gestion-locative.json';
+import mentionsLegales from './mentions-legales.json';
+import nosBiens from './nos-biens.json';
+
 // ↑ ajoutez ici manuellement tous vos JSON
 
 export const pages: Record<string, Record<string, any>> = {
@@ -14,5 +17,7 @@ export const pages: Record<string, Record<string, any>> = {
   blog,
   conciergerie,
   gestionLocative,
+  mentionsLegales,
+  nosBiens,
   // …
 };

@@ -17,7 +17,7 @@ export const footerLinks: FooterLink[] = [
   {
     id: uuid(),
     title: 'Nos Biens',
-    href: '/properties',
+    href: '/nos-biens',
     external: false,
   },
   {

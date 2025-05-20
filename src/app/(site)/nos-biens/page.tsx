@@ -1,9 +1,9 @@
-// src/app/nos-biens/page.tsx
 import Properties from '@/components/Property';
 import { fetchProperties } from '@/sanity/sanity-utils';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { getMetadata } from '@/app/config/pageMetadata';
 import { makePropertiesSchema } from '@/app/config/pageSchema';
+import { t } from '@/app/libs/content';
 import type { Property } from '@/types/property';
 
 export const revalidate = 3600;
@@ -15,12 +15,18 @@ export default async function PropertiesPage() {
   // Génération du JSON-LD structuré
   const schema = makePropertiesSchema(properties);
 
+  // Texte externalisé
+  const pageKey = 'nos-biens';
+  const hero = t(pageKey, 'NosBiens.hero') as { title: string; description: string };
+  const noItems = t(pageKey, 'NosBiens.noItems.message') as string;
+  const aria = t(pageKey, 'NosBiens.pageAriaLabel') as string;
+
   return (
     <>
       {/* Injection unique du schéma JSON-LD */}
       <SeoSchemaInjector schema={schema} />
 
-      <main id="nos-biens" aria-labelledby="properties-title">
+      <main id="nos-biens" aria-labelledby="properties-title" aria-label={aria}>
         <section className="bg-white pt-10 sm:pt-16 lg:pt-20">
           <div className="container mx-auto px-4">
             <header className="mb-10 text-center">
@@ -28,19 +34,16 @@ export default async function PropertiesPage() {
                 id="properties-title"
                 className="text-3xl font-extrabold text-gray-900 sm:text-4xl"
               >
-                Nos biens en gestion
+                {hero.title}
               </h1>
-              <p className="mt-4 text-lg text-gray-600">
-                Studios, T2 ou maisons, en courte ou longue durée : découvrez les logements que nous
-                gérons, optimisés pour la rentabilité et la satisfaction voyageurs.
-              </p>
+              <p className="mt-4 text-lg text-gray-600">{hero.description}</p>
             </header>
 
-            {properties && properties.length > 0 ? (
+            {properties.length > 0 ? (
               <Properties properties={properties} />
             ) : (
               <div className="py-20 text-center text-gray-600" role="status" aria-live="polite">
-                Aucun bien à afficher pour le moment.
+                {noItems}
               </div>
             )}
           </div>

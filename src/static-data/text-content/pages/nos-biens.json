@@ -1,0 +1,12 @@
+{
+  "NosBiens": {
+    "pageAriaLabel": "Nos biens en gestion",
+    "hero": {
+      "title": "Nos biens en gestion",
+      "description": "Studios, T2 ou maisons, en courte ou longue durée : découvrez les logements que nous gérons, optimisés pour la rentabilité et la satisfaction voyageurs."
+    },
+    "noItems": {
+      "message": "Aucun bien à afficher pour le moment."
+    }
+  }
+}

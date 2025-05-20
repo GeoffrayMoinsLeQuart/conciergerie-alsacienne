@@ -1,73 +1,65 @@
+// src/components/Footer/index.tsx
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
-import { footerLinks, footerNewsData, footerQuickLinks } from '@/static-data/footer';
 import { v4 as uuid } from 'uuid';
+import {
+  footerLinks,
+  footerNewsData,
+  footerQuickLinks,
+  footerSocialLinks,
+} from '@/static-data/footer';
 
-// Social links data
-const footerSocialLinks = [
-  {
-    id: uuid(),
-    title: 'Facebook',
-    href: 'https://facebook.com/conciergerie',
-    icon: (
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 22 22"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path
-          d="M12.1 10.494V7.42717C12.1 6.23996 13.085 5.27753 14.3 5.27753H16.5V2.05308L13.5135 1.84464C10.9664 1.66688 8.8 3.63794 8.8 6.13299V10.494H5.5V13.7184H8.8V20.1668H12.1V13.7184H15.4L16.5 10.494H12.1Z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
-  },
-  {
-    id: uuid(),
-    title: 'Twitter',
-    href: 'https://twitter.com/conciergerie',
-    icon: (
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 22 22"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
-  },
-  {
-    id: uuid(),
-    title: 'LinkedIn',
-    href: 'https://linkedin.com/company/conciergerie',
-    icon: (
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path
-          d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
-  },
+// Déclaration des icônes sociales dans le même ordre que footerSocialLinks
+const socialIcons: React.ReactNode[] = [
+  // Facebook
+  <svg
+    key="facebook"
+    width="20"
+    height="20"
+    viewBox="0 0 22 22"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      d="M12.1 10.494V7.42717C12.1 6.23996 13.085 5.27753 14.3 5.27753H16.5V2.05308L13.5135 1.84464C10.9664 1.66688 8.8 3.63794 8.8 6.13299V10.494H5.5V13.7184H8.8V20.1668H12.1V13.7184H15.4L16.5 10.494H12.1Z"
+      fill="currentColor"
+    />
+  </svg>,
+  // Twitter
+  <svg
+    key="twitter"
+    width="20"
+    height="20"
+    viewBox="0 0 22 22"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z"
+      fill="currentColor"
+    />
+  </svg>,
+  // LinkedIn
+  <svg
+    key="linkedin"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z"
+      fill="currentColor"
+    />
+  </svg>,
 ];
 
 const FooterLinkItem = ({
@@ -105,9 +97,8 @@ const FooterContact = () => (
         >
           contact@conciergerie-alsacienne.fr
         </a>
-        <span>15 Rue des Fleurs, 68100 Mulhouse</span>
-        <a href="tel:+33389XXXXXX" className="block hover:text-primary transition-colors">
-          +33 3 89 XX XX XX
+        <a href="tel:+33621471922" className="block hover:text-primary transition-colors">
+          06 21 47 19 22
         </a>
       </address>
     </div>
@@ -117,6 +108,7 @@ const FooterContact = () => (
 const FooterGraphic = () => (
   <div aria-hidden="true">
     <div className="absolute bottom-0 left-0 -z-10">
+      {/* SVG décoratif */}
       <svg
         width="143"
         height="138"
@@ -163,7 +155,7 @@ const FooterGraphic = () => (
 const FooterBottom = () => (
   <div className="mt-10 border-t border-white/10 pt-12 text-center">
     <div className="mb-5 flex justify-center space-x-4">
-      {footerSocialLinks.map(({ id, href, title, icon }) => (
+      {footerSocialLinks.map(({ id, href, title }, idx) => (
         <a
           key={id}
           href={href}
@@ -172,7 +164,7 @@ const FooterBottom = () => (
           rel="noopener noreferrer nofollow"
           className="flex h-8 w-8 items-center justify-center rounded-full bg-body-color text-dark hover:bg-primary hover:text-white transition-colors"
         >
-          {icon}
+          {socialIcons[idx]}
         </a>
       ))}
     </div>
