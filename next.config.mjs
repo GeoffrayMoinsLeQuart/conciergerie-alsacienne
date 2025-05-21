@@ -1,11 +1,18 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production';
-// En prod, NEXT_PUBLIC_ASSET_PREFIX devra être quelque chose comme
-// 'https://cdn.votre-domaine.com' ou '/static', jamais vide ni sans slash.
+// En prod, NEXT_PUBLIC_ASSET_PREFIX doit être non vide et commencer par '/' ou 'https://'
 const cdnPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
 const nextConfig = {
   reactStrictMode: true,
+
+  // Activation des Server Actions expérimentales (même origine)
+  experimental: {
+    serverActions: {},
+  },
+
+  // Génère les source maps en production pour faciliter le debug
+  productionBrowserSourceMaps: true,
 
   images: {
     remotePatterns: [
@@ -16,7 +23,7 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 jours
   },
 
-  // Pas de prefix en dev (=> undefined). En prod, utilise ton CDN ou un /chemin.
+  // Pas de préfixe en dev. En prod, utilise ton CDN ou un chemin absolu.
   assetPrefix: isProd ? cdnPrefix : undefined,
 
   async headers() {
