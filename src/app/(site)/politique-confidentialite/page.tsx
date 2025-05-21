@@ -1,24 +1,24 @@
+// pages/privacy-policy.tsx
 import { FC } from 'react';
 import Link from 'next/link';
 import PageTitle from '@/components/Common/PageTitle';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
-import { mentionsLegalesSchema } from '@/app/config/pageSchema';
+import { privacyPolicySchema } from '@/app/config/pageSchema';
 import { t } from '@/app/libs/content';
 import { Metadata } from 'next';
 import { getMetadata } from '@/app/config/pageMetadata';
 
 type Segment = { type: 'text'; value: string } | { type: 'link'; label: string; href: string };
 
-export const metadata: Metadata = getMetadata('mentions-legales');
+export const metadata: Metadata = getMetadata('privacy-policy');
 
-export default function MentionsLegalesPage() {
-  const pageKey = 'mentionsLegales';
-  const baseKey = 'MentionsLegales';
+const PrivacyPolicyPage: FC = () => {
+  const pageKey = 'politiqueConfidentialite';
+  const baseKey = 'PrivacyPolicy';
 
   const pageAriaLabel = t(pageKey, `${baseKey}.pageAriaLabel`) as string;
   const { pageTitle, pageDescription, showMenu } = t(pageKey, `${baseKey}.PageTitle`) as any;
 
-  // Lecture de l'ordre—tombe sur keys(sections) si pas de tableau
   const orderRaw = t(pageKey, `${baseKey}.sectionOrder`);
   const sections = t(pageKey, `${baseKey}.sections`) as Record<string, any>;
   const order = Array.isArray(orderRaw) ? orderRaw : Object.keys(sections);
@@ -44,7 +44,7 @@ export default function MentionsLegalesPage() {
 
   return (
     <>
-      <SeoSchemaInjector schema={mentionsLegalesSchema} />
+      <SeoSchemaInjector schema={privacyPolicySchema} />
 
       <PageTitle pageTitle={pageTitle} pageDescription={pageDescription} showMenu={showMenu} />
 
@@ -84,4 +84,6 @@ export default function MentionsLegalesPage() {
       </main>
     </>
   );
-}
+};
+
+export default PrivacyPolicyPage;

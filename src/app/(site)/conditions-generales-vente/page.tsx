@@ -1,32 +1,30 @@
+// pages/terms.tsx
 import { FC } from 'react';
 import Link from 'next/link';
 import PageTitle from '@/components/Common/PageTitle';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
-import { mentionsLegalesSchema } from '@/app/config/pageSchema';
+import { termsAndConditionsSchema } from '@/app/config/pageSchema';
 import { t } from '@/app/libs/content';
 import { Metadata } from 'next';
 import { getMetadata } from '@/app/config/pageMetadata';
 
 type Segment = { type: 'text'; value: string } | { type: 'link'; label: string; href: string };
 
-export const metadata: Metadata = getMetadata('mentions-legales');
+export const metadata: Metadata = getMetadata('terms');
 
-export default function MentionsLegalesPage() {
-  const pageKey = 'mentionsLegales';
-  const baseKey = 'MentionsLegales';
+const TermsPage: FC = () => {
+  const pageKey = 'termsAndConditions';
+  const baseKey = 'TermsAndConditions';
 
   const pageAriaLabel = t(pageKey, `${baseKey}.pageAriaLabel`) as string;
   const { pageTitle, pageDescription, showMenu } = t(pageKey, `${baseKey}.PageTitle`) as any;
 
-  // Lecture de l'ordre—tombe sur keys(sections) si pas de tableau
   const orderRaw = t(pageKey, `${baseKey}.sectionOrder`);
   const sections = t(pageKey, `${baseKey}.sections`) as Record<string, any>;
   const order = Array.isArray(orderRaw) ? orderRaw : Object.keys(sections);
 
   function renderParagraph(p: string | Segment[], idx: number) {
-    if (typeof p === 'string') {
-      return <p key={idx}>{p}</p>;
-    }
+    if (typeof p === 'string') return <p key={idx}>{p}</p>;
     return (
       <p key={idx}>
         {p.map((seg, i) =>
@@ -44,7 +42,7 @@ export default function MentionsLegalesPage() {
 
   return (
     <>
-      <SeoSchemaInjector schema={mentionsLegalesSchema} />
+      <SeoSchemaInjector schema={termsAndConditionsSchema} />
 
       <PageTitle pageTitle={pageTitle} pageDescription={pageDescription} showMenu={showMenu} />
 
@@ -77,11 +75,13 @@ export default function MentionsLegalesPage() {
               )}
 
               {Array.isArray(sec.paragraphs) &&
-                sec.paragraphs.map((p: string | Segment[], i: number) => renderParagraph(p, i))}
+                sec.paragraphs.map((p: any, i: number) => renderParagraph(p, i))}
             </section>
           );
         })}
       </main>
     </>
   );
-}
+};
+
+export default TermsPage;

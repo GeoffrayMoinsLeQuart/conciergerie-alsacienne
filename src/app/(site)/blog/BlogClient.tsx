@@ -12,6 +12,8 @@ import { t } from '@/app/libs/content';
 
 const pageKey = 'blog';
 
+export const revalidate = 600;
+
 export default function BlogClient() {
   const [posts, setPosts] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -70,10 +72,7 @@ export default function BlogClient() {
   const resultsAriaLabel = t(pageKey, 'Blog.BlogClient.resultsAriaLabel') as string;
 
   return (
-    <section
-      aria-labelledby="blog-results-heading"
-      className="bg-white pb-20 pt-[40px]"
-    >
+    <section aria-labelledby="blog-results-heading" className="bg-white pb-20 pt-[40px]">
       <div className="container">
         {/* 🔍 {filtersLabel} */}
         <BlogFilters
@@ -81,7 +80,7 @@ export default function BlogClient() {
           selectedCats={selectedCats}
           onToggleCat={(cat) =>
             setSelectedCats((prev) =>
-              prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+              prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
             )
           }
           searchTerm={searchTerm}
@@ -97,12 +96,7 @@ export default function BlogClient() {
         </header>
 
         {filteredPosts.length === 0 ? (
-          <div
-            className="py-12 text-center"
-            aria-live="polite"
-            aria-atomic="true"
-            role="status"
-          >
+          <div className="py-12 text-center" aria-live="polite" aria-atomic="true" role="status">
             <p className="text-xl font-semibold text-black">{noResultsTitle}</p>
             <p className="text-body-color">{noResultsText}</p>
           </div>
@@ -126,4 +120,4 @@ export default function BlogClient() {
       </div>
     </section>
   );
-}  
+}

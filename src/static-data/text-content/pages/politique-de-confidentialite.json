@@ -1,0 +1,95 @@
+{
+  "PrivacyPolicy": {
+    "pageAriaLabel": "Politique de confidentialité",
+    "PageTitle": {
+      "pageTitle": "Politique de confidentialité",
+      "pageDescription": "Gestion de vos données personnelles pour Les Clefs d’Alsace",
+      "showMenu": false
+    },
+    "sectionOrder": [
+      "Introduction",
+      "Responsable",
+      "DonneesCollectees",
+      "Finalites",
+      "BaseLegale",
+      "Conservation",
+      "Cookies",
+      "Droits"
+    ],
+    "sections": {
+      "Introduction": {
+        "title": "1. Introduction",
+        "paragraphs": [
+          "La présente Politique de confidentialité décrit comment Les Clefs d’Alsace collecte, utilise et protège vos données personnelles."
+        ]
+      },
+      "Responsable": {
+        "title": "2. Responsable du traitement",
+        "items": [
+          { "label": "Société", "value": "Les Clefs d’Alsace" },
+          {
+            "label": "Email",
+            "value": "contact@clefsdalsace.fr",
+            "link": "mailto:contact@clefsdalsace.fr"
+          },
+          { "label": "Téléphone", "value": "06 21 47 19 22" }
+        ]
+      },
+      "DonneesCollectees": {
+        "title": "3. Données collectées",
+        "paragraphs": ["Nous collectons les données suivantes :"],
+        "items": [
+          { "label": "Identité", "value": "nom, prénom, e-mail, téléphone" },
+          { "label": "Navigation", "value": "IP, navigateur, pages consultées, durée" },
+          { "label": "Formulaires", "value": "contact, inscription, devis" }
+        ]
+      },
+      "Finalites": {
+        "title": "4. Finalités du traitement",
+        "items": [
+          { "label": "Gestion du site", "value": "Sécurisation et maintenance" },
+          { "label": "Support", "value": "Réponse aux demandes utilisateurs" },
+          { "label": "Marketing", "value": "Communications commerciales (avec consentement)" },
+          { "label": "Analyse", "value": "Amélioration de l'expérience utilisateur" }
+        ]
+      },
+      "BaseLegale": {
+        "title": "5. Base légale",
+        "items": [
+          { "label": "Consentement", "value": "formulaires, newsletter" },
+          { "label": "Exécution de contrat", "value": "exécution des services" },
+          { "label": "Obligations légales", "value": "facturation, sécurité" },
+          { "label": "Intérêts légitimes", "value": "amélioration du site" }
+        ]
+      },
+      "Conservation": {
+        "title": "6. Conservation des données",
+        "items": [
+          { "label": "Navigation", "value": "13 mois" },
+          { "label": "Formulaires", "value": "3 ans" },
+          { "label": "Newsletter", "value": "jusqu'à désinscription" }
+        ]
+      },
+      "Cookies": {
+        "title": "7. Cookies et traceurs",
+        "items": [
+          { "label": "Techniques", "value": "fonctionnement du site" },
+          { "label": "Analytiques", "value": "analyse d’usage" },
+          { "label": "Marketing", "value": "contenus personnalisés" }
+        ]
+      },
+      "Droits": {
+        "title": "8. Droits des personnes concernées",
+        "paragraphs": [
+          [
+            {
+              "type": "text",
+              "value": "Pour exercer vos droits (accès, rectification, effacement, limitation, opposition, portabilité), contactez le DPO : "
+            },
+            { "type": "link", "label": "contact@clefsdalsace.fr", "href": "mailto:contact@clefsdalsace.fr" }
+          ]
+        ]
+      }
+    }
+  }
+}

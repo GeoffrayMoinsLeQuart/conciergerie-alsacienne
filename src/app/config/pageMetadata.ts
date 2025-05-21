@@ -314,6 +314,71 @@ export const pageMetadata: Record<string, Metadata> = {
     robots: { index: true, follow: true },
     alternates: { canonical: `${siteURL}/mentions-legales` },
   },
+
+  'privacy-policy': {
+    title: 'Politique de confidentialité | Les Clés d’Alsace – Gestion des données personnelles',
+    description:
+      'Découvrez comment Les Clés d’Alsace collecte, utilise et protège vos données personnelles sur www.clefsdalsace.fr.',
+    openGraph: {
+      title: 'Politique de confidentialité | Les Clés d’Alsace',
+      description:
+        'Consultez la politique de confidentialité de Les Clés d’Alsace : collecte, finalités, droits, cookies et sécurité de vos données.',
+      url: `${siteURL}/privacy-policy`,
+      siteName,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Politique de confidentialité | Les Clés d’Alsace',
+      description:
+        'Découvrez la politique de confidentialité de Les Clés d’Alsace : comment nous collectons et protégeons vos données personnelles.',
+    },
+    robots: { index: true, follow: true },
+    alternates: { canonical: `${siteURL}/privacy-policy` },
+  },
+
+  terms: {
+    title: 'Conditions Générales de Vente | Les Clés d’Alsace – Prestations et tarifs',
+    description:
+      'Consultez les Conditions Générales de Vente de Les Clés d’Alsace : prestations, tarifs, paiement, responsabilité et propriété intellectuelle.',
+    openGraph: {
+      title: 'Conditions Générales de Vente | Les Clés d’Alsace',
+      description:
+        'Toutes les informations légales sur les prestations de Les Clés d’Alsace : gestion locative, conciergerie, tarifs et conditions.',
+      url: `${siteURL}/terms`,
+      siteName,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Conditions Générales de Vente | Les Clés d’Alsace',
+      description:
+        'Découvrez les Conditions Générales de Vente de Les Clés d’Alsace : services, tarifs, modalités de paiement et responsabilités.',
+    },
+    robots: { index: true, follow: true },
+    alternates: { canonical: `${siteURL}/terms` },
+  },
+  cookies: {
+    title: 'Politique de cookies | Les Clés d’Alsace – Gestion des cookies et traceurs',
+    description:
+      'Découvrez comment Les Clés d’Alsace utilise les cookies : types, gestion, consentement et politique de confidentialité associée.',
+    openGraph: {
+      title: 'Politique de cookies | Les Clés d’Alsace',
+      description:
+        'Consultez la politique de cookies de Les Clés d’Alsace : utilité, analyse de trafic, marketing et gestion de votre consentement.',
+      url: `${siteURL}/cookies`,
+      siteName,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Politique de cookies | Les Clés d’Alsace',
+      description:
+        'Apprenez comment Les Clés d’Alsace gère les cookies techniques, analytiques et marketing, et comment donner ou retirer votre consentement.',
+    },
+    robots: { index: true, follow: true },
+    alternates: { canonical: `${siteURL}/cookies` },
+  },
 };
 
 /**

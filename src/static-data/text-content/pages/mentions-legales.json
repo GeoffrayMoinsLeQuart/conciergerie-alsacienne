@@ -57,9 +57,7 @@
       },
       "directeur": {
         "title": "2. Directeur de la publication",
-        "paragraphs": [
-          "Jean-François Atlan, Président"
-        ]
+        "paragraphs": ["Jean-François Atlan, Président"]
       },
       "hebergement": {
         "title": "3. Hébergement",
@@ -107,8 +105,23 @@
             },
             {
               "type": "link",
-              "label": "Politique de confidentialité & cookies",
+              "label": "Politique de confidentialité",
               "href": "/politique-confidentialite"
+            },
+            {
+              "type": "text",
+              "value": "."
+            }
+          ],
+          [
+            {
+              "type": "text",
+              "value": "Consultez nos "
+            },
+            {
+              "type": "link",
+              "label": "Politique de cookies",
+              "href": "/cookies"
             },
             {
               "type": "text",
@@ -128,7 +141,7 @@
             {
               "type": "link",
               "label": "Conditions Générales de Vente",
-              "href": "/cgv"
+              "href": "/conditions-generales-vente"
             },
             {
               "type": "text",

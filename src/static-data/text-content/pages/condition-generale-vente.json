@@ -1,0 +1,93 @@
+{
+  "TermsAndConditions": {
+    "pageAriaLabel": "Conditions générales de vente",
+    "PageTitle": {
+      "pageTitle": "Conditions Générales de Vente",
+      "pageDescription": "Conditions générales de vente des prestations de Les Clefs d’Alsace",
+      "showMenu": false
+    },
+    "sectionOrder": [
+      "Objet",
+      "Prestations",
+      "Tarifs",
+      "Paiement",
+      "Livraison",
+      "Responsabilite",
+      "DroitDeRetractation",
+      "ProprieteIntellectuelle",
+      "DonneesPersonnelles",
+      "Contact"
+    ],
+    "sections": {
+      "Objet": {
+        "title": "1. Objet",
+        "paragraphs": [
+          "Les présentes Conditions Générales de Vente (CGV) régissent les offres et prestations fournies par Les Clefs d’Alsace à ses clients."
+        ]
+      },
+      "Prestations": {
+        "title": "2. Prestations",
+        "paragraphs": [
+          "Les prestations proposées comprennent la gestion locative, la conciergerie, et toutes autres services décrits sur le site."
+        ]
+      },
+      "Tarifs": {
+        "title": "3. Tarifs",
+        "paragraphs": [
+          "Les prix applicables sont ceux en vigueur au jour de la commande, exprimés en euros toutes taxes comprises (TTC)."
+        ]
+      },
+      "Paiement": {
+        "title": "4. Paiement",
+        "paragraphs": [
+          "Le paiement est dû à la commande, selon les modalités indiquées sur la facture. En cas de retard, des pénalités peuvent être appliquées."
+        ]
+      },
+      "Livraison": {
+        "title": "5. Livraison",
+        "paragraphs": [
+          "Les services sont réputés livrés dès la fourniture des clés ou l’accès aux services en ligne."
+        ]
+      },
+      "Responsabilite": {
+        "title": "6. Responsabilité",
+        "paragraphs": [
+          "Les Clefs d’Alsace ne peut être tenue responsable que des dommages directs résultant d’une faute prouvée, dans la limite du montant facturé."
+        ]
+      },
+      "DroitDeRetractation": {
+        "title": "7. Droit de rétractation",
+        "paragraphs": [
+          "Conformément à la loi, le client dispose d’un délai de 14 jours pour exercer son droit de rétractation sans justification ni pénalité, sauf services pleinement exécutés avant la fin du délai."
+        ]
+      },
+      "ProprieteIntellectuelle": {
+        "title": "8. Propriété intellectuelle",
+        "paragraphs": [
+          "Tous les contenus du site (textes, images, logos) sont la propriété exclusive de Les Clefs d’Alsace ou de ses partenaires, protégés par le Code de la propriété intellectuelle."
+        ]
+      },
+      "DonneesPersonnelles": {
+        "title": "9. Données personnelles",
+        "paragraphs": [
+          [
+            { "type": "text", "value": "Pour plus d’informations, consultez notre " },
+            { "type": "link", "label": "Politique de confidentialité", "href": "/privacy-policy" }
+          ]
+        ]
+      },
+      "Contact": {
+        "title": "10. Contact",
+        "items": [
+          { "label": "Éditeur", "value": "Les Clefs d’Alsace" },
+          {
+            "label": "Email",
+            "value": "contact@clefsdalsace.fr",
+            "link": "mailto:contact@clefsdalsace.fr"
+          },
+          { "label": "Téléphone", "value": "06 21 47 19 22" }
+        ]
+      }
+    }
+  }
+}

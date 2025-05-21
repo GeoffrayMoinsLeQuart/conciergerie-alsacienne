@@ -591,3 +591,93 @@ export function makePropertyPageSchema(property: Property) {
     '@graph': [productSchema, breadcrumb],
   };
 }
+
+export const privacyPolicySchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'DataPolicy',
+      name: `Politique de confidentialité | ${siteName}`,
+      description: 'Gestion de vos données personnelles pour Les Clés d’Alsace',
+      url: `${siteURL}/politique-de-confidentialite`,
+      publisher: {
+        '@type': 'Organization',
+        name: siteName,
+        url: siteURL,
+      },
+      policyContact: {
+        '@type': 'ContactPoint',
+        contactType: 'DPO',
+        email: 'dpo@clefsdalsace.fr',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteURL },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Politique de confidentialité',
+          item: `${siteURL}/politique-de-confidentialite`,
+        },
+      ],
+    },
+  ],
+};
+
+// app/config/pageSchema.ts
+export const termsAndConditionsSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: `Conditions Générales de Vente | ${siteName}`,
+      description: 'Conditions générales de vente des prestations de Les Clés d’Alsace',
+      url: `${siteURL}/terms`,
+      publisher: {
+        '@type': 'Organization',
+        name: siteName,
+        url: siteURL,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteURL },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Conditions Générales de Vente',
+          item: `${siteURL}/terms`,
+        },
+      ],
+    },
+  ],
+};
+
+// app/config/pageSchema.ts
+export const cookiePolicySchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: `Politique de cookies | ${siteName}`,
+      description: 'Explication de l’utilisation des cookies sur Les Clés d’Alsace',
+      url: `${siteURL}/cookies`,
+      publisher: { '@type': 'Organization', name: siteName, url: siteURL },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteURL },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Politique de cookies',
+          item: `${siteURL}/cookies`,
+        },
+      ],
+    },
+  ],
+};

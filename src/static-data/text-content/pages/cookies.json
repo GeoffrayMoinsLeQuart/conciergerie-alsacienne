@@ -1,0 +1,45 @@
+{
+  "CookiePolicy": {
+    "pageAriaLabel": "Politique de cookies",
+    "PageTitle": {
+      "pageTitle": "Politique de cookies",
+      "pageDescription": "Explication de l'utilisation des cookies sur Les Clés d’Alsace",
+      "showMenu": false
+    },
+    "sectionOrder": ["Introduction", "Types", "Gestion", "Consentement", "Contact"],
+    "sections": {
+      "Introduction": {
+        "title": "1. Introduction",
+        "paragraphs": [
+          "Les Clefs d’Alsace utilise des cookies pour améliorer votre expérience de navigation, analyser le trafic et proposer des contenus personnalisés."
+        ]
+      },
+      "Types": {
+        "title": "2. Types de cookies",
+        "items": [
+          { "label": "Cookies techniques", "value": "nécessaires au fonctionnement du site" },
+          { "label": "Cookies analytiques", "value": "collecte de statistiques de visite" },
+          { "label": "Cookies marketing", "value": "personnalisation des publicités" }
+        ]
+      },
+      "Gestion": {
+        "title": "3. Gestion des cookies",
+        "paragraphs": [
+          "Vous pouvez accepter, refuser ou retirer votre consentement à tout moment via le bandeau cookies ou les paramètres de votre navigateur."
+        ]
+      },
+      "Consentement": {
+        "title": "4. Consentement",
+        "paragraphs": [
+          "En poursuivant votre navigation, vous acceptez l'utilisation des cookies selon vos préférences définies dans le bandeau de consentement."
+        ]
+      },
+      "Contact": {
+        "title": "5. Contact",
+        "items": [
+          { "label": "DPO", "value": "contact@clefsdalsace.fr", "link": "mailto:contact@clefsdalsace.fr" }
+        ]
+      }
+    }
+  }
+}
