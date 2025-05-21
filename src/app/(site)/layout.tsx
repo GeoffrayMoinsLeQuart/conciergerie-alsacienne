@@ -11,6 +11,7 @@ import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { GTMScript } from '@/components/Pixels/GTM';
 import { GTMNoScript } from '@/components/Pixels/GTMNoScript';
 import FloatingCallButton from '@/components/FloatingCallButton';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,17 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#006BFF" />
-        <script
-          id="CookieConsent"
-          src="https://policy.app.cookieinformation.com/uc.js"
-          data-culture="FR"
-          data-gcm-version="2.0"
-          type="text/javascript"
-        ></script>
-        <GTMScript />
+        {/* GTM script + noscript sont injectés automatiquement */}
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!} />
+        {/* <GTMScript /> */}
       </head>
       <body className={inter.className}>
-        <GTMNoScript />
+        {/* <GTMNoScript /> */}
         <NextTopLoader
           color="#006BFF"
           crawlSpeed={300}
