@@ -19,11 +19,11 @@ const BlocProcessusEtPrestations: FC = () => {
   const pageKey = 'gestionLocative';
   const baseKey = 'GestionLocative.ProcessusPrestations';
 
-  const mainTitle = t(pageKey, `${baseKey}.mainTitle`)   as string;
-  const title     = t(pageKey, `${baseKey}.title`)       as string;
-  const paragraph = t(pageKey, `${baseKey}.paragraph`)   as string;
-  const steps     = t(pageKey, `${baseKey}.steps`)       as Step[];
-  const ctaLabel  = t(pageKey, `${baseKey}.ctaLabel`)    as string;
+  const mainTitle = t(pageKey, `${baseKey}.mainTitle`) as string;
+  const title = t(pageKey, `${baseKey}.title`) as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`) as string;
+  const steps = t(pageKey, `${baseKey}.steps`) as Step[];
+  const ctaLabel = t(pageKey, `${baseKey}.ctaLabel`) as string;
 
   return (
     <section id="processus" aria-labelledby="processus-title" className="bg-[#f8f9ff] py-20">
@@ -49,15 +49,13 @@ const BlocProcessusEtPrestations: FC = () => {
                   alt={`Illustration étape ${step.number}: ${step.title}`}
                   width={120}
                   height={120}
-                  className="object-contain"
+                  className="object-contain !max-w-none !h-auto !w-auto"
                 />
               </div>
               <h3 id={`step-${step.number}`} className="mb-2 text-xl font-bold text-dark">
                 {step.number}. {step.title}
               </h3>
-              <p className="mb-4 text-sm font-medium text-body-color">
-                {step.description}
-              </p>
+              <p className="mb-4 text-sm font-medium text-body-color">{step.description}</p>
               <ul className="list-disc space-y-1 pl-4 text-sm text-gray-700">
                 {step.details.map((item, idx) => (
                   <li key={idx}>{item}</li>
