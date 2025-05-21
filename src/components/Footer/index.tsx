@@ -3,13 +3,23 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { v4 as uuid } from 'uuid';
 import {
   footerLinks,
   footerNewsData,
   footerQuickLinks,
   footerSocialLinks,
 } from '@/static-data/footer';
+import { useEffect, useState } from 'react';
+
+export const useHydrationCheck = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  return isHydrated;
+};
 
 // Déclaration des icônes sociales dans le même ordre que footerSocialLinks
 const socialIcons: React.ReactNode[] = [
@@ -175,6 +185,10 @@ const FooterBottom = () => (
 );
 
 export default function Footer() {
+  const isHydrated = useHydrationCheck();
+
+  if (!isHydrated) return null; // ❗ même chose ici
+
   return (
     <footer className="relative z-10 bg-black pt-24 pb-12 overflow-hidden">
       <div className="container mx-auto px-4">

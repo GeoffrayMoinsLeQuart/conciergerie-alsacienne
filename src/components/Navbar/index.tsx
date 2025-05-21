@@ -3,12 +3,24 @@
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState, MouseEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { onScroll } from '@/utils/scrollActive';
 import MobileSubmenu from './MobileSubmenu';
 import DesktopSubmenu from './DesktopSubmenu';
 
+export const useHydrationCheck = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  return isHydrated;
+};
+
 export default function Navbar() {
+  const isHydrated = useHydrationCheck();
+
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,6 +48,8 @@ export default function Navbar() {
     const top = el.getBoundingClientRect().top + window.scrollY - 56;
     window.scrollTo({ top, behavior: 'smooth' });
   };
+
+  if (!isHydrated) return null; // ❗ Solution : bloquer rendu client avant hydratation
 
   return (
     <header
@@ -69,7 +83,9 @@ export default function Navbar() {
             <span className="block h-[2px] w-[30px] bg-dark my-[6px] transition-transform origin-center transform-gpu">
               <span className={`${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
             </span>
-            <span className={`block h-[2px] w-[30px] bg-dark my-[6px] ${menuOpen ? 'opacity-0' : ''}`} />
+            <span
+              className={`block h-[2px] w-[30px] bg-dark my-[6px] ${menuOpen ? 'opacity-0' : ''}`}
+            />
             <span className="block h-[2px] w-[30px] bg-dark my-[6px] transition-transform">
               <span className={`${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
             </span>
@@ -83,9 +99,7 @@ export default function Navbar() {
           />
 
           {/* Desktop menu */}
-          <DesktopSubmenu
-            scrollToSection={scrollToSection}
-          />
+          <DesktopSubmenu scrollToSection={scrollToSection} />
 
           {/* CTA */}
           <div className="hidden items-center gap-4 lg:flex">

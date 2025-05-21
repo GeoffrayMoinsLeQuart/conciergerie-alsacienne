@@ -1,9 +1,8 @@
-'use client';
-
+// app/layout.tsx  (Server Component)
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import '@/styles/globals.css';
-import { ThemeProvider } from 'next-themes';
+import ThemeProviderClient from '@/components/ThemeProviderClient';
 import { Inter } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 import AuthProvider from '../context/AuthContext';
@@ -22,7 +21,7 @@ const inter = Inter({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="light" style={{ colorScheme: 'light' }}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,7 +31,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={inter.className}>
         <GTMNoScript />
-
         <NextTopLoader
           color="#006BFF"
           crawlSpeed={300}
@@ -41,26 +39,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           zIndex={9999999}
         />
 
-        <ThemeProvider enableSystem={false} attribute="class" defaultTheme="light">
+        {/* Thème (client only) */}
+        <ThemeProviderClient>
+          {/* Contexte & UI */}
           <AuthProvider>
             <ToasterContext />
 
-            {/* Barre de navigation */}
             <Navbar />
-
-            {/* SEO global */}
             <SeoSchemaInjector />
 
-            {/* Contenu principal */}
             <main id="main-content" role="main" aria-label="Contenu principal">
               {children}
               <FloatingCallButton />
             </main>
 
-            {/* Pied de page */}
             <Footer />
           </AuthProvider>
-        </ThemeProvider>
+        </ThemeProviderClient>
       </body>
     </html>
   );

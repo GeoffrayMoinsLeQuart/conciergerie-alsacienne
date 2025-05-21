@@ -1,13 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import SectionTitle from '../Common/SectionTitle';
 import PropertyCard from './PropertyCard';
 import CTAButtons from '../Buttons/CTAButtons';
 import { Home } from 'lucide-react';
 import { t } from '@/app/libs/content';
 import { Property } from '@/types/property';
+import dynamic from 'next/dynamic';
+
+// Import dynamique (client-only)
+const MasonryWrapper = dynamic(() => import('./MasonryWrapper'), { ssr: false });
 
 export default function Properties({
   properties,
@@ -86,18 +89,16 @@ export default function Properties({
         <div className="flex justify-center">
           <div className="w-full xl:w-10/12">
             {displayedItems.length > 0 ? (
-              <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-                <Masonry gutter="30px">
-                  {displayedItems.map((property) => (
-                    <div
-                      key={property._id}
-                      className="rounded-xl bg-white p-1 shadow-xl transition hover:shadow-2xl"
-                    >
-                      <PropertyCard property={property} />
-                    </div>
-                  ))}
-                </Masonry>
-              </ResponsiveMasonry>
+              <MasonryWrapper columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }} gutter="30px">
+                {displayedItems.map((property) => (
+                  <div
+                    key={property._id}
+                    className="rounded-xl bg-white p-1 shadow-xl transition hover:shadow-2xl"
+                  >
+                    <PropertyCard property={property} />
+                  </div>
+                ))}
+              </MasonryWrapper>
             ) : (
               <p className="text-center text-gray-500" role="status" aria-live="polite">
                 {noResultsText}
