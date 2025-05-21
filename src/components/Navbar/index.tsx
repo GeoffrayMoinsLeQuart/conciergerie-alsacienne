@@ -51,7 +51,7 @@ export default function Navbar() {
             <div className="relative h-10 w-[175px]">
               <Image
                 src="/images/logo/logo.svg"
-                alt="Logo Conciergerie Alsacienne"
+                alt="Logo les Clés d'Alsace"
                 fill
                 className="object-contain"
                 sizes="(max-width: 768px) 100px, 175px"

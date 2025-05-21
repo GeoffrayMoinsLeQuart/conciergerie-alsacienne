@@ -4,7 +4,7 @@ export async function GET() {
   const properties = await fetchProperties();
   const { posts: blogPosts } = await getPosts();
 
-  const baseUrl = 'https://www.conciergerie-alsacienne.fr';
+  const baseUrl = 'https://www.clesdalsace.fr';
 
   const staticRoutes = [
     '/',

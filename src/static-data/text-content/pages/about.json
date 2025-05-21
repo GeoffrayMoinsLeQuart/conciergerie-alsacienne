@@ -3,7 +3,7 @@
     "pageTitle": "À Propos",
     "pageDescription": "Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme",
     "Hero": {
-      "title": "Conciergerie Alsacienne",
+      "title": "Les Clés d’Alsace",
       "subtitle": "Votre partenaire local, 100 % Alsacien, pour une gestion haut de gamme",
       "imageAlt": "Maison traditionnelle alsacienne"
     },
@@ -14,7 +14,7 @@
     "Founder": {
       "name": "Jean Dupont",
       "role": "Fondateur & Expert Local",
-      "bio": "Après 10 ans dans la gestion hôtelière et Airbnb, Jean a créé la Conciergerie Alsacienne pour proposer un accompagnement premium, à taille humaine.",
+      "bio": "Après 10 ans dans la gestion hôtelière et Airbnb, Jean a créé Les Clés d’Alsace pour proposer un accompagnement premium, à taille humaine.",
       "photoAlt": "Portrait de Jean Dupont"
     },
     "Stats": [
@@ -33,12 +33,20 @@
         "title": "Service sur mesure",
         "desc": "Des offres taillées pour vos besoins."
       },
-      { "icon": "⚡️", "title": "Réactivité", "desc": "Nous sommes disponibles 7j/7, 24h/24." },
-      { "icon": "🔍", "title": "Transparence", "desc": "Rapports clairs et bilans réguliers." }
+      {
+        "icon": "⚡️",
+        "title": "Réactivité",
+        "desc": "Nous sommes disponibles 7j/7, 24h/24."
+      },
+      {
+        "icon": "🔍",
+        "title": "Transparence",
+        "desc": "Rapports clairs et bilans réguliers."
+      }
     ],
     "CTA": {
       "heading": "Prêts à démarrer ?",
-      "text": "Contactez - nous pour un audit gratuit de votre bien et découvrez comment maximiser vos revenus en toute sérénité.",
+      "text": "Contactez-nous pour un audit gratuit de votre bien et découvrez comment maximiser vos revenus en toute sérénité.",
       "buttonLabel": "Nous contacter",
       "buttonLink": "/contact"
     }

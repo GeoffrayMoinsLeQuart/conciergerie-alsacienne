@@ -358,8 +358,13 @@ usememo
 
 
 
-Faire les metadata et schema pour la page : src/app/(site)/blog/BlogClient.tsx et pour la page slug de properties
 Et pour toutes les pages auth et dashboard qd réalisée et schema
 
 
 Faire la page : politique de confidentialité et Conditions Générales de Vente
+
+
+refaire le sitemap et ce document : src/app/sitemap.xml/route.ts
+
+
+changer l'adresse du webhook dans n8n

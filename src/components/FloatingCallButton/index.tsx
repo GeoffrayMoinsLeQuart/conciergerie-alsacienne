@@ -40,8 +40,8 @@ export default function FloatingCallButton() {
 
   return (
     <a
-      href="tel:0033XXXXXXXXX"
-      aria-label="Appeler Conciergerie Alsacienne"
+      href="tel:0033621471922"
+      aria-label="Appeler les Clés d'Alsace"
       title="Appelez-nous"
       className={`
         fixed bottom-4 right-4 w-14 h-14 rounded-full flex items-center justify-center

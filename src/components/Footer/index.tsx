@@ -92,10 +92,10 @@ const FooterContact = () => (
       <p className="mb-4 text-3xl font-bold text-white">Contactez-nous !</p>
       <address className="not-italic space-y-1 text-body-color">
         <a
-          href="mailto:contact@conciergerie-alsacienne.fr"
+          href="mailto:contact@clesdalsace.fr"
           className="block hover:text-primary transition-colors"
         >
-          contact@conciergerie-alsacienne.fr
+          contact@clesdalsace.fr
         </a>
         <a href="tel:+33621471922" className="block hover:text-primary transition-colors">
           06 21 47 19 22
@@ -169,7 +169,7 @@ const FooterBottom = () => (
       ))}
     </div>
     <p className="text-base font-medium text-body-color">
-      &copy; {new Date().getFullYear()} Conciergerie Alsacienne. Tous droits réservés.
+      &copy; {new Date().getFullYear()} Les Clés d'Alsace. Tous droits réservés.
     </p>
   </div>
 );

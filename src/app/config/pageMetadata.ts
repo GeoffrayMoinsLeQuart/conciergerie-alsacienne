@@ -1,16 +1,17 @@
 // src/config/pageMetadata.ts
 import { Metadata } from 'next';
-import { imageBuilder } from '@/sanity/sanity-utils';
+import { getPropertyBySlug, imageBuilder } from '@/sanity/sanity-utils';
 import type { Blog } from '@/types/blog';
+import { Property } from '@/types/property';
 
-const siteURL = process.env.SITE_URL || 'https://www.conciergerie-alsacienne.fr';
-const siteName = process.env.SITE_NAME || 'Conciergerie Alsacienne';
-const authorName = process.env.AUTHOR_NAME || 'Conciergerie Alsacienne';
+const siteURL = process.env.SITE_URL || 'https://www.clesdalsace.fr';
+const siteName = process.env.SITE_NAME || 'Les Clés d’Alsace';
+const authorName = process.env.AUTHOR_NAME || 'Les Clés d’Alsace';
 
 export const defaultMetadata: Metadata = {
-  title: siteName,
+  title: 'Les Clés d’Alsace | Location courte & moyenne durée',
   description:
-    'Conciergerie Alsacienne – Location courte et moyenne durée à Mulhouse, Colmar et alentours. Une conciergerie discrète, rentable, pensée pour les investisseurs exigeants.',
+    'Location courte & moyenne durée à Mulhouse, Colmar et alentours. Louez sereinement avec Les Clés d’Alsace, service discret et rentable pour investisseurs.',
   openGraph: {
     title: siteName,
     description: 'Accompagnement sur mesure, logements optimisés, sérénité assurée.',
@@ -32,17 +33,18 @@ export const pageMetadata: Record<string, Metadata> = {
 
   // Error page "/error"
   error: {
-    title: `Error | ${siteName}`,
-    description: 'This is Error page description',
+    title: 'Erreur 404 | Les Clés d’Alsace – Page non trouvée – Désolé',
+    description:
+      "La page que vous recherchez est introuvable. Retournez à l'accueil et explorez nos services de conciergerie courte et moyenne durée avec Les Clés d’Alsace.",
   },
 
   // About page "/about"
   about: {
-    title: 'Conciergerie Alsacienne – Notre histoire, notre mission',
+    title: 'Les Clés d’Alsace – Notre histoire et mission locale',
     description:
       'Une conciergerie 100% alsacienne, fondée par des professionnels passionnés. Découvrez notre mission, nos valeurs, notre exigence.',
     openGraph: {
-      title: 'Conciergerie Alsacienne – Notre histoire, notre mission',
+      title: 'Les Clés d’Alsace – Notre histoire et notre mission',
       description:
         'Depuis 10 ans, nous accompagnons les propriétaires avec rigueur, transparence et ancrage local. Faites connaissance avec notre équipe.',
       url: `${siteURL}/about`,
@@ -52,14 +54,14 @@ export const pageMetadata: Record<string, Metadata> = {
           url: `${siteURL}/images/about-hero.jpg`,
           width: 1200,
           height: 630,
-          alt: 'Maison traditionnelle alsacienne – Conciergerie Alsacienne',
+          alt: 'Maison traditionnelle alsacienne – Les Clés d’Alsace',
         },
       ],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'À propos de Conciergerie Alsacienne',
+      title: 'À propos des Clés d’Alsace',
       description:
         'Gestion haut de gamme, approche humaine, ancrage local. Notre équipe se présente.',
       images: [`${siteURL}/images/about-hero.jpg`],
@@ -69,27 +71,31 @@ export const pageMetadata: Record<string, Metadata> = {
 
   // Auth pages
   'forgot-password': {
-    title: `Forgot Password Page | ${siteName}`,
-    description: 'This is Forgot Password page description',
+    title: 'Mot de passe oublié | Les Clés d’Alsace – Réinitialisation',
+    description:
+      'Saisissez votre adresse e-mail pour recevoir un lien de réinitialisation de votre mot de passe. Sécurisé et rapide avec Les Clés d’Alsace.',
   },
   'reset-password': {
-    title: `Reset Password Page | ${siteName}`,
-    description: 'This is Reset Password page description',
+    title: 'Réinitialiser le mot de passe | Les Clés d’Alsace – Sécurité',
+    description:
+      "Entrez votre nouveau mot de passe pour sécuriser votre compte Les Clés d’Alsace. Assurez-vous d'utiliser un mot de passe fort.",
   },
   signin: {
-    title: `Signin Page | ${siteName}`,
-    description: 'This is Signin page description',
+    title: 'Connexion sécurisée | Les Clés d’Alsace – Espace client',
+    description:
+      'Connectez-vous à votre espace Les Clés d’Alsace pour gérer vos propriétés, réservations et services de conciergerie en toute simplicité et sécurité.',
   },
   signup: {
-    title: `Signup Page | ${siteName}`,
-    description: 'This is Signup page description',
+    title: 'Inscription | Les Clés d’Alsace – Créez votre compte',
+    description:
+      'Créez votre compte Les Clés d’Alsace pour commencer à gérer vos biens et optimiser vos revenus locatifs. Simple et rapide.',
   },
 
   // Blog listing "/blog"
   blog: {
-    title: 'Conseils pour investisseurs immobiliers | Le blog de Conciergerie Alsacienne',
+    title: 'Blog Les Clés d’Alsace – Conseils pour investisseurs',
     description:
-      'Fiscalité, optimisation locative, rentabilité, réglementation : suivez nos analyses pour mieux piloter vos biens.',
+      "Fiscalité, optimisation locative, rentabilité, réglementation : suivez nos analyses et retours d'expérience pour piloter vos biens.",
     openGraph: {
       title: 'Blog – Investissement locatif & gestion de biens',
       description: 'Des contenus clairs, utiles, orientés action pour propriétaires exigeants.',
@@ -99,14 +105,14 @@ export const pageMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Blog Conciergerie Alsacienne',
+      title: 'Blog Les Clés d’Alsace',
       description: 'Notre expertise au service de votre projet locatif.',
     },
   },
 
   // Conciergerie page "/conciergerie"
   conciergerie: {
-    title: 'Conciergerie Airbnb à Mulhouse & Colmar | Conciergerie Alsacienne',
+    title: 'Conciergerie Airbnb à Mulhouse & Colmar | Les Clés d’Alsace',
     description:
       'Un service de conciergerie haut de gamme pour la location courte durée. Pensé pour vous, géré comme pour nous, en Alsace.',
     openGraph: {
@@ -136,9 +142,9 @@ export const pageMetadata: Record<string, Metadata> = {
 
   // Contact page "/contact"
   contact: {
-    title: 'Nous contacter | Conciergerie Alsacienne',
+    title: 'Nous contacter | Les Clés d’Alsace – Demandez une estimation',
     description:
-      "Besoin d'un conseil ou d'une estimation ? Échangeons sans engagement. Notre équipe vous répond rapidement.",
+      "Besoin d'un conseil ou d'une estimation ? Contactez Les Clés d’Alsace pour optimiser la gestion de vos biens et maximiser vos revenus locatifs.",
     openGraph: {
       title: 'Contactez notre équipe',
       description: 'Une prise de contact simple, directe, sans pression.',
@@ -148,28 +154,61 @@ export const pageMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Contact | Conciergerie Alsacienne',
+      title: 'Contact | Les Clés d’Alsace',
       description: 'On vous écoute, on vous accompagne.',
     },
   },
 
   // Docs page "/docs"
   docs: {
-    title: `Docs Page | ${siteName}`,
-    description: 'This is Docs page',
+    title: 'Documentation officielle | Les Clés d’Alsace – Guides et API',
+    description:
+      'Consultez nos guides, tutoriels et références API pour les intégrations et la gestion des services de conciergerie avec Les Clés d’Alsace.',
   },
 
-  // Docs page "/success"
+  // Success page "/success"
   success: {
-    title: `Docs Page | ${siteName}`,
-    description: 'This is Docs page',
+    title: 'Merci ! | Les Clés d’Alsace – Votre demande est envoyée',
+    description:
+      'Votre demande a bien été envoyée. Nous revenons vers vous sous 24 h pour vous accompagner dans la gestion de vos biens avec Les Clés d’Alsace.',
+  },
+
+  // Merci page "/merci"
+  merci: {
+    title: 'Merci ! | Les Clés d’Alsace – Votre demande est confirmée',
+    description:
+      'Votre demande a bien été envoyée. Nous revenons vers vous sous 24 h pour vous accompagner dans la gestion de vos biens avec Les Clés d’Alsace.',
+    openGraph: {
+      title: `Merci pour votre demande !`,
+      description:
+        'Vous êtes entre de bonnes mains : votre demande est bien arrivée chez Les Clés d’Alsace.',
+      url: `${siteURL}/merci`,
+      siteName,
+      type: 'website',
+      images: [
+        {
+          url: `${siteURL}/opengraph/merci.jpg`,
+          width: 1200,
+          height: 630,
+          alt: 'Merci ! Les Clés d’Alsace',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Merci ! | ${siteName}`,
+      description: 'Nous avons bien reçu votre demande et revenons vers vous très vite.',
+      images: [`${siteURL}/opengraph/merci.jpg`],
+    },
+    robots: { index: false, follow: false },
+    alternates: { canonical: `${siteURL}/merci` },
   },
 
   // FAQ page "/faq"
   faq: {
-    title: 'Réponses à vos questions fréquentes | Conciergerie Alsacienne',
+    title: 'Réponses à vos questions fréquentes | Les Clés d’Alsace',
     description:
-      'Transparence totale sur nos prestations, tarifs, garanties. Tout ce que vous devez savoir, sans jargon.',
+      'Obtenez des réponses claires et détaillées sur nos services de conciergerie, tarifs, garanties et conditions. Guide complet Les Clés d’Alsace.',
     openGraph: {
       title: 'Foire aux questions',
       description: "Une conciergerie sérieuse, c'est aussi une réponse claire à chaque question.",
@@ -179,14 +218,14 @@ export const pageMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'FAQ | Conciergerie Alsacienne',
+      title: 'FAQ | Les Clés d’Alsace',
       description: 'Réponses simples et concrètes sur nos services.',
     },
   },
 
   // Gestion locative page "/gestion-locative"
   'gestion-locative': {
-    title: 'Gestion locative à Mulhouse & Colmar | Conciergerie Alsacienne',
+    title: 'Gestion locative à Mulhouse & Colmar | Les Clés d’Alsace',
     description:
       'Déléguez la gestion de votre bien immobilier à une équipe locale fiable. Loyers garantis, fiscalité optimisée, zéro stress. Location nue ou meublée.',
     alternates: { canonical: `${siteURL}/gestion-locative` },
@@ -217,9 +256,9 @@ export const pageMetadata: Record<string, Metadata> = {
 
   // Nos biens page "/nos-biens"
   'nos-biens': {
-    title: 'Biens en gestion courte et longue durée | Conciergerie Alsacienne',
+    title: 'Biens en gestion courte et longue durée | Les Clés d’Alsace',
     description:
-      'Découvrez des logements soignés, rentables, gérés avec attention. Une vitrine de notre méthode et de notre engagement.',
+      'Découvrez des logements soignés, rentables, gérés avec attention. Vitrine de notre méthode et engagement pour vos investissements.',
     openGraph: {
       title: 'Nos biens en location à Mulhouse, Colmar et alentours',
       description: 'Du studio rénové à la maison familiale, chaque bien reflète notre exigence.',
@@ -234,9 +273,9 @@ export const pageMetadata: Record<string, Metadata> = {
     },
   },
 
-  // estimation page "/estimation"
+  // Estimation page "/estimation"
   estimation: {
-    title: 'estimation de rentabilité locative | Conciergerie Alsacienne',
+    title: 'Estimation de rentabilité locative | Les Clés d’Alsace',
     description:
       'Estimez gratuitement le potentiel de votre logement en courte durée. Projection fiable, conseils personnalisés, sans engagement.',
     openGraph: {
@@ -252,53 +291,25 @@ export const pageMetadata: Record<string, Metadata> = {
       description: 'Répondez en quelques clics, nous faisons le calcul pour vous.',
     },
   },
-  merci: {
-    title: `Merci ! | ${siteName}`,
-    description:
-      'Votre demande a bien été envoyée. Nous revenons vers vous sous 24 h pour vous accompagner.',
-    openGraph: {
-      title: `Merci pour votre demande !`,
-      description:
-        'Vous êtes entre de bonnes mains : votre demande est bien arrivée chez Conciergerie Alsacienne.',
-      url: `${siteURL}/merci`,
-      siteName,
-      type: 'website',
-      images: [
-        {
-          url: `${siteURL}/opengraph/merci.jpg`, // adapte si tu as une image dédiée
-          width: 1200,
-          height: 630,
-          alt: 'Merci ! Conciergerie Alsacienne',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `Merci ! | ${siteName}`,
-      description: 'Nous avons bien reçu votre demande et revenons vers vous très vite.',
-      images: [`${siteURL}/opengraph/merci.jpg`],
-    },
-    robots: { index: false, follow: false }, // on peut empêcher l’indexation si on veut
-    alternates: { canonical: `${siteURL}/merci` },
-  },
+
   // Mentions légales page "/mentions-legales"
   'mentions-legales': {
-    title: 'Mentions légales | Conciergerie Alsacienne',
+    title: 'Mentions légales | Les Clés d’Alsace – Éditeur et conditions',
     description:
-      'Mentions légales de la Conciergerie Alsacienne : éditeur, hébergeur, propriété intellectuelle, données personnelles, responsabilité, cookies et conditions d’utilisation.',
+      'Mentions légales de Les Clés d’Alsace : éditeur, hébergeur, propriété intellectuelle, données personnelles, responsabilité et cookies.',
     openGraph: {
-      title: 'Mentions légales | Conciergerie Alsacienne',
+      title: 'Mentions légales | Les Clés d’Alsace',
       description:
-        'Consultez toutes les informations légales de la Conciergerie Alsacienne : identité de l’éditeur, hébergeur, droits d’auteur, protection des données et cookies.',
+        'Consultez toutes les informations légales de Les Clés d’Alsace : identité de l’éditeur, hébergeur, droits d’auteur, protection des données et cookies.',
       url: `${siteURL}/mentions-legales`,
       siteName,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Mentions légales | Conciergerie Alsacienne',
+      title: 'Mentions légales | Les Clés d’Alsace',
       description:
-        'Mentions légales de la Conciergerie Alsacienne : éditeur, hébergeur, propriété intellectuelle, données personnelles, responsabilité, cookies et conditions d’utilisation.',
+        'Mentions légales de Les Clés d’Alsace : éditeur, hébergeur, propriété intellectuelle, données personnelles, responsabilité et cookies.',
     },
     robots: { index: true, follow: true },
     alternates: { canonical: `${siteURL}/mentions-legales` },
@@ -377,5 +388,50 @@ export async function makeBlogMetadata(post: Blog): Promise<Metadata> {
       site: `@${siteName}`,
       images: [imageUrl],
     },
+  };
+}
+
+export async function makePropertyMetadata(slug: string): Promise<Metadata> {
+  const property: Property | null = await getPropertyBySlug(slug);
+
+  if (!property) {
+    return {
+      title: `Bien introuvable | ${siteName}`,
+      description: "Ce bien n'existe plus ou a été retiré de notre catalogue.",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const imageUrl = property.imagePrincipale
+    ? imageBuilder(property.imagePrincipale).url()
+    : `${siteURL}/default-property.jpg`;
+
+  const description = property.shortDescription || property.longDescription?.slice(0, 155) || '';
+
+  return {
+    title: `${property.name} | ${siteName}`,
+    description,
+    openGraph: {
+      title: `${property.name} | ${siteName}`,
+      description,
+      url: `${siteURL}/nos-biens/${property.slug.current}`,
+      siteName,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: property.name,
+        },
+      ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${property.name} | ${siteName}`,
+      description,
+      images: [imageUrl],
+    },
+    robots: { index: true, follow: true },
   };
 }

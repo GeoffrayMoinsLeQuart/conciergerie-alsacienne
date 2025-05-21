@@ -1,11 +1,12 @@
 {
   "MentionsLegales": {
-    "pageAriaLabel": "Mentions légales de la Conciergerie Alsacienne",
+    "pageAriaLabel": "Mentions légales de Les Clés d’Alsace",
     "PageTitle": {
       "pageTitle": "Mentions légales",
-      "pageDescription": "Mentions légales de la Conciergerie Alsacienne : éditeur, hébergeur, droits d'auteur, protection des données et cookies",
+      "pageDescription": "Mentions légales de Les Clés d’Alsace : éditeur, hébergeur, droits d'auteur, protection des données et cookies",
       "showMenu": true
     },
+    "lastUpdated": "2025-05-21",
     "sectionOrder": [
       "editeur",
       "directeur",
@@ -20,25 +21,45 @@
       "editeur": {
         "title": "1. Éditeur du site",
         "items": [
-          { "label": "Raison sociale", "value": "La Conciergerie Alsacienne" },
+          {
+            "label": "Raison sociale",
+            "value": "Les Clés d’Alsace"
+          },
           {
             "label": "Forme juridique",
             "value": "SASU (société par actions simplifiée unipersonnelle)"
           },
-          { "label": "Capital social", "value": "100,00 €" },
+          {
+            "label": "Capital social",
+            "value": "100,00 €"
+          },
           {
             "label": "Siège social",
             "value": "5 bis rue de Margnolles, 69300 Caluire-et-Cuire, France"
           },
-          { "label": "SIREN", "value": "938 391 158" },
-          { "label": "SIRET (siège)", "value": "938 391 158 00012" },
-          { "label": "RCS", "value": "R.C.S. Lyon 938 391 158" },
-          { "label": "TVA intracommunautaire", "value": "FR07938391158" }
+          {
+            "label": "SIREN",
+            "value": "938 391 158"
+          },
+          {
+            "label": "SIRET (siège)",
+            "value": "938 391 158 00012"
+          },
+          {
+            "label": "RCS",
+            "value": "R.C.S. Lyon 938 391 158"
+          },
+          {
+            "label": "TVA intracommunautaire",
+            "value": "FR07938391158"
+          }
         ]
       },
       "directeur": {
         "title": "2. Directeur de la publication",
-        "paragraphs": ["Jean-François Atlan, Président"]
+        "paragraphs": [
+          "Jean-François Atlan, Président"
+        ]
       },
       "hebergement": {
         "title": "3. Hébergement",
@@ -51,34 +72,49 @@
         "items": [
           {
             "label": "Par e-mail",
-            "value": "contact@conciergerie-alsacienne.fr",
-            "link": "mailto:contact@conciergerie-alsacienne.fr"
+            "value": "contact@clesdalsace.fr",
+            "link": "mailto:contact@clesdalsace.fr"
           },
           {
             "label": "Par téléphone",
-            "value": "00 33 6 21 47 19 22"
+            "value": "+33 6 21 47 19 22"
           }
         ]
       },
       "proprieteIntellectuelle": {
         "title": "5. Propriété intellectuelle",
         "paragraphs": [
-          "Le contenu de ce site, y compris les textes, graphiques, images et logos, est la propriété de la Conciergerie Alsacienne, à l'exception des éléments appartenant à d'autres sociétés partenaires ou auteurs. Toute reproduction, modification, publication ou adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le processus utilisé, est interdite sans l'accord préalable écrit de l'éditeur.",
+          "Le contenu de ce site, y compris les textes, graphiques, images et logos, est la propriété de Les Clés d’Alsace, à l'exception des éléments appartenant à d'autres sociétés partenaires ou auteurs. Toute reproduction, modification, publication ou adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le processus utilisé, est interdite sans l'accord préalable écrit de l'éditeur.",
           "Tout usage non autorisé de ce site ou de l'un quelconque des éléments qu'il contient sera considéré comme constitutif d'une contrefaçon et poursuivi conformément aux dispositions des articles L.335-2 et suivants du Code de la Propriété Intellectuelle."
         ]
       },
       "responsabilite": {
         "title": "6. Responsabilité",
         "paragraphs": [
-          "L'accès et l'utilisation du site conciergerie-alsacienne.fr sont soumis à l'acceptation et au respect des présentes conditions générales d'utilisation. La Conciergerie Alsacienne se réserve le droit de modifier ces conditions à tout moment ; les utilisateurs sont invités à les consulter régulièrement."
+          "L'accès et l'utilisation du site www.clesdalsace.fr sont soumis à l'acceptation et au respect des présentes conditions générales d'utilisation. Les Clés d’Alsace se réserve le droit de modifier ces conditions à tout moment ; les utilisateurs sont invités à les consulter régulièrement."
         ]
       },
       "donnees": {
         "title": "7. Données personnelles & cookies",
         "paragraphs": [
-          "Conformément à la loi Informatique et Libertés n° 78-17 du 6 janvier 1978 modifiée et au RGPD, vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression des données personnelles vous concernant (art. 34). Pour l'exercer : contact@conciergerie-alsacienne.fr.",
+          "Conformément à la loi Informatique et Libertés n° 78-17 du 6 janvier 1978 modifiée et au RGPD, vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression des données personnelles vous concernant (art. 34). Pour l'exercer : contact@clesdalsace.fr.",
           "Les données collectées peuvent inclure des informations de réservation, de gestion d'accès ou de lutte anti-fraude. Aucune transmission à des tiers sans consentement préalable.",
-          "Des mesures techniques et organisationnelles sont en place pour protéger vos données contre tout accès non autorisé, perte ou destruction. La Conciergerie Alsacienne se réserve le droit de modifier à tout moment la présente page et la politique en matière de cookies ; veuillez la consulter régulièrement."
+          "Des mesures techniques et organisationnelles sont en place pour protéger vos données contre tout accès non autorisé, perte ou destruction. Les Clés d’Alsace se réserve le droit de modifier à tout moment la présente page et la politique en matière de cookies ; veuillez la consulter régulièrement.",
+          [
+            {
+              "type": "text",
+              "value": "Consultez notre "
+            },
+            {
+              "type": "link",
+              "label": "Politique de confidentialité & cookies",
+              "href": "/politique-confidentialite"
+            },
+            {
+              "type": "text",
+              "value": "."
+            }
+          ]
         ]
       },
       "complementaires": {
@@ -89,8 +125,15 @@
               "type": "text",
               "value": "Pour toute question relative aux conditions générales de vente ou à la médiation de la consommation, veuillez consulter notre page "
             },
-            { "type": "link", "label": "Conditions Générales de Vente", "href": "/cgv" },
-            { "type": "text", "value": " ou contacter notre médiateur." }
+            {
+              "type": "link",
+              "label": "Conditions Générales de Vente",
+              "href": "/cgv"
+            },
+            {
+              "type": "text",
+              "value": " ou contacter notre médiateur."
+            }
           ]
         ]
       }

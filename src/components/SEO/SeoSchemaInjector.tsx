@@ -15,9 +15,9 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Conciergerie Alsacienne',
-    url: 'https://www.conciergerie-alsacienne.fr',
-    logo: 'https://www.conciergerie-alsacienne.fr/logo.svg',
+    name: 'Les Clés d’Alsace',
+    url: 'https://www.clesdalsace.fr',
+    logo: 'https://www.clesdalsace.fr/logo.svg',
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -28,25 +28,26 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
       },
     ],
     sameAs: [
-      'https://www.facebook.com/conciergerie.alsacienne',
-      'https://www.instagram.com/conciergerie.alsacienne/',
+      'https://www.facebook.com/clesdalsace',
+      'https://www.instagram.com/clesdalsace/',
+      // Ajoutez ici d'autres profils sociaux si nécessaire
     ],
   };
 
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Conciergerie Alsacienne',
-    url: 'https://www.conciergerie-alsacienne.fr',
+    name: 'Les Clés d’Alsace',
+    url: 'https://www.clesdalsace.fr',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://www.conciergerie-alsacienne.fr/search?q={search_term_string}',
+      target: 'https://www.clesdalsace.fr/search?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
 
   const pathname = usePathname();
-  const canonical = `https://www.conciergerie-alsacienne.fr${pathname}`;
+  const canonical = `https://www.clesdalsace.fr${pathname}`;
 
   return (
     <>
@@ -55,26 +56,32 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
         <meta name="robots" content="index, follow" />
       </Head>
 
+      {/* Organisation schema */}
       <Script
         id="schema-org-organization"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(organizationSchema),
         }}
       />
+
+      {/* Website schema */}
       <Script
         id="schema-org-website"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
         }}
       />
 
-      {/* Schéma supplémentaire injecté via prop (optionnel) */}
+      {/* Schéma supplémentaire (optionnel) */}
       {schema && (
         <Script
           id="schema-org-custom"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schema),
           }}

@@ -5,7 +5,7 @@ export const testimonialData: Testimonial[] = [
   {
     id: uuid(),
     review:
-      "Depuis que j'ai confié mon appartement à la Conciergerie Alsacienne, mes revenus ont augmenté de 30% et je n'ai plus aucun souci à me faire. Leur équipe est réactive et professionnelle.",
+      "Depuis que j'ai confié mon appartement à aux Clés d’Alsace, mes revenus ont augmenté de 30% et je n'ai plus aucun souci à me faire. Leur équipe est réactive et professionnelle.",
     companyName: 'Propriétaire T2 Mulhouse',
     name: 'Sophie Martin',
     image: '/images/testimonial/image-1.png',
@@ -25,7 +25,7 @@ export const testimonialData: Testimonial[] = [
   {
     id: uuid(),
     review:
-      "Je recommande vivement la Conciergerie Alsacienne pour leur professionnalisme et leur connaissance du marché local. Mes deux appartements affichent un taux d'occupation exceptionnel.",
+      "Je recommande vivement Les Clés d’Alsace pour leur professionnalisme et leur connaissance du marché local. Mes deux appartements affichent un taux d'occupation exceptionnel.",
     companyName: 'Propriétaire 2 biens Strasbourg',
     name: 'Marie Klein',
     image: '/images/testimonial/image-3.png',

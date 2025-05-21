@@ -7,6 +7,26 @@
     },
     "noItems": {
       "message": "Aucun bien à afficher pour le moment."
-    }
+    },
+    "pageTitle": "Nos biens en gestion",
+    "pageDescription": "Studios, T2 ou maisons, en courte ou longue durée : découvrez les logements que nous gérons, optimisés pour la rentabilité et la satisfaction voyageurs.",
+    "mobileInfo": {
+      "surface": "Surface",
+      "gestion": "Gestion",
+      "chambres": "Chambres",
+      "loyer": "Loyer",
+      "revenu": "Revenu",
+      "occupation": "Occupation",
+      "type": "Type"
+    },
+    "cta": {
+      "heading": "Vous avez un bien similaire ?",
+      "paragraph": "Nous pouvons estimer son potentiel et le prendre en gestion.",
+      "buttonLabel": "Estimer la rentabilité",
+      "buttonHref": "/estimation"
+    },
+    "infoKeyTitle": "Informations clés",
+    "prevLabel": "← Propriété précédente",
+    "nextLabel": "Propriété suivante →"
   }
 }

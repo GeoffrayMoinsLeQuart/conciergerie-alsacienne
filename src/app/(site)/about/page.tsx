@@ -2,7 +2,6 @@
 import { Metadata } from 'next';
 import PageTitle from '@/components/Common/PageTitle';
 import Image from 'next/image';
-import Script from 'next/script';
 import { getMetadata } from '@/app/config/pageMetadata';
 import { t } from '@/app/libs/content';
 import { aboutSchema } from '@/app/config/pageSchema';

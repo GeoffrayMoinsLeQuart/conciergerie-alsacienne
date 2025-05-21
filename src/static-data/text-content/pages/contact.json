@@ -61,7 +61,7 @@
         "whatsapp": "WhatsApp",
         "email": "Email"
       },
-      "consentLabel": "J'accepte la politique de confidentialité et le traitement de mes données personnelles pour être contacté(e) par Conciergerie Alsacienne.",
+      "consentLabel": "J'accepte la politique de confidentialité et le traitement de mes données personnelles pour être contacté(e) par Les Clés d’Alsace.",
       "privacyLinkText": "politique de confidentialité",
       "footer": "En soumettant ce formulaire, vous acceptez que les informations saisies soient utilisées pour vous recontacter dans le cadre de votre demande. Pour connaître et exercer vos droits, consultez notre {privacyLinkText}."
     }

@@ -4,16 +4,17 @@ import type { FAQItem } from '@/types/faq';
 import type { Property } from '@/types/property';
 import { generateBreadcrumbList } from '@/utils/BreadcrumbGenerator';
 
-const siteURL = 'https://www.conciergerie-alsacienne.fr';
-const siteName = 'Conciergerie Alsacienne';
+const siteURL = 'https://www.clesdalsace.fr';
+const siteName = 'Les Clés d’Alsace';
 const homeURL = siteURL + '/';
 
 /**
- * Node “WebSite” (votre homeSchema existant)
+ * Node “WebSite” (votre homeWebsiteSchema existant)
  */
 export const homeWebsiteSchema = {
+  '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Conciergerie Alsacienne',
+  name: siteName,
   url: siteURL,
   potentialAction: {
     '@type': 'SearchAction',
@@ -27,8 +28,9 @@ export const homeWebsiteSchema = {
  * avec action de contact intégrée
  */
 export const homeWebPageSchema = {
+  '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Accueil | Conciergerie Alsacienne',
+  name: `Accueil | ${siteName}`,
   url: homeURL,
   potentialAction: [
     {
@@ -46,13 +48,13 @@ export function makeHomePageSchema(posts: Blog[], properties: Property[]) {
   // Blog + derniers articles
   const blogNode = {
     '@type': 'Blog',
-    name: 'Blog de la Conciergerie Alsacienne',
+    name: `Blog des Clés d’Alsace`,
     url: `${siteURL}/blog`,
     blogPost: posts.slice(0, 6).map((post) => ({
       '@type': 'BlogPosting',
       headline: post.title,
       description: post.metadata || '',
-      url: `${siteURL}/blog/${post.slug}`,
+      url: `${siteURL}/blog/${post.slug.current}`,
       datePublished: post.publishedAt,
     })),
   };
@@ -77,14 +79,14 @@ export function makeHomePageSchema(posts: Blog[], properties: Property[]) {
 export const errorSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: '404 Page Not Found – Conciergerie Alsacienne',
-  url: 'https://www.conciergerie-alsacienne.fr/404',
+  name: `404 Page Not Found – ${siteName}`,
+  url: `${siteURL}/404`,
   description:
     "La page que vous recherchez n'existe pas ou plus. Utilisez le lien ci-dessous pour revenir à l'accueil.",
   isPartOf: {
     '@type': 'WebSite',
-    name: 'Conciergerie Alsacienne',
-    url: 'https://www.conciergerie-alsacienne.fr',
+    name: siteName,
+    url: siteURL,
   },
   breadcrumb: {
     '@type': 'BreadcrumbList',
@@ -93,13 +95,13 @@ export const errorSchema = {
         '@type': 'ListItem',
         position: 1,
         name: 'Accueil',
-        item: 'https://www.conciergerie-alsacienne.fr',
+        item: siteURL,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: '404 Page Not Found',
-        item: 'https://www.conciergerie-alsacienne.fr/404',
+        item: `${siteURL}/404`,
       },
     ],
   },
@@ -115,29 +117,29 @@ export const aboutSchema = {
           '@type': 'ListItem',
           position: 1,
           name: 'Accueil',
-          item: 'https://www.conciergerie-alsacienne.fr',
+          item: siteURL,
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'À propos',
-          item: 'https://www.conciergerie-alsacienne.fr/about',
+          item: `${siteURL}/about`,
         },
       ],
     },
     {
       '@type': 'AboutPage',
-      name: 'À propos | Conciergerie Alsacienne',
-      url: 'https://www.conciergerie-alsacienne.fr/about',
+      name: `À propos | ${siteName}`,
+      url: `${siteURL}/about`,
       description:
         'Une conciergerie 100% alsacienne, fondée par des professionnels passionnés. Découvrez notre mission, nos valeurs, notre exigence.',
       publisher: {
         '@type': 'Organization',
-        name: 'Conciergerie Alsacienne',
-        url: 'https://www.conciergerie-alsacienne.fr',
+        name: siteName,
+        url: siteURL,
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.conciergerie-alsacienne.fr/logo.svg',
+          url: `${siteURL}/logo.svg`,
         },
       },
     },
@@ -155,50 +157,40 @@ export const blogSchema = {
           '@type': 'ListItem',
           position: 1,
           name: 'Accueil',
-          item: 'https://www.conciergerie-alsacienne.fr',
+          item: siteURL,
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Blog',
-          item: 'https://www.conciergerie-alsacienne.fr/blog',
+          item: `${siteURL}/blog`,
         },
       ],
     },
     // Déclaration de la page de blog
     {
       '@type': 'Blog',
-      name: 'Notre Blog | Conciergerie Alsacienne',
-      url: 'https://www.conciergerie-alsacienne.fr/blog',
+      name: `Blog des Clés d’Alsace`,
+      url: `${siteURL}/blog`,
       description:
         'Découvrez nos articles sur les services de conciergerie en Alsace et les meilleures adresses de la région.',
       publisher: {
         '@type': 'Organization',
-        name: 'Conciergerie Alsacienne',
-        url: 'https://www.conciergerie-alsacienne.fr',
+        name: siteName,
+        url: siteURL,
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.conciergerie-alsacienne.fr/logo.svg',
+          url: `${siteURL}/logo.svg`,
         },
       },
-      // Optionnel : mainEntityOfPage pour lister dynamiquement les articles
-      // mainEntityOfPage: {
-      //   '@type': 'ItemList',
-      //   itemListElement: [
-      //     { '@type': 'ListItem', 'position': 1, 'url': 'https://…/article-1' },
-      //     …
-      //   ]
-      // }
     },
   ],
 };
 
 /**
  * Génère le schéma JSON-LD pour un article de blog
- * @param post - Données de l'article
- * @param siteUrl - URL du site (ex: https://conciergerie-alsacienne.fr)
  */
-export function makeBlogPostSchema(post: Blog, siteUrl: string) {
+export function makeBlogPostSchema(post: Blog, siteUrl: string = siteURL) {
   const postUrl = `${siteUrl}/blog/${post.slug.current}`;
   const mainImage = post.mainImage
     ? imageBuilder(post.mainImage).url()
@@ -215,11 +207,11 @@ export function makeBlogPostSchema(post: Blog, siteUrl: string) {
         dateModified: post.publishedAt,
         author: {
           '@type': 'Organization',
-          name: 'Conciergerie Alsacienne',
+          name: siteName,
         },
         publisher: {
           '@type': 'Organization',
-          name: 'Conciergerie Alsacienne',
+          name: siteName,
           logo: {
             '@type': 'ImageObject',
             url: `${siteUrl}/logo.png`,
@@ -258,7 +250,7 @@ export function makeBlogPostSchema(post: Blog, siteUrl: string) {
   };
 }
 
-// Partie statique du schéma pour /conciergerie
+// Partie statique du schéma pour /conciergerie (page service)
 export const conciergerieSchemaBase = {
   '@type': 'Service',
   serviceType: 'Conciergerie haut de gamme en location courte durée',
@@ -273,12 +265,17 @@ export const conciergerieSchemaBase = {
     'Conciergerie spécialisée en location courte et moyenne durée à Mulhouse, Colmar et environs. Optimisation des revenus, gestion complète, accompagnement premium.',
 };
 
-// Breadcrumb statique
+// Fil d'Ariane statique
 export const breadcrumbConciergerie = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteURL },
-    { '@type': 'ListItem', position: 2, name: 'Conciergerie', item: `${siteURL}/conciergerie` },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Conciergerie',
+      item: `${siteURL}/conciergerie`,
+    },
   ],
 };
 
@@ -373,7 +370,6 @@ export const contactPageSchema = {
       url: `${siteURL}/contact`,
       description:
         "Besoin d'un conseil ou d'une estimation ? Contactez notre équipe via le formulaire ci-dessous pour un accompagnement rapide et personnalisé.",
-      // On peut ajouter une action potentielle si besoin
       potentialAction: {
         '@type': 'ContactAction',
         target: `${siteURL}/contact`,
@@ -395,7 +391,7 @@ export const estimationSchema = {
   '@graph': [
     {
       '@type': 'WebPage',
-      name: 'Estimation de rentabilité locative | Conciergerie Alsacienne',
+      name: 'Estimation de rentabilité locative | Les Clés d’Alsace',
       url: `${siteURL}/estimation`,
       description:
         'Testez gratuitement le potentiel de revenus locatifs de votre bien en Alsace grâce à notre simulateur en ligne.',
@@ -463,7 +459,7 @@ export const mentionsLegalesSchema = {
     },
     {
       '@type': 'WebPage',
-      name: 'Mentions légales | Conciergerie Alsacienne',
+      name: `Mentions légales | ${siteName}`,
       url: `${siteURL}/mentions-legales`,
     },
   ],
@@ -481,7 +477,7 @@ export const merciSchema = {
     },
     {
       '@type': 'WebPage',
-      name: 'Merci pour votre demande ! | Conciergerie Alsacienne',
+      name: `Merci pour votre demande ! | ${siteName}`,
       url: `${siteURL}/merci`,
       description:
         'Merci pour votre demande ! Nous avons bien reçu vos informations et reviendrons vers vous dans les 24 heures.',
@@ -491,11 +487,12 @@ export const merciSchema = {
 
 export const propertiesPageBase = {
   '@type': 'WebPage',
-  name: 'Nos biens en gestion | Conciergerie Alsacienne',
+  name: `Nos biens en gestion | ${siteName}`,
   url: `${siteURL}/nos-biens`,
   description:
     'Studios, T2 ou maisons, en courte ou longue durée : découvrez les logements que nous gérons, optimisés pour la rentabilité et la satisfaction voyageurs.',
 };
+
 export const breadcrumbProperties = {
   '@type': 'BreadcrumbList',
   itemListElement: [
@@ -515,9 +512,7 @@ export function makePropertiesSchema(properties: Property[]) {
     itemListElement: properties.map((prop, idx) => ({
       '@type': 'ListItem',
       position: idx + 1,
-      // On utilise le slug (ou l'ID si absent) pour le name
       name: prop.slug?.current || prop._id,
-      // Lien vers la page détail (ajustez si votre route diffère)
       url: `${siteURL}/nos-biens/${prop.slug?.current}`,
     })),
   };
@@ -548,15 +543,13 @@ export function makePropertyPageSchema(property: Property) {
     categories,
   } = property;
 
-  // URL de la page
   const pageUrl = `${siteURL}/nos-biens/${slug?.current}`;
-  // Image principale
   const mainImage = imagePrincipale
     ? imageBuilder(imagePrincipale).url()
     : `${siteURL}/default-property.jpg`;
 
-  // Produit (property) schema
   const productSchema = {
+    '@context': 'https://schema.org',
     '@type': 'Product',
     name,
     description: shortDescription || longDescription?.slice(0, 150) || '',
@@ -587,7 +580,6 @@ export function makePropertyPageSchema(property: Property) {
     ],
   };
 
-  // Fil d'Ariane
   const breadcrumb = generateBreadcrumbList([
     { name: 'Accueil', url: siteURL },
     { name: 'Nos biens en gestion', url: `${siteURL}/nos-biens` },

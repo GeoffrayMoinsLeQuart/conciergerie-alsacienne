@@ -1,6 +1,6 @@
 {
   "Conciergerie": {
-    "pageAriaLabel": "Page conciergerie haut de gamme",
+    "pageAriaLabel": "Page Les Clés d’Alsace haut de gamme",
     "StickyAnchorMenu": {
       "navAriaLabel": "Navigation par sections",
       "mobileButtonAriaLabel": "Menu de navigation mobile",
@@ -33,7 +33,7 @@
         "Offrez une expérience inoubliable à vos hôtes — et des revenus vraiment optimisés à votre patrimoine."
       ],
       "image": "https://res.cloudinary.com/dx96rdxwk/image/upload/v1745434488/Conciergerie%20alsacienne/Icon%20landing/Conciergerie/ChatGPT_Image_Apr_23_2025_08_23_19_PM_1_nam8th.webp",
-      "imageAlt": "Illustration conciergerie haut de gamme en Alsace",
+      "imageAlt": "Illustration Les Clés d’Alsace haut de gamme en Alsace",
       "buttons": {
         "primary": { "label": "Discuter de mon projet", "href": "/contact" },
         "secondary": { "label": "Estimer mes revenus", "href": "/estimation" }
@@ -177,7 +177,7 @@
         {
           "name": "Claire R.",
           "role": "Propriétaire à Colmar",
-          "quote": "Grâce à La Conciergerie Alsacienne…",
+          "quote": "Grâce à Les Clés d’Alsace…",
           "image": "/avatars/avatar1.jpg",
           "imageAlt": "Photo de Claire R."
         },
@@ -219,7 +219,11 @@
         {
           "name": "Formule Premium",
           "price": "À partir de 21% des revenus",
-          "features": ["Tous les services de la formule Standard", "Ménage inclus", "Support 24/7"],
+          "features": [
+            "Tous les services de la formule Standard",
+            "Ménage inclus",
+            "Support 24/7"
+          ],
           "recommended": true,
           "badge": "Recommandée",
           "href": "/contact?service=conciergerie&formule=premium"
@@ -227,7 +231,10 @@
         {
           "name": "Formule Exclusive",
           "price": "À partir de 23% des revenus",
-          "features": ["Tous les services de la formule Premium", "Linge hôtelier premium"],
+          "features": [
+            "Tous les services de la formule Premium",
+            "Linge hôtelier premium"
+          ],
           "recommended": false,
           "badge": null,
           "href": "/contact?service=conciergerie&formule=exclusive"
