@@ -1,16 +1,16 @@
 // src/components/Hero.tsx
 'use client';
 
-import { Calculator, Mail } from 'lucide-react';
+import { Calculator, Clock, Mail, User } from 'lucide-react';
 import Image from 'next/image';
 import CTAButtons from '@/components/Buttons/CTAButtons';
 import dynamic from 'next/dynamic';
 import { t } from '@/app/libs/content';
+import Badge from '@/components/Badge';
 
-const MotionDiv = dynamic(
-  () => import('framer-motion').then((mod) => mod.motion.div),
-  { ssr: false }
-);
+const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
+  ssr: false,
+});
 
 export default function Hero() {
   return (
@@ -101,12 +101,19 @@ export default function Hero() {
               {t('home', 'Hero.title')}
             </h1>
 
-            <p className="text-lg text-gray-600 md:text-xl">
-              {t('home', 'Hero.subtitle')}
-            </p>
-            <p className="mb-8 text-lg text-gray-600 md:text-xl">
-              {t('home', 'Hero.tagline')}
-            </p>
+            <p className="text-lg text-gray-600 md:text-xl">{t('home', 'Hero.subtitle')}</p>
+            <p className="mb-8 text-lg text-gray-600 md:text-xl">{t('home', 'Hero.tagline')}</p>
+
+            {/* Badges améliorés */}
+            <div className="flex flex-wrap justify-center gap-6 mb-8">
+              <Badge icon={<Clock className="w-4 h-4" />} variant="filled">
+                Réponse en 24 h garantie
+              </Badge>
+
+              <Badge icon={<User className="w-4 h-4" />} variant="outline">
+                Conseiller dédié
+              </Badge>
+            </div>
 
             {/* Boutons centrés en mobile et desktop */}
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

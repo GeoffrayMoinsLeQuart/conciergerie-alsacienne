@@ -2,11 +2,12 @@
 
 import { FC } from 'react';
 import CTAButtons from '@/components/Buttons/CTAButtons';
-import { Calculator, Mail } from 'lucide-react';
+import { Calculator, Clock, Mail, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { t } from '@/app/libs/content';
+import Badge from '@/components/Badge';
 
-const MotionSection = dynamic(() => import('framer-motion').then(mod => mod.motion.section), {
+const MotionSection = dynamic(() => import('framer-motion').then((mod) => mod.motion.section), {
   ssr: false,
 });
 
@@ -14,15 +15,15 @@ const CTAGestionLocative: FC = () => {
   const pageKey = 'gestionLocative';
   const baseKey = 'GestionLocative.CTAGestionLocative';
 
-  const heading       = t(pageKey, `${baseKey}.heading`)       as string;
-  const paragraph     = t(pageKey, `${baseKey}.paragraph`)     as string;
-  const primaryLabel  = t(pageKey, `${baseKey}.primary.label`) as string;
-  const primaryHref   = t(pageKey, `${baseKey}.primary.href`)  as string;
-  const secondaryLabel= t(pageKey, `${baseKey}.secondary.label`) as string;
+  const heading = t(pageKey, `${baseKey}.heading`) as string;
+  const paragraph = t(pageKey, `${baseKey}.paragraph`) as string;
+  const primaryLabel = t(pageKey, `${baseKey}.primary.label`) as string;
+  const primaryHref = t(pageKey, `${baseKey}.primary.href`) as string;
+  const secondaryLabel = t(pageKey, `${baseKey}.secondary.label`) as string;
   const secondaryHref = t(pageKey, `${baseKey}.secondary.href`) as string;
   const contactPrompt = t(pageKey, `${baseKey}.contactPrompt`) as string;
-  const phoneNumber   = t(pageKey, `${baseKey}.phoneNumber`)   as string;
-  const phoneHref     = t(pageKey, `${baseKey}.phoneHref`)     as string;
+  const phoneNumber = t(pageKey, `${baseKey}.phoneNumber`) as string;
+  const phoneHref = t(pageKey, `${baseKey}.phoneHref`) as string;
 
   return (
     <MotionSection
@@ -36,29 +37,45 @@ const CTAGestionLocative: FC = () => {
       className="bg-primary/10 py-20"
     >
       <div className="container mx-auto max-w-3xl px-4 text-center">
-        <h2
-          id="cta-gestion-title"
-          className="mb-4 text-3xl font-bold text-gray-800 md:text-4xl"
-        >
+        <h2 id="cta-gestion-title" className="mb-4 text-3xl font-bold text-gray-800 md:text-4xl">
           {heading}
         </h2>
-        <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-          {paragraph}
-        </p>
+        <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">{paragraph}</p>
+
+        <div className="flex justify-center gap-6 mb-8">
+          {/* Badge 1 : fond blanc, texte et bordure blancs pour contraste */}
+          <Badge
+            icon={<Clock className="w-4 h-4" />}
+            variant="outline"
+            className="border-primary text-primary bg-primary"
+          >
+            Réponse en 24 h garantie
+          </Badge>
+
+          {/* Badge 2 : fond blanc plein, texte primary */}
+          <Badge
+            icon={<User className="w-4 h-4" />}
+            variant="outline"
+            className="bg-white text-primary"
+          >
+            Conseiller dédié
+          </Badge>
+        </div>
+
         <CTAButtons
           primary={{
             label: primaryLabel,
             href: primaryHref,
-            icon: <Calculator className="h-5 w-5" />
+            icon: <Calculator className="h-5 w-5" />,
           }}
           secondary={{
             label: secondaryLabel,
             href: secondaryHref,
-            icon: <Mail className="h-5 w-5" />
+            icon: <Mail className="h-5 w-5" />,
           }}
         />
         <p className="mt-8 text-sm text-gray-600">
-          {contactPrompt}
+          {contactPrompt + ' '}
           <a
             href={phoneHref}
             aria-label={`Appelez-nous au ${phoneNumber}`}

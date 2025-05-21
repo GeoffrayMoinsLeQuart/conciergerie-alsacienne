@@ -2,7 +2,8 @@
   "Contact": {
     "SectionTitle": {
       "title": "Un projet immobilier en tête ?",
-      "paragraph": "Contactez-nous pour discuter de votre bien et découvrir comment notre service peut maximiser vos revenus locatifs en Alsace."
+      "paragraph": "Contactez-nous pour discuter de votre bien et découvrir comment notre service peut maximiser vos revenus locatifs en Alsace.",
+      "secondaryParagraph": "Formulaire rapide – pas de spam, juste un appel personnalisé sous 24 h."
     },
     "aria": {
       "sectionId": "contact-form"

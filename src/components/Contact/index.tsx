@@ -27,6 +27,8 @@ const { title: sectionTitle, paragraph: sectionParagraph } = t(pageKey, 'Contact
   paragraph: string;
 };
 
+const secondaryParagraph = t(pageKey, 'Contact.SectionTitle.secondaryParagraph') as string;
+
 const STEP_TITLES = t(pageKey, 'Contact.steps') as string[];
 
 const BUTTONS = t(pageKey, 'Contact.buttons') as Record<string, string>;
@@ -144,7 +146,9 @@ export default function ContactForm() {
       <div className="container mx-auto max-w-4xl px-4">
         <h1 className="sr-only">{sectionTitle}</h1>
         <SectionTitle title={sectionTitle} paragraph={sectionParagraph} center />
-
+        <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600 text-center">
+          {secondaryParagraph}
+        </p>
         <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mt-8">
           <Formik
             initialValues={initialValues}
