@@ -8,11 +8,8 @@ import NextTopLoader from 'nextjs-toploader';
 import AuthProvider from '../context/AuthContext';
 import ToasterContext from '../context/ToastContext';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
-import { GTMScript } from '@/components/Pixels/GTM';
-import { GTMNoScript } from '@/components/Pixels/GTMNoScript';
 import FloatingCallButton from '@/components/FloatingCallButton';
-import { GoogleTagManager } from '@next/third-parties/google';
-// import { GTM, GTMClient } from '@/components/Pixels/GTMClient';
+import { GAScript } from '@/components/Pixels/GAScript';
 import { GTM } from '@/components/Pixels/GTMClient';
 
 const inter = Inter({
@@ -30,14 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#006BFF" />
-        {/* GTM script + noscript sont injectés automatiquement */}
-        {/* <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!} /> */}
-        {/* <GTMClient /> */}
         <GTM />
-        {/* <GTMScript /> */}
       </head>
+      <GAScript />
       <body className={inter.className}>
-        {/* <GTMNoScript /> */}
         <NextTopLoader
           color="#006BFF"
           crawlSpeed={300}
