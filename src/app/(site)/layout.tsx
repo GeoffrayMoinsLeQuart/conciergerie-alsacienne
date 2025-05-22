@@ -12,7 +12,8 @@ import { GTMScript } from '@/components/Pixels/GTM';
 import { GTMNoScript } from '@/components/Pixels/GTMNoScript';
 import FloatingCallButton from '@/components/FloatingCallButton';
 import { GoogleTagManager } from '@next/third-parties/google';
-import { GTMClient } from '@/components/Pixels/GTMClient';
+// import { GTM, GTMClient } from '@/components/Pixels/GTMClient';
+import { GTM } from '@/components/Pixels/GTMClient';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,7 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#006BFF" />
         {/* GTM script + noscript sont injectés automatiquement */}
         {/* <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!} /> */}
-        <GTMClient />
+        {/* <GTMClient /> */}
+        <GTM />
         {/* <GTMScript /> */}
       </head>
       <body className={inter.className}>
