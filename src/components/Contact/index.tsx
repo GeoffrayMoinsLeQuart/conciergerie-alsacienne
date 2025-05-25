@@ -202,6 +202,7 @@ export default function ContactForm() {
                       disabled={isSubmitting}
                       className="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-70"
                       aria-busy={isSubmitting}
+                      id="cta-button-submit-contact-form"
                     >
                       {isSubmitting ? BUTTONS.submitting : BUTTONS.submit}
                     </button>
