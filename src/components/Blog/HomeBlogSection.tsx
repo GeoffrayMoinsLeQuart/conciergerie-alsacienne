@@ -1,7 +1,7 @@
 // src/components/HomeBlogSection.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getPosts } from '@/sanity/sanity-utils';
 import { Blog } from '@/types/blog';
 import SingleBlog from './SingleBlog';
@@ -27,6 +27,9 @@ export default function HomeBlogSection() {
     }
     fetchData();
   }, []);
+
+  // On ne recrée le tableau de 6 posts que quand `posts` change
+  const firstSixPosts = useMemo(() => posts.slice(0, 6), [posts]);
 
   // Texte externes
   const sectionLabel = t(pageKey, 'BlogSection.label');
@@ -70,7 +73,6 @@ export default function HomeBlogSection() {
           <div className="swiper-button-next-custom absolute -right-5 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow hover:bg-primary/90">
             →
           </div>
-
           <Swiper
             spaceBetween={20}
             slidesPerView={1.1}
@@ -82,7 +84,7 @@ export default function HomeBlogSection() {
             }}
             className="pb-12"
           >
-            {posts.slice(0, 6).map((blog) => (
+            {firstSixPosts.map((blog) => (
               <SwiperSlide key={blog._id}>
                 <SingleBlog blog={blog} />
               </SwiperSlide>
@@ -97,7 +99,7 @@ export default function HomeBlogSection() {
             className="-mx-4 flex w-auto"
             columnClassName="px-4"
           >
-            {posts.slice(0, 6).map((blog) => (
+            {firstSixPosts.map((blog) => (
               <SingleBlog blog={blog} key={blog._id} />
             ))}
           </Masonry>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import SectionTitle from '../Common/SectionTitle';
 import PropertyCard from './PropertyCard';
 import CTAButtons from '../Buttons/CTAButtons';
@@ -37,13 +37,16 @@ export default function Properties({
   const noResultsText = t(pageKey, 'Properties.noResultsText') as string;
   const ctaLabel = t(pageKey, 'Properties.ctaLabel') as string;
 
-  // Filtrage
-  const filteredItems = Array.isArray(properties)
-    ? activeTag === 'All'
-      ? properties
-      : properties.filter((p) => p.modeGestion === activeTag)
-    : [];
-  const displayedItems = homePage ? filteredItems.slice(0, 3) : filteredItems.slice(0, 3);
+  // 1. Filtrage mémoïsé
+  const filteredItems = useMemo(() => {
+    if (!Array.isArray(properties)) return [];
+    return activeTag === 'All' ? properties : properties.filter((p) => p.modeGestion === activeTag);
+  }, [properties, activeTag]);
+
+  // 2. Découpage mémoïsé
+  const displayedItems = useMemo(() => {
+    return filteredItems.slice(0, 3);
+  }, [filteredItems]);
 
   return (
     <section

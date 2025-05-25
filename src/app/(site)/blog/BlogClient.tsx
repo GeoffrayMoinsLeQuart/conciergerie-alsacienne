@@ -11,8 +11,10 @@ import BlogFilters from '@/components/Blog/BlogFilters';
 import { t } from '@/app/libs/content';
 
 const pageKey = 'blog';
-
 export const revalidate = 600;
+
+// static breakpoint config, memoized once
+const BREAKPOINT_COLS = { default: 3, 1100: 2, 700: 1 };
 
 export default function BlogClient() {
   const [posts, setPosts] = useState<Blog[]>([]);
@@ -20,6 +22,7 @@ export default function BlogClient() {
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  // fetch posts once
   useEffect(() => {
     setIsLoading(true);
     getAllPosts().then((all) => {
@@ -28,6 +31,7 @@ export default function BlogClient() {
     });
   }, []);
 
+  // compute counts per category
   const categoriesWithCount = useMemo(() => {
     const counts: Record<string, number> = {};
     posts.forEach((post) => {
@@ -35,12 +39,12 @@ export default function BlogClient() {
         if (category) counts[category] = (counts[category] || 0) + 1;
       });
     });
-
     return Object.entries(counts)
       .map(([title, count]) => ({ title, count }))
       .sort((a, b) => a.title.localeCompare(b.title));
   }, [posts]);
 
+  // filter posts by selected categories and search term
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       if (selectedCats.length > 0) {
@@ -57,30 +61,36 @@ export default function BlogClient() {
     });
   }, [posts, selectedCats, searchTerm]);
 
+  // restrict available categories to those present in filteredPosts
   const availableCategories = useMemo(() => {
     const setCats = new Set<string>();
     filteredPosts.forEach((post) => post.categories?.forEach((cat) => cat && setCats.add(cat)));
     return categoriesWithCount.filter(({ title }) => setCats.has(title));
   }, [filteredPosts, categoriesWithCount]);
 
-  if (isLoading) return <SkeletonMasonryBlog />;
+  // memoize externalized texts
+  const { filtersLabel, noResultsTitle, noResultsText, resultsAriaLabel } = useMemo(
+    () => ({
+      filtersLabel: t(pageKey, 'Blog.BlogClient.filtersLabel') as string,
+      noResultsTitle: t(pageKey, 'Blog.BlogClient.noResultsTitle') as string,
+      noResultsText: t(pageKey, 'Blog.BlogClient.noResultsText') as string,
+      resultsAriaLabel: t(pageKey, 'Blog.BlogClient.resultsAriaLabel') as string,
+    }),
+    []
+  );
 
-  // Externalized texts
-  const filtersLabel = t(pageKey, 'Blog.BlogClient.filtersLabel') as string;
-  const noResultsTitle = t(pageKey, 'Blog.BlogClient.noResultsTitle') as string;
-  const noResultsText = t(pageKey, 'Blog.BlogClient.noResultsText') as string;
-  const resultsAriaLabel = t(pageKey, 'Blog.BlogClient.resultsAriaLabel') as string;
+  if (isLoading) return <SkeletonMasonryBlog />;
 
   return (
     <section aria-labelledby="blog-results-heading" className="bg-white pb-20 pt-[40px]">
       <div className="container">
-        {/* 🔍 {filtersLabel} */}
+        {/* Filters */}
         <BlogFilters
           categoriesWithCount={availableCategories}
           selectedCats={selectedCats}
           onToggleCat={(cat) =>
             setSelectedCats((prev) =>
-              prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
+              prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
             )
           }
           searchTerm={searchTerm}
@@ -102,7 +112,7 @@ export default function BlogClient() {
           </div>
         ) : (
           <Masonry
-            breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
+            breakpointCols={BREAKPOINT_COLS}
             className="-mx-4 flex w-auto"
             columnClassName="px-4 space-y-10"
           >
