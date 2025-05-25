@@ -9,7 +9,7 @@ import AuthProvider from '../context/AuthContext';
 import ToasterContext from '../context/ToastContext';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import FloatingCallButton from '@/components/FloatingCallButton';
-import { GAScript } from '@/components/Pixels/GAScript';
+// import { GAScript } from '@/components/Pixels/GAScript';
 import { GTM } from '@/components/Pixels/GTMClient';
 
 const inter = Inter({
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#006BFF" />
         <GTM />
       </head>
-      <GAScript />
+      {/* <GAScript /> */}
       <body className={inter.className}>
         <NextTopLoader
           color="#006BFF"
