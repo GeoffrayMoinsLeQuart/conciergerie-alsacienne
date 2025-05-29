@@ -9,7 +9,7 @@ export function GTM() {
   return (
     <>
       {/* 1. Data Layer init */}
-      <Script id="gtm-init" strategy="afterInteractive">
+      <Script id="gtm-init" strategy="beforeInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
@@ -22,9 +22,19 @@ export function GTM() {
       {/* 2. Chargement du gtm.js */}
       <Script
         id="gtm-script"
-        strategy="lazyOnload"
+        strategy="beforeInteractive"
         src={`https://www.googletagmanager.com/gtm.js?id=${id}`}
       />
+
+      {/* Fallback noscript déplacé ici */}
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+      </noscript>
     </>
   );
 }
