@@ -17,25 +17,20 @@ const ContactForm = dynamic(() => import('./contact/page'), {
   loading: () => (
     <div
       className="animate-pulse h-96 bg-gray-100 rounded-lg"
-      style={{ minHeight: '600px', contain: 'layout' }} // Amélioration avec minHeight et contain
-    ></div>
+      style={{ minHeight: '600px', contain: 'layout' }}
+    />
   ),
 });
+
 export const metadata = getMetadata('home');
 
 export default async function HomePage() {
-  // Récupération SSR des propriétés
   const properties = await fetchProperties();
-
-  // getPosts renvoie { posts, pagination }
   const { posts } = await getPosts({ limit: 6 });
-
-  // Génération de tout le schéma JSON-LD
   const schema = makeHomePageSchema(posts, properties);
 
   return (
     <main id="home" aria-label={t('home', 'AriaLabelHome')}>
-      {/* Injection unique du schéma WebSite + Blog + Properties */}
       <SeoSchemaInjector schema={schema} />
 
       <Hero />

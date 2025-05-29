@@ -9,6 +9,8 @@ const nextConfig = {
   // Activation des Server Actions expérimentales (même origine)
   experimental: {
     serverActions: {},
+    optimizeCss: true, // Optimisation CSS
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
 
   // Génère les source maps en production pour faciliter le debug
@@ -30,9 +32,7 @@ const nextConfig = {
     return [
       {
         source: '/images/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=604800, immutable' },
-        ],
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=604800, immutable' }],
       },
     ];
   },
