@@ -9,7 +9,7 @@ export function GTM() {
   return (
     <>
       {/* 1. Data Layer init */}
-      <Script id="gtm-init" strategy="beforeInteractive">
+      <Script id="gtm-init" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
@@ -22,7 +22,7 @@ export function GTM() {
       {/* 2. Chargement du gtm.js */}
       <Script
         id="gtm-script"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtm.js?id=${id}`}
       />
 

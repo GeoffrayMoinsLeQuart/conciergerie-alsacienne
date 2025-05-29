@@ -28,7 +28,7 @@ export default function Hero() {
               style={{ aspectRatio: '12 / 5' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-desktop_nddksd.webp"
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1748531765/Mon%20projet%20locatif/Header-desktop_rtmbza.webp"
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
@@ -49,7 +49,7 @@ export default function Hero() {
               style={{ aspectRatio: '2 / 1' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1748531997/Mon%20projet%20locatif/Header-tablet_edp2mu.webp"
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
@@ -70,7 +70,7 @@ export default function Hero() {
               style={{ aspectRatio: '4 / 3' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1748531998/Mon%20projet%20locatif/Header-mobil_tbfewv.webp"
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
