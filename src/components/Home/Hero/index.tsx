@@ -7,12 +7,39 @@ import CTAButtons from '@/components/Buttons/CTAButtons';
 import dynamic from 'next/dynamic';
 import { t } from '@/app/libs/content';
 import Badge from '@/components/Badge';
+import { useEffect } from 'react';
+
+// Données de placeholder pour les images (à générer une seule fois)
+const blurDesktop =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDEyMDAgNTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZmIi8+PC9zdmc+';
+const blurTablet =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgODAwIDQwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y4ZjlmZiIvPjwvc3ZnPg==';
+const blurMobile =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y4ZjlmZiIvPjwvc3ZnPg==';
+
+// Préchargement des polices pour réduire les layout shifts
+const preloadFonts = () => {
+  if (typeof window !== 'undefined') {
+    const fontLink = document.createElement('link');
+    fontLink.rel = 'preload';
+    fontLink.href = '/fonts/inter-var.woff2'; // Ajustez selon votre police
+    fontLink.as = 'font';
+    fontLink.type = 'font/woff2';
+    fontLink.crossOrigin = 'anonymous';
+    document.head.appendChild(fontLink);
+  }
+};
 
 const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
   ssr: false,
 });
 
 export default function Hero() {
+  // Préchargement des polices au montage du composant
+  useEffect(() => {
+    preloadFonts();
+  }, []);
+
   return (
     <section
       className="relative mb-24 overflow-hidden bg-cover bg-center bg-no-repeat"
@@ -20,7 +47,7 @@ export default function Hero() {
     >
       <div className="bg-white/90">
         <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
-          {/* Images responsive avec ratio correct */}
+          {/* Images responsive avec ratio correct et optimisations */}
           <div className="w-full">
             {/* Desktop */}
             <div
@@ -32,14 +59,12 @@ export default function Hero() {
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
-                sizes="
-          (max-width: 640px) 100vw,
-          (max-width: 768px) 640px,
-          (max-width: 1024px) 768px,
-          (max-width: 1280px) 1024px,
-          1280px
-        "
+                sizes="(max-width: 1280px) 1024px, 1280px"
                 priority
+                quality={80}
+                placeholder="blur"
+                blurDataURL={blurDesktop}
+                fetchPriority="high"
               />
             </div>
 
@@ -53,14 +78,12 @@ export default function Hero() {
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
-                sizes="
-          (max-width: 640px) 100vw,
-          (max-width: 768px) 640px,
-          (max-width: 1024px) 768px,
-          (max-width: 1280px) 1024px,
-          1280px
-        "
+                sizes="(max-width: 768px) 640px, 768px"
                 priority
+                quality={80}
+                placeholder="blur"
+                blurDataURL={blurTablet}
+                fetchPriority="high"
               />
             </div>
 
@@ -74,25 +97,23 @@ export default function Hero() {
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
-                sizes="
-          (max-width: 640px) 100vw,
-          (max-width: 768px) 640px,
-          (max-width: 1024px) 768px,
-          (max-width: 1280px) 1024px,
-          1280px
-        "
+                sizes="(max-width: 640px) 100vw"
                 priority
+                quality={80}
+                placeholder="blur"
+                blurDataURL={blurMobile}
+                fetchPriority="high"
               />
             </div>
           </div>
 
-          {/* Texte animé & accessibilité */}
+          {/* Texte animé & accessibilité - avec hauteur minimale pour éviter les layout shifts */}
           <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mt-10"
+            transition={{ duration: 0.6, delay: 0.2 }} // Léger délai pour permettre au contenu principal de s'afficher
+            className="mt-10 min-h-[200px]" // Hauteur minimale pour réduire les layout shifts
           >
             <h1
               id="hero-title"
@@ -104,8 +125,8 @@ export default function Hero() {
             <p className="text-lg text-gray-600 md:text-xl">{t('home', 'Hero.subtitle')}</p>
             <p className="mb-8 text-lg text-gray-600 md:text-xl">{t('home', 'Hero.tagline')}</p>
 
-            {/* Badges améliorés */}
-            <div className="flex flex-wrap justify-center gap-6 mb-8">
+            {/* Badges améliorés avec hauteur fixe */}
+            <div className="flex flex-wrap justify-center gap-6 mb-8 min-h-[40px]">
               <Badge icon={<Clock className="w-4 h-4" />} variant="filled">
                 Réponse en 24 h garantie
               </Badge>
@@ -115,8 +136,8 @@ export default function Hero() {
               </Badge>
             </div>
 
-            {/* Boutons centrés en mobile et desktop */}
-            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            {/* Boutons centrés en mobile et desktop avec hauteur fixe */}
+            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center min-h-[48px]">
               <CTAButtons
                 primary={{
                   label: t('home', 'Hero.primaryLabel'),
