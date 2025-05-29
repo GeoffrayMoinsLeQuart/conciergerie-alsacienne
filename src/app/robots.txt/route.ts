@@ -3,7 +3,7 @@ export function GET() {
 User-agent: *
 Disallow:
 
-Sitemap: https://www.clefsdalsace.fr/sitemap.xml
+Sitemap: https://clefsdalsace.fr/sitemap.xml
 `;
 
   return new Response(content.trim(), {

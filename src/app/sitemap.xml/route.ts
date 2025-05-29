@@ -4,7 +4,7 @@ export async function GET() {
   const properties = await fetchProperties();
   const { posts: blogPosts } = await getPosts();
 
-  const baseUrl = 'https://www.clesdalsace.fr';
+  const baseUrl = 'https://clefsdalsace.fr';
 
   const staticRoutes = [
     '/',
@@ -16,6 +16,11 @@ export async function GET() {
     '/blog',
     '/about', // ✅ AJOUT ICI
     '/contact',
+    '/cookies',
+    '/mentions-legales',
+    '/conditions-generales-vente',
+    '/politique-confidentialite',
+    '/merci',
   ];
 
   const staticUrls = staticRoutes.map(
