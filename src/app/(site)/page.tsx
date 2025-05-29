@@ -1,6 +1,5 @@
 // src/app/page.tsx
 import HomeBlogSection from '@/components/Blog/HomeBlogSection';
-import About from '@/components/Home/About';
 import Hero from '@/components/Home/Hero';
 import Prestation from '@/components/Home/Prestation';
 import Testimonial from '@/components/Home/Testimonial';
@@ -12,6 +11,11 @@ import dynamic from 'next/dynamic';
 import { getMetadata } from '../config/pageMetadata';
 import { makeHomePageSchema } from '../config/pageSchema';
 import { t } from '@/app/libs/content';
+
+const About = dynamic(() => import('@/components/Home/About'), {
+  ssr: true,
+  loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" />,
+});
 
 const ContactForm = dynamic(() => import('./contact/page'), {
   loading: () => (

@@ -2,13 +2,27 @@
 'use client';
 
 import { FC } from 'react';
+import dynamic from 'next/dynamic';
 import { Phone } from 'lucide-react';
-import CTAButtons from '@/components/Buttons/CTAButtons';
-import { motion, useReducedMotion } from 'framer-motion';
 import { t } from '@/app/libs/content';
 import { formatNumber, formatPercentage } from '@/utils/formatting';
-import SocialLinks from './SocialLinks';
-import Graphic from './Graphic';
+
+// Dynamically import heavy sub-components
+const CTAButtons = dynamic(() => import('@/components/Buttons/CTAButtons'), {
+  ssr: false,
+  loading: () => null,
+});
+const SocialLinks = dynamic(() => import('./SocialLinks'), {
+  ssr: false,
+  loading: () => null,
+});
+const Graphic = dynamic(() => import('./Graphic'), {
+  ssr: false,
+  loading: () => null,
+});
+
+// Framer Motion can rester synchronisé si le bundle n'est pas trop gros
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface Stat {
   label: string;
@@ -19,23 +33,17 @@ const About: FC = () => {
   const reduce = useReducedMotion();
   const pageKey = 'home';
 
-  // Récupération des données
+  // Texte & datas
   const title = t(pageKey, 'About.title');
   const description = t(pageKey, 'About.description');
   const promiseHeading = t(pageKey, 'About.promiseHeading');
-  const rawPromises = t(pageKey, 'About.promises');
-  const promises: string[] = Array.isArray(rawPromises) ? rawPromises : [];
+  const promises: string[] = Array.isArray(t(pageKey, 'About.promises'))
+    ? t(pageKey, 'About.promises')
+    : [];
   const ctaLabel = t(pageKey, 'About.ctaLabel');
-  const rawStats = t(pageKey, 'About.stats');
-  const stats: Stat[] = Array.isArray(rawStats) ? rawStats : [];
+  const stats: Stat[] = Array.isArray(t(pageKey, 'About.stats')) ? t(pageKey, 'About.stats') : [];
 
-  // Accessibilité
-  const sectionId = 'about';
-  const titleId = t(pageKey, 'About.aria.titleId');
-  const promisesLabel = t(pageKey, 'About.aria.promiseListLabel');
-  const statsLabel = t(pageKey, 'About.aria.statsListLabel');
-
-  // Animations
+  // Variants anim si non réduit
   const listVariants = reduce
     ? undefined
     : { hidden: {}, visible: { transition: { staggerChildren: 0.2 } } };
@@ -45,13 +53,13 @@ const About: FC = () => {
 
   return (
     <section
-      id={sectionId}
-      aria-labelledby={titleId}
-      className="relative z-10 bg-[#f8f9ff] py-16 sm:py-24"
+      id="about"
+      aria-labelledby="about-title"
+      className="relative z-10 bg-[#f8f9ff] py-16 sm:py-24 contain layout style"
     >
       <div className="container mx-auto px-4">
         <header className="mb-12 text-center">
-          <h2 id={titleId} className="text-3xl font-bold text-gray-800 md:text-4xl">
+          <h2 id="about-title" className="text-3xl font-bold text-gray-800 md:text-4xl">
             {title}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">{description}</p>
@@ -61,7 +69,7 @@ const About: FC = () => {
           {/* Promesses + CTA */}
           <div>
             <h3 className="mb-4 text-xl font-semibold text-primary">{promiseHeading}</h3>
-            <ul className="mb-8 space-y-3 text-base text-gray-700" aria-label={promisesLabel}>
+            <ul className="mb-8 space-y-3 text-base text-gray-700">
               {promises.map((p, i) => (
                 <li key={i}>✅ {p}</li>
               ))}
@@ -80,27 +88,24 @@ const About: FC = () => {
           {/* Statistiques + SocialLinks */}
           <div>
             <motion.ul
-              className="grid grid-cols-2 gap-6 text-center min-h-[120px]" // Ajout de min-height
-              style={{ contain: 'layout' }} // Ajout de contain: layout
+              className="grid grid-cols-2 gap-6 text-center min-h-[120px]"
               initial={reduce ? undefined : 'hidden'}
               whileInView={reduce ? undefined : 'visible'}
               viewport={{ once: true }}
               variants={listVariants}
-              aria-label={statsLabel}
             >
               {stats.map((stat) => {
                 const isPercent = stat.value.includes('%');
-                const formattedValue = isPercent
+                const value = isPercent
                   ? formatPercentage(stat.value)
                   : formatNumber(Number(stat.value));
-
                 return (
                   <motion.li
                     key={stat.label}
-                    className="flex flex-col items-center min-h-[80px]" // Ajout de min-height
+                    className="flex flex-col items-center min-h-[80px]"
                     variants={itemVariants}
                   >
-                    <span className="mb-1 text-3xl font-bold text-primary">{formattedValue}</span>
+                    <span className="mb-1 text-3xl font-bold text-primary">{value}</span>
                     <span className="text-sm text-gray-600">{stat.label}</span>
                   </motion.li>
                 );
@@ -113,7 +118,7 @@ const About: FC = () => {
         </div>
       </div>
 
-      {/* Élément décoratif non-animé pour éviter le CLS */}
+      {/* Décoratif en lazy */}
       <Graphic aria-hidden="true" />
     </section>
   );
