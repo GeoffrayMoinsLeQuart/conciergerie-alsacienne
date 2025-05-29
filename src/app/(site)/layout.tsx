@@ -33,11 +33,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://cdn-cookieyes.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
 
+        {/* Preload LCP images */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-desktop_nddksd.webp"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-tablet_uczvdn.webp"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/dx96rdxwk/image/upload/v1717939157/Immobilier/website/Header-mobil_kvve7t.webp"
+        />
+
         {/* GTM script */}
         <GTM />
       </head>
       {/* <GAScript /> */}
       <body className={inter.className}>
+        {/* Fallback noscript déplacé ici */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <NextTopLoader
           color="#006BFF"
           crawlSpeed={300}

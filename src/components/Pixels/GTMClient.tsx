@@ -22,20 +22,9 @@ export function GTM() {
       {/* 2. Chargement du gtm.js */}
       <Script
         id="gtm-script"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtm.js?id=${id}`}
-        defer
       />
-
-      {/* 3. Fallback noscript dans le body */}
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${id}`}
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        />
-      </noscript>
     </>
   );
 }
