@@ -24,6 +24,7 @@ export function GTM() {
         id="gtm-script"
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtm.js?id=${id}`}
+        defer
       />
 
       {/* 3. Fallback noscript dans le body */}
