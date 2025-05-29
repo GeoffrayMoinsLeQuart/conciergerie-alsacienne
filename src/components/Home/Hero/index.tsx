@@ -20,65 +20,7 @@ export default function Hero() {
       <div className="bg-white/90">
         <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
           {/* Images */}
-          <div className="w-full">
-            {/* Desktop */}
-            <div
-              className="relative hidden rounded-lg md:block w-full"
-              style={{ aspectRatio: '12/5', contain: 'layout' }}
-            >
-              <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/q_auto,f_auto,w_1200/v1748531765/Mon%20projet%20locatif/Header-desktop_rtmbza.webp"
-                alt={t('home', 'Hero.imageAlt')}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1280px) 1024px, 1280px"
-                priority
-                quality={85}
-                placeholder="blur"
-                blurDataURL={blurDesktop}
-                fetchPriority="high"
-                loading="eager"
-              />
-            </div>
-            {/* Tablet */}
-            <div
-              className="relative mx-auto hidden rounded-lg sm:block md:hidden w-full"
-              style={{ aspectRatio: '2/1', contain: 'layout' }}
-            >
-              <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/q_auto,f_auto,w_768/v1748531997/Mon%20projet%20locatif/Header-tablet_edp2mu.webp"
-                alt={t('home', 'Hero.imageAlt')}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 640px, 768px"
-                priority
-                quality={85}
-                placeholder="blur"
-                blurDataURL={blurTablet}
-                fetchPriority="high"
-                loading="eager"
-              />
-            </div>
-            {/* Mobile */}
-            <div
-              className="relative mx-auto rounded-lg sm:hidden w-full"
-              style={{ aspectRatio: '4/3', contain: 'layout' }}
-            >
-              <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/q_auto,f_auto,w_400/v1748531998/Mon%20projet%20locatif/Header-mobil_tbfewv.webp"
-                alt={t('home', 'Hero.imageAlt')}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) 100vw"
-                priority
-                quality={85}
-                placeholder="blur"
-                blurDataURL={blurMobile}
-                fetchPriority="high"
-                loading="eager"
-              />
-            </div>
-          </div>
+
 
           {/* Texte & CTA */}
           <HeroClient />
