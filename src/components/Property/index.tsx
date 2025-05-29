@@ -90,13 +90,15 @@ export default function Properties({
 
         {/* Grille de biens */}
         <div className="flex justify-center">
-          <div className="w-full xl:w-10/12">
+          <div className="w-full xl:w-10/12 min-h-[500px]" style={{ contain: 'layout' }}>
+            {/* Ajout de min-height et contain */}
             {displayedItems.length > 0 ? (
               <MasonryWrapper columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }} gutter="30px">
                 {displayedItems.map((property) => (
                   <div
                     key={property._id}
-                    className="rounded-xl bg-white p-1 shadow-xl transition hover:shadow-2xl"
+                    className="rounded-xl bg-white p-1 shadow-xl transition hover:shadow-2xl min-h-[300px]" // Ajout de min-height
+                    style={{ aspectRatio: '3/4' }} // Ajout d'un ratio d'aspect fixe
                   >
                     <PropertyCard property={property} />
                   </div>
@@ -107,7 +109,6 @@ export default function Properties({
                 {noResultsText}
               </p>
             )}
-
             {/* CTA uniquement si homePage */}
             {homePage && (
               <div className="mt-10 text-center">

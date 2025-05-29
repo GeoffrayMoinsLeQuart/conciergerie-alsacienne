@@ -63,7 +63,8 @@ export default function HomeBlogSection() {
 
         {/* Carousel mobile */}
         <div
-          className="relative mb-10 block lg:hidden"
+          className="relative mb-10 block lg:hidden min-h-[400px]" // Ajout de min-height
+          style={{ contain: 'layout' }} // Ajout de contain: layout
           aria-roledescription="carousel"
           aria-label={carouselAria}
         >
@@ -93,7 +94,8 @@ export default function HomeBlogSection() {
         </div>
 
         {/* Masonry desktop */}
-        <div className="hidden flex-1 lg:block">
+        <div className="hidden flex-1 lg:block min-h-[600px]" style={{ contain: 'layout' }}>
+          {/* Ajout de min-height et contain */}
           <Masonry
             breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
             className="-mx-4 flex w-auto"

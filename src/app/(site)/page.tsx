@@ -14,9 +14,13 @@ import { makeHomePageSchema } from '../config/pageSchema';
 import { t } from '@/app/libs/content';
 
 const ContactForm = dynamic(() => import('./contact/page'), {
-  loading: () => <div className="animate-pulse h-96 bg-gray-100 rounded-lg"></div>,
+  loading: () => (
+    <div
+      className="animate-pulse h-96 bg-gray-100 rounded-lg"
+      style={{ minHeight: '600px', contain: 'layout' }} // Amélioration avec minHeight et contain
+    ></div>
+  ),
 });
-
 export const metadata = getMetadata('home');
 
 export default async function HomePage() {

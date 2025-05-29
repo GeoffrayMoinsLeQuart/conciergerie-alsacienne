@@ -33,7 +33,7 @@ export default function Testimonial() {
           </div>
         </div>
 
-        <div className="-mx-4 flex flex-wrap">
+        <div className="-mx-4 flex flex-wrap min-h-[400px]" style={{ contain: 'layout' }}>
           {testimonialData?.map((testimonial) => (
             <SingleTestimonial key={testimonial.id} testimonial={testimonial} />
           ))}

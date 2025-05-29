@@ -63,7 +63,8 @@ export default function Prestation() {
         {/* Grille des cartes */}
         <MotionDiv
           key={activeTab}
-          className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 min-h-[400px]" // Ajout de min-height
+          style={{ contain: 'layout' }} // Ajout de contain: layout
           initial="hidden"
           animate="visible"
           variants={{
@@ -74,7 +75,7 @@ export default function Prestation() {
           {prestations.map((prestation) => (
             <MotionDiv
               key={prestation.id}
-              className="group flex flex-col rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-xl transition duration-300 hover:shadow-2xl"
+              className="group flex flex-col rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-xl transition duration-300 hover:shadow-2xl min-h-[250px]" // Ajout de min-height
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { opacity: 1, y: 0 },

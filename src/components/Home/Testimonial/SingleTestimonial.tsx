@@ -4,8 +4,11 @@ import Image from 'next/image';
 export default function SingleTestimonial({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div className="w-full px-4 lg:w-1/2">
-      <div className="relative mb-10 overflow-hidden rounded-xl bg-white p-10 px-7 shadow-testimonial sm:px-10">
-        <div className="mb-5">
+      <div
+        className="relative mb-10 overflow-hidden rounded-xl bg-white p-10 px-7 shadow-testimonial sm:px-10"
+        style={{ minHeight: '250px' }} // Hauteur minimale fixe
+      >
+        <div className="mb-5 h-[25px]">
           <Image
             src={testimonial?.companyLogo}
             alt={testimonial?.companyName}

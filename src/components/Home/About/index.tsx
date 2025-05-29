@@ -80,7 +80,8 @@ const About: FC = () => {
           {/* Statistiques + SocialLinks */}
           <div>
             <motion.ul
-              className="grid grid-cols-2 gap-6 text-center"
+              className="grid grid-cols-2 gap-6 text-center min-h-[120px]" // Ajout de min-height
+              style={{ contain: 'layout' }} // Ajout de contain: layout
               initial={reduce ? undefined : 'hidden'}
               whileInView={reduce ? undefined : 'visible'}
               viewport={{ once: true }}
@@ -96,7 +97,7 @@ const About: FC = () => {
                 return (
                   <motion.li
                     key={stat.label}
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center min-h-[80px]" // Ajout de min-height
                     variants={itemVariants}
                   >
                     <span className="mb-1 text-3xl font-bold text-primary">{formattedValue}</span>
