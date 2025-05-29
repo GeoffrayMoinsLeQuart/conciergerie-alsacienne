@@ -7,7 +7,6 @@ import CTAButtons from '@/components/Buttons/CTAButtons';
 import dynamic from 'next/dynamic';
 import { t } from '@/app/libs/content';
 import Badge from '@/components/Badge';
-import { useEffect } from 'react';
 
 // Données de placeholder pour les images (à générer une seule fois)
 const blurDesktop =
@@ -17,29 +16,11 @@ const blurTablet =
 const blurMobile =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y4ZjlmZiIvPjwvc3ZnPg==';
 
-// Préchargement des polices pour réduire les layout shifts
-const preloadFonts = () => {
-  if (typeof window !== 'undefined') {
-    const fontLink = document.createElement('link');
-    fontLink.rel = 'preload';
-    fontLink.href = '/fonts/inter-var.woff2'; // Ajustez selon votre police
-    fontLink.as = 'font';
-    fontLink.type = 'font/woff2';
-    fontLink.crossOrigin = 'anonymous';
-    document.head.appendChild(fontLink);
-  }
-};
-
 const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
   ssr: false,
 });
 
 export default function Hero() {
-  // Préchargement des polices au montage du composant
-  useEffect(() => {
-    preloadFonts();
-  }, []);
-
   return (
     <section
       className="relative mb-24 overflow-hidden bg-cover bg-center bg-no-repeat"
@@ -56,7 +37,7 @@ export default function Hero() {
             >
               <Image
                 src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1748531765/Mon%20projet%20locatif/Header-desktop_rtmbza.webp"
-                alt={t('home', 'Hero.imageAlt')}
+                alt={t('home', 'Hero.imageAlt' )}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1280px) 1024px, 1280px"
@@ -75,7 +56,7 @@ export default function Hero() {
             >
               <Image
                 src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1748531997/Mon%20projet%20locatif/Header-tablet_edp2mu.webp"
-                alt={t('home', 'Hero.imageAlt')}
+                alt={t('home', 'Hero.imageAlt' )}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 640px, 768px"
@@ -87,19 +68,19 @@ export default function Hero() {
               />
             </div>
 
-            {/* Mobile */}
+            {/* Mobile - avec optimisation Cloudinary améliorée */}
             <div
               className="relative mx-auto rounded-lg sm:hidden w-full"
               style={{ aspectRatio: '4 / 3' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1748531998/Mon%20projet%20locatif/Header-mobil_tbfewv.webp"
-                alt={t('home', 'Hero.imageAlt')}
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/q_auto,f_auto,w_400/v1748531998/Mon%20projet%20locatif/Header-mobil_tbfewv.webp"
+                alt={t('home', 'Hero.imageAlt' )}
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 100vw"
                 priority
-                quality={80}
+                quality={75}
                 placeholder="blur"
                 blurDataURL={blurMobile}
                 fetchPriority="high"
