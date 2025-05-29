@@ -23,6 +23,8 @@ export default function SingleBlog({ blog }: { blog: Blog }) {
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="w-full rounded-xl object-cover duration-300 group-hover:scale-105"
+              loading="lazy"
+              priority={false}
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gray-100 text-sm text-gray-500">

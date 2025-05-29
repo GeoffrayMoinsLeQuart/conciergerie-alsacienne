@@ -40,7 +40,8 @@ export default function PropertyCard({ property }: { property: Property }) {
             fill
             sizes="(max-width: 768px) 100vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
-            priority
+            loading="lazy"
+            priority={false}
           />
         </div>
 
