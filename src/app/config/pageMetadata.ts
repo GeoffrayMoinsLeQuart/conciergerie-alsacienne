@@ -4,7 +4,7 @@ import { getPropertyBySlug, imageBuilder } from '@/sanity/sanity-utils';
 import type { Blog } from '@/types/blog';
 import { Property } from '@/types/property';
 
-const siteURL = process.env.SITE_URL || 'https://www.clesdalsace.fr';
+const siteURL = process.env.SITE_URL || 'https://www.clefsdalsace.fr';
 const siteName = process.env.SITE_NAME || 'Les Clés d’Alsace';
 const authorName = process.env.AUTHOR_NAME || 'Les Clés d’Alsace';
 

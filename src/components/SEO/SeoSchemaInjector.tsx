@@ -16,8 +16,8 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Les Clés d’Alsace',
-    url: 'https://www.clesdalsace.fr',
-    logo: 'https://www.clesdalsace.fr/logo.svg',
+    url: 'https://www.clefsdalsace.fr',
+    logo: 'https://www.clefsdalsace.fr/logo.svg',
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -28,8 +28,8 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
       },
     ],
     sameAs: [
-      'https://www.facebook.com/clesdalsace',
-      'https://www.instagram.com/clesdalsace/',
+      'https://www.facebook.com/clefsdalsace',
+      'https://www.instagram.com/clefsdalsace/',
       // Ajoutez ici d'autres profils sociaux si nécessaire
     ],
   };
@@ -38,16 +38,16 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Les Clés d’Alsace',
-    url: 'https://www.clesdalsace.fr',
+    url: 'https://www.clefsdalsace.fr',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://www.clesdalsace.fr/search?q={search_term_string}',
+      target: 'https://www.clefsdalsace.fr/search?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
 
   const pathname = usePathname();
-  const canonical = `https://www.clesdalsace.fr${pathname}`;
+  const canonical = `https://www.clefsdalsace.fr${pathname}`;
 
   return (
     <>

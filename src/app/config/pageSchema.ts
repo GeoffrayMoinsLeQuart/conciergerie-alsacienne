@@ -4,7 +4,7 @@ import type { FAQItem } from '@/types/faq';
 import type { Property } from '@/types/property';
 import { generateBreadcrumbList } from '@/utils/BreadcrumbGenerator';
 
-const siteURL = 'https://www.clesdalsace.fr';
+const siteURL = 'https://www.clefsdalsace.fr';
 const siteName = 'Les Clés d’Alsace';
 const homeURL = siteURL + '/';
 

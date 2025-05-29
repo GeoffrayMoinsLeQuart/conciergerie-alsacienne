@@ -23,10 +23,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className="light" style={{ colorScheme: 'light' }}>
       <head>
+        {/* Métas globales */}
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#006BFF" />
+
+        {/* Preconnect tiers */}
+        <link rel="preconnect" href="https://cdn-cookieyes.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+        {/* GTM script */}
         <GTM />
       </head>
       {/* <GAScript /> */}
@@ -46,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ToasterContext />
 
             <Navbar />
+            {/* Inject basic schemas + canonical */}
             <SeoSchemaInjector />
 
             <main id="main-content" role="main" aria-label="Contenu principal">
