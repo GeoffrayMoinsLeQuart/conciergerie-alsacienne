@@ -60,7 +60,7 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
       <Script
         id="schema-org-organization"
         type="application/ld+json"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(organizationSchema),
         }}
@@ -70,7 +70,7 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
       <Script
         id="schema-org-website"
         type="application/ld+json"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
         }}
@@ -81,7 +81,7 @@ const SeoSchemaInjector: FC<SeoSchemaInjectorProps> = ({ schema }) => {
         <Script
           id="schema-org-custom"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schema),
           }}
