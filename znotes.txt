@@ -368,3 +368,7 @@ refaire le sitemap et ce document : src/app/sitemap.xml/route.ts
 
 
 changer l'adresse du webhook dans n8n
+
+
+
+url sanity : https://conciergerie.sanity.studio/structure

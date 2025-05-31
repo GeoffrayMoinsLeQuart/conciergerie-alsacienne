@@ -1,6 +1,5 @@
 import ImageUrlBuilder from '@sanity/image-url';
 import { createClient } from 'next-sanity';
-import clientConfig from './config/client-config';
 import {
   postQuery,
   categoryQuery,
@@ -25,6 +24,9 @@ import { integrations } from '../../integrations.config';
 import { Property } from '@/types/property';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { FAQItem } from '@/types/faq';
+import config from './sanity.config';
+
+
 
 export async function sanityFetch<QueryResponse>({
   query,
@@ -43,7 +45,7 @@ export async function sanityFetch<QueryResponse>({
       );
 
       // console.log("Sanity query params:", JSON.stringify(cleanParams));
-      const client = createClient(clientConfig);
+      const client = createClient(config);
 
       const result = await client.fetch<QueryResponse>(query, cleanParams, {
         cache: 'force-cache',
@@ -259,7 +261,7 @@ export async function getPostByTag(tag: string) {
 }
 
 export function imageBuilder(source: SanityImageSource) {
-  const client = createClient(clientConfig);
+  const client = createClient(config);
   const builder = ImageUrlBuilder(client);
   return builder.image(source);
 }
