@@ -1,7 +1,6 @@
 // studio/sanity.config.ts
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
 import schemas from './schemaTypes'
 
 export default defineConfig({
@@ -15,8 +14,8 @@ export default defineConfig({
     'sk7O9PuzFNLljHxKPyfKzoFW1WqJMj9F02rFR7SUaawqk3FfzvX2nJxFF9TbsahWaGIsvy7RfDW9kQvariXOhnjgvphf0y5bJPRMZnU3YTWlIRo1ogLAl6EejOuuwfaGsnDzfJVJ4BjXSwQmKG0aIytlifhbyBWioDudQ4R1zMkmBSdISy6R',
   // studioHost: 'conciergerie', // ou 'conciergerie-test' selon ce que vous avez défini
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool()],
   schema: {
-    types: schemas, 
+    types: schemas,
   },
 })
