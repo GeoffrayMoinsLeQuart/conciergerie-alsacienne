@@ -8,7 +8,12 @@ export default function FloatingCallButton() {
   const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
 
-  const excluded = ['/mentions-legales', '/cgu', '/politique-de-confidentialite'];
+  const excluded = [
+    '/mentions-legales',
+    '/conditions-generales-vente',
+    '/politique-confidentialite',
+    '/cookies',
+  ];
 
   // Scroll-up / scroll-down behavior
   useEffect(() => {
@@ -35,7 +40,7 @@ export default function FloatingCallButton() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
+  }, [pathname, excluded]);
 
   // Do not render on excluded paths
   if (excluded.includes(pathname)) return null;
