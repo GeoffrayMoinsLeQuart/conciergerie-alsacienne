@@ -1,3 +1,12 @@
+// next.config.mjs
+
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
+// Active le bundle analyzer quand on définit la variable d’environnement ANALYZE à "true"
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production';
 // En prod, NEXT_PUBLIC_ASSET_PREFIX doit être non vide et commencer par '/' ou 'https://'
@@ -32,10 +41,16 @@ const nextConfig = {
     return [
       {
         source: '/images/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=604800, immutable' }],
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, immutable',
+          },
+        ],
       },
     ];
   },
 };
 
-export default nextConfig;
+// On exporte la config enveloppée dans le bundle-analyzer
+export default bundleAnalyzer(nextConfig);

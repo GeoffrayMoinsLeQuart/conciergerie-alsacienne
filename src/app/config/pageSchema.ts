@@ -1,5 +1,5 @@
 import { Blog } from '@/types/blog';
-import { imageBuilder } from '@/sanity/sanity-utils';
+import { imageBuilder } from '../../../lib/sanity/sanity-utils';
 import type { FAQItem } from '@/types/faq';
 import type { Property } from '@/types/property';
 import { generateBreadcrumbList } from '@/utils/BreadcrumbGenerator';

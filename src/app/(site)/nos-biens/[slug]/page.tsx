@@ -1,6 +1,10 @@
 import { t } from '@/app/libs/content';
 import PageTitle from '@/components/Common/PageTitle';
-import { fetchProperties, getPropertyBySlug, imageBuilder } from '@/sanity/sanity-utils';
+import {
+  fetchProperties,
+  getPropertyBySlug,
+  imageBuilder,
+} from '../../../../../lib/sanity/sanity-utils';
 import { notFound } from 'next/navigation';
 import MarkdownRenderer from '@/utils/markdownConfig';
 import Link from 'next/link';

@@ -1,5 +1,5 @@
 import CodeWithCopy from '@/components/Common/CodeWithCopy';
-import config from '@/sanity/sanity.config';
+import config from '../../../../lib/sanity/sanity.config';
 import MarkdownRenderer from '@/utils/markdownConfig';
 import { getImageDimensions } from '@sanity/asset-utils';
 import urlBuilder from '@sanity/image-url';

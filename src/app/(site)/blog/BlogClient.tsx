@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-import { getAllPosts } from '@/sanity/sanity-utils';
+import { getAllPosts } from '../../../../lib/sanity/sanity-utils';
 import { Blog } from '@/types/blog';
 import SingleBlog from '@/components/Blog/SingleBlog';
 import Masonry from 'react-masonry-css';
@@ -76,7 +76,7 @@ export default function BlogClient() {
       noResultsText: t(pageKey, 'Blog.BlogClient.noResultsText') as string,
       resultsAriaLabel: t(pageKey, 'Blog.BlogClient.resultsAriaLabel') as string,
     }),
-    []
+    [],
   );
 
   if (isLoading) return <SkeletonMasonryBlog />;
@@ -90,7 +90,7 @@ export default function BlogClient() {
           selectedCats={selectedCats}
           onToggleCat={(cat) =>
             setSelectedCats((prev) =>
-              prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+              prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
             )
           }
           searchTerm={searchTerm}

@@ -1,5 +1,5 @@
 // src/app/faq/page.tsx
-import { getFAQs } from '@/sanity/sanity-utils';
+import { getFAQs } from '../../../../lib/sanity/sanity-utils';
 import FAQPageClient from './FAQPageClient';
 import { getMetadata } from '@/app/config/pageMetadata';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';

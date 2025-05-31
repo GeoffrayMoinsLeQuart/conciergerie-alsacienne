@@ -1,4 +1,4 @@
-import { fetchProperties, getPosts } from '@/sanity/sanity-utils';
+import { fetchProperties, getPosts } from '../../../lib/sanity/sanity-utils';
 
 export async function GET() {
   const properties = await fetchProperties();

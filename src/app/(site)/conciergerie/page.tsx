@@ -16,7 +16,7 @@ import StickyAnchorMenu from '@/components/Common/StickyAnchorMenu';
 import { getMetadata } from '@/app/config/pageMetadata';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { makeConciergerieSchema } from '@/app/config/pageSchema';
-import { getFAQsByType } from '@/sanity/sanity-utils';
+import { getFAQsByType } from '../../../../lib/sanity/sanity-utils';
 import { FAQItem } from '@/types/faq';
 
 export const metadata = getMetadata('conciergerie');

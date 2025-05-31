@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { getPosts } from '@/sanity/sanity-utils';
+import { getPosts } from '../../../lib/sanity/sanity-utils';
 import { Blog } from '@/types/blog';
 import SingleBlog from './SingleBlog';
 import Masonry from 'react-masonry-css';

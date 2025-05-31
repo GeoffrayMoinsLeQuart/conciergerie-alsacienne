@@ -1,5 +1,5 @@
 import Properties from '@/components/Property';
-import { fetchProperties } from '@/sanity/sanity-utils';
+import { fetchProperties } from '../../../../lib/sanity/sanity-utils';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { getMetadata } from '@/app/config/pageMetadata';
 import { makePropertiesSchema } from '@/app/config/pageSchema';

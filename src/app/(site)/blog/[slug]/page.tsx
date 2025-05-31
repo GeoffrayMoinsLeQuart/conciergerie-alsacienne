@@ -1,7 +1,7 @@
 // src/app/blog/[slug]/page.tsx
 import { structuredAlgoliaHtmlData } from '@/app/libs/crawlIndex';
 import RenderBodyContent from '@/components/Blog/BlogDetails/RenderBodyContent';
-import { getPostBySlug, getPosts, imageBuilder } from '@/sanity/sanity-utils';
+import { getPostBySlug, getPosts, imageBuilder } from '../../../../../lib/sanity/sanity-utils';
 import { Blog } from '@/types/blog';
 import Image from 'next/image';
 import Link from 'next/link';

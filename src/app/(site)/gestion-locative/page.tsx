@@ -11,7 +11,7 @@ import FAQGestionLocative from './FAQGestionLocative';
 import CTAGestionLocative from '@/components/GestionLocative/CTAGestionLocative';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import { getMetadata } from '@/app/config/pageMetadata';
-import { getFAQsByType } from '@/sanity/sanity-utils';
+import { getFAQsByType } from '../../../../lib/sanity/sanity-utils';
 import { makeGestionLocativeSchema } from '@/app/config/pageSchema';
 import type { FAQItem } from '@/types/faq';
 
@@ -31,17 +31,17 @@ export default async function GestionLocativePage() {
         <StickyAnchorMenu />
 
         <Intro variant="gestion-locative" />
-        
+
         <BlocProcessusEtPrestations />
-        
+
         <TabsProfilProprietaire />
-        
+
         <GarantiesLoyers />
-        
+
         <TemoinagesSection />
-        
+
         <FraisInitiauxCard />
-        
+
         <TarificationGestionLocative />
 
         <FAQGestionLocative items={faqs} />

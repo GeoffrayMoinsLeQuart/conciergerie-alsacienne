@@ -1,6 +1,6 @@
 // src/config/pageMetadata.ts
 import { Metadata } from 'next';
-import { getPropertyBySlug, imageBuilder } from '@/sanity/sanity-utils';
+import { getPropertyBySlug, imageBuilder } from '../../../lib/sanity/sanity-utils';
 import type { Blog } from '@/types/blog';
 import { Property } from '@/types/property';
 

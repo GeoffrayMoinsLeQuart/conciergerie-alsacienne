@@ -1,7 +1,7 @@
 // src/components/PropertyCard.tsx
 'use client';
 
-import { imageBuilder } from '@/sanity/sanity-utils';
+import { imageBuilder } from '../../../lib/sanity/sanity-utils';
 import { Property } from '@/types/property';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,11 +26,11 @@ export default function PropertyCard({ property }: { property: Property }) {
   const url = slug?.current ? `/nos-biens/${slug.current}` : '#';
 
   return (
-    <article className="h-full rounded-md shadow-service transition hover:shadow-xl">
+    <article className="h-full rounded-md shadow-service transition hover:shadow-xl min-h-[420px]">
       <Link
         href={url}
         aria-label={`Voir la fiche du bien : ${name}`}
-        className="group block h-full overflow-hidden rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+        className="group block h-full overflow-hidden rounded-md focus:outline-none focus:ring-2 focus:ring-primary  min-h-[420px]"
       >
         {/* Image principale */}
         <div className="relative aspect-[4/3] w-full">

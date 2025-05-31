@@ -1,4 +1,4 @@
-import { imageBuilder } from '@/sanity/sanity-utils';
+import { imageBuilder } from '../../../lib/sanity/sanity-utils';
 import { Blog } from '@/types/blog';
 import Image from 'next/image';
 import Link from 'next/link';
