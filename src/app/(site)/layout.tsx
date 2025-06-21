@@ -28,6 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#006BFF" />
 
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#4A6CF7" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.ico" />
+
         {/* Préchargement optimisé LCP */}
         <link
           rel="preload"

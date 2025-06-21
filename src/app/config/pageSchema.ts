@@ -214,7 +214,7 @@ export function makeBlogPostSchema(post: Blog, siteUrl: string = siteURL) {
           name: siteName,
           logo: {
             '@type': 'ImageObject',
-            url: `${siteUrl}/logo.png`,
+            url: `${siteUrl}/logo.svg`,
           },
         },
         mainEntityOfPage: {

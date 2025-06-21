@@ -42,7 +42,7 @@ export default function Hero() {
             </div>
             {/* Tablet */}
             <div
-              className="relative mx-auto hidden rounded-lg sm:block md:hidden w-full"
+              className="relative mx-auto hidden rounded-lg sm:block md:hidden w-full mt-8"
               style={{ aspectRatio: '2/1', contain: 'layout' }}
             >
               <Image
@@ -61,7 +61,7 @@ export default function Hero() {
             </div>
             {/* Mobile */}
             <div
-              className="relative mx-auto rounded-lg sm:hidden w-full"
+              className="relative mx-auto rounded-lg sm:hidden w-full mt-8"
               style={{ aspectRatio: '4/3', contain: 'layout' }}
             >
               <Image

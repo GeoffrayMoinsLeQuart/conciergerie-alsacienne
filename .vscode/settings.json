@@ -6,6 +6,9 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "node_modules": true,
+    "studio/node_modules": true,
+    "studio/dist": true,
+    "studio/.sanity": true,
     ".next": true,
     "out": true
   },
