@@ -62,7 +62,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="block py-6 lg:py-8" aria-label="Retour à l'accueil">
-            <div className="relative h-20 w-[175px]">
+            <div className="relative h-16 w-[175px]">
               <Image
                 src="/images/logo/logo.svg"
                 alt="Logo les Clés d'Alsace"

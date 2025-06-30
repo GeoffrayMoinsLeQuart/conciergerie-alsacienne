@@ -23,7 +23,7 @@ export default function Hero() {
           <div className="w-full">
             {/* Desktop */}
             <div
-              className="relative hidden rounded-lg md:block w-full"
+              className="relative hidden rounded-lg md:block w-full  mt-12"
               style={{ aspectRatio: '12/5', contain: 'layout' }}
             >
               <Image
