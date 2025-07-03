@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
 
         {/* Préchargement optimisé LCP */}
-        <link
+        {/* <link
           rel="preload"
           as="image"
           href="https://res.cloudinary.com/dx96rdxwk/image/upload/v1748531998/Mon%20projet%20locatif/Header-mobil_tbfewv.webp?w=400"
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           imageSizes="(min-width: 768px) 1280px"
           fetchPriority="high"
           crossOrigin="anonymous"
-        />
+        /> */}
 
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <GTM />

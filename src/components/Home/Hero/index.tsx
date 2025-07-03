@@ -27,7 +27,7 @@ export default function Hero() {
               style={{ aspectRatio: '12/5', contain: 'layout' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751272293/Conciergerie%20alsacienne/Image%20site/ChatGPT_Image_Jun_30_2025_10_27_32_AM_zachcw.png"
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751578985/Conciergerie%20alsacienne/Image%20site/LES_CLEFS_D%27ALSACE_homepage.webp"
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
@@ -46,7 +46,7 @@ export default function Hero() {
               style={{ aspectRatio: '2/1', contain: 'layout' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/q_auto,f_auto,w_768/v1748531997/Mon%20projet%20locatif/Header-tablet_edp2mu.webp"
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751578985/Conciergerie%20alsacienne/Image%20site/LES_CLEFS_D%27ALSACE_homepage.webp"
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
@@ -65,7 +65,7 @@ export default function Hero() {
               style={{ aspectRatio: '4/3', contain: 'layout' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/q_auto,f_auto,w_400/v1748531998/Mon%20projet%20locatif/Header-mobil_tbfewv.webp"
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751578985/Conciergerie%20alsacienne/Image%20site/LES_CLEFS_D%27ALSACE_homepage.webp"
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
