@@ -1,7 +1,7 @@
 // Permet d'indiquer aux chercheurs en sécurité comment vous contacter
 // Placez ce fichier dans public/.well-known/security.txt
 
-Contact: mailto:contact@clefsdalsace.fr
+Contact: mailto:lesclefsdalsace@gmail.com
 Expires: 2025-12-31T23:59:59.000Z
 Preferred-Languages: fr, en
 Canonical: https://www.clefsdalsace.fr/.well-known/security.txt

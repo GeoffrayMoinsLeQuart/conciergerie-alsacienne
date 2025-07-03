@@ -102,10 +102,10 @@ const FooterContact = () => (
       <p className="mb-4 text-3xl font-bold text-white">Contactez-nous !</p>
       <address className="not-italic space-y-1 text-body-color">
         <a
-          href="mailto:contact@clefsdalsace.fr"
+          href="mailto:lesclefsdalsace@gmail.com"
           className="block hover:text-primary transition-colors"
         >
-          contact@clefsdalsace.fr
+          lesclefsdalsace@gmail.com
         </a>
         <a href="tel:+33621471922" className="block hover:text-primary transition-colors">
           06 21 47 19 22

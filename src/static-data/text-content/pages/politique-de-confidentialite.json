@@ -29,8 +29,8 @@
           { "label": "Société", "value": "Les Clefs d’Alsace" },
           {
             "label": "Email",
-            "value": "contact@clefsdalsace.fr",
-            "link": "mailto:contact@clefsdalsace.fr"
+            "value": "lesclefsdalsace@gmail.com",
+            "link": "mailto:lesclefsdalsace@gmail.com"
           },
           { "label": "Téléphone", "value": "06 21 47 19 22" }
         ]
@@ -86,7 +86,11 @@
               "type": "text",
               "value": "Pour exercer vos droits (accès, rectification, effacement, limitation, opposition, portabilité), contactez le DPO : "
             },
-            { "type": "link", "label": "contact@clefsdalsace.fr", "href": "mailto:contact@clefsdalsace.fr" }
+            {
+              "type": "link",
+              "label": "lesclefsdalsace@gmail.com",
+              "href": "mailto:lesclefsdalsace@gmail.com"
+            }
           ]
         ]
       }

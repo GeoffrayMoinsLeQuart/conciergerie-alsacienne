@@ -37,7 +37,11 @@
       "Contact": {
         "title": "5. Contact",
         "items": [
-          { "label": "DPO", "value": "contact@clefsdalsace.fr", "link": "mailto:contact@clefsdalsace.fr" }
+          {
+            "label": "DPO",
+            "value": "lesclefsdalsace@gmail.com",
+            "link": "mailto:lesclefsdalsace@gmail.com"
+          }
         ]
       }
     }

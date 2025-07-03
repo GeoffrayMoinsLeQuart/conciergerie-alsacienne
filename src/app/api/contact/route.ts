@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
     // Options de l'email
     const mailOptions = {
       from: process.env.EMAIL_FROM || 'noreply@clefsdalsace.fr',
-      to: process.env.EMAIL_TO || 'contact@clefsdalsace.fr',
+      to: process.env.EMAIL_TO || 'lesclefsdalsace@gmail.com',
       subject: 'Nouvelle demande de contact - Les Clés d’Alsace',
       html: emailContent,
       replyTo: formData.email,

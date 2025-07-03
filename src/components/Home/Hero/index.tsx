@@ -27,7 +27,7 @@ export default function Hero() {
               style={{ aspectRatio: '12/5', contain: 'layout' }}
             >
               <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/q_auto,f_auto,w_1200/v1748531765/Mon%20projet%20locatif/Header-desktop_rtmbza.webp"
+                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751272293/Conciergerie%20alsacienne/Image%20site/ChatGPT_Image_Jun_30_2025_10_27_32_AM_zachcw.png"
                 alt={t('home', 'Hero.imageAlt')}
                 fill
                 className="object-cover"
