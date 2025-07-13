@@ -35,8 +35,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <link rel="preconnect" href="https://www.googletagmanager.com" />
       </Head>
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-HRJTLCWFYG"></script>
+
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-HRJTLCWFYG');
+          `,
+        }}
+      ></script>
+
       <body className={inter.className}>
-        <GTM />
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WJHTFKNJ"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
         <NextTopLoader
           color="#006BFF"
           crawlSpeed={300}
@@ -60,6 +82,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </AuthProvider>
         </ThemeProviderClient>
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            if(typeof window !== 'undefined') {
+              window.addEventListener('load', function() {
+                const preloader = document.getElementById('preloader');
+                preloader.style.display = 'none';
+              });
+            }
+          `,
+          }}
+        ></script>
       </body>
     </html>
   );
