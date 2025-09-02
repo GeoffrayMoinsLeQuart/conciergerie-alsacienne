@@ -25,9 +25,9 @@
     ],
     "ctaLabel": "Discutons de votre projet",
     "stats": [
-      { "label": "Biens gérés", "value": "120" },
-      { "label": "Voyageurs accueillis", "value": "3500" },
-      { "label": "Années d'expérience", "value": "8" },
+      { "label": "Biens gérés", "value": "15" },
+      { "label": "Voyageurs accueillis", "value": "940" },
+      { "label": "Années d'expérience", "value": "2" },
       { "label": "Taux d'occupation moyen", "value": "85%" }
     ]
   },
