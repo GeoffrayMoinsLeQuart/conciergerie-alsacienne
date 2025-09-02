@@ -1,18 +1,9 @@
-// ----------------------------------------------------------------------
+// ../types.ts
+import type { Easing, BezierDefinition } from 'framer-motion';
 
-type EaseType =
-  | 'linear'
-  | 'easeIn'
-  | 'easeOut'
-  | 'easeInOut'
-  | 'circIn'
-  | 'circOut'
-  | 'circInOut'
-  | 'backIn'
-  | 'backOut'
-  | 'backInOut'
-  | 'anticipate'
-  | number[];
+// Accepté par Framer Motion: un easing nommé, un tuple bezier [x1,y1,x2,y2],
+// ou un tableau d'easings pour keyframes.
+export type EaseType = Easing | BezierDefinition | Easing[];
 
 export type VariantsType = {
   distance?: number;
