@@ -45,7 +45,7 @@ export default function Properties({
 
   // 2. Découpage mémoïsé
   const displayedItems = useMemo(() => {
-    return filteredItems.slice(0, 3);
+    return filteredItems.slice(0, homePage ? 3 : 100000);
   }, [filteredItems]);
 
   return (
