@@ -204,7 +204,7 @@
       "plans": [
         {
           "name": "Formule Standard",
-          "price": "À partir de 16% des revenus",
+          "price": "16% des revenus",
           "features": [
             "Création et optimisation des annonces",
             "Gestion des réservations",
@@ -218,7 +218,7 @@
         },
         {
           "name": "Formule Premium",
-          "price": "À partir de 21% des revenus",
+          "price": "20% des revenus",
           "features": [
             "Tous les services de la formule Standard",
             "Ménage inclus",
@@ -230,7 +230,7 @@
         },
         {
           "name": "Formule Exclusive",
-          "price": "À partir de 23% des revenus",
+          "price": "23% des revenus",
           "features": [
             "Tous les services de la formule Premium",
             "Linge hôtelier premium"
