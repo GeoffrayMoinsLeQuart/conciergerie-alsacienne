@@ -29,12 +29,6 @@ export const navbarData: NavbarItem[] = [
   },
   {
     id: uuid(),
-    title: 'Réserver',
-    href: 'reserver',
-    external: false,
-  },
-  {
-    id: uuid(),
     title: 'FAQ',
     href: 'faq',
     external: false,
