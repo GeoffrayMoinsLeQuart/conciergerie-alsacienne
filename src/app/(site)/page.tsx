@@ -1,66 +1,99 @@
-// src/app/(site)/page.tsx
-
 import dynamic from 'next/dynamic';
-import HomeBlogSection from '@/components/Blog/HomeBlogSection';
-import Hero from '@/components/Home/Hero';
-import Prestation from '@/components/Home/Prestation';
-import Testimonial from '@/components/Home/Testimonial';
-import Properties from '@/components/Property';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
-
+import Properties from '@/components/Property';
 import { integrations } from '../../../integrations.config';
 import { fetchProperties, getPosts } from '../../../lib/sanity/sanity-utils';
-import { makeHomePageSchema } from '../config/pageSchema';
+import {
+  makeHomePageSchema,
+  makeProcessSchema,
+  makeResultsSchema,
+  makeServicesSchema,
+  makeTestimonialsSchema,
+} from '../config/pageSchema';
 import { getMetadata } from '../config/pageMetadata';
 import { t } from '@/app/libs/content';
+// import ResultsShowcase from '@/components/Home/ResultsShowcase';
+import ResultsSection from '@/components/Home/ResultsSection';
+import ProcessSection from '@/components/Home/ProcessSection';
+import ServicesSection from '@/components/Home/ServicesSection';
+import TestimonialsSection from '@/components/Home/TestimonialsSection';
+import FinalCTA from '@/components/Home/FinalCTA';
+import RevenueCalculator from '@/components/Home/RevenueCalculator';
 
-const About = dynamic(() => import('@/components/Home/About'), {
-  ssr: true,
-  loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" />,
-});
+// --- Sections principales (Lovable + Original mix) ---
+const Hero = dynamic(() => import('@/components/Home/Hero'), { ssr: true });
+const About = dynamic(() => import('@/components/Home/About'), { ssr: true });
+const Prestation = dynamic(() => import('@/components/Home/Prestation'), { ssr: true });
+const Testimonial = dynamic(() => import('@/components/Home/Testimonial'), { ssr: true });
+const HomeBlogSection = dynamic(() => import('@/components/Blog/HomeBlogSection'), { ssr: true });
+const ContactForm = dynamic(() => import('./contact/page'), { ssr: true });
 
-const ContactForm = dynamic(() => import('./contact/page'), {
-  ssr: true,
-  loading: () => (
-    <div
-      className="animate-pulse h-96 bg-gray-100 rounded-lg"
-      style={{ minHeight: '600px', contain: 'layout' }}
-    />
-  ),
-});
+// --- Nouvelles sections importées depuis Lovable ---
+// const GuaranteesSection = dynamic(() => import("@/components/Lovable/GuaranteesSection"), { ssr: false });
+// const RevenueCalculator = dynamic(() => import("@/components/Lovable/RevenueCalculator"), { ssr: false });
+// const ContactCTA = dynamic(() => import("@/components/Lovable/ContactCTA"), { ssr: false });
+// const EstimationWidget = dynamic(() => import("@/components/Lovable/EstimationWidget"), { ssr: false });
 
-// --------------------------------------------------------------------------------
-// NOTE IMPORTANTE :
-// Plus d’`export const getStaticProps` dans l’App Router.
-// On transforme le composant en Server Component asynchrone.
-// --------------------------------------------------------------------------------
+// --- SEO / Metadata ---
 export const metadata = getMetadata('home');
 
+// --- PAGE ---
 export default async function HomePage() {
-  // ➜ Ce code s’exécute côté serveur, à la build (et en ISR si vous utilisez revalidate)
+  // Récupération Sanity (Server side)
   const properties = await fetchProperties();
   const { posts } = await getPosts({ limit: 6 });
 
-  // Construction des métadonnées et du JSON-LD SEO
-  const schema = makeHomePageSchema(posts, properties);
+  // Génération du JSON-LD SEO
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      ...makeHomePageSchema(posts, properties)['@graph'],
+      ...makeResultsSchema()['@graph'],
+      makeProcessSchema(),
+      ...makeServicesSchema()['@graph'],
+      ...makeTestimonialsSchema()['@graph'],
+    ],
+  };
+  // FAQ locale pour la section FAQ si besoin (optionnel)
+  const faqItems = [
+    {
+      question: 'Comment fonctionne la conciergerie ?',
+      answer:
+        'Nous gérons tout : annonces, réservations, ménage, accueil et optimisation des revenus.',
+    },
+    {
+      question: 'Puis-je utiliser mon bien quand je veux ?',
+      answer:
+        'Oui, vous gardez la main sur le calendrier et pouvez bloquer des dates à tout moment.',
+    },
+    {
+      question: 'Quel gain moyen espérer ?',
+      answer: 'Entre +30% et +50% vs. location classique selon le bien et la saison.',
+    },
+  ];
 
   return (
     <main id="home" aria-label={t('home', 'AriaLabelHome')}>
       <SeoSchemaInjector schema={schema} />
-
       <Hero />
-
-      <About />
-
-      <Prestation />
-
-      {properties.length > 0 && <Properties properties={properties} homePage />}
-
-      <Testimonial />
-
-      {integrations?.isSanityEnabled && <HomeBlogSection />}
-
-      <ContactForm />
+      <ResultsSection />
+      <ProcessSection />
+      <ServicesSection />
+      <section id="revenus" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">
+              Calculez vos <span className="text-primary">revenus potentiels</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Découvrez combien vous pourriez gagner avec votre bien.
+            </p>
+          </div>
+          <RevenueCalculator />
+        </div>
+      </section>
+      <TestimonialsSection />
+      <FinalCTA />
     </main>
   );
 }

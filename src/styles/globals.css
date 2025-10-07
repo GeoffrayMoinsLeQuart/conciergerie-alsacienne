@@ -40,3 +40,7 @@
 .ais-Hits-item {
   @apply last-of-type:rounded-b-lg;
 }
+
+.bg-gradient-cta {
+  background: linear-gradient(135deg, #0048BA 0%,  #E63946 100%);
+}

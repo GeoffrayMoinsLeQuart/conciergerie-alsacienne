@@ -1,231 +1,120 @@
-// src/components/Footer/index.tsx
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import {
-  footerLinks,
-  footerNewsData,
-  footerQuickLinks,
-  footerSocialLinks,
-} from '@/static-data/footer';
-import { useEffect, useState } from 'react';
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import Link from "next/link";
 
-export const useHydrationCheck = () => {
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  return isHydrated;
-};
-
-// Déclaration des icônes sociales dans le même ordre que footerSocialLinks
-const socialIcons: React.ReactNode[] = [
-  // Facebook
-  <svg
-    key="facebook"
-    width="20"
-    height="20"
-    viewBox="0 0 22 22"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      d="M12.1 10.494V7.42717C12.1 6.23996 13.085 5.27753 14.3 5.27753H16.5V2.05308L13.5135 1.84464C10.9664 1.66688 8.8 3.63794 8.8 6.13299V10.494H5.5V13.7184H8.8V20.1668H12.1V13.7184H15.4L16.5 10.494H12.1Z"
-      fill="currentColor"
-    />
-  </svg>,
-  // Twitter
-  <svg
-    key="twitter"
-    width="20"
-    height="20"
-    viewBox="0 0 22 22"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z"
-      fill="currentColor"
-    />
-  </svg>,
-  // LinkedIn
-  <svg
-    key="linkedin"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z"
-      fill="currentColor"
-    />
-  </svg>,
-];
-
-const FooterLinkItem = ({
-  title,
-  href,
-  external,
-}: {
-  title: string;
-  href: string;
-  external?: boolean;
-}) => (
-  <li>
-    <Link
-      href={href}
-      target={external ? '_blank' : '_self'}
-      rel={external ? 'noopener noreferrer' : undefined}
-      className="inline-block text-base text-body-color hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
-    >
-      {title}
-    </Link>
-  </li>
-);
-
-const FooterContact = () => (
-  <section aria-labelledby="footer-contact" className="mb-10">
-    <h2 id="footer-contact" className="sr-only">
-      Coordonnées
-    </h2>
-    <div>
-      <p className="mb-4 text-3xl font-bold text-white">Contactez-nous !</p>
-      <address className="not-italic space-y-1 text-body-color">
-        <a
-          href="mailto:lesclefsdalsace@gmail.com"
-          className="block hover:text-primary transition-colors"
-        >
-          lesclefsdalsace@gmail.com
-        </a>
-        <a href="tel:+33621471922" className="block hover:text-primary transition-colors">
-          06 21 47 19 22
-        </a>
-      </address>
-    </div>
-  </section>
-);
-
-const FooterGraphic = () => (
-  <div aria-hidden="true">
-    <div className="absolute bottom-0 left-0 -z-10">
-      {/* SVG décoratif */}
-      <svg
-        width="143"
-        height="138"
-        viewBox="0 0 143 138"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="25" cy="118" r="101" stroke="url(#gradient1)" strokeWidth="34" />
-        <defs>
-          <linearGradient
-            id="gradient1"
-            x1="-12.8"
-            y1="-37.3"
-            x2="99.2"
-            y2="173.8"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#4A6CF7" />
-            <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-    <div className="absolute right-3 top-3 -z-10 opacity-50">
-      <svg
-        width="61"
-        height="77"
-        viewBox="0 0 61 77"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g>
-          {[...Array(25)].map((_, i) => {
-            const x = (i % 5) * 14 + 1.67;
-            const y = Math.floor(i / 5) * 14 + 1.67;
-            return <circle key={i} cx={x} cy={y} r="1.67" fill="white" />;
-          })}
-        </g>
-      </svg>
-    </div>
-  </div>
-);
-
-const FooterBottom = () => (
-  <div className="mt-10 border-t border-white/10 pt-12 text-center">
-    <div className="mb-5 flex justify-center space-x-4">
-      {footerSocialLinks.map(({ id, href, title }, idx) => (
-        <a
-          key={id}
-          href={href}
-          aria-label={title}
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-body-color text-dark hover:bg-primary hover:text-white transition-colors"
-        >
-          {socialIcons[idx]}
-        </a>
-      ))}
-    </div>
-    <p className="text-base font-medium text-body-color">
-      &copy; {new Date().getFullYear()} Les Clés d'Alsace. Tous droits réservés.
-    </p>
-  </div>
-);
-
-export default function Footer() {
-  const isHydrated = useHydrationCheck();
-
-  if (!isHydrated) return null; // ❗ même chose ici
+const Footer = () => {
+  const footerLinks = {
+    services: {
+      title: "Nos Services",
+      links: [
+        { name: "Conciergerie Airbnb", href: "/conciergerie" },
+        { name: "Gestion Locative", href: "/gestion-locative" },
+        { name: "Nos Biens", href: "/nos-biens" },
+        { name: "Estimation Gratuite", href: "/estimation" },
+      ]
+    },
+    company: {
+      title: "Entreprise",
+      links: [
+        { name: "À propos", href: "/about" },
+        { name: "Blog", href: "/blog" },
+        { name: "Témoignages", href: "/#testimonials" },
+        { name: "Contact", href: "/contact" },
+      ]
+    },
+    legal: {
+      title: "Légal",
+      links: [
+        { name: "Mentions légales", href: "/mentions-legales" },
+        { name: "CGV", href: "/conditions-generales-vente" },
+        { name: "Politique de confidentialité", href: "/politique-confidentialite" },
+        { name: "Cookies", href: "/cookies" },
+      ]
+    }
+  };
 
   return (
-    <footer className="relative z-10 bg-black pt-24 pb-12 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap -mx-4 mb-16">
-          <div className="w-full px-4 md:w-1/2 lg:w-4/12">
-            <FooterContact />
-          </div>
-          <nav aria-label="Nos Services" className="w-full px-4 md:w-1/2 lg:w-3/12 mb-10">
-            <h3 className="mb-6 text-xl font-semibold text-white">Nos Services</h3>
-            <ul className="space-y-3">
-              {footerLinks.map((link) => (
-                <FooterLinkItem key={link.id} {...link} />
-              ))}
-            </ul>
-          </nav>
-          <nav aria-label="Blog" className="w-full px-4 md:w-1/2 lg:w-2/12 mb-10">
-            <h3 className="mb-6 text-xl font-semibold text-white">Blog</h3>
-            <ul className="space-y-3">
-              {footerNewsData.map((link) => (
-                <FooterLinkItem key={link.id} {...link} />
-              ))}
-            </ul>
-          </nav>
-          <nav aria-label="Liens Rapides" className="w-full px-4 md:w-1/2 lg:w-3/12 mb-10">
-            <h3 className="mb-6 text-xl font-semibold text-white">Liens Rapides</h3>
-            <ul className="space-y-3">
-              {footerQuickLinks.map((link) => (
-                <FooterLinkItem key={link.id} {...link} />
-              ))}
-            </ul>
-          </nav>
-        </div>
+    <footer className="bg-gray-950 text-white">
+      {/* --- Section principale --- */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+          
+          {/* Identité + contact */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary to-accent flex items-center justify-center shadow-md">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M9 22V12H15V22" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <div className="text-xl font-bold">Les Clés d’Alsace</div>
+                <div className="text-sm text-gray-400">Conciergerie Premium</div>
+              </div>
+            </div>
 
-        <FooterBottom />
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Votre partenaire de confiance pour la gestion locative et la conciergerie Airbnb à Mulhouse et ses environs. 
+              <span className="text-accent font-semibold"> +40% de revenus garantis</span>.
+            </p>
+
+            <div className="space-y-3">
+              <a href="tel:+33621471922" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+                <Phone className="w-5 h-5 text-accent" />
+                <span>06 21 47 19 22</span>
+              </a>
+              <a href="mailto:lesclefsdalsace@gmail.com" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+                <Mail className="w-5 h-5 text-accent" />
+                <span>lesclefsdalsace@gmail.com</span>
+              </a>
+              <div className="flex items-start gap-3 text-gray-300">
+                <MapPin className="w-5 h-5 text-accent mt-1" />
+                <span>Mulhouse, Alsace<br />France</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Liens dynamiques */}
+          {Object.entries(footerLinks).map(([key, section]) => (
+            <div key={key}>
+              <h3 className="text-lg font-bold mb-4">{section.title}</h3>
+              <ul className="space-y-3">
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <FooterGraphic />
+      {/* --- Bas de page --- */}
+      <div className="border-t border-gray-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-gray-400">
+            © {new Date().getFullYear()} Les Clés d’Alsace. Tous droits réservés.
+          </p>
+          <div className="flex items-center gap-4">
+            <a href="https://facebook.com/clefsdalsace" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-primary flex items-center justify-center transition-colors" aria-label="Facebook">
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a href="https://instagram.com/clefsdalsace" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-accent flex items-center justify-center transition-colors" aria-label="Instagram">
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a href="https://linkedin.com/company/clefsdalsace" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-primary flex items-center justify-center transition-colors" aria-label="LinkedIn">
+              <Linkedin className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </div>
     </footer>
   );
-}
+};
+
+export default Footer;

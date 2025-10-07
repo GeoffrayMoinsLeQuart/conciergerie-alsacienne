@@ -11,6 +11,7 @@ import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
 import FloatingCallButton from '@/components/FloatingCallButton';
 import { GTM } from '@/components/Pixels/GTMClient';
 import Head from 'next/head';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <main id="main-content" role="main" aria-label="Contenu principal">
               {children}
+              <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
               <FloatingCallButton />
             </main>
 

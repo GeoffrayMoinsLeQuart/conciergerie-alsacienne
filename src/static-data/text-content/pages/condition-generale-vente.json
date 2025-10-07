@@ -16,6 +16,7 @@
       "DroitDeRetractation",
       "ProprieteIntellectuelle",
       "DonneesPersonnelles",
+      "EngagementPerformance",
       "Contact"
     ],
     "sections": {
@@ -76,8 +77,18 @@
           ]
         ]
       },
+      "EngagementPerformance": {
+        "title": "10. Engagement de performance",
+        "paragraphs": [
+          "Les Clefs d’Alsace s’engage à mettre en œuvre l’ensemble de ses moyens et compétences afin d’optimiser la rentabilité des biens confiés en gestion.",
+          "Un objectif de performance (taux d’occupation ou progression des revenus) peut être défini conjointement entre Les Clefs d’Alsace et le client lors de la signature du mandat ou du contrat de gestion.",
+          "Si le résultat convenu n’est pas atteint dans les conditions prévues, un geste commercial ou un ajustement d’honoraires pourra être proposé, sans constituer une obligation de remboursement automatique.",
+          "Cette promesse est applicable uniquement dans le cadre d’une gestion active d’une durée minimale de trois (3) mois et sous réserve que le bien soit maintenu en état de location et conforme aux standards de présentation et d’entretien attendus.",
+          "Les performances peuvent varier selon la localisation, la saisonnalité, la conjoncture du marché ou les circonstances extérieures (travaux, sinistres, interruptions de plateformes de réservation, etc.)."
+        ]
+      },
       "Contact": {
-        "title": "10. Contact",
+        "title": "11. Contact",
         "items": [
           { "label": "Éditeur", "value": "Les Clefs d’Alsace" },
           {

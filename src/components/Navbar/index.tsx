@@ -10,11 +10,9 @@ import DesktopSubmenu from './DesktopSubmenu';
 
 export const useHydrationCheck = () => {
   const [isHydrated, setIsHydrated] = useState(false);
-
   useEffect(() => {
     setIsHydrated(true);
   }, []);
-
   return isHydrated;
 };
 
@@ -49,46 +47,53 @@ export default function Navbar() {
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
-  if (!isHydrated) return null; // ❗ Solution : bloquer rendu client avant hydratation
+  if (!isHydrated) return null;
 
   return (
     <header
-      className={`header left-0 top-0 z-40 w-full items-center transition ${
-        sticky ? 'sticky-navbar' : 'absolute bg-transparent'
-      }`}
+      className={`header fixed top-0 left-0 z-50 w-full transition ${
+        sticky ? 'sticky-navbar' : 'bg-white/95 backdrop-blur-md'
+      } h-[74px] lg:h-[80px] flex items-center`}
       role="banner"
     >
       <div className="mx-auto w-full px-4 xl:container">
-        <div className="flex items-center justify-between">
+        {/* Container aligné verticalement */}
+        <div className="flex items-center justify-between h-full">
           {/* Logo */}
-          <Link href="/" className="block py-6 lg:py-8" aria-label="Retour à l'accueil">
-            <div className="relative h-16 w-[175px]">
+          <Link href="/" className="flex items-center" aria-label="Retour à l'accueil">
+            <div className="relative h-12 w-[110px] lg:h-12 lg:w-[140px]">
               <Image
                 src="/images/logo/logo.svg"
-                alt="Logo les Clés d'Alsace"
+                alt="Logo Les Clés d'Alsace"
                 fill
                 className="object-contain"
-                sizes="(max-width: 768px) 100px, 175px"
+                sizes="(max-width: 768px) 80px, 150px"
                 priority
               />
             </div>
           </Link>
 
-          {/* Burger (mobile) */}
+          {/* Burger menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Ouvrir le menu"
-            className="lg:hidden rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary"
+            className="lg:hidden flex flex-col justify-center items-center h-10 w-10 rounded-md hover:bg-gray-100 transition"
           >
-            <span className="block h-[2px] w-[30px] bg-dark my-[6px] transition-transform origin-center transform-gpu">
-              <span className={`${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
-            </span>
             <span
-              className={`block h-[2px] w-[30px] bg-dark my-[6px] ${menuOpen ? 'opacity-0' : ''}`}
+              className={`block h-[2px] w-[22px] bg-dark transition-transform duration-200 ${
+                menuOpen ? 'rotate-45 translate-y-[6px]' : ''
+              }`}
             />
-            <span className="block h-[2px] w-[30px] bg-dark my-[6px] transition-transform">
-              <span className={`${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
-            </span>
+            <span
+              className={`block h-[2px] w-[22px] bg-dark my-[4px] transition-opacity duration-200 ${
+                menuOpen ? 'opacity-0' : ''
+              }`}
+            />
+            <span
+              className={`block h-[2px] w-[22px] bg-dark transition-transform duration-200 ${
+                menuOpen ? '-rotate-45 -translate-y-[6px]' : ''
+              }`}
+            />
           </button>
 
           {/* Mobile menu */}
@@ -101,11 +106,11 @@ export default function Navbar() {
           {/* Desktop menu */}
           <DesktopSubmenu scrollToSection={scrollToSection} />
 
-          {/* CTA */}
+          {/* CTA Desktop */}
           <div className="hidden items-center gap-4 lg:flex">
             <Link
               href="/contact"
-              className="whitespace-nowrap rounded-full bg-primary px-6 py-3 text-base font-bold text-white hover:bg-opacity-90 hover:shadow-md transition"
+              className="whitespace-nowrap rounded-full bg-primary px-6 py-2 text-sm font-semibold text-white hover:bg-opacity-90 hover:shadow-md transition"
             >
               Demander un devis
             </Link>

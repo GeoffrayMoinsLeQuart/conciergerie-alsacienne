@@ -3,6 +3,7 @@ import { imageBuilder } from '../../../lib/sanity/sanity-utils';
 import type { FAQItem } from '@/types/faq';
 import type { Property } from '@/types/property';
 import { generateBreadcrumbList } from '@/utils/BreadcrumbGenerator';
+import { testimonialData } from '@/static-data/testimonial';
 
 const siteURL = 'https://www.clefsdalsace.fr';
 const siteName = 'Les Clés d’Alsace';
@@ -681,3 +682,183 @@ export const cookiePolicySchema = {
     },
   ],
 };
+
+// --- Nouveau schéma JSON-LD pour la section “Nos Résultats” --- //
+
+export function makeResultsSchema() {
+  const siteURL = 'https://www.clefsdalsace.fr';
+  const siteName = 'Les Clés d’Alsace';
+
+  const caseStudies = [
+    {
+      location: 'Strasbourg – Hypercentre',
+      propertyType: 'T2 – 45m²',
+      before: '850 €/mois',
+      after: '1 420 €/mois',
+      increase: '+67%',
+      duration: '2 mois',
+    },
+    {
+      location: 'Colmar – Petite Venise',
+      propertyType: 'Studio – 28m²',
+      before: '520 €/mois',
+      after: '890 €/mois',
+      increase: '+71%',
+      duration: '1 mois',
+    },
+    {
+      location: 'Mulhouse – Centre',
+      propertyType: 'T3 – 65m²',
+      before: '780 €/mois',
+      after: '1 180 €/mois',
+      increase: '+51%',
+      duration: '3 mois',
+    },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        name: `Nos résultats concrets | ${siteName}`,
+        description:
+          'Des propriétaires alsaciens qui ont vu leurs revenus locatifs augmenter de 40 à 70 % grâce à la gestion haut de gamme des Clés d’Alsace.',
+        url: `${siteURL}/#results`,
+        isPartOf: {
+          '@type': 'WebSite',
+          name: siteName,
+          url: siteURL,
+        },
+      },
+      {
+        '@type': 'AggregateOffer',
+        name: 'Résultats Clés d’Alsace',
+        description:
+          'Études de cas réelles de propriétaires ayant multiplié leurs revenus locatifs grâce à la Conciergerie Alsacienne.',
+        url: `${siteURL}/#results`,
+        seller: {
+          '@type': 'Organization',
+          name: siteName,
+          url: siteURL,
+          logo: `${siteURL}/logo.svg`,
+        },
+        offers: caseStudies.map((c) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Product',
+            name: `${c.propertyType} – ${c.location}`,
+          },
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            priceCurrency: 'EUR',
+            price: parseInt(c.after.replace(/[^0-9]/g, '')),
+          },
+          description: `Avant ${c.before}, après ${c.after}, soit ${c.increase} en ${c.duration}.`,
+        })),
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          reviewCount: '127',
+        },
+      },
+    ],
+  };
+}
+
+export function makeProcessSchema() {
+  const siteURL = 'https://www.clefsdalsace.fr';
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'Comment fonctionne la Conciergerie Alsacienne',
+    description:
+      'Trois étapes simples pour estimer, déléguer et rentabiliser votre bien immobilier en Alsace.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Vous nous contactez',
+        text: 'Un expert vous répond sous 2 h pour évaluer gratuitement votre bien.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Nous estimons votre bien',
+        text: 'Nous analysons le marché local et simulons vos revenus potentiels.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Nous gérons tout, vous encaissez',
+        text: 'De la création d’annonce à la fiscalité, nous gérons tout ; vous percevez les revenus.',
+      },
+    ],
+    publisher: {
+      '@type': 'Organization',
+      name: 'Les Clés d’Alsace',
+      url: siteURL,
+      logo: `${siteURL}/logo.svg`,
+    },
+  };
+}
+
+export function makeServicesSchema() {
+  const siteURL = 'https://www.clefsdalsace.fr';
+  const siteName = 'Les Clés d’Alsace';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        name: 'Conciergerie Premium',
+        serviceType: 'Gestion complète de location courte durée',
+        areaServed: { '@type': 'Place', name: 'Alsace' },
+        provider: { '@type': 'Organization', name: siteName, url: siteURL },
+        url: `${siteURL}/conciergerie`,
+        description:
+          'Gestion complète des locations courte et moyenne durée en Alsace, incluant annonces, ménage, linge et optimisation tarifaire.',
+      },
+      {
+        '@type': 'Service',
+        name: 'Gestion Locative Longue Durée',
+        serviceType: 'Location meublée ou vide longue durée',
+        areaServed: { '@type': 'Place', name: 'Mulhouse, Colmar, Saint-Louis' },
+        provider: { '@type': 'Organization', name: siteName, url: siteURL },
+        url: `${siteURL}/gestion-locative`,
+        description:
+          'Gestion locative haut de gamme pour propriétaires souhaitant déléguer la mise en location longue durée.',
+      },
+    ],
+  };
+}
+
+export function makeTestimonialsSchema() {
+  const siteURL = 'https://www.clefsdalsace.fr';
+  const siteName = 'Les Clés d’Alsace';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'AggregateRating',
+        itemReviewed: {
+          '@type': 'Organization',
+          name: siteName,
+          url: siteURL,
+        },
+        ratingValue: '4.9',
+        reviewCount: '127',
+        bestRating: '5',
+      },
+      ...testimonialData.slice(0, 3).map((t) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: t.name },
+        reviewBody: t.review,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: '5',
+          bestRating: '5',
+        },
+      })),
+    ],
+  };
+}

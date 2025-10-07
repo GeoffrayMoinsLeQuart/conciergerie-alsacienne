@@ -1,89 +1,87 @@
-// src/components/Home/Hero.tsx
-import Image from 'next/image';
-import { t } from '@/app/libs/content';
-import HeroClient from './HeroClient';
+'use client';
+import MultiStepQuestionnaire from '@/components/MultiStepQuestionnaire';
+import { ArrowRight, Phone, Star } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
-// Données de placeholder pour les images (à générer une seule fois)
-const blurDesktop =
-  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDEyMDAgNTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZmIi8+PC9zdmc+';
-const blurTablet =
-  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgODAwIDQwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y4ZjlmZiIvPjwvc3ZnPg==';
-const blurMobile =
-  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y4ZjlmZiIvPjwvc3ZnPg==';
+const Hero = () => {
+  const router = useRouter();
 
-export default function Hero() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useEffect(() => {
+    const header = document.querySelector('header');
+    if (header) setHeaderHeight(header.offsetHeight - 40);
+  }, []);
+
   return (
     <section
-      className="relative mb-24 overflow-hidden bg-cover bg-center bg-no-repeat"
-      aria-labelledby="hero-title"
+      className="relative min-h-screen flex items-center overflow-hidden py-20"
+      style={{
+        background: 'linear-gradient(135deg, #0048BA 0%, #0072FF 100%)',
+        paddingTop: `${headerHeight}px`, // ✅ padding égal à la hauteur réelle du header
+      }}
     >
-      <div className="bg-white/90">
-        <div className="container mx-auto flex flex-col items-center justify-center pt-20 text-center md:min-h-screen">
-          {/* Images */}
-          <div className="w-full">
-            {/* Desktop */}
-            <div
-              className="relative hidden rounded-lg md:block w-full  mt-12"
-              style={{ aspectRatio: '12/5', contain: 'layout' }}
-            >
-              <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751578985/Conciergerie%20alsacienne/Image%20site/LES_CLEFS_D%27ALSACE_homepage.webp"
-                alt={t('home', 'Hero.imageAlt')}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1280px) 1024px, 1280px"
-                priority
-                quality={85}
-                placeholder="blur"
-                blurDataURL={blurDesktop}
-                fetchPriority="high"
-                loading="eager"
-              />
+      {/* Motif en transparence */}
+      <div
+        className="absolute inset-0 opacity-15 mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl">
+          {/* Badges */}
+          <div className="flex flex-wrap gap-4 mb-8 animate-fade-in">
+            <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-elegant flex items-center gap-2">
+              <Phone className="w-5 h-5 text-primary" />
+              <span className="font-semibold text-sm">Réponse sous 2h</span>
             </div>
-            {/* Tablet */}
-            <div
-              className="relative mx-auto hidden rounded-lg sm:block md:hidden w-full mt-8"
-              style={{ aspectRatio: '2/1', contain: 'layout' }}
-            >
-              <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751578985/Conciergerie%20alsacienne/Image%20site/LES_CLEFS_D%27ALSACE_homepage.webp"
-                alt={t('home', 'Hero.imageAlt')}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 640px, 768px"
-                priority
-                quality={85}
-                placeholder="blur"
-                blurDataURL={blurTablet}
-                fetchPriority="high"
-                loading="eager"
-              />
-            </div>
-            {/* Mobile */}
-            <div
-              className="relative mx-auto rounded-lg sm:hidden w-full mt-8"
-              style={{ aspectRatio: '4/3', contain: 'layout' }}
-            >
-              <Image
-                src="https://res.cloudinary.com/dx96rdxwk/image/upload/v1751578985/Conciergerie%20alsacienne/Image%20site/LES_CLEFS_D%27ALSACE_homepage.webp"
-                alt={t('home', 'Hero.imageAlt')}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) 100vw"
-                priority
-                quality={85}
-                placeholder="blur"
-                blurDataURL={blurMobile}
-                fetchPriority="high"
-                loading="eager"
-              />
+            <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-elegant flex items-center gap-2">
+              <Star className="w-5 h-5 text-accent" fill="#E63946" stroke="#E63946" />
+              <span className="font-semibold text-sm">+50 propriétaires clients</span>
             </div>
           </div>
 
-          {/* Texte & CTA */}
-          <HeroClient />
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in">
+            Transformez votre bien <br />
+            en <span className="text-yellow-400 drop-shadow-lg">machine à revenus</span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-white/90 mb-8 font-medium animate-fade-in">
+            <span className="text-yellow-400 font-bold">+40% de revenus</span> dès le 1er mois |
+            Mulhouse & Alsace | <span className="text-yellow-400 font-bold">€2.1M</span> générés
+            pour nos clients
+          </p>
+
+          {/* Questionnaire */}
+          <div className="mb-8 animate-scale-in">
+            <MultiStepQuestionnaire />
+          </div>
+
+          {/* Social proof */}
+          <div className="flex items-center gap-6 text-white/80 animate-fade-in">
+            <div className="flex -space-x-2">
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  className="w-10 h-10 rounded-full bg-white/20 border-2 border-white backdrop-blur-sm"
+                />
+              ))}
+            </div>
+            <p className="text-sm">
+              <span className="font-bold text-white">+50 propriétaires</span> nous font confiance
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;
