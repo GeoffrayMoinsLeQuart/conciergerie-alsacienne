@@ -118,20 +118,29 @@ const ServicesSection = () => {
             </div>
           ))}
         </div>
-        <div className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 text-center">
-          <h3 className="text-2xl font-bold mb-4">
+        <div
+          className="mt-12 p-8 rounded-3xl border border-[#e5e7eb] text-center shadow-sm"
+          style={{
+            background: 'linear-gradient(to right, #fdf2f2, #f9fafc, #eff6ff)',
+          }}
+        >
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
             Notre Promesse : Résultats Mesurables ou Remboursé*
           </h3>
-          <p className="text-muted-foreground max-w-3xl mx-auto">
+
+          <p className="text-gray-700 max-w-3xl mx-auto leading-relaxed">
             Nous nous engageons sur une amélioration mesurable des revenus locatifs dès les premiers
             mois. Si le pourcentage de progression convenu ensemble n’est pas atteint, un geste
             commercial ou un ajustement de nos honoraires est proposé. C’est notre engagement
             qualité.
           </p>
 
-          <p className="text-xs text-muted-foreground mt-4">
+          <p className="text-xs text-gray-500 mt-4">
             *Voir conditions détaillées sur{' '}
-            <a href="/conditions-generales-vente" className="underline hover:text-primary">
+            <a
+              href="/conditions-generales-vente"
+              className="underline text-[#0072FF] hover:text-[#E63946] transition-colors"
+            >
               nos conditions de gestion
             </a>
             .

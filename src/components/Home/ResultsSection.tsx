@@ -3,6 +3,7 @@
 import { ArrowRight, TrendingUp, MapPin, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../Buttons/button';
+import Image from 'next/image';
 
 const ResultsSection = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const ResultsSection = () => {
       after: '1 420 €/mois',
       increase: '+67%',
       duration: '2 mois',
-      image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&fit=crop',
+      image: 'https://res.cloudinary.com/dx96rdxwk/image/upload/v1756809289/Immobilier/Tour%20de%20l%27europe/after/MG_01092025-01_dby0ff.webp',
     },
     {
       location: 'Colmar – Petite Venise',
@@ -25,7 +26,7 @@ const ResultsSection = () => {
       increase: '+71%',
       duration: '1 mois',
       image:
-        'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop',
+        'https://res.cloudinary.com/dx96rdxwk/image/upload/v1756809289/Immobilier/Tour%20de%20l%27europe/after/MG_01092025-01_dby0ff.webp',
     },
     {
       location: 'Mulhouse – Centre',
@@ -35,7 +36,7 @@ const ResultsSection = () => {
       increase: '+51%',
       duration: '3 mois',
       image:
-        'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop',
+        'https://res.cloudinary.com/dx96rdxwk/image/upload/v1756809289/Immobilier/Tour%20de%20l%27europe/after/MG_01092025-01_dby0ff.webp',
     },
   ];
 
@@ -80,10 +81,12 @@ const ResultsSection = () => {
               className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-[#E63946]/50 hover:shadow-xl transition-all duration-500"
             >
               <div className="relative h-48 overflow-hidden">
-                <img
+                <Image
                   src={study.image}
                   alt={study.location}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  fill // Utiliser fill pour que l'image remplisse le conteneur parent
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Exemple de sizes, à ajuster
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">

@@ -13,24 +13,24 @@ export default function FloatingCallButton() {
     '/conditions-generales-vente',
     '/politique-confidentialite',
     '/cookies',
+    '/merci', // ✅ ajouté ici
   ];
 
   // Scroll-up / scroll-down behavior
   useEffect(() => {
-    if (excluded.includes(pathname)) return;
+    if (excluded.includes(pathname)) {
+      setHidden(true);
+      return;
+    }
+    setHidden(false);
 
     let lastY = window.pageYOffset;
     let ticking = false;
-
     const handleScroll = () => {
       const currentY = window.pageYOffset;
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          if (currentY > lastY && currentY > 100) {
-            setHidden(true);
-          } else {
-            setHidden(false);
-          }
+          setHidden(currentY > lastY && currentY > 100);
           lastY = Math.max(currentY, 0);
           ticking = false;
         });
@@ -40,7 +40,7 @@ export default function FloatingCallButton() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname, excluded]);
+  }, [pathname]);
 
   // Do not render on excluded paths
   if (excluded.includes(pathname)) return null;

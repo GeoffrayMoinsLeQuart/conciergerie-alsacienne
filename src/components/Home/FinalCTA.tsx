@@ -13,12 +13,13 @@ const ContactCTA = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Titre principal */}
           <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-8 leading-tight">
-            Prêt à augmenter vos revenus de <span className="text-accent">+40%</span> ?
+            Prêt à transformer votre bien en{' '}
+            <span className="text-accent">une source de revenus ?</span>
           </h2>
 
           {/* Sous-titre */}
           <p className="text-2xl text-white/90 mb-14 max-w-2xl mx-auto">
-            Discutons de votre projet dès aujourd'hui. Réponse garantie sous 24h.
+            Obtenez une estimation personnalisée gratuite et découvrez votre potentiel.
           </p>
 
           {/* Boutons d’action */}
@@ -31,7 +32,7 @@ const ContactCTA = () => {
                 className="gap-2 text-base px-8 w-full sm:w-auto"
               >
                 <Phone className="w-5 h-5" />
-                06 21 47 19 22
+                Appelez-nous pour une estimation rapide
               </Button>
             </a>
 
@@ -43,7 +44,7 @@ const ContactCTA = () => {
               className="gap-2 text-base px-8 bg-white hover:bg-white/90 text-primary border-white w-full sm:w-auto"
             >
               <Mail className="w-5 h-5" />
-              Nous contacter
+              Demandez votre étude personnalisée
             </Button>
           </div>
 

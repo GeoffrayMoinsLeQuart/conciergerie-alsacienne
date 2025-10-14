@@ -1,29 +1,29 @@
 'use client';
 import MultiStepQuestionnaire from '@/components/MultiStepQuestionnaire';
-import { ArrowRight, Phone, Star } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Phone } from 'lucide-react';
+import { useHeaderOffset } from '@/hooks/useHeaderOffset'; // ✅ nouveau hook
 
 const Hero = () => {
-  const router = useRouter();
-
-  const headerRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState(0);
-
-  useEffect(() => {
-    const header = document.querySelector('header');
-    if (header) setHeaderHeight(header.offsetHeight - 40);
-  }, []);
+  const { paddingTop } = useHeaderOffset('2rem'); // ✅ calcule la hauteur dynamique du header
 
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden py-20"
+      className="
+        relative 
+        flex 
+        items-center 
+        overflow-hidden 
+        bg-gradient-to-br 
+        from-[#0048BA] 
+        to-[#0072FF]
+      "
       style={{
-        background: 'linear-gradient(135deg, #0048BA 0%, #0072FF 100%)',
-        paddingTop: `${headerHeight}px`, // ✅ padding égal à la hauteur réelle du header
+        paddingTop, // 👈 applique le hook ici
+        paddingBottom: '5rem',
+        minHeight: '100vh',
       }}
     >
-      {/* Motif en transparence */}
+      {/* Motif discret */}
       <div
         className="absolute inset-0 opacity-15 mix-blend-overlay"
         style={{
@@ -35,18 +35,6 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl">
-          {/* Badges */}
-          <div className="flex flex-wrap gap-4 mb-8 animate-fade-in">
-            <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-elegant flex items-center gap-2">
-              <Phone className="w-5 h-5 text-primary" />
-              <span className="font-semibold text-sm">Réponse sous 2h</span>
-            </div>
-            <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-elegant flex items-center gap-2">
-              <Star className="w-5 h-5 text-accent" fill="#E63946" stroke="#E63946" />
-              <span className="font-semibold text-sm">+50 propriétaires clients</span>
-            </div>
-          </div>
-
           {/* Headline */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in">
             Transformez votre bien <br />
@@ -59,13 +47,12 @@ const Hero = () => {
             pour nos clients
           </p>
 
-          {/* Questionnaire */}
           <div className="mb-8 animate-scale-in">
             <MultiStepQuestionnaire />
           </div>
 
-          {/* Social proof */}
-          <div className="flex items-center gap-6 text-white/80 animate-fade-in">
+          {/* Zone de confiance */}
+          <div className="flex flex-col sm:flex-row items-center gap-6 text-white/80 animate-fade-in">
             <div className="flex -space-x-2">
               {[1, 2, 3, 4].map((i) => (
                 <div
@@ -74,9 +61,15 @@ const Hero = () => {
                 />
               ))}
             </div>
-            <p className="text-sm">
+
+            <p className="text-sm text-center sm:text-left">
               <span className="font-bold text-white">+50 propriétaires</span> nous font confiance
             </p>
+
+            <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-elegant">
+              <Phone className="w-4 h-4 text-primary" />
+              <span className="font-semibold text-sm text-primary">Réponse sous 2 h</span>
+            </div>
           </div>
         </div>
       </div>

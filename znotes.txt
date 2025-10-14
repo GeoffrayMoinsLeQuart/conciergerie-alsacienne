@@ -372,3 +372,7 @@ changer l'adresse du webhook dans n8n
 
 
 url sanity : https://conciergerie.sanity.studio/structure
+
+
+
+Centraliser toutes les couleurs qq part pour toutes les changer d'un coup
