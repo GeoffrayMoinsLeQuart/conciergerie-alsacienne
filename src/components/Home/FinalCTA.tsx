@@ -31,7 +31,7 @@ export default function ContactCTA() {
           {/* Titre principal */}
           <h2
             className="
-              text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+              text-4xl sm:text-5xl md:text-6xl 
               font-extrabold text-white mb-6 leading-tight
               drop-shadow-[0_3px_10px_rgba(0,0,0,0.3)]
             "
