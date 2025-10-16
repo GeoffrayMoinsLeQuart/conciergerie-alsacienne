@@ -1,218 +1,182 @@
-// src/components/Home/ContactForm.tsx
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Formik, FormikHelpers, Form } from 'formik';
-import * as Yup from 'yup';
-import toast from 'react-hot-toast';
-import SectionTitle from '../Common/SectionTitle';
-import FormProgress from './FormProgress';
-import Step1Info from './steps/Step1Info';
-import Step2Service from './steps/Step2Service';
-import Step3Property from './steps/Step3Property';
-import Step4Message from './steps/Step4Message';
-import { Activity, ContactFormValues } from '@/types/form';
-import { t } from '@/app/libs/content';
-import PrevButton from '../Buttons/PrevNext/PrevButton';
-import NextButton from '../Buttons/PrevNext/NextButton';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import MultiStepQuestionnaire from '@/components/MultiStepQuestionnaire';
+import { useFormData } from '@/hooks/useFormData';
+import { Phone, Mail, MapPin, Clock, CheckCircle } from 'lucide-react';
 
-const WEBHOOK_URL = 'https://n8n.conciergerie-alsacienne.fr/webhook/lead-capture-contact';
+export default function ContactPage() {
+  const searchParams = useSearchParams();
+  const skipToStepParam = searchParams.get('skipToStep');
+  const skipToStep = skipToStepParam ? parseInt(skipToStepParam, 10) : undefined;
+  const [showContinuationBanner, setShowContinuationBanner] = useState(false);
 
-const pageKey = 'contact';
+  const { formData } = useFormData();
 
-// Récupération des textes
-const { title: sectionTitle, paragraph: sectionParagraph } = t(pageKey, 'Contact.SectionTitle') as {
-  title: string;
-  paragraph: string;
-};
-
-const secondaryParagraph = t(pageKey, 'Contact.SectionTitle.secondaryParagraph') as string;
-
-const STEP_TITLES = t(pageKey, 'Contact.steps') as string[];
-
-const BUTTONS = t(pageKey, 'Contact.buttons') as Record<string, string>;
-const ARIA = t(pageKey, 'Contact.aria') as { sectionId: string };
-const ARIA_LABELS = t(pageKey, 'Contact.ariaLabels') as Record<string, string>;
-const VALID = t(pageKey, 'Contact.validation') as Record<string, string>;
-const TOAST = t(pageKey, 'Contact.toast') as Record<string, string>;
-
-// Validation schemas
-const validationSchemas = [
-  Yup.object({
-    firstName: Yup.string().required(VALID.requiredFirstName),
-    lastName: Yup.string().required(VALID.requiredLastName),
-    email: Yup.string().email(VALID.invalidEmail).required(VALID.requiredEmail),
-    phone: Yup.string().required(VALID.requiredPhone),
-    honeypot: Yup.string().test('is-empty', VALID.botDetected, (v) => !v),
-  }),
-  Yup.object({
-    serviceType: Yup.mixed<Activity>()
-      .oneOf(Object.values(Activity), VALID.chooseService)
-      .required(VALID.chooseService),
-    formule: Yup.string().when('serviceType', ([serviceType], schema) =>
-      serviceType === Activity.GestionLocative || serviceType === Activity.Conciergerie
-        ? schema.required(VALID.chooseFormula)
-        : schema.notRequired(),
-    ),
-  }),
-  Yup.object({
-    address: Yup.string().required(VALID.requiredAddress),
-  }),
-  Yup.object({
-    consent: Yup.boolean().oneOf([true], VALID.requiredConsent),
-    preferredChannel: Yup.string()
-      .oneOf(['call', 'email', 'whatsapp'], VALID.chooseChannel)
-      .required(VALID.chooseChannel),
-  }),
-];
-
-export default function ContactForm() {
-  const router = useRouter();
-  const params = useSearchParams();
-  const [step, setStep] = useState(0);
-  const [highestStepReached, setHighestStepReached] = useState(0);
-  const totalSteps = STEP_TITLES.length;
-
-  const initialService = (params.get('service') || '') as Activity;
-  const initialFormule = params.get('formule') || '';
-
-  const initialValues: ContactFormValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    serviceType: initialService,
-    formule: initialFormule,
-    address: '',
-    city: '',
-    postalCode: '',
-    propertyType: '',
-    surface: '',
-    message: '',
-    consent: false,
-    honeypot: '',
-    submissionTime: '',
-    preferredChannel: 'call',
-  };
-
-  const handleSubmit = async (
-    values: ContactFormValues,
-    { setSubmitting }: FormikHelpers<ContactFormValues>,
-  ) => {
-    try {
-      values.submissionTime = new Date().toISOString();
-      if (values.honeypot) throw new Error('bot');
-
-      const response = await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
-      });
-      if (!response.ok) throw new Error(response.statusText);
-
-      toast.success(TOAST.success);
-      router.push('/merci#confirmation');
-    } catch {
-      console.error('Form submission error');
-      toast.error(TOAST.error);
-    } finally {
-      setSubmitting(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (skipToStep && Object.keys(formData).length > 0) {
+      setShowContinuationBanner(true);
     }
-  };
-
-  const nextStep = async (
-    validateForm: () => Promise<any>,
-    setTouched: (fields: Record<string, boolean>) => void,
-  ) => {
-    const fields = Object.keys(validationSchemas[step].fields);
-    setTouched(fields.reduce((a, f) => ({ ...a, [f]: true }), {}));
-    const errs = await validateForm();
-    if (Object.keys(errs).length === 0) {
-      const next = Math.min(step + 1, totalSteps - 1);
-      setStep(next);
-      setHighestStepReached((h) => Math.max(h, next));
-      document.getElementById(ARIA.sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const prevStep = () => {
-    setStep((s) => Math.max(s - 1, 0));
-    document.getElementById(ARIA.sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [skipToStep, formData]);
 
   return (
-    <section id={ARIA.sectionId} className="bg-white py-[120px]">
-      <div className="container mx-auto max-w-4xl px-4">
-        <h1 className="sr-only">{sectionTitle}</h1>
-        <SectionTitle title={sectionTitle} paragraph={sectionParagraph} center />
-        <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600 text-center">
-          {secondaryParagraph}
-        </p>
-        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mt-8">
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchemas[step]}
-            onSubmit={handleSubmit}
-            validateOnMount={false}
-            validateOnChange
-            validateOnBlur
-          >
-            {({ isSubmitting, validateForm, setTouched, errors, values }) => (
-              <Form aria-live="polite" noValidate>
-                <FormProgress
-                  currentStep={step}
-                  steps={STEP_TITLES}
-                  onStepClick={(i) => {
-                    if (i <= highestStepReached) {
-                      setStep(i);
-                      document
-                        .getElementById(ARIA.sectionId)
-                        ?.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                />
-                <div className="min-h-[400px]">
-                  {step === 0 && <Step1Info />}
-                  {step === 1 && <Step2Service />}
-                  {step === 2 && <Step3Property />}
-                  {step === 3 && <Step4Message />}
-                </div>
-
-                <div className="mt-8 flex flex-col-reverse gap-4 sm:flex-row sm:justify-between">
-                  {step > 0 ? (
-                    <PrevButton
-                      onClick={prevStep}
-                      aria-label={ARIA_LABELS.prev}
-                      label={BUTTONS.prev}
-                    />
-                  ) : (
-                    <div />
-                  )}
-
-                  {step < totalSteps - 1 ? (
-                    <NextButton
-                      onClick={() => nextStep(validateForm, setTouched)}
-                      aria-label={`${ARIA_LABELS.nextPrefix} ${step + 2}: ${STEP_TITLES[step + 1]}`}
-                      label={BUTTONS.next}
-                    />
-                  ) : (
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-70"
-                      aria-busy={isSubmitting}
-                      id="cta-button-submit-contact-form"
-                    >
-                      {isSubmitting ? BUTTONS.submitting : BUTTONS.submit}
-                    </button>
-                  )}
-                </div>
-              </Form>
-            )}
-          </Formik>
+    <>
+      {/* HERO */}
+      <section
+        className="relative pt-28 pb-12 bg-gradient-to-br 
+        from-[#0048BA] 
+        to-[#0072FF] overflow-hidden"
+      >
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+          }}
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Parlons de votre <span className="text-accent">projet</span>
+          </h1>
+          <p className="text-xl text-white/90">
+            Réponse garantie sous 24h. Estimation gratuite et sans engagement.
+          </p>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* CONTACT + FORMULAIRE */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          {showContinuationBanner && (
+            <div className="mb-6 bg-accent/10 border border-accent/30 text-accent px-4 py-3 rounded-lg text-sm font-medium">
+              ✅ Vos premières réponses ont bien été enregistrées. Il ne reste plus que quelques
+              informations pour finaliser votre estimation.
+            </div>
+          )}
+
+          {/* --- Grille principale --- */}
+          <div className="flex flex-col-reverse lg:grid lg:grid-cols-3 lg:gap-12 items-stretch">
+            {/* COLONNE GAUCHE - CONTACT INFOS */}
+            <div className="mt-12 lg:mt-0 flex flex-col justify-between h-full">
+              <div className="flex flex-col justify-between h-full bg-transparent">
+                <div>
+                  <h2 className="text-2xl font-bold mb-6 text-center lg:text-left">
+                    Contactez-nous
+                  </h2>
+                  <p className="text-muted-foreground mb-8 text-center lg:text-left">
+                    Notre équipe est à votre disposition pour répondre à toutes vos questions.
+                  </p>
+
+                  <div className="space-y-6">
+                    <a
+                      href="tel:+33621471922"
+                      className="flex items-start gap-4 p-4 rounded-xl bg-card shadow-service hover:shadow-elegant transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Phone className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">Téléphone</div>
+                        <div className="text-sm text-muted-foreground">06 21 47 19 22</div>
+                        <div className="text-xs text-accent mt-1">Cliquez pour appeler</div>
+                      </div>
+                    </a>
+
+                    <a
+                      href="mailto:contact@clesdalsace.fr"
+                      className="flex items-start gap-4 p-4 rounded-xl bg-card shadow-service hover:shadow-elegant transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Mail className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">Email</div>
+                        <div className="text-sm text-muted-foreground">contact@clesdalsace.fr</div>
+                        <div className="text-xs text-accent mt-1">Réponse sous 24h</div>
+                      </div>
+                    </a>
+
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-card shadow-service">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <MapPin className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">Localisation</div>
+                        <div className="text-sm text-muted-foreground">
+                          Mulhouse, Alsace
+                          <br />
+                          France
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-card shadow-service">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <Clock className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">Horaires</div>
+                        <div className="text-sm text-muted-foreground">
+                          Lundi - Samedi
+                          <br />
+                          9h00 - 19h00
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* COLONNE DROITE - FORMULAIRE */}
+            <div className="lg:col-span-2 flex flex-col justify-between h-full">
+              <h2 className="text-3xl font-bold mb-3 text-center lg:text-left">
+                {showContinuationBanner
+                  ? 'Finalisez votre estimation gratuite'
+                  : 'Obtenez votre estimation gratuite'}
+              </h2>
+              <p className="text-muted-foreground text-lg mb-8 text-center lg:text-left">
+                {showContinuationBanner
+                  ? 'Encore quelques détails et notre équipe vous enverra votre estimation personnalisée sous 24h.'
+                  : 'Répondez à quelques questions et recevez une estimation personnalisée sous 24h.'}
+              </p>
+
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 md:p-6 h-full flex flex-col justify-center">
+                <MultiStepQuestionnaire variant="light" initialStep={skipToStep ?? 1} />
+              </div>
+            </div>
+          </div>
+
+          {/* --- PLEINE LARGEUR - POURQUOI NOUS CHOISIR --- */}
+          <div className="mt-16">
+            <div className="relative bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl p-8 shadow-xl border border-gray-200 text-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#0072FF]/10 via-transparent to-[#E63946]/10 pointer-events-none rounded-3xl" />
+              <div className="relative z-10">
+                <h3 className="font-bold mb-6 text-xl flex items-center justify-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-accent" />
+                  Pourquoi nous choisir ?
+                </h3>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm font-medium text-gray-800 max-w-4xl mx-auto">
+                  <li className="bg-white shadow-sm rounded-xl py-4 px-3 border border-gray-100">
+                    Réponse garantie sous 24h
+                  </li>
+                  <li className="bg-white shadow-sm rounded-xl py-4 px-3 border border-gray-100">
+                    Estimation gratuite et sans engagement
+                  </li>
+                  <li className="bg-white shadow-sm rounded-xl py-4 px-3 border border-gray-100">
+                    Expertise locale reconnue
+                  </li>
+                  <li className="bg-white shadow-sm rounded-xl py-4 px-3 border border-gray-100">
+                    +40% de revenus en moyenne
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

@@ -10,6 +10,8 @@ export const metadata = getMetadata('faq');
 
 export default async function FAQPage() {
   const faqs: FAQItem[] = await getFAQs();
+
+  console.log(faqs)
   const schema = makeFAQPageSchema(faqs);
 
   return (

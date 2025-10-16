@@ -40,7 +40,7 @@ export default function DesktopMenu({ scrollToSection }: DesktopMenuProps) {
               <Link
                 href={path}
                 onClick={() => {}}
-                className={`flex items-center py-2 text-base text-black transition hover:text-primary lg:py-6 ${
+                className={`flex items-center py-2 text-sm text-black transition hover:text-primary lg:py-6 ${
                   pathname === path ? 'text-primary font-semibold' : ''
                 }`}
                 aria-haspopup={submenu.length > 0}
