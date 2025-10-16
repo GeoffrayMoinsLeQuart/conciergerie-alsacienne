@@ -158,7 +158,7 @@ export default function EstimationModal({ open, onClose }: EstimationModalProps)
                 const completeData = { ...data, ...values };
                 setFormState?.({ source: 'simulateur', data: completeData });
 
-                toast.success('✅ Estimation envoyée !');
+                toast.success('Estimation envoyée !');
 
                 setTimeout(() => {
                   router.push('/merci');
