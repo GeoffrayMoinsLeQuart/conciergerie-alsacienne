@@ -379,6 +379,38 @@ export const pageMetadata: Record<string, Metadata> = {
     robots: { index: true, follow: true },
     alternates: { canonical: `${siteURL}/cookies` },
   },
+
+  // pageMetadata.ts
+  revenus: {
+    title: 'Calculateur de rentabilité locative | Les Clés d’Alsace',
+    description:
+      'Simulez gratuitement vos revenus locatifs en Alsace : courte ou longue durée, conciergerie ou gestion locative. Résultat immédiat et sans engagement.',
+    alternates: { canonical: `${siteURL}/revenus` },
+    openGraph: {
+      title: 'Simulateur de rentabilité locative | Les Clés d’Alsace',
+      description:
+        'Découvrez combien votre bien peut rapporter avec la gestion Les Clés d’Alsace. Simulateur gratuit et précis basé sur nos données réelles.',
+      url: `${siteURL}/revenus`,
+      siteName,
+      type: 'website',
+      images: [
+        {
+          url: `${siteURL}/opengraph/revenus.jpg`,
+          width: 1200,
+          height: 630,
+          alt: 'Simulateur de rentabilité Les Clés d’Alsace',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Calculez vos revenus locatifs | Les Clés d’Alsace',
+      description:
+        'Estimez vos revenus en location courte ou longue durée. Projection réaliste, gratuite et sans inscription.',
+      images: [`${siteURL}/opengraph/revenus.jpg`],
+    },
+    robots: { index: true, follow: true },
+  },
 };
 
 /**

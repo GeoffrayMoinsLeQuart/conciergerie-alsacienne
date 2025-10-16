@@ -1,106 +1,75 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { testimonialData } from "@/static-data/testimonial";
+import Image from 'next/image';
+import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import { useCallback, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { testimonialData } from '@/static-data/testimonial';
 
 export default function TestimonialsSection() {
   const averageRating = 4.9;
   const totalReviews = 127;
-
   const items = testimonialData;
-  const itemsPerSet = items.length;
 
-  // 3 copies pour la boucle : [A][A][A]
-  const tripled = useMemo(() => [...items, ...items, ...items], [items]);
+  // 🎠 Carousel setup
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: 'start', // ← au lieu de 'center'
+      skipSnaps: false,
+      dragFree: true,
+      containScroll: 'trimSnaps',
+    },
+    [Autoplay({ delay: 5000, stopOnInteraction: false })],
+  );
 
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const firstCardRef = useRef<HTMLDivElement>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const [copyWidth, setCopyWidth] = useState(0); // largeur d'un set A
-  const [step, setStep] = useState(0); // largeur d'une carte + gap
-  const [activeIndex, setActiveIndex] = useState(0); // index modulo items.length
-
-  // Mesures: largeur d'un set + pas (carte + gap)
-  const measure = () => {
-    const scroller = scrollerRef.current;
-    const track = trackRef.current;
-    const card = firstCardRef.current;
-    if (!scroller || !track || !card) return;
-
-    // largeur d'un set = scrollWidth / 3 (car 3 copies)
-    const setW = track.scrollWidth / 3;
-    setCopyWidth(setW);
-
-    // pas = carte + gap (gap vient de column-gap du track)
-    const styles = getComputedStyle(track);
-    const gap =
-      parseFloat((styles.columnGap || styles.gap || "0").toString()) || 0;
-    const cardW = card.getBoundingClientRect().width;
-    setStep(cardW + gap);
-
-    // placer le scroll au début du set central (invisible pour l’utilisateur)
-    const prevBehavior = scroller.style.scrollBehavior;
-    scroller.style.scrollBehavior = "auto";
-    scroller.scrollLeft = setW; // début du 2e set
-    scroller.style.scrollBehavior = prevBehavior || "smooth";
-  };
+  // navigation
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((i: number) => emblaApi && emblaApi.scrollTo(i), [emblaApi]);
 
   useEffect(() => {
-    measure();
-    const ro = new ResizeObserver(() => measure());
-    if (trackRef.current) ro.observe(trackRef.current);
-    if (scrollerRef.current) ro.observe(scrollerRef.current);
-    return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi]);
 
-  // Bouclage transparent quand on approche des extrémités
-  const onScroll = () => {
-    const scroller = scrollerRef.current;
-    if (!scroller || !copyWidth || !step) return;
-
-    // si on part trop à gauche du set central → on rajoute un set
-    if (scroller.scrollLeft < copyWidth * 0.5) {
-      const prev = scroller.style.scrollBehavior;
-      scroller.style.scrollBehavior = "auto";
-      scroller.scrollLeft += copyWidth;
-      scroller.style.scrollBehavior = prev || "smooth";
-    }
-    // si on part trop à droite du set central → on retire un set
-    else if (scroller.scrollLeft > copyWidth * 1.5) {
-      const prev = scroller.style.scrollBehavior;
-      scroller.style.scrollBehavior = "auto";
-      scroller.scrollLeft -= copyWidth;
-      scroller.style.scrollBehavior = prev || "smooth";
-    }
-
-    // calcul d'un index "virtuel" dans le set central pour les pastilles
-    const positionInMiddle = scroller.scrollLeft - copyWidth; // 0 = début du set central
-    if (positionInMiddle >= 0 && step > 0) {
-      const i = Math.round(positionInMiddle / step) % itemsPerSet;
-      setActiveIndex(((i % itemsPerSet) + itemsPerSet) % itemsPerSet);
-    }
-  };
-
-  // navigation par flèches (avance/recul d’une carte)
-  const scrollByOne = (dir: 1 | -1) => {
-    const scroller = scrollerRef.current;
-    if (!scroller || !step) return;
-    scroller.scrollBy({ left: dir * step, behavior: "smooth" });
-  };
+  // 🌈 Parallaxe du fond
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
 
   return (
     <section
       id="testimonials"
       aria-labelledby="testimonials-heading"
-      className="relative py-24 bg-gradient-to-b from-[#F8FAFF] to-white"
+      className="relative py-24 overflow-hidden bg-gradient-to-b from-[#FFF8F6] to-[#F8FAFF]"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
+      {/* 🌈 Fond et halo animé */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-b from-[#FFF8F6] via-[#F8FAFF] to-[#E9F2FF]"
+        style={{ y }}
+      />
+      <motion.div
+        animate={{ opacity: [0.5, 0.7, 0.5] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute -top-64 left-1/2 w-[900px] h-[900px] rounded-full 
+                   bg-gradient-to-tr from-[#E63946]/20 via-[#0072FF]/15 to-transparent 
+                   blur-3xl opacity-60"
+        style={{ x: '-50%', y }}
+      />
+
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* HEADER */}
+        <div className="text-center mb-16 relative z-10">
           <span className="text-[#E63946] font-semibold uppercase tracking-wide text-sm">
             Témoignages
           </span>
@@ -108,74 +77,46 @@ export default function TestimonialsSection() {
             id="testimonials-heading"
             className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-gray-900"
           >
-            Ce que disent nos{" "}
-            <span className="text-[#0072FF]">propriétaires</span>
+            Ce que disent nos <span className="text-[#0072FF]">propriétaires</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-            Des propriétaires alsaciens satisfaits, des revenus optimisés et une
-            tranquillité retrouvée.
+            Des propriétaires alsaciens satisfaits, des revenus optimisés et une tranquillité
+            retrouvée.
           </p>
 
-          {/* Note globale */}
-          <div className="flex items-center justify-center gap-2">
+          {/* ⭐ Note globale animée */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            viewport={{ once: true }}
+            className="flex items-center justify-center gap-2"
+          >
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="w-5 h-5 text-[#E63946] fill-[#E63946]" />
             ))}
             <span className="ml-2 text-gray-800 font-semibold">
               {averageRating} ★ sur {totalReviews} séjours gérés
             </span>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Slider */}
-        <div className="relative">
-          {/* Gradients latéraux pour rendre le slider évident */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#F8FAFF] to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#F8FAFF] to-transparent z-10" />
-
-          {/* Flèches visibles */}
-          <button
-            type="button"
-            aria-label="Témoignage précédent"
-            onClick={() => scrollByOne(-1)}
-            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-white/80 shadow hover:bg-white"
-          >
-            <ChevronLeft className="h-5 w-5 text-gray-700" />
-          </button>
-          <button
-            type="button"
-            aria-label="Témoignage suivant"
-            onClick={() => scrollByOne(1)}
-            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-white/80 shadow hover:bg-white"
-          >
-            <ChevronRight className="h-5 w-5 text-gray-700" />
-          </button>
-
-          {/* Piste scrollable */}
-          <div
-            ref={scrollerRef}
-            onScroll={onScroll}
-            className="overflow-x-auto scroll-smooth snap-x snap-mandatory"
-          >
-            <div
-              ref={trackRef}
-              className="flex gap-8 px-1"
-              // role list pour accessibilité
-              role="list"
-            >
-              {tripled.map((t, idx) => (
-                <div
-                  key={`${t.id}-${idx}`}
-                  ref={idx === itemsPerSet ? firstCardRef : undefined} // première carte du set central
-                  role="listitem"
-                  className="snap-start min-w-[320px] md:min-w-[380px] bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 transition-all duration-300"
-                >
-                  <Quote className="mb-4 h-10 w-10 text-[#0072FF]/15" />
-                  <p className="text-gray-700 leading-relaxed mb-6 italic">
-                    “{t.review}”
-                  </p>
-
-                  <div className="flex items-center gap-4">
+        {/* 🎠 Carousel */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {items.map((t, i) => (
+              <motion.div
+                key={t.id || i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="flex-[0_0_90%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-4"
+              >
+                <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300 h-full flex flex-col justify-between relative z-10">
+                  <Quote className="h-10 w-10 text-[#0072FF]/15 mb-4" />
+                  <p className="text-gray-700 leading-relaxed mb-6 italic">“{t.review}”</p>
+                  <div className="flex items-center gap-4 mt-auto">
                     <div className="h-[60px] w-[60px] overflow-hidden rounded-full">
                       <Image
                         src={t.image}
@@ -192,28 +133,45 @@ export default function TestimonialsSection() {
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* indicateurs (index modulo la vraie liste) */}
-          <div className="mt-8 flex justify-center gap-2">
-            {items.map((_, i) => (
-              <span
-                key={i}
-                aria-hidden="true"
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  i === activeIndex ? "bg-[#E63946]" : "bg-gray-300"
-                }`}
-              />
+              </motion.div>
             ))}
           </div>
-
-          {/* aide visuelle mobile */}
-          <p className="mt-3 text-center text-xs text-gray-400 md:hidden">
-            Glissez ↔︎ pour voir plus d’avis
-          </p>
         </div>
+
+        {/* 🔹 Flèches navigation desktop */}
+        <button
+          onClick={scrollPrev}
+          aria-label="Témoignage précédent"
+          className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white/80 transition-all"
+        >
+          <ChevronLeft className="h-5 w-5 text-gray-700" />
+        </button>
+        <button
+          onClick={scrollNext}
+          aria-label="Témoignage suivant"
+          className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white/80 transition-all"
+        >
+          <ChevronRight className="h-5 w-5 text-gray-700" />
+        </button>
+
+        {/* 🔹 Indicateurs */}
+        <div className="mt-8 flex justify-center gap-2 relative z-10">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollTo(i)}
+              className={`h-2.5 w-2.5 rounded-full transition-all ${
+                selectedIndex === i ? 'bg-[#E63946] scale-110' : 'bg-gray-300 hover:bg-gray-400'
+              }`}
+              aria-label={`Aller au témoignage ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* 🔹 Aide mobile */}
+        <p className="mt-3 text-center text-xs text-gray-400 md:hidden relative z-10">
+          Glissez ↔︎ pour voir plus d’avis
+        </p>
       </div>
     </section>
   );

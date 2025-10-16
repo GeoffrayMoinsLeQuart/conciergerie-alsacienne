@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -10,28 +10,24 @@ import DesktopSubmenu from './DesktopSubmenu';
 
 export const useHydrationCheck = () => {
   const [isHydrated, setIsHydrated] = useState(false);
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
+  useEffect(() => setIsHydrated(true), []);
   return isHydrated;
 };
 
 export default function Navbar() {
   const isHydrated = useHydrationCheck();
-
   const pathname = usePathname();
-  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
 
-  // Sticky header
+  // Sticky
   useEffect(() => {
     const handleScroll = () => setSticky(window.scrollY >= 80);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Home scrollspy
+  // ScrollSpy home
   useEffect(() => {
     if (pathname === '/') {
       window.addEventListener('scroll', onScroll);
@@ -39,7 +35,7 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-  // scroll with 56px offset
+  // Smooth scroll helper
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -51,32 +47,40 @@ export default function Navbar() {
 
   return (
     <header
+      id="site-header"
+      aria-labelledby="main-navigation-label"
+      role="banner"
       className={`header fixed top-0 left-0 z-50 w-full transition ${
         sticky ? 'sticky-navbar' : 'bg-white/95 backdrop-blur-md'
       } h-[74px] lg:h-[80px] flex items-center`}
-      role="banner"
     >
       <div className="mx-auto w-full px-4 xl:container">
-        {/* Container aligné verticalement */}
+        {/* Rangée principale */}
         <div className="flex items-center justify-between h-full">
-          {/* Logo */}
-          <Link href="/" className="flex items-center" aria-label="Retour à l'accueil">
+          {/* Logo (gauche) */}
+          <Link
+            href="/"
+            aria-label="Retour à la page d’accueil Les Clés d’Alsace"
+            className="flex items-center"
+          >
             <div className="relative h-12 w-[110px] lg:h-12 lg:w-[140px]">
               <Image
                 src="/images/logo/logo.svg"
-                alt="Logo Les Clés d'Alsace"
+                alt="Logo Les Clés d’Alsace"
                 fill
+                priority
                 className="object-contain"
                 sizes="(max-width: 768px) 80px, 150px"
-                priority
               />
             </div>
           </Link>
-
-          {/* Burger menu */}
+          {/* Zone droite : pousse tout à droite */}
+          {/* Bouton burger (mobile ONLY) */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Ouvrir le menu"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             className="lg:hidden flex flex-col justify-center items-center h-10 w-10 rounded-md hover:bg-gray-100 transition"
           >
             <span
@@ -95,22 +99,19 @@ export default function Navbar() {
               }`}
             />
           </button>
-
-          {/* Mobile menu */}
+          {/* Menu desktop */}
           <MobileSubmenu
             menuOpen={menuOpen}
             setMenuOpen={setMenuOpen}
             scrollToSection={scrollToSection}
           />
-
-          {/* Desktop menu */}
           <DesktopSubmenu scrollToSection={scrollToSection} />
-
           {/* CTA Desktop */}
-          <div className="hidden items-center gap-4 lg:flex">
+          <div className="hidden lg:flex">
             <Link
               href="/contact"
               className="whitespace-nowrap rounded-full bg-primary px-6 py-2 text-sm font-semibold text-white hover:bg-opacity-90 hover:shadow-md transition"
+              aria-label="Demander un devis ou une estimation gratuite"
             >
               Demander un devis
             </Link>

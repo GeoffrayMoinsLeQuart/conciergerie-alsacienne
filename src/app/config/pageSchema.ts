@@ -862,3 +862,99 @@ export function makeTestimonialsSchema() {
     ],
   };
 }
+
+// pageSchema.ts
+export function makeRevenueCalculatorSchema() {
+  const siteURL = 'https://www.clefsdalsace.fr';
+  const siteName = 'Les Clés d’Alsace';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      // Fil d'Ariane
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteURL },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Calculateur de revenus',
+            item: `${siteURL}/revenus`,
+          },
+        ],
+      },
+      // Déclaration de la page
+      {
+        '@type': 'WebPage',
+        name: `Calculateur de rentabilité locative | ${siteName}`,
+        url: `${siteURL}/revenus`,
+        description:
+          'Estimez vos revenus potentiels en location courte ou longue durée grâce à notre simulateur immobilier précis et gratuit.',
+        potentialAction: {
+          '@type': 'EstimateAction',
+          name: 'Simuler mes revenus locatifs',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${siteURL}/revenus`,
+          },
+        },
+        mainEntity: {
+          '@type': 'FinancialProduct',
+          name: 'Simulateur de rentabilité locative',
+          description:
+            'Calculateur en ligne des revenus locatifs potentiels pour propriétaires en Alsace.',
+          provider: {
+            '@type': 'Organization',
+            name: siteName,
+            url: siteURL,
+            logo: `${siteURL}/logo.svg`,
+          },
+          areaServed: {
+            '@type': 'Place',
+            name: 'Alsace',
+          },
+        },
+      },
+    ],
+  };
+}
+
+// --- LocalBusiness Schema pour le footer ---
+export const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Les Clés d’Alsace',
+  image: 'https://www.clefsdalsace.fr/logo.svg',
+  url: 'https://www.clefsdalsace.fr',
+  telephone: '+33621471922',
+  email: 'lesclefsdalsace@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '5B Rue de Margnolles',
+    addressLocality: 'Mulhouse',
+    addressRegion: 'Grand Est',
+    postalCode: '68100',
+    addressCountry: 'FR',
+  },
+  areaServed: {
+    '@type': 'Place',
+    name: 'Alsace, Colmar, Mulhouse, Saint-Louis',
+  },
+  description:
+    'Conciergerie et gestion locative haut de gamme en Alsace. Optimisation des revenus Airbnb et gestion complète pour propriétaires.',
+  sameAs: [
+    'https://facebook.com/clefsdalsace',
+    'https://instagram.com/clefsdalsace',
+    'https://linkedin.com/company/clefsdalsace',
+  ],
+  priceRange: '€€',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '08:00',
+      closes: '20:00',
+    },
+  ],
+};

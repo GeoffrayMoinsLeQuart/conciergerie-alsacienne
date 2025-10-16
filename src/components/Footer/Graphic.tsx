@@ -1,8 +1,11 @@
 export default function Graphic() {
   return (
     <>
-      <div className="-z-1 absolute bottom-0 left-0" aria-label="shape">
-        <span className="hidden">shape</span>
+      {/* --- Élément décoratif inférieur gauche --- */}
+      <div className="-z-1 absolute bottom-0 left-0" aria-labelledby="graphic-bottom">
+        <span id="graphic-bottom" className="sr-only">
+          Élément graphique décoratif inférieur gauche
+        </span>
         <svg
           width="143"
           height="138"
@@ -10,10 +13,10 @@ export default function Graphic() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle cx="25" cy="118" r="101" stroke="url(#paint0_linear_52:83)" strokeWidth="34" />
+          <circle cx="25" cy="118" r="101" stroke="url(#paint0_linear_52_83)" strokeWidth="34" />
           <defs>
             <linearGradient
-              id="paint0_linear_52:83"
+              id="paint0_linear_52_83"
               x1="-12.7969"
               y1="-37.3359"
               x2="99.2109"
@@ -26,8 +29,12 @@ export default function Graphic() {
           </defs>
         </svg>
       </div>
-      <div className="-z-1 absolute right-3 top-3" aria-label="shape">
-        <span className="hidden">shape</span>
+
+      {/* --- Élément décoratif supérieur droit --- */}
+      <div className="-z-1 absolute right-3 top-3" aria-labelledby="graphic-top">
+        <span id="graphic-top" className="sr-only">
+          Élément graphique décoratif supérieur droit
+        </span>
         <svg
           width="61"
           height="77"

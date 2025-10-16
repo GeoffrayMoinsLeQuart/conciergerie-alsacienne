@@ -19,6 +19,7 @@ import ServicesSection from '@/components/Home/ServicesSection';
 import TestimonialsSection from '@/components/Home/TestimonialsSection';
 import FinalCTA from '@/components/Home/FinalCTA';
 import RevenueCalculator from '@/components/Home/RevenueCalculator';
+import RevenueCalculatorSection from '@/components/Home/RevenueCalculatorSection';
 
 // --- Sections principales (Lovable + Original mix) ---
 const Hero = dynamic(() => import('@/components/Home/Hero'), { ssr: true });
@@ -76,24 +77,12 @@ export default async function HomePage() {
     <main id="home" aria-label={t('home', 'AriaLabelHome')}>
       <SeoSchemaInjector schema={schema} />
       <Hero />
-      <ResultsSection />
+      <ResultsSection /> 
       <ProcessSection />
-      <ServicesSection />
-      <section id="revenus" className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">
-              Calculez vos <span className="text-primary">revenus potentiels</span>
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Découvrez combien vous pourriez gagner avec votre bien.
-            </p>
-          </div>
-          <RevenueCalculator />
-        </div>
-      </section>
-      <TestimonialsSection />
-      <FinalCTA />
+     <ServicesSection />
+      <RevenueCalculatorSection />
+       <TestimonialsSection />
+       <FinalCTA />
     </main>
   );
 }

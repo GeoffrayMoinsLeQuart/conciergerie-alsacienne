@@ -80,5 +80,16 @@ button:hover {
 
 button.bg-gradient-to-r:hover {
   filter: brightness(1.05);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.25), 0 0 10px rgba(236, 72, 153, 0.15);
+  box-shadow:
+    0 0 20px rgba(59, 130, 246, 0.25),
+    0 0 10px rgba(236, 72, 153, 0.15);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

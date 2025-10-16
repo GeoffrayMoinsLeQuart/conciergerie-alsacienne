@@ -4,6 +4,7 @@ import { ArrowRight, TrendingUp, MapPin, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../Buttons/button';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const ResultsSection = () => {
   const router = useRouter();
@@ -16,7 +17,8 @@ const ResultsSection = () => {
       after: '1 420 €/mois',
       increase: '+67%',
       duration: '2 mois',
-      image: 'https://res.cloudinary.com/dx96rdxwk/image/upload/v1756809289/Immobilier/Tour%20de%20l%27europe/after/MG_01092025-01_dby0ff.webp',
+      image:
+        'https://res.cloudinary.com/dx96rdxwk/image/upload/v1756809289/Immobilier/Tour%20de%20l%27europe/after/MG_01092025-01_dby0ff.webp',
     },
     {
       location: 'Colmar – Petite Venise',
@@ -40,11 +42,39 @@ const ResultsSection = () => {
     },
   ];
 
+  const statsData = [
+    {
+      value: '+47%',
+      label: 'Revenus moyens en plus',
+      bgClass:
+        'bg-gradient-to-br from-[#0072FF]/15 to-[#0072FF]/5 border border-[#0072FF]/30 shadow-[0_0_20px_rgba(0,114,255,0.08)]',
+      textClass: 'text-[#0072FF]',
+    },
+    {
+      value: '83%',
+      label: 'Taux d’occupation moyen',
+      bgClass:
+        'bg-gradient-to-br from-[#E63946]/15 to-[#E63946]/5 border border-[#E63946]/30 shadow-[0_0_20px_rgba(230,57,70,0.08)]',
+      textClass: 'text-[#E63946]',
+    },
+    {
+      value: '2 mois',
+      label: 'Délai moyen pour atteindre +40%',
+      bgClass:
+        'bg-gradient-to-br from-[#0072FF]/10 to-[#E63946]/10 border border-[#0072FF]/30 shadow-[0_0_20px_rgba(0,114,255,0.08)]',
+      textClass: 'text-[#0072FF]',
+    },
+  ];
+
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      viewport={{ once: true, amount: 0.3 }}
       id="results"
       aria-labelledby="results-heading"
-      className="py-20 bg-gradient-to-b from-[#0072FF]/10 to-white"
+      className="py-20 bg-gradient-to-b from-[#0072FF]/10 to-white bg-[length:200%_200%] animate-[gradientShift_12s_infinite_alternate]"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -57,27 +87,39 @@ const ResultsSection = () => {
           </p>
         </div>
 
-        {/* Stats globales */}
+
+        {/* ✅ Stats globales dynamiques + animées */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0072FF]/10 to-[#0072FF]/5 border border-[#0072FF]/20 text-center">
-            <div className="text-4xl font-bold text-[#0072FF] mb-2">+47%</div>
-            <div className="text-sm text-gray-500">Revenus moyens en plus</div>
-          </div>
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#E63946]/10 to-[#E63946]/5 border border-[#E63946]/20 text-center">
-            <div className="text-4xl font-bold text-[#E63946] mb-2">83%</div>
-            <div className="text-sm text-gray-500">Taux d’occupation moyen</div>
-          </div>
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0072FF]/10 to-[#E63946]/10 border border-[#0072FF]/20 text-center">
-            <div className="text-4xl font-bold text-[#0072FF] mb-2">2 mois</div>
-            <div className="text-sm text-gray-500">Délai moyen pour atteindre +40%</div>
-          </div>
+          {statsData.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className={`p-8 rounded-2xl text-center backdrop-blur-sm ${stat.bgClass} transition-transform duration-300 hover:scale-[1.02]`}
+            >
+              <div className={`text-4xl md:text-5xl font-extrabold ${stat.textClass} mb-2`}>
+                {stat.value}
+              </div>
+              <div className="text-base text-gray-600 font-medium">{stat.label}</div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Études de cas */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {caseStudies.map((study, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.3,
+                ease: 'easeOut',
+              }}
+              viewport={{ once: true }}
               className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-[#E63946]/50 hover:shadow-xl transition-all duration-500"
             >
               <div className="relative h-48 overflow-hidden">
@@ -127,12 +169,18 @@ const ResultsSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
           <Button
             size="lg"
             onClick={() => router.push('/contact')}
@@ -142,9 +190,9 @@ const ResultsSection = () => {
             <ArrowRight className="w-5 h-5" />
           </Button>
           <p className="text-sm text-gray-500 mt-4">Réponse sous 2h ouvrées • Sans engagement</p>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
