@@ -376,3 +376,6 @@ url sanity : https://conciergerie.sanity.studio/structure
 
 
 Centraliser toutes les couleurs qq part pour toutes les changer d'un coup
+
+Revoir les code des componenets créé par lovable poru les intégrer comme les boutons par exemple
+

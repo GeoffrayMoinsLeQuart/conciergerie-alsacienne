@@ -96,13 +96,11 @@ export const navbarData: NavbarItem[] = [
 // src/config/sectionConfig.ts
 export const SECTION_CONFIG: Record<string, { id: string; label: string }[]> = {
   '/conciergerie': [
-    { id: 'selection', label: 'Sélection' },
-    { id: 'transformations', label: 'Transformations' },
-    { id: 'prestations', label: 'Prestations' },
-    { id: 'expertise', label: 'Expertise' },
-    { id: 'processus', label: 'Processus' },
-    { id: 'tarifs', label: 'Tarifs' },
-    { id: 'faq', label: 'FAQ' },
+    { id: 'expertise', label: 'Notre expertise' },
+    { id: '', label: 'Notre méthode' },
+    { id: 'prestations', label: 'Nos prestations' },
+    { id: 'tarifs', label: 'Tarifs & formules' },
+    { id: 'eligibilite', label: 'Éligibilité du bien' },
   ],
   '/gestion-locative': [
     { id: 'processus', label: 'Prestations' },

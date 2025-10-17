@@ -958,3 +958,150 @@ export const localBusinessSchema = {
     },
   ],
 };
+
+export function makeConciergerieSchemaV4(faqs: FAQItem[]) {
+  const faqPage = {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer.replace(/<[^>]*>/g, '').trim(),
+      },
+    })),
+  };
+
+  const breadcrumb = {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteURL },
+      { '@type': 'ListItem', position: 2, name: 'Conciergerie', item: `${siteURL}/conciergerie` },
+    ],
+  };
+
+  const service = {
+    '@type': 'Service',
+    serviceType: 'Conciergerie haut de gamme en location courte durée',
+    provider: {
+      '@type': 'LocalBusiness',
+      name: siteName,
+      url: siteURL,
+      logo: { '@type': 'ImageObject', url: `${siteURL}/logo.svg` },
+      telephone: '+33621471922',
+      email: 'lesclefsdalsace@gmail.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '5B Rue de Margnolles',
+        addressLocality: 'Mulhouse',
+        postalCode: '68100',
+        addressRegion: 'Grand Est',
+        addressCountry: 'FR',
+      },
+      areaServed: {
+        '@type': 'Place',
+        name: 'Mulhouse, Colmar, Strasbourg, Saint-Louis',
+      },
+    },
+    areaServed: { '@type': 'Place', name: 'Alsace' },
+    description:
+      'Conciergerie spécialisée en location courte et moyenne durée à Mulhouse, Colmar et Strasbourg. Gestion complète, accompagnement premium, optimisation des revenus et services hôteliers.',
+    url: `${siteURL}/conciergerie`,
+  };
+
+  const howTo = {
+    '@type': 'HowTo',
+    name: 'Comment fonctionne notre conciergerie',
+    description: 'Étapes simples pour estimer, déléguer et rentabiliser votre bien en Alsace.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Évaluation gratuite',
+        text: 'Analyse complète du potentiel de revenus locatifs de votre bien en Alsace.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Préparation du bien',
+        text: 'Photos professionnelles, équipements et mise en conformité pour maximiser vos revenus.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Gestion quotidienne',
+        text: 'Accueil, ménage, maintenance et optimisation tarifaire 7j/7.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Revenus optimisés',
+        text: 'Suivi transparent des performances et versements mensuels garantis.',
+      },
+    ],
+  };
+
+  const results = {
+    '@type': 'AggregateOffer',
+    name: 'Résultats obtenus en Alsace',
+    description:
+      'Des propriétaires alsaciens ayant augmenté leurs revenus locatifs de 40 à 70% grâce à la Conciergerie Alsacienne.',
+    url: `${siteURL}/conciergerie#results`,
+    seller: { '@type': 'Organization', name: siteName, url: siteURL },
+    offers: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Product',
+          name: 'T3 – Tour de l’Europe, Mulhouse',
+        },
+        description: 'Revenus +40% par rapport à l’ancienne conciergerie, taux d’occupation 98%.',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Product',
+          name: 'T2 – Centre historique, Colmar',
+        },
+        description: 'Revenus +30%, expérience voyageur 4.9/5.',
+      },
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '127',
+      bestRating: '5',
+    },
+  };
+
+  const testimonials = {
+    '@type': 'ItemList',
+    itemListElement: testimonialData.slice(0, 3).map((t, index) => ({
+      '@type': 'Review',
+      position: index + 1,
+      author: { '@type': 'Person', name: t.name },
+      reviewBody: t.review,
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+    })),
+  };
+
+  const localBusiness = {
+    '@type': 'LocalBusiness',
+    name: siteName,
+    image: `${siteURL}/logo.svg`,
+    url: siteURL,
+    telephone: '+33621471922',
+    email: 'lesclefsdalsace@gmail.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '5B Rue de Margnolles',
+      addressLocality: 'Mulhouse',
+      postalCode: '68100',
+      addressRegion: 'Grand Est',
+      addressCountry: 'FR',
+    },
+    areaServed: { '@type': 'Place', name: 'Alsace, Colmar, Mulhouse, Saint-Louis' },
+    priceRange: '€€',
+  };
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [service, breadcrumb, faqPage, howTo, results, testimonials, localBusiness],
+  };
+}

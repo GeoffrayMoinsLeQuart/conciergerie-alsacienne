@@ -1,61 +1,65 @@
-// 🔁 Fichier mis à jour : /conciergerie/page.tsx
+// ✅ PAGE CONCIERGERIE – Version V4 consolidée
+// Architecture Lovable + SEO enrichi + JSON-LD + accessibilité
 
-import Tarification from '@/components/Conciergerie/TarificationConciergerie';
-import Intro from '@/components/Intro';
-import SelectionEtAccompagnement from '@/components/Conciergerie/SelectionEtAccompagnement';
-import NotreExpertise from '@/components/Conciergerie/NotreExpertise';
-import NosPrestations from '@/components/Prestations';
-import TimelineProcess from '@/components/Conciergerie/ProcessusConciergerie';
-import SectionTransparence from '@/components/Conciergerie/SectionTransparence';
-import FaqConciergerie from './FaqConciergerie';
-import NosTransformations from '@/components/Conciergerie/NosTransformations';
-import CTAConciergerie from '@/components/Conciergerie/CTAConciergerie';
-import TemoignagesClients from '@/components/Conciergerie/TemoignagesClients';
-import SectionResultatsConciergerie from '@/components/Conciergerie/SectionResultatsConciergerie';
-import StickyAnchorMenu from '@/components/Common/StickyAnchorMenu';
-import { getMetadata } from '@/app/config/pageMetadata';
+import { Metadata } from 'next';
+
+import type { FAQItem } from '@/types/faq';
 import SeoSchemaInjector from '@/components/SEO/SeoSchemaInjector';
-import { makeConciergerieSchema } from '@/app/config/pageSchema';
+import { makeConciergerieSchemaV4 } from '@/app/config/pageSchema';
+import { getMetadata } from '@/app/config/pageMetadata';
 import { getFAQsByType } from '../../../../lib/sanity/sanity-utils';
-import { FAQItem } from '@/types/faq';
+import HeroSection from '@/components/conciergerie/IntroConciergerie';
+import WhySection from '@/components/conciergerie/WhySection';
+import ResultsBannerSection from '@/components/conciergerie/ResultsBannerSection';
+import HowItWorksSection from '@/components/conciergerie/HowItWorksSection';
+import ServicesSection from '@/components/conciergerie/ServicesSection';
+import PricingSection from '@/components/conciergerie/PrincingSection';
+import EligibilitySection from '@/components/conciergerie/EligibilitySection';
+import TestimonialsSection from '@/components/conciergerie/TestimonialsSection';
+import FAQSection from '@/components/conciergerie/FAQSection';
+import FinalCTASection from '@/components/conciergerie/FinalCTASection';
 
-export const metadata = getMetadata('conciergerie');
+export const metadata: Metadata = getMetadata('conciergerie');
+export const revalidate = 3600;
 
 export default async function ConciergeriePage() {
   const faqs: FAQItem[] = await getFAQsByType('conciergerie');
-
-  const schema = makeConciergerieSchema(faqs);
+  const schema = makeConciergerieSchemaV4(faqs);
 
   return (
     <>
-      {/* Injection unique du JSON-LD */}
       <SeoSchemaInjector schema={schema} />
-      <main id="main" aria-label="Page conciergerie haut de gamme">
-        <StickyAnchorMenu />
 
-        <Intro variant="conciergerie" />
+      <main
+        id="main"
+        role="main"
+        aria-label="Page de conciergerie haut de gamme en Alsace – gestion location courte durée"
+        className="min-h-screen bg-background text-foreground"
+      >
+        {/* --- Hero / Why / Results --- */}
+        <HeroSection />
+        <div className="h-12 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <WhySection />
+        <ResultsBannerSection />
 
-        <SelectionEtAccompagnement />
+        {/* --- Processus & Services --- */}
+        <div className="h-12 bg-gradient-to-b from-primary/5 via-background to-secondary/20" />
+        <HowItWorksSection />
+        <ServicesSection />
 
-        <NosTransformations />
+        {/* --- Tarification & Éligibilité --- */}
+        <div className="h-12 bg-gradient-to-b from-secondary/10 via-background to-primary/5" />
+        <PricingSection />
+        <div className="h-12 bg-gradient-to-b from-primary/5 via-secondary/10 to-background" />
+        <EligibilitySection />
+        <div className="h-12 bg-gradient-to-b from-background via-primary/5 to-background" />
 
-        <NosPrestations />
-
-        <TimelineProcess />
-
-        <NotreExpertise />
-
-        <SectionTransparence />
-
-        <SectionResultatsConciergerie />
-
-        <TemoignagesClients />
-
-        <Tarification />
-
-        <FaqConciergerie items={faqs} />
-
-        <CTAConciergerie />
+        {/* --- Témoignages & FAQ --- */}
+        <TestimonialsSection />
+        <div className="h-12 bg-gradient-to-b from-secondary/20 via-background to-primary/5" />
+        <FAQSection />
+        <div className="h-12 bg-gradient-to-b from-primary/5 via-background to-secondary/20" />
+        <FinalCTASection />
       </main>
     </>
   );
