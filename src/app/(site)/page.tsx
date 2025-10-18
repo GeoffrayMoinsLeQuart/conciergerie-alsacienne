@@ -18,7 +18,6 @@ import ProcessSection from '@/components/Home/ProcessSection';
 import ServicesSection from '@/components/Home/ServicesSection';
 import TestimonialsSection from '@/components/Home/TestimonialsSection';
 import FinalCTA from '@/components/Home/FinalCTA';
-import RevenueCalculator from '@/components/Home/RevenueCalculator';
 import RevenueCalculatorSection from '@/components/Home/RevenueCalculatorSection';
 
 // --- Sections principales (Lovable + Original mix) ---
@@ -28,12 +27,6 @@ const Prestation = dynamic(() => import('@/components/Home/Prestation'), { ssr: 
 const Testimonial = dynamic(() => import('@/components/Home/Testimonial'), { ssr: true });
 const HomeBlogSection = dynamic(() => import('@/components/Blog/HomeBlogSection'), { ssr: true });
 const ContactForm = dynamic(() => import('./contact/page'), { ssr: true });
-
-// --- Nouvelles sections importées depuis Lovable ---
-// const GuaranteesSection = dynamic(() => import("@/components/Lovable/GuaranteesSection"), { ssr: false });
-// const RevenueCalculator = dynamic(() => import("@/components/Lovable/RevenueCalculator"), { ssr: false });
-// const ContactCTA = dynamic(() => import("@/components/Lovable/ContactCTA"), { ssr: false });
-// const EstimationWidget = dynamic(() => import("@/components/Lovable/EstimationWidget"), { ssr: false });
 
 // --- SEO / Metadata ---
 export const metadata = getMetadata('home');
@@ -77,12 +70,12 @@ export default async function HomePage() {
     <main id="home" aria-label={t('home', 'AriaLabelHome')}>
       <SeoSchemaInjector schema={schema} />
       <Hero />
-      <ResultsSection /> 
+      <ResultsSection />
       <ProcessSection />
-     <ServicesSection />
+      <ServicesSection />
       <RevenueCalculatorSection />
-       <TestimonialsSection />
-       <FinalCTA />
+      <TestimonialsSection />
+      <FinalCTA />
     </main>
   );
 }

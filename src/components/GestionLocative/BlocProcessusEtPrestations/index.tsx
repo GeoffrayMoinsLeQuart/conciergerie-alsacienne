@@ -26,10 +26,10 @@ const BlocProcessusEtPrestations: FC = () => {
   const ctaLabel = t(pageKey, `${baseKey}.ctaLabel`) as string;
 
   return (
-    <section id="processus" aria-labelledby="processus-title" className="bg-[#f8f9ff] py-20">
+    <section id="processs" aria-labelledby="processus-title" className="bg-[#f8f9ff] py-20">
       <div className="container">
         <SectionTitle
-          id="processus-title"
+          id="proces-title"
           mainTitle={mainTitle}
           title={title}
           paragraph={paragraph}
